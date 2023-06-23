@@ -1,7 +1,7 @@
 package conexion;
 
 public class Usuarios {
-    
+    //aaaaa
     private int id;
     private String usuario;
     private String contrasena;
