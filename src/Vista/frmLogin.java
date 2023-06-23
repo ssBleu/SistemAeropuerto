@@ -63,8 +63,8 @@ public class frmLogin extends javax.swing.JFrame {
                 resultado=1;
                 if (resultado==1) {
                     //hacemos esto para que nos muestre si es true la clase fmrprincipal
-                    //fmrprincipal form= new fmrprincipal();
-                    //form.setVisible(true);
+                    frmRegCli form= new frmRegCli();
+                    form.setVisible(true);
                     //para que salga de esta clase y visualice la otra
                     this.dispose();
                 }
