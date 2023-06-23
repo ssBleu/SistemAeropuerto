@@ -13,44 +13,47 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 public class frmLogin extends javax.swing.JFrame {
-
     //Se necesitan 5 variables
     //Se estableceran rutas de conexiones
-    public static String URL= "jdbc:mysql://localhost/bd_vuelos";
-    public static String USERNAME= "root";
-    public static String PASSWORD= "";
-    PreparedStatement ps;
-    ResultSet rs;
+
     
     Conexion conexion = new Conexion();
     Connection connection = conexion.getConnection();
 
-    
-private void validarAdmin() {
-    String usuario = txtUsuario.getText();
-    String contrasena = String.valueOf(txtContra.getPassword());
-
-    TrabajadorDAO trabajadorDAO = new TrabajadorDAO(connection);
-
-    try {
-        if (trabajadorDAO.validarCredenciales(usuario, contrasena)) {
-            // Credenciales válidas, continuar con el flujo de la aplicación
-        } else {
-            // Credenciales inválidas, mostrar mensaje de error
-            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-        }
-    } catch (SQLException e) {
-        // Manejar el error de la base de datos
-        e.printStackTrace();
-    }
-}
-    
     //cree esto por mi cuenta y juicio, lo que hace es abrir la pestana de frmRegistrarUsuario
     
+    public frmLogin() {
+        initComponents();
+        //para centrar el jframe
+        this.setLocationRelativeTo(null);
+    }
     
     public void registrarse(){
         frmRegUsu form = new frmRegUsu();
         form.setVisible(true);
+    }
+    
+    public void validarUsuario(){
+        
+        String usuario = txtUsuario.getText();
+        String contrasena = String.valueOf(txtContra.getPassword());
+        
+        TrabajadorDAO trabajadorDAO = new TrabajadorDAO(connection);
+
+        try {
+            if (trabajadorDAO.validarCredenciales(usuario, contrasena)) {
+                frmRegCli form= new frmRegCli();
+                form.setVisible(true);
+                //para que salga de esta clase y visualice la otra
+                this.dispose();
+            } else {
+                // Credenciales inválidas, mostrar mensaje de error
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            // Manejar el error de la base de datos
+            e.printStackTrace();
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -211,7 +214,8 @@ private void validarAdmin() {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        validarAdmin();
+        validarUsuario();
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
