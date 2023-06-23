@@ -1,4 +1,4 @@
-package conexion;
+package Modelo.Conexion;
 import com.mysql.jdbc.Driver;
 import java.sql.Connection;
 import java.sql.DriverManager;

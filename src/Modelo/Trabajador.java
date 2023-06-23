@@ -8,16 +8,21 @@ public class Trabajador {
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
+    private String usuario;
+    private String contrasena;
     private String cargo;
     private double salario;
     private Date fechaContratacion;
     private String idAerolinea;
 
-    public Trabajador(String idTrabajador, String nombre, String apellido, Date fechaNacimiento, String cargo, double salario, Date fechaContratacion, String idAerolinea) {
+
+    public Trabajador(String idTrabajador, String nombre, String apellido, Date fechaNacimiento, String usuario, String contrasena, String cargo, double salario, Date fechaContratacion, String idAerolinea) {
         this.idTrabajador = idTrabajador;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
         this.cargo = cargo;
         this.salario = salario;
         this.fechaContratacion = fechaContratacion;
@@ -86,5 +91,21 @@ public class Trabajador {
 
     public void setIdAerolinea(String idAerolinea) {
         this.idAerolinea = idAerolinea;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

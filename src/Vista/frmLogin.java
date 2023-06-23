@@ -1,5 +1,8 @@
 package Vista;
 
+import Modelo.Conexion.Conexion;
+import Modelo.DAO.TrabajadorDAO;
+import Modelo.Trabajador;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,63 +22,28 @@ public class frmLogin extends javax.swing.JFrame {
     PreparedStatement ps;
     ResultSet rs;
     
-    //creamos un metodo y adentro creamos el objeto
-    public static Connection getConection(){
-        Connection con = null;
-        //aca vamos a generar nuestra conectividad
-        try {
-            //conexion con base de datos
-            Class.forName("com.mysql.jdbc.Driver");
-            con=(Connection)DriverManager.getConnection(URL,USERNAME,PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            //por si no se conecta
-            System.out.println(e);
-        }return con;
-    }
+    Conexion conexion = new Conexion();
+    Connection connection = conexion.getConnection();
+
     
-    public frmLogin() {
-        initComponents();
-        //para centrar el jframe
-        this.setLocationRelativeTo(null);
-    }
-    
-    
-    
-    //creamos otro metodo
-    public void validarAdmin(){
-        int resultado = 0;
-        //ahora utilizamos la coneccion que esta en el metodo
-        Connection con = getConection();
-        try {
-            //se crea 2 variables de tipo String
-            //lo que se escrie en el txt usuario se guardara en la variable usuario
-            String usuario = txtUsuario.getText();
-            //Para guardar la contrasena
-            String password = String.valueOf(txtContra.getPassword());
-            //guardaremos una sentencia query
-            String sql = "SELECT * FROM trabajador WHERE usuario='"+usuario+"'and contrasena='"+password+"'";
-            //generamos 2 variables
-            Statement st=con.createStatement();
-            //para ejecutar la sentencia
-            ResultSet rs=st.executeQuery(sql);
-            
-            if (rs.next()) {
-                resultado=1;
-                if (resultado==1) {
-                    //hacemos esto para que nos muestre si es true la clase fmrprincipal
-                    frmRegCli form= new frmRegCli();
-                    form.setVisible(true);
-                    //para que salga de esta clase y visualice la otra
-                    this.dispose();
-                }
-            }else{
-                JOptionPane.showMessageDialog(null,"Error de usuario y contrasena");
-            }
-            //Si hay algun error en la conexion generamos un catch
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al conectar a base de datos");
+private void validarAdmin() {
+    String usuario = txtUsuario.getText();
+    String contrasena = String.valueOf(txtContra.getPassword());
+
+    TrabajadorDAO trabajadorDAO = new TrabajadorDAO(connection);
+
+    try {
+        if (trabajadorDAO.validarCredenciales(usuario, contrasena)) {
+            // Credenciales válidas, continuar con el flujo de la aplicación
+        } else {
+            // Credenciales inválidas, mostrar mensaje de error
+            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (SQLException e) {
+        // Manejar el error de la base de datos
+        e.printStackTrace();
     }
+}
     
     //cree esto por mi cuenta y juicio, lo que hace es abrir la pestana de frmRegistrarUsuario
     
@@ -271,21 +239,6 @@ public class frmLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
