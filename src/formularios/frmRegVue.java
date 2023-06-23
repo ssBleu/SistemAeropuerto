@@ -48,21 +48,25 @@ public class frmRegVue extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        btnBusCli = new javax.swing.JLabel();
-        btnReVue = new javax.swing.JLabel();
-        btnReTra = new javax.swing.JLabel();
-        btnReAero = new javax.swing.JLabel();
-        btnEstadis = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        btnBusCli2 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        btnReVue2 = new javax.swing.JLabel();
+        btnReAero2 = new javax.swing.JLabel();
+        btnReTra2 = new javax.swing.JLabel();
+        jSeparator10 = new javax.swing.JSeparator();
+        jLabel19 = new javax.swing.JLabel();
+        btnEstadis2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 255));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
         jLabel3.setText("-");
@@ -180,93 +184,121 @@ public class frmRegVue extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel6.setBackground(new java.awt.Color(102, 153, 255));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario (1).png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario (1).png"))); // NOI18N
 
-        btnBusCli.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnBusCli.setText("Busqueda de Cliente");
-        btnBusCli.addMouseListener(new java.awt.event.MouseAdapter() {
+        jSeparator8.setForeground(new java.awt.Color(0, 0, 0));
+
+        jSeparator9.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnBusCli2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnBusCli2.setText("    Busqueda de Cliente");
+        btnBusCli2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBusCliMouseClicked(evt);
+                btnBusCli2MouseClicked(evt);
             }
         });
 
-        btnReVue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReVue.setText("Registro de Vuelo");
-        btnReVue.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscli (1).png"))); // NOI18N
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retra (1).png"))); // NOI18N
+
+        btnReVue2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnReVue2.setText("     Registro de Vuelo");
+        btnReVue2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReVueMouseClicked(evt);
+                btnReVue2MouseClicked(evt);
             }
         });
 
-        btnReTra.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReTra.setText("Registro de Trabajador");
-        btnReTra.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReAero2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnReAero2.setText("   Registro de Aerolínea");
+        btnReAero2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReTraMouseClicked(evt);
+                btnReAero2MouseClicked(evt);
             }
         });
 
-        btnReAero.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReAero.setText("Registro de Aerolínea");
-        btnReAero.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReTra2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnReTra2.setText("  Registro de Trabajador");
+        btnReTra2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReAeroMouseClicked(evt);
+                btnReTra2MouseClicked(evt);
             }
         });
 
-        btnEstadis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnEstadis.setText("Estadísticas");
-        btnEstadis.addMouseListener(new java.awt.event.MouseAdapter() {
+        jSeparator10.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
+
+        btnEstadis2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnEstadis2.setText("            Estadísticas");
+        btnEstadis2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEstadisMouseClicked(evt);
+                btnEstadis2MouseClicked(evt);
             }
         });
 
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel7)
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(btnBusCli2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator10)
+            .addComponent(btnReVue2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnReAero2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnReTra2, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+            .addComponent(btnEstadis2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel11)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel19)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel18)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator3)
-            .addComponent(btnBusCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReVue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReAero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReTra, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-            .addComponent(btnEstadis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel7)
-                .addGap(44, 44, 44)
-                .addComponent(btnBusCli)
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(btnReVue)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReAero)
+                .addComponent(btnBusCli2)
+                .addGap(17, 17, 17)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReTra)
-                .addGap(14, 14, 14)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReVue2)
+                .addGap(11, 11, 11)
+                .addComponent(btnReAero2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReTra2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEstadis)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEstadis2)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 480));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
         pack();
         setLocationRelativeTo(null);
@@ -288,35 +320,35 @@ public class frmRegVue extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnReVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReVueMouseClicked
-      frmRegVue frmReVue=new frmRegVue(); 
-      frmReVue.setVisible(true); 
-      this.setVisible(false);
-    }//GEN-LAST:event_btnReVueMouseClicked
+    private void btnBusCli2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseClicked
+        frmBusCli frmBuCli=new frmBusCli();
+        frmBuCli.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBusCli2MouseClicked
 
-    private void btnReAeroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseClicked
-       frmRegAero frmReAero=new frmRegAero(); 
-       frmReAero.setVisible(true);
-       this.setVisible(false);
-    }//GEN-LAST:event_btnReAeroMouseClicked
+    private void btnReVue2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReVue2MouseClicked
+        frmRegVue frmReVue=new frmRegVue();
+        frmReVue.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnReVue2MouseClicked
 
-    private void btnReTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseClicked
-      frmRegTrab frmReTrab=new frmRegTrab();
-      frmReTrab.setVisible(true);
-      this.setVisible(false);
-    }//GEN-LAST:event_btnReTraMouseClicked
+    private void btnReAero2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAero2MouseClicked
+        frmRegAero frmReAero=new frmRegAero();
+        frmReAero.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnReAero2MouseClicked
 
-    private void btnBusCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseClicked
-      frmBusCli frmBuCli=new frmBusCli();
-      frmBuCli.setVisible(true);
-      this.setVisible(false);
-    }//GEN-LAST:event_btnBusCliMouseClicked
+    private void btnReTra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseClicked
+        frmRegTrab frmReTrab=new frmRegTrab();
+        frmReTrab.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnReTra2MouseClicked
 
-    private void btnEstadisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisMouseClicked
-      frmEstadis frmEsta=new frmEstadis();
-      frmEsta.setVisible(true);
-      this.setVisible(false);
-    }//GEN-LAST:event_btnEstadisMouseClicked
+    private void btnEstadis2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadis2MouseClicked
+        frmEstadis frmEsta=new frmEstadis();
+        frmEsta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEstadis2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -354,11 +386,11 @@ public class frmRegVue extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnBusCli;
-    private javax.swing.JLabel btnEstadis;
-    private javax.swing.JLabel btnReAero;
-    private javax.swing.JLabel btnReTra;
-    private javax.swing.JLabel btnReVue;
+    private javax.swing.JLabel btnBusCli2;
+    private javax.swing.JLabel btnEstadis2;
+    private javax.swing.JLabel btnReAero2;
+    private javax.swing.JLabel btnReTra2;
+    private javax.swing.JLabel btnReVue2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -366,19 +398,23 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
