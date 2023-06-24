@@ -2,23 +2,27 @@
 package Vista;
 
 import Modelo.Conexion.Conexion;
+import Modelo.Pasajero;
+import static Vista.Controladores.objPS;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 public class frmRegCli extends javax.swing.JFrame {
 
-    Conexion con = new Conexion();
-    Connection cn;
-    Statement st;
-    ResultSet rs;
-    DefaultTableModel modelo;
-    
     public frmRegCli() {
         initComponents();
-        setLocationRelativeTo(null);
-        listar();
+        listado();
     }
+    void listado(){
+        DefaultTableModel dt=(DefaultTableModel)TablaDatos.getModel();
+        
+        dt.setRowCount(0);
+        for(Pasajero x:objPS.Listado()){
+            Object v[]={x.getDniPasajero(),x.getNombre(),x.getApellido(),x.getEdad(),x.getGenero(),x.getNacionalidad()};
+            dt.addRow(v);
+        }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,9 +48,9 @@ public class frmRegCli extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtNacionalidad = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
+        txtGenero = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -147,6 +151,11 @@ public class frmRegCli extends javax.swing.JFrame {
                 "Nombre", "Apellido", "Dni", "Edad", "Genero", "Nacionalidad"
             }
         ));
+        TablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaDatosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaDatos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 580, 180));
@@ -169,6 +178,11 @@ public class frmRegCli extends javax.swing.JFrame {
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 170, -1));
 
@@ -183,9 +197,6 @@ public class frmRegCli extends javax.swing.JFrame {
         jLabel16.setText("Edad:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Masculino", "Femenino" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 170, -1));
-
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("Genero:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 20));
@@ -196,6 +207,7 @@ public class frmRegCli extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 170, -1));
+        jPanel1.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 80, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -333,7 +345,35 @@ public class frmRegCli extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        guardar();
+        try {
+        String dni =txtDni.getText();
+        String nom =txtApellido.getText();
+        String ape =txtNombre.getText();
+        int edad =Integer.parseInt(txtEdad.getText());
+        String gene =txtGenero.getText();
+        String nacio =txtNacionalidad.getText();
+        
+        if(nom.length()>0){
+            if(edad>0){
+                Pasajero pr=new Pasajero(dni,nom,ape,edad,gene,nacio);
+                objPS.crearPasajero(pr);
+                txtNombre.setText("");
+                txtApellido.setText("");
+                txtDni.setText("");
+                txtEdad.setText("");
+                txtGenero.setText("");
+                txtNacionalidad.setText("");
+                listado();
+                JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 0");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un nombre");
+        }
+        } catch (Exception e1){
+            JOptionPane.showMessageDialog(null, "Ingrese los datos en las casillas correctamente");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtNacionalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNacionalidadActionPerformed
@@ -374,6 +414,42 @@ public class frmRegCli extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEstadis2MouseClicked
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+        try {
+            if (confirm.equals("CONTINUAR")){
+                int dni=Integer.parseInt(txtDni.getText());
+                objPS.eliminarPasajero(dni);
+                txtDni.setText("");
+                txtApellido.setText("");
+                txtNombre.setText("");
+                txtEdad.setText("");
+                txtGenero.setText("");
+                txtNacionalidad.setText("");
+                JOptionPane.showMessageDialog(null,"Eliminacion completada exitosamente");
+                listado();
+        } else {
+            JOptionPane.showMessageDialog(null,"Proceso cancelado");
+        }
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Seleccione un Producto");
+            }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void TablaDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaDatosMouseClicked
+        int Pr = TablaDatos.getSelectedRow();
+        int DNI = Integer.parseInt(TablaDatos.getValueAt(Pr, 0).toString());
+        
+        Pasajero x = objPS.buscarPasajero(DNI);
+        
+        txtDni.setText(x.getDniPasajero());
+        txtNombre.setText(x.getNombre());
+        txtApellido.setText(x.getApellido());
+        txtEdad.setText(""+x.getEdad());
+        txtGenero.setText(x.getGenero());
+        txtNacionalidad.setText(x.getNacionalidad());
+    }//GEN-LAST:event_TablaDatosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -409,46 +485,7 @@ public class frmRegCli extends javax.swing.JFrame {
         });
     }
 
-    void listar(){
-        String sql ="select * from pasajero";
-        try {
-            cn=con.getConnection();
-            st=cn.createStatement();
-            rs=st.executeQuery(sql);
-            Object[]trabajador=new Object[6];
-            modelo=(DefaultTableModel)TablaDatos.getModel();
-            while(rs.next()){
-                trabajador[0]=rs.getString("Nombre");
-                trabajador[1]=rs.getString("Apellido");
-                trabajador[2]=rs.getInt("Dni");
-                trabajador[3]=rs.getInt("Edad");
-                trabajador[4]=rs.getString("Genero");
-                trabajador[5]=rs.getString("Nacionalidad");
-                modelo.addRow(trabajador);
-            }
-            TablaDatos.setModel(modelo);
-        } catch (Exception e) {
-        }
-    }
     
-    void guardar(){
-        String nombre=txtNombre.getText();
-        String apellido=txtApellido.getText();
-        String nacionalidad=txtNacionalidad.getText();
-        String dni=txtDni.getText();
-        String edad=txtEdad.getText();
-        if(nombre.equals("")||apellido.equals("")||nacionalidad.equals("")||dni.equals("")||edad.equals("")){
-            JOptionPane.showMessageDialog(null,"Llenar todos los campos...");   
-        }else{
-            String sql = "insert into pasajero(Dni, Nombre, Apellido, Edad, Genero, Nacionalidad)"
-            try {
-                cn=con.getConnection();
-                st=cn.createStatement();
-                st.executeUpdate(sql);
-            } catch (Exception e) {
-            }
-        }
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaDatos;
@@ -460,7 +497,6 @@ public class frmRegCli extends javax.swing.JFrame {
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -485,6 +521,7 @@ public class frmRegCli extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNacionalidad;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

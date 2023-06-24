@@ -18,7 +18,7 @@ public class frmLogin extends javax.swing.JFrame {
 
     
     Conexion conexion = new Conexion();
-    Connection connection = conexion.getConnection();
+    Connection connection = conexion.getConexion();
 
     //cree esto por mi cuenta y juicio, lo que hace es abrir la pestana de frmRegistrarUsuario
     

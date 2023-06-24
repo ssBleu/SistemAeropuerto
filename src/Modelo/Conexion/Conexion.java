@@ -8,24 +8,18 @@ import java.util.logging.Logger;
 
 public class Conexion {
     
-    private final String base = "bd_vuelos";
-    private final String user = "root";
-    private final String password= "";
-    private final String url = "jdbc:mysql://localhost:3306/"+base;
-    private Connection con = null;
-    
-    public Connection getConnection(){
-        
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con=(Connection)DriverManager.getConnection(url,user,password);
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return con;
-    }
-}
+    public static Connection getConexion(){ 
+		Connection con = null;
+		try { Class.forName("com.mysql.jdbc.Driver"); 
+		String url = "jdbc:mysql://localhost/bd_vuelos"; 
+		String usr = "root";
+		String psw = ""; 
+		con = DriverManager.getConnection(url,usr,psw); 
+		System.out.println("conexion ok");
+		} catch (ClassNotFoundException ex)
+		{ System.out.println("No hay Driver!!"); } 
+		catch (SQLException ex) { System.out.println("Error con la BD "); }
+		return con; 
+		}
+}  
+
