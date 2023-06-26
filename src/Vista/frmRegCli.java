@@ -175,6 +175,11 @@ public class frmRegCli extends javax.swing.JFrame {
         jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 80, -1));
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
 
         btnEliminar.setText("Eliminar");
@@ -432,7 +437,7 @@ public class frmRegCli extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Proceso cancelado");
         }
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Seleccione un Producto");
+                JOptionPane.showMessageDialog(null,"Seleccione un Cliente");
             }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -449,6 +454,44 @@ public class frmRegCli extends javax.swing.JFrame {
         txtGenero.setText(x.getGenero());
         txtNacionalidad.setText(x.getNacionalidad());
     }//GEN-LAST:event_TablaDatosMouseClicked
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+         try {
+            String dni =txtDni.getText();
+            String nom =txtApellido.getText();
+            String ape =txtNombre.getText();
+            int edad =Integer.parseInt(txtEdad.getText());
+            String gene =txtGenero.getText();
+            String nacio =txtNacionalidad.getText();
+           
+                if(nom.length()>0){
+                    if(edad>1){
+                        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+                        if (confirm.equals("CONTINUAR")){
+                                Pasajero pr=new Pasajero(dni,nom,ape,edad,gene,nacio);
+                                objPS.modificarPasajero(pr);
+                                txtDni.setText("");
+                                txtApellido.setText("");
+                                txtNombre.setText("");
+                                txtEdad.setText("");
+                                txtGenero.setText("");
+                                txtNacionalidad.setText("");
+                                JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente");
+                                listado();
+                            }else {
+                            JOptionPane.showMessageDialog(null,"Proceso cancelado");}
+                    } else {
+                        JOptionPane.showMessageDialog(null,"La edad debe ser mayor a 1");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingrese un nombre");
+                }
+            
+            
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Seleccione un Cliente");
+            }
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     /**
      * @param args the command line arguments

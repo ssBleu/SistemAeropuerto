@@ -24,7 +24,79 @@ public class AerolineaDAO {
             statement.executeUpdate();
         }
     }
+     public void modificarAerolinea(Aerolinea aerolinea) throws SQLException {
+    Connection cn = Conexion.getConexion();
+    String sql = "UPDATE aerolinea SET nombre = ?, pais_origen = ?, telefono = ?, pagina_web = ?, fecha_fundacion = ? WHERE id_aerolinea = ?";
 
+    try (PreparedStatement statement = cn.prepareStatement(sql)) {
+        statement.setString(1, aerolinea.getNombre());
+        statement.setString(2, aerolinea.getPaisOrigen());
+        statement.setString(3, aerolinea.getTelefono());
+        statement.setString(4, aerolinea.getPaginaWeb());
+        statement.setDate(5, new java.sql.Date(aerolinea.getFechaFundacion().getTime()));
+        statement.setInt(6, aerolinea.getIdAerolinea());
+
+        statement.executeUpdate();
+    }
+}
+    public void eliminarAerolinea(int idAerolinea) throws SQLException {
+      Connection cn = Conexion.getConexion();
+      String sql = "DELETE FROM aerolinea WHERE id_aerolinea = ?";
+      try (PreparedStatement statement = cn.prepareStatement(sql)) {
+          statement.setInt(1, idAerolinea);
+          statement.executeUpdate();
+      }
+  }
+ 
+
+        public List<Aerolinea> Listado() {
+        List<Aerolinea> lis=new ArrayList();
+        Connection cn=Conexion.getConexion();
+        try {
+            String sql="SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea" ;
+            PreparedStatement st=cn.prepareStatement(sql);
+            ResultSet rs=st.executeQuery();
+            while(rs.next()){
+                Aerolinea ep=new Aerolinea(0,"","","","",null);
+                ep.setIdAerolinea(rs.getInt(1));
+                ep.setNombre(rs.getString(2));
+                ep.setPaisOrigen(rs.getString(3));
+                ep.setTelefono(rs.getString(4));
+                ep.setPaginaWeb(rs.getString(5));
+                ep.setFechaFundacion(rs.getDate(6));
+                lis.add(ep);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try { cn.close();} catch(Exception e2) {};
+        }
+        return lis;
+    }
+    public Aerolinea buscarAerolinea(int id) {
+        Aerolinea ep=null;
+        Connection cn=Conexion.getConexion();
+        try {
+            String sql="SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea where id_aerolinea=?" ;
+            PreparedStatement st=cn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs=st.executeQuery();
+            if(rs.next()){//Si lee significa que existe
+                ep=new Aerolinea(0,"","","","",null);
+                ep.setIdAerolinea(rs.getInt(1));
+                ep.setNombre(rs.getString(2));
+                ep.setPaisOrigen(rs.getString(3));
+                ep.setTelefono(rs.getString(4));
+                ep.setPaginaWeb(rs.getString(5));
+                ep.setFechaFundacion(rs.getDate(6));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try { cn.close();} catch(Exception e2) {};
+        }
+        return ep;
+    }
     public Aerolinea obtenerAerolineaPorId(String idAerolinea) throws SQLException {
         Connection cn=Conexion.getConexion();
         String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea WHERE id_aerolinea = ?";
@@ -48,6 +120,7 @@ public class AerolineaDAO {
 
         return null;
     }
+
 
     // Falta eliminar y metodos extras
 }

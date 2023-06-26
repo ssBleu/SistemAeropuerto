@@ -6,12 +6,23 @@ import static Vista.Controladores.objAD;
 import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmRegAero extends javax.swing.JFrame {
 
     public frmRegAero() {
         initComponents();
+    listado();
     }
+    void listado(){
+        DefaultTableModel dt=(DefaultTableModel)jTable1.getModel();
+        
+        dt.setRowCount(0);
+        for(Aerolinea x:objAD.Listado()){
+            Object v[]={x.getIdAerolinea(),x.getNombre(),x.getPaisOrigen(),x.getTelefono(),x.getPaginaWeb(),x.getFechaFundacion()};
+            dt.addRow(v);
+        }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -144,6 +155,11 @@ public class frmRegAero extends javax.swing.JFrame {
                 "ID Aerolínea", "Nombre", "Origen", "Telefono", "Pagina Web", "Fecha fundación"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 580, 180));
@@ -163,9 +179,19 @@ public class frmRegAero extends javax.swing.JFrame {
         jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 80, -1));
 
         jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
         jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 170, -1));
 
@@ -338,10 +364,25 @@ public class frmRegAero extends javax.swing.JFrame {
         
         JDateChooser dateChooser = DCDate; // Asigna el JDateChooser a una variable
         Date fechaFundacion = dateChooser.getDate(); // Obtiene la fecha seleccionada
-        
+        if(nombre.length()>0){
+            if(codigo>0){
          Aerolinea pr=new Aerolinea(codigo,nombre,paisOrigen,telefono,paginaWeb, fechaFundacion);
           objAD.crearAerolinea(pr);
-          } catch (Exception e1){
+                txtID.setText("");
+                txtNombre.setText("");
+                txtPais.setText("");
+                txtTelefono.setText("");
+                txtPagina.setText("");
+                DCDate.setDate(null);
+                listado();
+               JOptionPane.showMessageDialog(null, "Aerolinea agregada correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "El codigo debe ser mayor a 0");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un nombre");
+        }
+        } catch (Exception e1){
             JOptionPane.showMessageDialog(null, "Ingrese los datos en las casillas correctamente");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -383,6 +424,81 @@ public class frmRegAero extends javax.swing.JFrame {
         frmEsta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEstadis2MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+        try {
+            if (confirm.equals("CONTINUAR")){
+                int codigo=Integer.parseInt(txtID.getText());
+                objAD.eliminarAerolinea(codigo);
+                txtID.setText("");
+                txtNombre.setText("");
+                txtPais.setText("");
+                txtTelefono.setText("");
+                txtPagina.setText("");
+                DCDate.setDate(null);
+                JOptionPane.showMessageDialog(null,"Eliminacion completada exitosamente");
+                listado();
+        } else {
+            JOptionPane.showMessageDialog(null,"Proceso cancelado");
+        }
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Seleccione una Aerolinea");
+            }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int Pr = jTable1.getSelectedRow();
+        int Codigo = Integer.parseInt(jTable1.getValueAt(Pr, 0).toString());
+        
+        Aerolinea x = objAD.buscarAerolinea(Codigo);
+        
+        txtID.setText(""+x.getIdAerolinea());
+        txtNombre.setText(x.getNombre());
+        txtPais.setText(x.getPaisOrigen());
+        txtTelefono.setText(x.getTelefono());
+        txtPagina.setText(x.getPaginaWeb());
+        DCDate.setDate(x.getFechaFundacion());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+          try {
+            int codigo = Integer.parseInt(txtID.getText());
+            String nombre =txtNombre.getText();
+            String paisOrigen =txtPais.getText();
+            String telefono =txtTelefono.getText();
+            String paginaWeb =txtPagina.getText();
+            JDateChooser dateChooser = DCDate; // Asigna el JDateChooser a una variable
+            Date fechaFundacion = dateChooser.getDate(); // Obtiene la fecha seleccionada
+           
+                if(nombre.length()>0){
+                    if(codigo>0){
+                        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+                        if (confirm.equals("CONTINUAR")){
+                                Aerolinea pr=new Aerolinea(codigo,nombre,paisOrigen,telefono,paginaWeb, fechaFundacion);
+                                objAD.modificarAerolinea(pr);
+                                txtID.setText("");
+                                txtNombre.setText("");
+                                txtPais.setText("");
+                                txtTelefono.setText("");
+                                txtPagina.setText("");
+                                DCDate.setDate(null);
+                                JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente");
+                                listado();
+                            }else {
+                            JOptionPane.showMessageDialog(null,"Proceso cancelado");}
+                    } else {
+                        JOptionPane.showMessageDialog(null,"El codigo debe ser mayor a 0");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingrese un nombre");
+                }
+            
+            
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Seleccione una Aerolinea");
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

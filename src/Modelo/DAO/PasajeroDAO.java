@@ -63,23 +63,21 @@ public class PasajeroDAO {
         return ep;
     }
      
-     public void Modifica(Pasajero p) {
-        Connection cn=Conexion.getConexion();
-        try {
-            String sql="update pasajero set "
-                    + "dni_pasajero=?, nombre=?, apellido=?, edad=?, genero=?, nacionalidad=? where dni_pasajero=?" ;
-            PreparedStatement st=cn.prepareStatement(sql);
-            st.setString(1, p.getDniPasajero());
-            st.setString(2, p.getNombre());
-            st.setString(3, p.getApellido());
-            st.setInt(4, p.getEdad());
-            st.setString(5, p.getGenero());
-            st.setString(6, p.getNacionalidad());
-            st.executeUpdate();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+     public void modificarPasajero(Pasajero pasajero) throws SQLException {
+    Connection cn = Conexion.getConexion();
+    String sql = "UPDATE pasajero SET nombre = ?, apellido = ?, edad = ?, genero = ?, nacionalidad = ? WHERE dni_pasajero = ?";
+
+    try (PreparedStatement statement = cn.prepareStatement(sql)) {
+        statement.setString(1, pasajero.getNombre());
+        statement.setString(2, pasajero.getApellido());
+        statement.setInt(3, pasajero.getEdad());
+        statement.setString(4, pasajero.getGenero());
+        statement.setString(5, pasajero.getNacionalidad());
+        statement.setString(6, pasajero.getDniPasajero());
+
+        statement.executeUpdate();
     }
+}
 
     public List<Pasajero> Listado() {
         List<Pasajero> lis=new ArrayList();
