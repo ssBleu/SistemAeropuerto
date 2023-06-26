@@ -11,9 +11,7 @@ public class PasajeroDAO {
  
     public void crearPasajero(Pasajero pasajero) throws SQLException {
         Connection cn=Conexion.getConexion();
-        String sql = "insert into "
-                + "pasajero (dni_pasajero, nombre, apellido, edad, genero, nacionalidad) " 
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pasajero (dni_pasajero, nombre, apellido, edad, genero, nacionalidad) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
             statement.setString(1, pasajero.getDniPasajero());
