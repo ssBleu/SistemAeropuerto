@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.DAO.AerolineaDAO;
 import Modelo.DAO.PasajeroDAO;
 
 /**
@@ -12,4 +13,5 @@ import Modelo.DAO.PasajeroDAO;
  */
 public class Controladores {
     public static PasajeroDAO objPS=new PasajeroDAO();
+    public static AerolineaDAO objAD=new AerolineaDAO();
 }

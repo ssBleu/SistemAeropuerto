@@ -4,14 +4,14 @@ package Modelo;
 import java.util.Date;
 
 public class Aerolinea {
-    private String idAerolinea;
+   private int idAerolinea;
     private String nombre;
     private String paisOrigen;
     private String telefono;
     private String paginaWeb;
-    private Date fechaFundacion;
+    private java.sql.Date fechaFundacion;
 
-    public Aerolinea(String idAerolinea, String nombre, String paisOrigen, String telefono, String paginaWeb, Date fechaFundacion) {
+    public Aerolinea(int idAerolinea, String nombre, String paisOrigen, String telefono, String paginaWeb, java.sql.Date fechaFundacion) {
         this.idAerolinea = idAerolinea;
         this.nombre = nombre;
         this.paisOrigen = paisOrigen;
@@ -20,11 +20,11 @@ public class Aerolinea {
         this.fechaFundacion = fechaFundacion;
     }
 
-    public String getIdAerolinea() {
+    public int getIdAerolinea() {
         return idAerolinea;
     }
 
-    public void setIdAerolinea(String idAerolinea) {
+    public void setIdAerolinea(int idAerolinea) {
         this.idAerolinea = idAerolinea;
     }
 
@@ -60,13 +60,12 @@ public class Aerolinea {
         this.paginaWeb = paginaWeb;
     }
 
-    public Date getFechaFundacion() {
+    public java.sql.Date getFechaFundacion() {
         return fechaFundacion;
     }
 
-    public void setFechaFundacion(Date fechaFundacion) {
+    public void setFechaFundacion(java.sql.Date fechaFundacion) {
         this.fechaFundacion = fechaFundacion;
     }
-    
     
 }
