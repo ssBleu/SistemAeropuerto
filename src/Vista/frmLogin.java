@@ -28,10 +28,6 @@ public class frmLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    public void registrarse(){
-        frmRegUsu form = new frmRegUsu();
-        form.setVisible(true);
-    }
     
     public void validarUsuario(){
         
@@ -72,7 +68,6 @@ public class frmLogin extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
-        btnRegistrarse = new javax.swing.JButton();
         btnIngresar = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
@@ -154,16 +149,6 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8.setText("PASSWORD:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
 
-        btnRegistrarse.setBackground(new java.awt.Color(102, 102, 255));
-        btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnRegistrarse.setText("Registrarse");
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 140, 40));
-
         btnIngresar.setBackground(new java.awt.Color(102, 102, 255));
         btnIngresar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnIngresar.setText("Ingresar");
@@ -208,11 +193,6 @@ public class frmLogin extends javax.swing.JFrame {
       String pass = String.valueOf(txtContra.getPassword());
     }//GEN-LAST:event_txtContraActionPerformed
 
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        this.setVisible(false);
-        registrarse();
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
-
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         validarUsuario();
 
@@ -255,7 +235,6 @@ public class frmLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
-    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
