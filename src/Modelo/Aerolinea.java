@@ -8,9 +8,9 @@ public class Aerolinea {
     private String paisOrigen;
     private String telefono;
     private String paginaWeb;
-    private java.sql.Date fechaFundacion;
+    private Date fechaFundacion;
 
-    public Aerolinea(int idAerolinea, String nombre, String paisOrigen, String telefono, String paginaWeb, java.sql.Date fechaFundacion) {
+    public Aerolinea(int idAerolinea, String nombre, String paisOrigen, String telefono, String paginaWeb, Date fechaFundacion) {
         this.idAerolinea = idAerolinea;
         this.nombre = nombre;
         this.paisOrigen = paisOrigen;
@@ -59,7 +59,7 @@ public class Aerolinea {
         this.paginaWeb = paginaWeb;
     }
 
-    public java.sql.Date getFechaFundacion() {
+    public Date getFechaFundacion() {
         return fechaFundacion;
     }
 

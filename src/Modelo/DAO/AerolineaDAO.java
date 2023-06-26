@@ -10,17 +10,17 @@ public class AerolineaDAO {
 
 
   public void crearAerolinea(Aerolinea aerolinea) throws SQLException {
-        Connection cn=Conexion.getConexion();
+        Connection cn=Conexion.getConexion(); //INSERT INTO aerolinea (id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion) VALUES (?, ?, ?, ?, ?, ?)
         String sql = "INSERT INTO aerolinea (id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion) VALUES (?, ?, ?, ?, ?, ?)";
-
+//
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
             statement.setInt(1, aerolinea.getIdAerolinea());
             statement.setString(2, aerolinea.getNombre());
             statement.setString(3, aerolinea.getPaisOrigen());
             statement.setString(4, aerolinea.getTelefono());
             statement.setString(5, aerolinea.getPaginaWeb());
-           // statement.setDate(6, new java.sql.Date(aerolinea.getFechaFundacion().getTime()));
-           
+            statement.setDate(6, new java.sql.Date(aerolinea.getFechaFundacion().getTime())); //new java.sql.Date(aerolinea.getFechaFundacion().getTime())
+
             statement.executeUpdate();
         }
     }
