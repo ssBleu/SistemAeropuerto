@@ -4,7 +4,6 @@ package Modelo;
 import java.util.Date;
 
 public class Trabajador {
-    private String idTrabajador;
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
@@ -13,11 +12,11 @@ public class Trabajador {
     private String cargo;
     private double salario;
     private Date fechaContratacion;
-    private String idAerolinea;
+    private int idAerolinea;
+    private int codigoTra;
 
-
-    public Trabajador(String idTrabajador, String nombre, String apellido, Date fechaNacimiento, String usuario, String contrasena, String cargo, double salario, Date fechaContratacion, String idAerolinea) {
-        this.idTrabajador = idTrabajador;
+    public Trabajador(int codigo,String nombre, String apellido, Date fechaNacimiento, String usuario, String contrasena, String cargo, double salario, Date fechaContratacion, int idAerolinea) {
+        this.codigoTra = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNacimiento = fechaNacimiento;
@@ -29,12 +28,12 @@ public class Trabajador {
         this.idAerolinea = idAerolinea;
     }
 
-    public String getIdTrabajador() {
-        return idTrabajador;
+    public int getCodigoTra() {
+        return codigoTra;
     }
 
-    public void setIdTrabajador(String idTrabajador) {
-        this.idTrabajador = idTrabajador;
+    public void setCodigoTra(int codigoTra) {
+        this.codigoTra = codigoTra;
     }
 
     public String getNombre() {
@@ -85,11 +84,11 @@ public class Trabajador {
         this.fechaContratacion = fechaContratacion;
     }
 
-    public String getIdAerolinea() {
+    public int getIdAerolinea() {
         return idAerolinea;
     }
 
-    public void setIdAerolinea(String idAerolinea) {
+    public void setIdAerolinea(int idAerolinea) {
         this.idAerolinea = idAerolinea;
     }
 

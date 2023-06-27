@@ -3,6 +3,7 @@ package Vista;
 
 import Modelo.DAO.AerolineaDAO;
 import Modelo.DAO.PasajeroDAO;
+import Modelo.DAO.TrabajadorDAO;
 
 /**
  *
@@ -11,4 +12,5 @@ import Modelo.DAO.PasajeroDAO;
 public class Controladores {
     public static PasajeroDAO objPS=new PasajeroDAO();
     public static AerolineaDAO objAD=new AerolineaDAO();
+    public static TrabajadorDAO objTR=new TrabajadorDAO();
 }

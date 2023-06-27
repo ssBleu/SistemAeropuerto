@@ -2,6 +2,7 @@ package Vista;
 
 import Modelo.Conexion.Conexion;
 import Modelo.DAO.TrabajadorDAO;
+import Modelo.DAO.Usuario;
 import Modelo.Trabajador;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,7 +35,7 @@ public class frmLogin extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String contrasena = String.valueOf(txtContra.getPassword());
         
-        TrabajadorDAO trabajadorDAO = new TrabajadorDAO(connection);
+        Usuario trabajadorDAO = new Usuario(connection);
 
         try {
             if (trabajadorDAO.validarCredenciales(usuario, contrasena)) {

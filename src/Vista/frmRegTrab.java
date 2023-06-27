@@ -1,41 +1,37 @@
 
 package Vista;
 
+import Modelo.Pasajero;
+import Modelo.Trabajador;
+import static Vista.Controladores.objPS;
+import static Vista.Controladores.objTR;
+//import static Vista.Controladores.objTR;
+import com.toedter.calendar.JDateChooser;
+import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmRegTrab extends javax.swing.JFrame {
 
     public frmRegTrab() {
         initComponents();
+    listado();
     }
+    void listado(){
+        DefaultTableModel dt=(DefaultTableModel)TablaTra.getModel();
+        
+        dt.setRowCount(0);
+        for(Trabajador x:objTR.Listado()){
+            Object v[]={x.getCodigoTra(),x.getNombre(),x.getApellido(),x.getFechaNacimiento(),x.getUsuario(),x.getContrasena(), x.getCargo(), x.getSalario(), x.getFechaContratacion(), x.getIdAerolinea()};
+            dt.addRow(v);
+        }
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
-        txtNom = new javax.swing.JTextField();
-        txtApe = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        idTrab = new javax.swing.JTextField();
-        idAero = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -53,92 +49,37 @@ public class frmRegTrab extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jLabel21 = new javax.swing.JLabel();
         btnEstadis2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaTra = new javax.swing.JTable();
+        jLabel16 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        DCNacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel23 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        txtContraseña = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        txtSalario = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        DCContrato = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        txtCargo = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        txtIDT = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("ID Trabajador:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("ID Aerolinea:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Apellido:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Fecha de contrato:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, 20));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Trabajador", "ID Aerolinea", "Nombre", "Apellido", "Nacimiento", "Cargo", "Salario", "Contrato"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 600, 200));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 80, -1));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("TRABAJADOR");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, -1));
-
-        jButton2.setText("Actualizar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
-
-        jButton3.setText("Eliminar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 80, -1));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setText("Nombre:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
-        jPanel1.add(txtNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 180, -1));
-        jPanel1.add(txtApe, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 180, -1));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Nacimiento:");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 20));
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel18.setText("Cargo:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, 20));
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel19.setText("Salario:");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, 20));
-        jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 110, -1));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 100, -1));
-        jPanel1.add(idTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 110, -1));
-        jPanel1.add(idAero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 110, -1));
-
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 150, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -168,7 +109,7 @@ public class frmRegTrab extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
+                .addContainerGap(495, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +135,7 @@ public class frmRegTrab extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 860, -1));
 
         jPanel6.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -307,18 +248,129 @@ public class frmRegTrab extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEstadis2)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("TRABAJADOR");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, -1));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 80, -1));
+
+        TablaTra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Trabajador", "Nombre", "Apellido", "Nacimiento", "Usuario", "Contraseña", "Cargo", "Salario", "Contrato", "Id Aerolinea"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaTraMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaTra);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 830, 200));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Codigo");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 20));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 180, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Apellido:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 20));
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 180, -1));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel22.setText("Nacimiento:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
+
+        DCNacimiento.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(DCNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 120, -1));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel23.setText("Usuario:");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 90, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Contraseña:");
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 20));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 80, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel18.setText("Cargo:");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, 20));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setText("Salario:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, 20));
+        jPanel1.add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 110, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Fecha de contrato:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, 20));
+
+        DCContrato.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(DCContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("ID Aerolinea:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, 20));
+        jPanel1.add(txtCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 80, -1));
+        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 80, -1));
+        jPanel1.add(txtIDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 90, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel24.setText("Nombre:");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 860, 420));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-                // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         this.setState(frmLogin.ICONIFIED);
@@ -362,6 +414,124 @@ public class frmRegTrab extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEstadis2MouseClicked
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            int idt = Integer.parseInt(txtIDT.getText());
+            String nombre = txtNombre.getText();
+            String apel = txtApellido.getText();
+            JDateChooser dateChooser = DCNacimiento; // Asigna el JDateChooser a una variable
+            Date naci = dateChooser.getDate(); // Obtiene la fecha seleccionada
+            String usu = txtUsuario.getText();
+            String contra = txtContraseña.getText();
+            String cargo = txtCargo.getText();
+            double sueldo = Double.parseDouble(txtSalario.getText());
+            JDateChooser jDateChooser = DCContrato;
+            Date contrato = jDateChooser.getDate();
+            int ida = Integer.parseInt(txtID.getText());
+
+            Trabajador pr = new Trabajador(idt, nombre, apel, naci, usu, contra, cargo, sueldo, contrato, ida);
+            objTR.crearTrabajador(pr);
+            txtIDT.setText("");
+            txtNombre.setText("");
+            txtApellido.setText("");
+            DCNacimiento.setDateFormatString("");
+            txtUsuario.setText("");
+            txtCargo.setText("");
+            txtContraseña.setText("");
+            txtSalario.setText("");
+            DCContrato.setDateFormatString("");
+            txtID.setText("");
+            listado();
+            JOptionPane.showMessageDialog(null, "Trabajador agregado correctamente");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ingrese los datos en las casillas correctamente");
+        }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        try {
+            int idt = Integer.parseInt(txtIDT.getText());
+            String nombre = txtNombre.getText();
+            String apel = txtApellido.getText();
+            JDateChooser dateChooser = DCNacimiento; // Asigna el JDateChooser a una variable
+            Date naci = dateChooser.getDate(); // Obtiene la fecha seleccionada
+            String usu = txtUsuario.getText();
+            String contra = txtContraseña.getText();
+            String cargo = txtCargo.getText();
+            double sueldo = Double.parseDouble(txtSalario.getText());
+            JDateChooser jDateChooser = DCContrato;
+            Date contrato = jDateChooser.getDate();
+            int ida = Integer.parseInt(txtID.getText());
+
+            if(nombre.length()>0){
+                if(idt>0){
+                    String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+                    if (confirm.equals("CONTINUAR")){
+                        Trabajador pr=new Trabajador(idt, nombre, apel, naci, usu, contra, cargo, sueldo, contrato, ida);
+                        objTR.modificarTrabajador(pr);
+                        txtIDT.setText("");
+                        txtNombre.setText("");
+                        txtApellido.setText("");
+                        DCNacimiento.setDateFormatString("");
+                        txtUsuario.setText("");
+                        txtCargo.setText("");
+                        txtContraseña.setText("");
+                        txtSalario.setText("");
+                        DCContrato.setDateFormatString("");
+                        txtID.setText("");
+                        JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente");
+                        listado();
+                    }else {
+                        JOptionPane.showMessageDialog(null,"Proceso cancelado");}
+                } else {
+                    JOptionPane.showMessageDialog(null,"El codigo debe ser mayor a 0");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un nombre");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Seleccione una Aerolinea");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+        try {
+            if (confirm.equals("CONTINUAR")){
+                int codi=Integer.parseInt(txtIDT.getText());
+                objTR.eliminarTrabajdor(codi);
+                txtIDT.setText("");
+                listado();
+                JOptionPane.showMessageDialog(null,"Eliminacion completada exitosamente");
+
+            } else {
+                JOptionPane.showMessageDialog(null,"Proceso cancelado");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Seleccione un Producto");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void TablaTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaTraMouseClicked
+       int idt = TablaTra.getSelectedRow();
+        int DNI = Integer.parseInt(TablaTra.getValueAt(idt, 0).toString());
+
+            Trabajador x = objTR.buscarTrabajador(DNI);
+            txtIDT.setText(""+x.getCodigoTra());
+            txtNombre.setText(x.getNombre());
+            txtApellido.setText(x.getApellido());
+            DCNacimiento.setDate(x.getFechaNacimiento());
+            txtUsuario.setText(x.getUsuario());
+            txtContraseña.setText(x.getContrasena());
+            txtCargo.setText(x.getCargo()); 
+            txtSalario.setText(""+x.getSalario());
+            DCContrato.setDate(x.getFechaContratacion());
+            txtID.setText(""+x.getIdAerolinea());
+
+    }//GEN-LAST:event_TablaTraMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -398,18 +568,17 @@ public class frmRegTrab extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser DCContrato;
+    private com.toedter.calendar.JDateChooser DCNacimiento;
+    private javax.swing.JTable TablaTra;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JLabel btnBusCli2;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel btnEstadis2;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
-    private javax.swing.JTextField idAero;
-    private javax.swing.JTextField idTrab;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -421,8 +590,10 @@ public class frmRegTrab extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -433,10 +604,13 @@ public class frmRegTrab extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField txtApe;
-    private javax.swing.JTextField txtNom;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCargo;
+    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtIDT;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSalario;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
