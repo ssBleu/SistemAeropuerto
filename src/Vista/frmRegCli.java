@@ -148,7 +148,7 @@ public class frmRegCli extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Apellido", "Dni", "Edad", "Genero", "Nacionalidad"
+                "DNI", "Nombre", "Apellido", "Edad", "Genero", "Nacionalidad"
             }
         ));
         TablaDatos.addMouseListener(new java.awt.event.MouseAdapter() {

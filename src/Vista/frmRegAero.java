@@ -463,7 +463,7 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
           try {
-            int codigo = Integer.parseInt(txtID.getText());
+            int idAerolinea = Integer.parseInt(txtID.getText());
             String nombre =txtNombre.getText();
             String paisOrigen =txtPais.getText();
             String telefono =txtTelefono.getText();
@@ -472,10 +472,10 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
             Date fechaFundacion = dateChooser.getDate(); // Obtiene la fecha seleccionada
            
                 if(nombre.length()>0){
-                    if(codigo>0){
+                    if(idAerolinea>0){
                         String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
                         if (confirm.equals("CONTINUAR")){
-                                Aerolinea pr=new Aerolinea(codigo,nombre,paisOrigen,telefono,paginaWeb, fechaFundacion);
+                                Aerolinea pr=new Aerolinea(idAerolinea,nombre,paisOrigen,telefono,paginaWeb, fechaFundacion);
                                 objAD.modificarAerolinea(pr);
                                 txtID.setText("");
                                 txtNombre.setText("");
