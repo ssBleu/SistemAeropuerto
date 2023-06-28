@@ -97,12 +97,12 @@ public class AerolineaDAO {
         }
         return ep;
     }
-    public Aerolinea obtenerAerolineaPorId(String idAerolinea) throws SQLException {
-        Connection cn=Conexion.getConexion();
+    public Aerolinea obtenerAerolineaPorId(int idAerolinea) throws SQLException {
+        Connection cn = Conexion.getConexion();
         String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea WHERE id_aerolinea = ?";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
-            statement.setString(1, idAerolinea);
+            statement.setInt(1, idAerolinea);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -120,7 +120,52 @@ public class AerolineaDAO {
 
         return null;
     }
+    
+        public Aerolinea obtenerAerolineaPorNombre(String nombreAerolinea) throws SQLException {
+        Connection cn = Conexion.getConexion();
+        String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea WHERE nombre = ?";
 
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setString(1, nombreAerolinea);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("id_aerolinea");
+                    String nombre = resultSet.getString("nombre");
+                    String paisOrigen = resultSet.getString("pais_origen");
+                    String telefono = resultSet.getString("telefono");
+                    String paginaWeb = resultSet.getString("pagina_web");
+                    Date fechaFundacion = resultSet.getDate("fecha_fundacion");
+
+                    return new Aerolinea(id, nombre, paisOrigen, telefono, paginaWeb, fechaFundacion);
+                }
+            }
+        }
+
+        return null;
+    }
+    
+    
+    public List<String> obtenerAerolineas() {
+        List<String> aeropuertos = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "SELECT nombre FROM aerolinea";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                aeropuertos.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+        return aeropuertos;
+    }
 
     // Falta eliminar y metodos extras
 }

@@ -1,12 +1,27 @@
 
 package Vista;
 
+import Modelo.Aerolinea;
+import Modelo.Avion;
+import static Vista.Controladores.objAD;
+import static Vista.Controladores.objAvD;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class frmRegVue extends javax.swing.JFrame {
 
+    
+    
     public frmRegVue() {
         initComponents();
+        
+        List<String> nombresAerolineas = objAD.obtenerAerolineas();
+          for (String nombreAerolinea : nombresAerolineas) {
+            cboAerol.addItem(nombreAerolinea);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -24,12 +39,12 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField2 = new javax.swing.JTextField();
+        txtIDAvion = new javax.swing.JTextField();
+        cboAerol = new javax.swing.JComboBox<>();
+        txtModelo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        cboCapacidad = new javax.swing.JComboBox<>();
+        btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -139,26 +154,30 @@ public class frmRegVue extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 580, 200));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 110, -1));
+        jPanel1.add(txtIDAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 110, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 180, -1));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("VUELOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 90, -1));
-
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cboAerol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cboAerolActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 80, -1));
+        jPanel1.add(cboAerol, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 150, -1));
+        jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 180, -1));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("VUELOS-AVIÓN?");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+
+        cboCapacidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        jPanel1.add(cboCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 90, -1));
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 80, -1));
 
         jButton2.setText("Actualizar");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
@@ -300,9 +319,31 @@ public class frmRegVue extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+        try {
+            String nombreAerolinea = (String) cboAerol.getSelectedItem();
+            int IDAvion = Integer.parseInt(txtIDAvion.getText());
+            String modelo = txtModelo.getText();
+            int capacidadPasajeros = Integer.parseInt((String) cboCapacidad.getSelectedItem());
+            int idAerolinea = 0;
+
+            Aerolinea aerolineaSeleccionada = objAD.obtenerAerolineaPorNombre(nombreAerolinea);
+
+            if (aerolineaSeleccionada != null) {
+                idAerolinea = aerolineaSeleccionada.getIdAerolinea(); // Obtener el ID de la aerolínea
+
+                Avion avion = new Avion(IDAvion, modelo, capacidadPasajeros, idAerolinea);
+                objAvD.crearAvion(avion);
+            } else {
+                // La aerolínea seleccionada no existe
+                JOptionPane.showMessageDialog(this, "La aerolínea seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmRegVue.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBusCli2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseClicked
         frmBusCli frmBuCli=new frmBusCli();
@@ -333,6 +374,10 @@ public class frmRegVue extends javax.swing.JFrame {
         frmEsta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEstadis2MouseClicked
+
+    private void cboAerolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAerolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboAerolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -372,14 +417,14 @@ public class frmRegVue extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBusCli2;
     private javax.swing.JLabel btnEstadis2;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cboAerol;
+    private javax.swing.JComboBox<String> cboCapacidad;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -400,7 +445,7 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtIDAvion;
+    private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 }

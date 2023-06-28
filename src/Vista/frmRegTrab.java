@@ -359,6 +359,12 @@ public class frmRegTrab extends javax.swing.JFrame {
         jLabel8.setText("ID Aerolinea:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, 20));
         jPanel1.add(txtCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 80, -1));
+
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 80, -1));
         jPanel1.add(txtIDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 90, -1));
 
@@ -531,6 +537,10 @@ public class frmRegTrab extends javax.swing.JFrame {
             txtID.setText(""+x.getIdAerolinea());
 
     }//GEN-LAST:event_TablaTraMouseClicked
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
 
     /**
      * @param args the command line arguments

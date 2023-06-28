@@ -2,23 +2,23 @@
 package Modelo;
 
 public class Avion {
-    private String idAvion;
+    private int idAvion;
     private String modelo;
     private int capacidadPasajeros;
-    private String idAerolinea;
+    private int idAerolinea;
 
-    public Avion(String idAvion, String modelo, int capacidadPasajeros, String idAerolinea) {
+    public Avion(int idAvion, String modelo, int capacidadPasajeros, int idAerolinea) {
         this.idAvion = idAvion;
         this.modelo = modelo;
         this.capacidadPasajeros = capacidadPasajeros;
         this.idAerolinea = idAerolinea;
     }
 
-    public String getIdAvion() {
+    public int getIdAvion() {
         return idAvion;
     }
 
-    public void setIdAvion(String idAvion) {
+    public void setIdAvion(int idAvion) {
         this.idAvion = idAvion;
     }
 
@@ -38,11 +38,11 @@ public class Avion {
         this.capacidadPasajeros = capacidadPasajeros;
     }
 
-    public String getIdAerolinea() {
+    public int getIdAerolinea() {
         return idAerolinea;
     }
 
-    public void setIdAerolinea(String idAerolinea) {
+    public void setIdAerolinea(int idAerolinea) {
         this.idAerolinea = idAerolinea;
     }
     
