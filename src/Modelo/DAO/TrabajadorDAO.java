@@ -43,11 +43,12 @@ public class TrabajadorDAO {
     }
     
     
-        public void modificarTrabajador(Trabajador trabajador) throws SQLException {
+    public void modificarTrabajador(Trabajador trabajador) throws SQLException {
     Connection cn = Conexion.getConexion();
     String sql = "UPDATE trabajador SET nombre = ?, apellido = ?, fecha_nacimiento = ?, usuario = ?, contrasena = ?, cargo = ?, salario = ?, fecha_contratacion = ?, id_aerolinea = ?     WHERE id_trabajador = ?";
 
     try (PreparedStatement statement = cn.prepareStatement(sql)) {
+        
         statement.setString(1, trabajador.getNombre());
         statement.setString(2, trabajador.getApellido());
         statement.setDate(3, new java.sql.Date(trabajador.getFechaNacimiento().getTime()));
@@ -57,7 +58,7 @@ public class TrabajadorDAO {
         statement.setDouble(7,trabajador.getSalario());
         statement.setDate(8, new java.sql.Date(trabajador.getFechaContratacion().getTime()));
         statement.setInt(9, trabajador.getIdAerolinea());
-
+        statement.setInt(10, trabajador.getCodigoTra());
         statement.executeUpdate();
     }
 }
