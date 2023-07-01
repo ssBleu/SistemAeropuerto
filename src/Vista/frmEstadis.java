@@ -262,7 +262,7 @@ public class frmEstadis extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBusCli2MouseClicked
 
     private void btnReVue2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReVue2MouseClicked
-        frmRegVue frmReVue=new frmRegVue();
+        frmRegAv frmReVue=new frmRegAv();
         frmReVue.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnReVue2MouseClicked

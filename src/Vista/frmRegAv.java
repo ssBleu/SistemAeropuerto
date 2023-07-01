@@ -10,17 +10,31 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-public class frmRegVue extends javax.swing.JFrame {
+public class frmRegAv extends javax.swing.JFrame {
 
     
     
-    public frmRegVue() {
+    public frmRegAv() {
         initComponents();
         
         List<String> nombresAerolineas = objAD.obtenerAerolineas();
           for (String nombreAerolinea : nombresAerolineas) {
             cboAerol.addItem(nombreAerolinea);
+        }
+          
+        listado();
+    }
+    
+              
+        void listado(){
+        DefaultTableModel dt=(DefaultTableModel)tablaAvion.getModel();
+
+        dt.setRowCount(0);
+        for(Avion x:objAvD.Listado()){
+            Object v[]={x.getIdAvion(),x.getModelo(),x.getCapacidadPasajeros(),x.getIdAerolinea()};
+            dt.addRow(v);
         }
     }
 
@@ -38,7 +52,7 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaAvion = new javax.swing.JTable();
         txtIDAvion = new javax.swing.JTextField();
         cboAerol = new javax.swing.JComboBox<>();
         txtModelo = new javax.swing.JTextField();
@@ -46,7 +60,7 @@ public class frmRegVue extends javax.swing.JFrame {
         cboCapacidad = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -86,14 +100,14 @@ public class frmRegVue extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel6.setText("REGISTROS");
+        jLabel6.setText("REGISTRO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,7 +154,7 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel10.setText("Capacidad de pasajeros:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAvion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -151,7 +165,12 @@ public class frmRegVue extends javax.swing.JFrame {
                 "ID Avion", "ID Aerolinea", "Modelo", "Capacidad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaAvion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAvionMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaAvion);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 580, 200));
         jPanel1.add(txtIDAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 110, -1));
@@ -165,7 +184,7 @@ public class frmRegVue extends javax.swing.JFrame {
         jPanel1.add(txtModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 180, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("VUELOS-AVIÓN?");
+        jLabel1.setText("AVIÓN");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         cboCapacidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
@@ -182,8 +201,13 @@ public class frmRegVue extends javax.swing.JFrame {
         jButton2.setText("Actualizar");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
 
-        jButton3.setText("Eliminar");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -335,12 +359,13 @@ public class frmRegVue extends javax.swing.JFrame {
 
                 Avion avion = new Avion(IDAvion, modelo, capacidadPasajeros, idAerolinea);
                 objAvD.crearAvion(avion);
+                listado();
             } else {
                 // La aerolínea seleccionada no existe
                 JOptionPane.showMessageDialog(this, "La aerolínea seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(frmRegVue.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmRegAv.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -352,7 +377,7 @@ public class frmRegVue extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBusCli2MouseClicked
 
     private void btnReVue2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReVue2MouseClicked
-        frmRegVue frmReVue=new frmRegVue();
+        frmRegAv frmReVue=new frmRegAv();
         frmReVue.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnReVue2MouseClicked
@@ -379,6 +404,43 @@ public class frmRegVue extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboAerolActionPerformed
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+        try {
+            if (confirm.equals("CONTINUAR")){
+                int dni=Integer.parseInt(txtIDAvion.getText());
+                objAvD.eliminarAvion(dni);
+                txtModelo.setText("");
+                JOptionPane.showMessageDialog(null,"Eliminacion completada exitosamente");
+                listado();
+        } else {
+            JOptionPane.showMessageDialog(null,"Proceso cancelado");
+        }
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Seleccione un Cliente");
+            }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tablaAvionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAvionMouseClicked
+        int Pr = tablaAvion.getSelectedRow();
+        int ID = Integer.parseInt(tablaAvion.getValueAt(Pr, 0).toString());
+
+        Avion x = objAvD.buscarAvion(ID);
+
+        txtIDAvion.setText("" + x.getIdAvion());
+        txtModelo.setText(x.getModelo());
+        cboCapacidad.setSelectedItem(x.getCapacidadPasajeros());
+
+        /*// Recorrer el combobox para encontrar y seleccionar el nombre de la aerolínea
+        for (int i = 0; i < cboAerol.getItemCount(); i++) {
+            String nombreAerolinea = (String) cboAerol.getItemAt(i);
+            if (nombreAerolinea.equals(x.getNombreAerolinea())) {
+                cboAerol.setSelectedIndex(i);
+                break;
+            }
+        }*/
+    }//GEN-LAST:event_tablaAvionMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -396,26 +458,28 @@ public class frmRegVue extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmRegVue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegAv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmRegVue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegAv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmRegVue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegAv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmRegVue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegAv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmRegVue().setVisible(true);
+                new frmRegAv().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBusCli2;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel btnEstadis2;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel btnReAero2;
@@ -424,7 +488,6 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboAerol;
     private javax.swing.JComboBox<String> cboCapacidad;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -444,7 +507,7 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaAvion;
     private javax.swing.JTextField txtIDAvion;
     private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables

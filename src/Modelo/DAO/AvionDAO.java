@@ -2,6 +2,7 @@ package Modelo.DAO;
 
 import Modelo.Avion;
 import Modelo.Conexion.Conexion;
+import Modelo.Pasajero;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,65 @@ public class AvionDAO {
 
         return null;
     }
+    
+        public List<Avion> Listado() {
+        List<Avion> lis=new ArrayList();
+        Connection cn=Conexion.getConexion();
+        try {
+            String sql="select id_avion, modelo, capacidad_pasajeros, id_aerolinea from avion" ;
+            PreparedStatement st=cn.prepareStatement(sql);
+            ResultSet rs=st.executeQuery();
+            while(rs.next()){
+                Avion ep=new Avion(0,"",0,0);
+                ep.setIdAvion(rs.getInt(1));
+                ep.setModelo(rs.getString(2));
+                ep.setCapacidadPasajeros(rs.getInt(3));
+                ep.setIdAerolinea(rs.getInt(4));
+                lis.add(ep);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try { cn.close();} catch(Exception e2) {};
+        }
+        return lis;
+    }
+        
+        
+      public void eliminarAvion(int id) throws SQLException {
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "delete from avion "
+                    + "where id_avion=?";
+            PreparedStatement st = cn.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
+        public Avion buscarAvion(int id) {
+        Avion ep=null;
+        Connection cn=Conexion.getConexion();
+        try {
+            String sql="select id_avion, modelo, capacidad_pasajeros, id_aerolinea from avion where id_avion=?" ;
+            PreparedStatement st=cn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs=st.executeQuery();
+            if(rs.next()){//Si lee significa que existe
+                ep=new Avion(0,"",0,0);
+                 ep.setIdAvion(rs.getInt(1));
+                ep.setModelo(rs.getString(2));
+                ep.setCapacidadPasajeros(rs.getInt(3));
+                ep.setIdAerolinea(rs.getInt(4));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try { cn.close();} catch(Exception e2) {};
+        }
+        return ep;
+    }
         // Falta eliminar y metodos extras
 }
