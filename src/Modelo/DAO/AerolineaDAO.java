@@ -146,11 +146,34 @@ public class AerolineaDAO {
     }
     
     
-    public List<String> obtenerAerolineas() {
+    public List<Integer> obtenerAerolineas() {
+        List<Integer> aeropuertos = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "SELECT id_aerolinea FROM aerolinea";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                aeropuertos.add(rs.getInt(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+        return aeropuertos;
+    }
+    
+    
+        
+    public List<String> obtenerNombreporIdAerolineas(int ID) {
         List<String> aeropuertos = new ArrayList<>();
         Connection cn = Conexion.getConexion();
         try {
-            String sql = "SELECT nombre FROM aerolinea";
+            String sql = "SELECT nombre FROM aerolinea WHERE id_aerolinea=?";
             PreparedStatement st = cn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
@@ -166,6 +189,7 @@ public class AerolineaDAO {
         }
         return aeropuertos;
     }
+
 
     // Falta eliminar y metodos extras
 }

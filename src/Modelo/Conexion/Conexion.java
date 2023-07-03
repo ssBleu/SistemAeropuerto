@@ -8,9 +8,9 @@ public class Conexion {
     public static Connection getConexion(){ 
 		Connection con = null;
 		try { Class.forName("com.mysql.jdbc.Driver"); 
-		String url = "jdbc:mysql://sql10.freesqldatabase.com:3306/sql10628899"; //"jdbc:mysql://localhost/bd_vuelos" (opcion local)
-		String usr = "sql10628899"; //root (opcion local)
-		String psw = "YqmCP18gTM"; //nada (opcion local)
+		String url = "jdbc:mysql://localhost/bd_vuelos"; //"jdbc:mysql://localhost/bd_vuelos" (opcion local)
+		String usr = "root"; //root (opcion local)
+		String psw = ""; //nada (opcion local)
 		con = DriverManager.getConnection(url,usr,psw); 
 		System.out.println("conexion ok");
 		} catch (ClassNotFoundException ex)

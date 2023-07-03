@@ -19,9 +19,9 @@ public class frmRegAv extends javax.swing.JFrame {
     public frmRegAv() {
         initComponents();
         
-        List<String> nombresAerolineas = objAD.obtenerAerolineas();
-          for (String nombreAerolinea : nombresAerolineas) {
-            cboAerol.addItem(nombreAerolinea);
+        List<Integer> nombresAerolineas = objAD.obtenerAerolineas();
+          for (Integer nombreAerolinea : nombresAerolineas) {
+            cboAerol.addItem(String.valueOf(nombreAerolinea));
         }
           
         listado();

@@ -1,14 +1,17 @@
 
 package Vista;
 
+import Modelo.Aerolinea;
 import Modelo.Pasajero;
 import Modelo.Trabajador;
+import static Vista.Controladores.objAD;
 import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
 //import static Vista.Controladores.objTR;
 import com.toedter.calendar.JDateChooser;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,8 +19,13 @@ public class frmRegTrab extends javax.swing.JFrame {
 
     public frmRegTrab() {
         initComponents();
+        List<Integer> nombresAerolineas = objAD.obtenerAerolineas();
+          for (int nombreAerolinea : nombresAerolineas) {
+            jCID.addItem(String.valueOf(nombreAerolinea));
+        }
     listado();
     }
+    
     void listado(){
         DefaultTableModel dt=(DefaultTableModel)TablaTra.getModel();
         
@@ -72,10 +80,10 @@ public class frmRegTrab extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         DCContrato = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        txtCargo = new javax.swing.JTextField();
-        txtID = new javax.swing.JTextField();
         txtIDT = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
+        jCCargo = new javax.swing.JComboBox<>();
+        jCID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -248,7 +256,7 @@ public class frmRegTrab extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEstadis2)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
@@ -358,19 +366,22 @@ public class frmRegTrab extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("ID Aerolinea:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, 20));
-        jPanel1.add(txtCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 80, -1));
-
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 80, -1));
         jPanel1.add(txtIDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 90, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Nombre:");
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 20));
+
+        jCCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azafatas", "Pilotos", "Administrador", "Limpieza", "Mantenimiento", " ", " " }));
+        jPanel1.add(jCCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 110, -1));
+
+        jCID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccionar--" }));
+        jCID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCIDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jCID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 110, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 860, 420));
 
@@ -429,11 +440,11 @@ public class frmRegTrab extends javax.swing.JFrame {
             Date naci = dateChooser.getDate(); // Obtiene la fecha seleccionada
             String usu = txtUsuario.getText();
             String contra = txtContraseña.getText();
-            String cargo = txtCargo.getText();
+            String cargo = jCCargo.getSelectedItem().toString();
             double sueldo = Double.parseDouble(txtSalario.getText());
             JDateChooser jDateChooser = DCContrato;
             Date contrato = jDateChooser.getDate();
-            int ida = Integer.parseInt(txtID.getText());
+            int ida = Integer.parseInt(jCID.getSelectedItem().toString());
 
             Trabajador pr = new Trabajador(idt, nombre, apel, naci, usu, contra, cargo, sueldo, contrato, ida);
             objTR.crearTrabajador(pr);
@@ -442,11 +453,11 @@ public class frmRegTrab extends javax.swing.JFrame {
             txtApellido.setText("");
             DCNacimiento.setDateFormatString("");
             txtUsuario.setText("");
-            txtCargo.setText("");
+             jCCargo.setSelectedItem("");
             txtContraseña.setText("");
             txtSalario.setText("");
             DCContrato.setDateFormatString("");
-            txtID.setText("");
+            jCID.setSelectedItem("");
             listado();
             JOptionPane.showMessageDialog(null, "Trabajador agregado correctamente");
         } catch (SQLException ex) {
@@ -464,11 +475,11 @@ public class frmRegTrab extends javax.swing.JFrame {
             Date naci = dateChooser.getDate(); // Obtiene la fecha seleccionada
             String usu = txtUsuario.getText();
             String contra = txtContraseña.getText();
-            String cargo = txtCargo.getText();
+            String cargo = jCCargo.getSelectedItem().toString();
             double sueldo = Double.parseDouble(txtSalario.getText());
             JDateChooser jDateChooser = DCContrato;
             Date contrato = jDateChooser.getDate();
-            int ida = Integer.parseInt(txtID.getText());
+            int ida = Integer.parseInt(jCID.getSelectedItem().toString());
 
             if(nombre.length()>0){
                 if(idt>0){
@@ -481,11 +492,11 @@ public class frmRegTrab extends javax.swing.JFrame {
                         txtApellido.setText("");
                         DCNacimiento.setDateFormatString("");
                         txtUsuario.setText("");
-                        txtCargo.setText("");
+                         jCCargo.setSelectedItem("");
                         txtContraseña.setText("");
                         txtSalario.setText("");
                         DCContrato.setDateFormatString("");
-                        txtID.setText("");
+                         jCCargo.setSelectedItem("");
                         JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente");
                         listado();
                     }else {
@@ -531,16 +542,16 @@ public class frmRegTrab extends javax.swing.JFrame {
             DCNacimiento.setDate(x.getFechaNacimiento());
             txtUsuario.setText(x.getUsuario());
             txtContraseña.setText(x.getContrasena());
-            txtCargo.setText(x.getCargo()); 
+            jCCargo.setSelectedItem(x.getCargo()); 
             txtSalario.setText(""+x.getSalario());
             DCContrato.setDate(x.getFechaContratacion());
-            txtID.setText(""+x.getIdAerolinea());
+            jCID.setSelectedItem(""+x.getIdAerolinea());
 
     }//GEN-LAST:event_TablaTraMouseClicked
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
+    private void jCIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCIDActionPerformed
+        
+    }//GEN-LAST:event_jCIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -589,6 +600,8 @@ public class frmRegTrab extends javax.swing.JFrame {
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
+    private javax.swing.JComboBox<String> jCCargo;
+    private javax.swing.JComboBox<String> jCID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -615,9 +628,7 @@ public class frmRegTrab extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtContraseña;
-    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtIDT;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
