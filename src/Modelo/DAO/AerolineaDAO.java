@@ -121,40 +121,33 @@ public class AerolineaDAO {
         return null;
     }
     
-        public Aerolinea obtenerAerolineaPorNombre(String nombreAerolinea) throws SQLException {
+    public int obtenerIdAerolineaPorNombre(String nombreAerolinea) throws SQLException {
         Connection cn = Conexion.getConexion();
-        String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea WHERE nombre = ?";
+        String sql = "SELECT id_aerolinea FROM aerolinea WHERE nombre = ?";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
             statement.setString(1, nombreAerolinea);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    int id = resultSet.getInt("id_aerolinea");
-                    String nombre = resultSet.getString("nombre");
-                    String paisOrigen = resultSet.getString("pais_origen");
-                    String telefono = resultSet.getString("telefono");
-                    String paginaWeb = resultSet.getString("pagina_web");
-                    Date fechaFundacion = resultSet.getDate("fecha_fundacion");
-
-                    return new Aerolinea(id, nombre, paisOrigen, telefono, paginaWeb, fechaFundacion);
+                    return resultSet.getInt("id_aerolinea");
                 }
             }
         }
 
-        return null;
+        return -1; // O cualquier otro valor que desees usar como indicador de que no se encontró el ID
     }
     
     
     public List<Integer> obtenerAerolineas() {
-        List<Integer> aeropuertos = new ArrayList<>();
+        List<Integer> aerolineas = new ArrayList<>();
         Connection cn = Conexion.getConexion();
         try {
             String sql = "SELECT id_aerolinea FROM aerolinea";
             PreparedStatement st = cn.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                aeropuertos.add(rs.getInt(1));
+                aerolineas.add(rs.getInt(1));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -164,9 +157,29 @@ public class AerolineaDAO {
             } catch (Exception e2) {
             }
         }
-        return aeropuertos;
+        return aerolineas;
     }
     
+        public List<String> obtenerNombresAerolineas() {
+        List<String> aerolineas = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "SELECT nombre FROM aerolinea";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                aerolineas.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+        return aerolineas;
+    }
     
         
     public List<String> obtenerNombreporIdAerolineas(int ID) {

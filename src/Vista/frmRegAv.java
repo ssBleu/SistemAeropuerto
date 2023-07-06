@@ -14,26 +14,24 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmRegAv extends javax.swing.JFrame {
 
-    
-    
     public frmRegAv() {
         initComponents();
         
-        List<Integer> nombresAerolineas = objAD.obtenerAerolineas();
-          for (Integer nombreAerolinea : nombresAerolineas) {
-            cboAerol.addItem(String.valueOf(nombreAerolinea));
+        List<String> nombresAerolineas = objAD.obtenerNombresAerolineas();
+          for (String nombreAerolinea : nombresAerolineas) {
+            cboAerol.addItem(nombreAerolinea);
         }
           
         listado();
     }
     
               
-        void listado(){
+    void listado(){
         DefaultTableModel dt=(DefaultTableModel)tablaAvion.getModel();
 
         dt.setRowCount(0);
-        for(Avion x:objAvD.Listado()){
-            Object v[]={x.getIdAvion(),x.getModelo(),x.getCapacidadPasajeros(),x.getIdAerolinea()};
+        for(Avion x:objAvD.obtenerListaAviones()){
+            Object v[]={x.getIdAvion(),x.getIdAerolinea(),x.getNombreAerolinea(),x.getModelo(),x.getCapacidadPasajeros()};
             dt.addRow(v);
         }
     }
@@ -143,7 +141,7 @@ public class frmRegAv extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("ID Aerolinea:");
+        jLabel8.setText("Aerolinea:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -156,13 +154,13 @@ public class frmRegAv extends javax.swing.JFrame {
 
         tablaAvion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID Avion", "ID Aerolinea", "Modelo", "Capacidad"
+                "ID Avion", "ID Aerolinea", "Aerolinea", "Modelo", "Capacidad"
             }
         ));
         tablaAvion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -346,24 +344,18 @@ public class frmRegAv extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         try {
-            String nombreAerolinea = (String) cboAerol.getSelectedItem();
             int IDAvion = Integer.parseInt(txtIDAvion.getText());
             String modelo = txtModelo.getText();
+            
             int capacidadPasajeros = Integer.parseInt((String) cboCapacidad.getSelectedItem());
-            int idAerolinea = 0;
+            
+            String nombreAerolinea = (String) cboAerol.getSelectedItem();
+            int idAerolinea = objAD.obtenerIdAerolineaPorNombre(nombreAerolinea);
 
-            Aerolinea aerolineaSeleccionada = objAD.obtenerAerolineaPorNombre(nombreAerolinea);
-
-            if (aerolineaSeleccionada != null) {
-                idAerolinea = aerolineaSeleccionada.getIdAerolinea(); // Obtener el ID de la aerolínea
-
-                Avion avion = new Avion(IDAvion, modelo, capacidadPasajeros, idAerolinea);
-                objAvD.crearAvion(avion);
-                listado();
-            } else {
-                // La aerolínea seleccionada no existe
-                JOptionPane.showMessageDialog(this, "La aerolínea seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            Avion avion = new Avion(IDAvion, modelo, capacidadPasajeros, idAerolinea);
+            objAvD.crearAvion(avion);
+            listado();
+                
         } catch (SQLException ex) {
             Logger.getLogger(frmRegAv.class.getName()).log(Level.SEVERE, null, ex);
         }

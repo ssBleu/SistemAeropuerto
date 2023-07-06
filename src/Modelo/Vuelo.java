@@ -9,10 +9,14 @@ public class Vuelo {
     private String destino;
     private Date fechaSalida;
     private Date fechaLlegada;
-    private int duracion;
+    private String duracion;
     private String idAvion;
+    private double precio;
+    
+    private String nombreAvion;
+    private String nombreAerolinea;
 
-    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, int duracion, String idAvion) {
+    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio) {
         this.idVuelo = idVuelo;
         this.origen = origen;
         this.destino = destino;
@@ -20,6 +24,7 @@ public class Vuelo {
         this.fechaLlegada = fechaLlegada;
         this.duracion = duracion;
         this.idAvion = idAvion;
+        this.precio = precio;
     }
 
     public String getIdVuelo() {
@@ -62,11 +67,11 @@ public class Vuelo {
         this.fechaLlegada = fechaLlegada;
     }
 
-    public int getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
 
@@ -77,4 +82,31 @@ public class Vuelo {
     public void setIdAvion(String idAvion) {
         this.idAvion = idAvion;
     }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getNombreAvion() {
+        return nombreAvion;
+    }
+
+    public void setNombreAvion(String nombreAvion) {
+        this.nombreAvion = nombreAvion;
+    }
+
+    public String getNombreAerolinea() {
+        return nombreAerolinea;
+    }
+
+    public void setNombreAerolinea(String nombreAerolinea) {
+        this.nombreAerolinea = nombreAerolinea;
+    }
+
+  
+    
 }

@@ -1,4 +1,3 @@
-
 package Modelo;
 
 public class Avion {
@@ -6,6 +5,7 @@ public class Avion {
     private String modelo;
     private int capacidadPasajeros;
     private int idAerolinea;
+    private String nombreAerolinea;
 
     public Avion(int idAvion, String modelo, int capacidadPasajeros, int idAerolinea) {
         this.idAvion = idAvion;
@@ -46,4 +46,11 @@ public class Avion {
         this.idAerolinea = idAerolinea;
     }
     
+    public String getNombreAerolinea() {
+        return nombreAerolinea;
+    }
+    
+    public void setNombreAerolinea(String nombreAerolinea) {
+        this.nombreAerolinea = nombreAerolinea;
+    }
 }
