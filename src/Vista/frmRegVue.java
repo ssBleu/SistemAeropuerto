@@ -34,7 +34,7 @@ public class frmRegVue extends javax.swing.JFrame {
         dt.setRowCount(0);
         for(Vuelo x:objVD.obtenerListaVuelos()){
             Object v[]={x.getIdVuelo(),x.getIdAvion(), x.getNombreAvion(), x.getNombreAerolinea(), x.getOrigen(),
-            x.getDestino(), x.getDuracion(), x.getFechaSalida(), x.getFechaSalida(), x.getPrecio()};
+            x.getDestino(), x.getDuracion(), x.getFechaSalida(), x.getFechaSalida(),x.getTipo(), x.getPrecio()};
             dt.addRow(v);
         }
     }
@@ -61,6 +61,7 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -69,13 +70,12 @@ public class frmRegVue extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVuelo = new javax.swing.JTable();
         cboAvion = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         txtDestino = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
+        txtTipo = new javax.swing.JTextField();
         FSalida = new com.toedter.calendar.JDateChooser();
         FLlegada = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
@@ -84,6 +84,8 @@ public class frmRegVue extends javax.swing.JFrame {
         txtDurac = new javax.swing.JTextField();
         txtIDVuelo = new javax.swing.JTextField();
         txtOrigen = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -239,19 +241,25 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel6.setText("REGISTRO");
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("VUELO");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(572, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
                         .addComponent(jLabel6)
-                        .addGap(221, 221, 221)))
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2))
         );
@@ -266,7 +274,9 @@ public class frmRegVue extends javax.swing.JFrame {
                         .addGap(0, 25, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 25, Short.MAX_VALUE)
-                        .addComponent(jLabel6)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1))))
                 .addContainerGap())
         );
 
@@ -288,18 +298,18 @@ public class frmRegVue extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, 20));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Precio:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, 20));
+        jLabel10.setText("Tipo:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, 20));
 
         tablaVuelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Vuelo", "ID Avion", "ModeloAvion", "Aerolinea", "Origen", "Destino", "Duración", "F. Salida", "F. Llegada", "Precio"
+                "ID Vuelo", "ID Avion", "ModeloAvion", "Aerolinea", "Origen", "Destino", "Duración", "F. Salida", "F. Llegada", "Tipo", "Precio"
             }
         ));
         tablaVuelo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -317,10 +327,6 @@ public class frmRegVue extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cboAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, -1));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("VUELO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -345,13 +351,13 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("ID Vuelo:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 150, -1));
+        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 150, -1));
 
         FSalida.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(FSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 150, -1));
+        jPanel1.add(FSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 150, -1));
 
         FLlegada.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(FLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 150, -1));
+        jPanel1.add(FLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 150, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Duración:");
@@ -359,14 +365,19 @@ public class frmRegVue extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Fecha Salida:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, 20));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Fecha Llegada:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, 20));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, 20));
         jPanel1.add(txtDurac, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 100, -1));
         jPanel1.add(txtIDVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, -1));
         jPanel1.add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 110, -1));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Precio:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, 20));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 150, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -437,15 +448,17 @@ public class frmRegVue extends javax.swing.JFrame {
             String origen = txtOrigen.getText();
             String destino = txtDestino.getText();
             String duracion = txtDurac.getText();
+            String tipo = txtTipo.getText();
+            
             JDateChooser dateChooser = FSalida; // Asigna el JDateChooser a una variable
             Date Fsali = dateChooser.getDate(); // Obtiene la fecha seleccionada
             JDateChooser jdateChooser = FLlegada; // Asigna el JDateChooser a una variable
-            Date Flleg = dateChooser.getDate(); // Obtiene la fecha seleccionada   
+            Date Flleg = dateChooser.getDate(); // Obtiene la fecha seleccionada
             double precio = Double.parseDouble(txtPrecio.getText());
             
             String modeloAvion = (String) cboAvion.getSelectedItem();
             String idAvion = String.valueOf(objAvD.obtenerIdAvionPorModelo(modeloAvion));
-            Vuelo vuelo = new Vuelo(IDVuelo, origen, destino, Fsali, Flleg, duracion, idAvion, precio);
+            Vuelo vuelo = new Vuelo(IDVuelo, origen, destino, Fsali, Flleg, duracion, idAvion, precio, tipo);
             objVD.crearVuelo(vuelo);
             listado();
                 
@@ -513,6 +526,7 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -535,5 +549,6 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JTextField txtIDVuelo;
     private javax.swing.JTextField txtOrigen;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,13 +1,69 @@
 
 package Vista;
 
+import Modelo.Vuelo;
+import static Vista.Controladores.objVD;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmCompraBole extends javax.swing.JFrame {
 
     public frmCompraBole() {
         initComponents();
+        listadoVuelosInicial();
+        
+        // Obtener la lista de orígenes desde VueloDAO
+        List<String> origenes = objVD.obtenerOrigenes();
+        List<String> duraciones = objVD.obtenerDuraciones();
+        List<String> destinos = objVD.obtenerDestino();
+
+        // Añadir los orígenes al JComboBox
+        for (String origen : origenes) {
+            cboOrigen.addItem(origen);
+        }
+        
+                for (String duracion : duraciones) {
+            cboDuracion.addItem(duracion);
+        }
+                
+                        for (String destino : destinos) {
+            cboDestino.addItem(destino);
+        }
     }
+    
+    void listadoVuelosInicial(){
+        DefaultTableModel dt=(DefaultTableModel)tablaVueloBoleto.getModel();
+
+        dt.setRowCount(0);
+        for(Vuelo x:objVD.obtenerListaVuelos()){
+            Object v[]={x.getOrigen(),x.getDestino(), x.getDuracion(),x.getTipo(),x.getNombreAerolinea(), x.getPrecio()};
+            dt.addRow(v);
+        }
+    }
+    
+    // CHEQUEAR
+    /*private void filtrarTabla() {
+        DefaultTableModel dt = (DefaultTableModel) tablaVueloBoleto.getModel();
+        String origenSeleccionado = (String) cboOrigen.getSelectedItem();
+        String destinoSeleccionado = (String) comboBoxDestino.getSelectedItem();
+        String duracionSeleccionada = (String) comboBoxDuracion.getSelectedItem();
+
+        // Remover todas las filas de la tabla
+        dt.setRowCount(0);
+
+        // Obtener los vuelos filtrados desde VueloDAO
+        List<Vuelo> vuelosFiltrados = objVD.obtenerVuelosFiltrados(origenSeleccionado, destinoSeleccionado, duracionSeleccionada);
+
+        // Agregar las filas filtradas a la tabla
+        for (Vuelo vuelo : vuelosFiltrados) {
+            Object v[] = {vuelo.getOrigen(), vuelo.getDestino(), vuelo.getDuracion(), vuelo.getTipo(),
+                    vuelo.getNombreAerolinea(), String.valueOf(vuelo.getPrecio())};
+            dt.addRow(v);
+        }
+        }
+    }*/
+ 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -20,17 +76,19 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVueloBoleto = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboOrigen = new javax.swing.JComboBox<>();
+        cboDestino = new javax.swing.JComboBox<>();
+        cboDuracion = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -109,10 +167,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Origen:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
+        jLabel9.setText("Duración:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVueloBoleto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -123,7 +181,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaVueloBoleto);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 580, 190));
 
@@ -138,13 +196,6 @@ public class frmCompraBole extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 100, -1));
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 170, -1));
 
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -180,8 +231,25 @@ public class frmCompraBole extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 80, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 160, -1));
+        cboOrigen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboOrigenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cboOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 160, -1));
+
+        jPanel1.add(cboDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 160, -1));
+
+        cboDuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDuracionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cboDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 160, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Origen:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -323,12 +391,8 @@ public class frmCompraBole extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        //aplicarFiltro();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -368,6 +432,16 @@ public class frmCompraBole extends javax.swing.JFrame {
         frmEsta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEstadis2MouseClicked
+
+    private void cboOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboOrigenActionPerformed
+        //String origenSeleccionado = (String) cboOrigen.getSelectedItem();
+        //filtrarTabla();
+    }//GEN-LAST:event_cboOrigenActionPerformed
+
+    private void cboDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDuracionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboDuracionActionPerformed
+    
 
     /**
      * @param args the command line arguments
@@ -411,12 +485,15 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
+    private javax.swing.JComboBox<String> cboDestino;
+    private javax.swing.JComboBox<String> cboDuracion;
+    private javax.swing.JComboBox<String> cboOrigen;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -433,9 +510,8 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTable tablaVueloBoleto;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,11 +12,12 @@ public class Vuelo {
     private String duracion;
     private String idAvion;
     private double precio;
-    
+    private String tipo;
+
     private String nombreAvion;
     private String nombreAerolinea;
 
-    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio) {
+    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio, String tipo) {
         this.idVuelo = idVuelo;
         this.origen = origen;
         this.destino = destino;
@@ -25,6 +26,7 @@ public class Vuelo {
         this.duracion = duracion;
         this.idAvion = idAvion;
         this.precio = precio;
+        this.tipo = tipo;
     }
 
     public String getIdVuelo() {
@@ -107,6 +109,12 @@ public class Vuelo {
         this.nombreAerolinea = nombreAerolinea;
     }
 
-  
+      public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
 }
