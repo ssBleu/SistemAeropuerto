@@ -1,14 +1,28 @@
 
 package Vista;
 
+import static Vista.Controladores.objPS;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmBusCli extends javax.swing.JFrame {
 
     public frmBusCli() {
         initComponents();
+        listado();
     }
 
+    void listado(){
+        DefaultTableModel dt=(DefaultTableModel)BuscCliente.getModel();
+        
+        dt.setRowCount(0);
+      
+        for(Object[] Clientes :objPS.listarPasajerosVuelo()){
+            dt.addRow(Clientes);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -16,7 +30,7 @@ public class frmBusCli extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        BuscCliente = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
@@ -52,7 +66,7 @@ public class frmBusCli extends javax.swing.JFrame {
         jLabel9.setText("DNI:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        BuscCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -63,13 +77,13 @@ public class frmBusCli extends javax.swing.JFrame {
                 "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Precio"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(BuscCliente);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 580, 250));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("CLIENTE");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        jLabel1.setText("REGISTRADAS");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
 
         jButton1.setText("Comprar Boletos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,14 +147,14 @@ public class frmBusCli extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel6.setText("BUSQUEDA");
+        jLabel6.setText("RESERVAS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(264, Short.MAX_VALUE)
+                .addContainerGap(270, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,6 +404,7 @@ public class frmBusCli extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BuscCliente;
     private javax.swing.JLabel btnBusCli2;
     private javax.swing.JLabel btnEstadis2;
     private javax.swing.JLabel btnReAero2;
@@ -415,7 +430,6 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

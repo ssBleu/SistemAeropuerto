@@ -103,5 +103,54 @@ public class PasajeroDAO {
         }
         return lis;
     }
+    
+    //para el otro frm
+
+    public List<Object[]> listarPasajerosVuelo() {
+        List<Object[]> clientes = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT r.id_reserva, p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, aero.nombre AS aerolinea, v.precio " +
+                         "FROM reserva_vuelo r " +
+                         "JOIN pasajero p ON r.dni_pasajero = p.dni_pasajero " +
+                         "JOIN vuelo v ON r.id_vuelo = v.id_vuelo " +
+                         "JOIN avion av ON v.id_avion = av.id_avion " +
+                         "JOIN aerolinea aero ON av.id_aerolinea = aero.id_aerolinea";
+
+            Statement statement = cn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int dniPasajero = resultSet.getInt("dni_pasajero");
+                String nombre = resultSet.getString("nombre");
+                String apellido = resultSet.getString("apellido");
+                String origen = resultSet.getString("origen");
+                String destino = resultSet.getString("destino");
+                String aerolinea = resultSet.getString("aerolinea");
+                double precio = resultSet.getDouble("precio");
+
+                Object[] cliente = {dniPasajero, nombre, apellido, origen, destino, aerolinea, precio};
+                clientes.add(cliente);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return clientes;
+    }
+    
+    
+    
+    
+    
+    
+    
 
 }

@@ -22,7 +22,7 @@ public class frmRegAero extends javax.swing.JFrame {
             Object v[]={x.getIdAerolinea(),x.getNombre(),x.getPaisOrigen(),x.getTelefono(),x.getPaginaWeb(),x.getFechaFundacion()};
             dt.addRow(v);
         }
-}
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
