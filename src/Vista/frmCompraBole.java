@@ -41,7 +41,7 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         dt.setRowCount(0);
         for(Vuelo x:objVD.obtenerListaVuelos()){
-            Object v[]={x.getOrigen(),x.getDestino(), x.getDuracion(),x.getTipo(),x.getNombreAerolinea(), x.getPrecio()};
+            Object v[]={x.getIdVuelo(), x.getOrigen(),x.getDestino(), x.getDuracion(),x.getTipo(),x.getNombreAerolinea(), x.getPrecio()};
             dt.addRow(v);
         }
     }
@@ -79,7 +79,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         } else {
             // Agregar las filas filtradas a la tabla
             for (Vuelo x : vuelosFiltrados) {
-                Object v[] = {x.getOrigen(), x.getDestino(), x.getDuracion(), x.getTipo(),
+                Object v[] = {x.getIdVuelo(), x.getOrigen(), x.getDestino(), x.getDuracion(), x.getTipo(),
                         x.getNombreAerolinea(), String.valueOf(x.getPrecio())};
                 dt.addRow(v);
             }
@@ -100,7 +100,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVueloBoleto = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnReservar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -194,13 +194,13 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         tablaVueloBoleto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio"
+                "ID_Vuelo", "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tablaVueloBoleto);
@@ -211,13 +211,13 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel1.setText("BOLETOS");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
-        jButton1.setText("Reservar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReservar.setText("Reservar");
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnReservarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 100, -1));
+        jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 100, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -409,11 +409,27 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        frmReserva frmReser= new frmReserva();
-        frmReser.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        // Obtener el índice de la fila seleccionada
+        int selectedRow = tablaVueloBoleto.getSelectedRow();
+        
+        //del selectedRow buscar el ID
+
+        // Verificar si se ha seleccionado una fila
+        if (selectedRow != -1) {
+            // Obtener el idVuelo de la fila seleccionada
+            int idVuelo = Integer.parseInt(tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
+
+            // Llamar al método cargarPasajeros de frmReserva y pasar el idVuelo
+            frmReserva frmReser = new frmReserva();
+            frmReser.cargarPasajeros(idVuelo);
+            frmReser.setVisible(true);
+            this.setVisible(false);
+        } else {
+            // Mostrar un mensaje de error indicando que no se ha seleccionado ningún vuelo
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un vuelo para realizar la reserva", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnReservarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         filtrarTabla();
@@ -510,10 +526,10 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
+    private javax.swing.JButton btnReservar;
     private javax.swing.JComboBox<String> cboDestino;
     private javax.swing.JComboBox<String> cboDuracion;
     private javax.swing.JComboBox<String> cboOrigen;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

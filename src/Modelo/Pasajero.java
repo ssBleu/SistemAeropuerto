@@ -2,14 +2,14 @@
 package Modelo;
 
 public class Pasajero {
-    private String dniPasajero;
+    private int dniPasajero;
     private String nombre;
     private String apellido;
     private int edad;
     private String genero;
     private String nacionalidad;
 
-    public Pasajero(String dniPasajero, String nombre, String apellido, int edad, String genero, String nacionalidad) {
+    public Pasajero(int dniPasajero, String nombre, String apellido, int edad, String genero, String nacionalidad) {
         this.dniPasajero = dniPasajero;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -18,11 +18,11 @@ public class Pasajero {
         this.nacionalidad = nacionalidad;
     }
 
-    public String getDniPasajero() {
+    public int getDniPasajero() {
         return dniPasajero;
     }
 
-    public void setDniPasajero(String dniPasajero) {
+    public void setDniPasajero(int dniPasajero) {
         this.dniPasajero = dniPasajero;
     }
 

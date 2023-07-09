@@ -351,7 +351,7 @@ public class frmRegCli extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         try {
-        String dni =txtDni.getText();
+        int dni = Integer.parseInt(txtDni.getText());
         String nom =txtApellido.getText();
         String ape =txtNombre.getText();
         int edad =Integer.parseInt(txtEdad.getText());
@@ -447,7 +447,7 @@ public class frmRegCli extends javax.swing.JFrame {
         
         Pasajero x = objPS.buscarPasajero(DNI);
         
-        txtDni.setText(x.getDniPasajero());
+        txtDni.setText(String.valueOf(x.getDniPasajero()));///
         txtNombre.setText(x.getNombre());
         txtApellido.setText(x.getApellido());
         txtEdad.setText(""+x.getEdad());
@@ -457,7 +457,7 @@ public class frmRegCli extends javax.swing.JFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
          try {
-            String dni =txtDni.getText();
+            int dni =Integer.parseInt(txtDni.getText());
             String nom =txtApellido.getText();
             String ape =txtNombre.getText();
             int edad =Integer.parseInt(txtEdad.getText());

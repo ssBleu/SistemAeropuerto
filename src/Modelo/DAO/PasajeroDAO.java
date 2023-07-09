@@ -14,7 +14,7 @@ public class PasajeroDAO {
         String sql = "INSERT INTO pasajero (dni_pasajero, nombre, apellido, edad, genero, nacionalidad) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
-            statement.setString(1, pasajero.getDniPasajero());
+            statement.setInt(1, pasajero.getDniPasajero());
             statement.setString(2, pasajero.getNombre());
             statement.setString(3, pasajero.getApellido());
             statement.setInt(4, pasajero.getEdad());
@@ -47,8 +47,8 @@ public class PasajeroDAO {
             st.setInt(1, id);
             ResultSet rs=st.executeQuery();
             if(rs.next()){//Si lee significa que existe
-                ep=new Pasajero("","","",0,"","");
-                ep.setDniPasajero(rs.getString(1));
+                ep=new Pasajero(0,"","",0,"","");
+                ep.setDniPasajero(rs.getInt(1));
                 ep.setNombre(rs.getString(2));
                 ep.setApellido(rs.getString(3));
                 ep.setEdad(rs.getInt(4));
@@ -73,7 +73,7 @@ public class PasajeroDAO {
         statement.setInt(3, pasajero.getEdad());
         statement.setString(4, pasajero.getGenero());
         statement.setString(5, pasajero.getNacionalidad());
-        statement.setString(6, pasajero.getDniPasajero());
+        statement.setInt(6, pasajero.getDniPasajero());
 
         statement.executeUpdate();
     }
@@ -87,8 +87,8 @@ public class PasajeroDAO {
             PreparedStatement st=cn.prepareStatement(sql);
             ResultSet rs=st.executeQuery();
             while(rs.next()){
-                Pasajero ep=new Pasajero("","","",0,"","");
-                ep.setDniPasajero(rs.getString(1));
+                Pasajero ep=new Pasajero(0,"","",0,"","");
+                ep.setDniPasajero(rs.getInt(1));
                 ep.setNombre(rs.getString(2));
                 ep.setApellido(rs.getString(3));
                 ep.setEdad(rs.getInt(4));
@@ -103,28 +103,5 @@ public class PasajeroDAO {
         }
         return lis;
     }
-    
-  
-     /*public Pasajero obtenerPasajeroPorDni(String dni) throws SQLException {
-        String sql = "SELECT dni_pasajero, nombre, apellido, edad, genero, nacionalidad FROM pasajero WHERE dni_pasajero = ?";
-        Connection cn=Conexion.getConexion();
-        try (PreparedStatement statement = cn.prepareStatement(sql)) {
-            statement.setString(1, dni);
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String dniPasajero = resultSet.getString("dni_pasajero");
-                    String nombre = resultSet.getString("nombre");
-                    String apellido = resultSet.getString("apellido");
-                    int edad = resultSet.getInt("edad");
-                    String genero = resultSet.getString("genero");
-                    String nacionalidad = resultSet.getString("nacionalidad");
-
-                    return new Pasajero(dniPasajero, nombre, apellido, edad, genero, nacionalidad);
-                }
-            }
-        }
-
-        return null;
-    }*/
 }

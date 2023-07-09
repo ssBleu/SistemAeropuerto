@@ -1,12 +1,76 @@
 
 package Vista;
 
+import Modelo.Pasajero;
+import Modelo.Reserva;
+import static Vista.Controladores.objRS;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmReserva extends javax.swing.JFrame {
 
     public frmReserva() {
         initComponents();
+
+    }
+    
+    public void cargarPasajeros(int idVuelo) {
+        lblIdVuelo.setText(String.valueOf(idVuelo));
+        // Obtener los pasajeros por vuelo desde el PasajeroDAO
+        List<Pasajero> pasajeros = objRS.obtenerPasajerosPorVuelo(idVuelo);
+
+        // Obtener las reservas por vuelo desde el ReservaDAO
+        List<Reserva> reservas = objRS.obtenerReservasPorVuelo(idVuelo);
+
+        // Luego, puedes mostrar los pasajeros y las reservas en la interfaz gráfica
+        DefaultTableModel dt = (DefaultTableModel) tablaReservas.getModel();
+        dt.setRowCount(0);
+
+        // Recorrer los pasajeros y buscar la reserva correspondiente para cada pasajero
+        for (Pasajero pasajero : pasajeros) {
+            int dniPasajero = pasajero.getDniPasajero();
+            Reserva reservaPasajero = null;
+
+            // Buscar la reserva correspondiente al pasajero
+            for (Reserva reserva : reservas) {
+                if (reserva.getDniPasajero() == dniPasajero) {
+                    reservaPasajero = reserva;
+                    break;
+                }
+            }
+
+            if (reservaPasajero != null) {
+                // Obtener los datos de la reserva
+                int idReserva = reservaPasajero.getIdReserva();
+                Date fechaReserva = reservaPasajero.getFechaReserva();
+
+                // Agregar los datos a la tabla
+                Object[] row = {idReserva, idVuelo, dniPasajero, fechaReserva, pasajero.getNombre(), pasajero.getApellido()};
+                dt.addRow(row);
+            } else {
+                // Si no se encuentra reserva para el pasajero, agregar una fila vacía
+                Object[] row = {null, idVuelo, dniPasajero, null, pasajero.getNombre(), pasajero.getApellido()};
+                dt.addRow(row);
+            }
+        }
+    }
+
+    
+    
+    private void mostrarReservas(List<Reserva> reservas) {
+        DefaultTableModel dt = (DefaultTableModel) tablaReservas.getModel();
+
+        // Remover todas las filas de la tabla
+        dt.setRowCount(0);
+
+        // Agregar las reservas a la tabla
+        for (Reserva reserva : reservas) {
+            Object r[] = {reserva.getIdReserva(), reserva.getDniPasajero(), reserva.getFechaReserva()};
+            dt.addRow(r);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -20,12 +84,14 @@ public class frmReserva extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaReservas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
+        txtDNI = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        lblIdVuelo = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -107,7 +173,7 @@ public class frmReserva extends javax.swing.JFrame {
         jLabel4.setText("DNI:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,7 +184,7 @@ public class frmReserva extends javax.swing.JFrame {
                 "ID Reserva", "ID Vuelo", "DNI", "Fecha"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaReservas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 600, 200));
 
@@ -135,11 +201,27 @@ public class frmReserva extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 80, -1));
 
         btnComprar.setText("Comprar");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, -1));
 
         jButton3.setText("Imprimir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 80, -1));
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 150, -1));
+        jPanel1.add(txtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 150, -1));
+
+        jLabel7.setText("VUELO");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
+
+        lblIdVuelo.setText("jLabel5");
+        jPanel1.add(lblIdVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -309,6 +391,35 @@ public class frmReserva extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEstadis2MouseClicked
 
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+
+        
+        int dniPasajero = Integer.parseInt(txtDNI.getText());
+        try{
+        if(String.valueOf(dniPasajero).length()==8){
+
+                int IdVuelo = Integer.parseInt(lblIdVuelo.getText());
+                Date fechaReserva = Calendar.getInstance().getTime();
+                Reserva rs=new Reserva(0,dniPasajero,IdVuelo,fechaReserva);
+                objRS.crearReserva(rs);
+                txtDNI.setText("");
+                cargarPasajeros(IdVuelo);
+                //listado();
+                JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");
+        } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un DNI válido");
+        }
+        
+                } catch (Exception e1){
+            JOptionPane.showMessageDialog(null, "Ingrese los datos en las casillas correctamente");
+        }
+
+    }//GEN-LAST:event_btnComprarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +473,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
@@ -369,7 +481,8 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lblIdVuelo;
+    private javax.swing.JTable tablaReservas;
+    private javax.swing.JTextField txtDNI;
     // End of variables declaration//GEN-END:variables
 }
