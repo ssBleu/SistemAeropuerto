@@ -54,13 +54,13 @@ public class frmBusCli extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Origen", "Destino", "Aerolínea", "Precio"
+                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Precio"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
