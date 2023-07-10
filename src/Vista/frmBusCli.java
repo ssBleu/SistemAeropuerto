@@ -84,7 +84,7 @@ public class frmBusCli extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Precio"
+                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva"
             }
         ));
         jScrollPane1.setViewportView(BuscCliente);

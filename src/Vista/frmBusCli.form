@@ -77,7 +77,7 @@
                     <Column editable="true" title="Origen" type="java.lang.Object"/>
                     <Column editable="true" title="Destino" type="java.lang.Object"/>
                     <Column editable="true" title="Aerol&#xed;nea" type="java.lang.Object"/>
-                    <Column editable="true" title="Precio" type="java.lang.Object"/>
+                    <Column editable="true" title="Fecha Reserva" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

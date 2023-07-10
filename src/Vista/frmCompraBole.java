@@ -9,10 +9,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 public class frmCompraBole extends javax.swing.JFrame {
 
     public frmCompraBole() {
         initComponents();
+
+
         listadoVuelosInicial();
         
                                       //tablita
