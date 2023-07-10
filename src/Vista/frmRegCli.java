@@ -75,6 +75,7 @@ public class frmRegCli extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jLabel19 = new javax.swing.JLabel();
         btnEstadis2 = new javax.swing.JLabel();
+        btnRegVue = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -256,7 +257,7 @@ public class frmRegCli extends javax.swing.JFrame {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retra (1).png"))); // NOI18N
 
         btnReVue2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnReVue2.setText("     Registro de Vuelo");
+        btnReVue2.setText("     Registro de Avión");
         btnReVue2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnReVue2MouseClicked(evt);
@@ -291,6 +292,14 @@ public class frmRegCli extends javax.swing.JFrame {
             }
         });
 
+        btnRegVue.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegVue.setText("  Registro de Vuelos");
+        btnRegVue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegVueMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLatLayout = new javax.swing.GroupLayout(panelLat);
         panelLat.setLayout(panelLatLayout);
         panelLatLayout.setHorizontalGroup(
@@ -315,8 +324,13 @@ public class frmRegCli extends javax.swing.JFrame {
                         .addComponent(jLabel19)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelLatLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel18)
+                .addGroup(panelLatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLatLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel18))
+                    .addGroup(panelLatLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btnRegVue)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelLatLayout.setVerticalGroup(
@@ -341,12 +355,14 @@ public class frmRegCli extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnReTra2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegVue, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEstadis2)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
 
         getContentPane().add(panelLat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
@@ -520,6 +536,12 @@ public class frmRegCli extends javax.swing.JFrame {
         btnGuardar.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_btnGuardarMouseExited
 
+    private void btnRegVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseClicked
+        frmRegVue frmRegVue=new frmRegVue();
+        frmRegVue.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegVueMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -567,6 +589,7 @@ public class frmRegCli extends javax.swing.JFrame {
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
+    private javax.swing.JLabel btnRegVue;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
