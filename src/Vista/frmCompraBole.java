@@ -3,6 +3,8 @@ package Vista;
 
 import Modelo.Vuelo;
 import static Vista.Controladores.objVD;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +14,13 @@ public class frmCompraBole extends javax.swing.JFrame {
     public frmCompraBole() {
         initComponents();
         listadoVuelosInicial();
+        
+                                      //tablita
+        tablaVueloBoleto.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
+        tablaVueloBoleto.getTableHeader().setOpaque(false);
+        tablaVueloBoleto.getTableHeader().setBackground(new Color(12, 64, 160));
+        tablaVueloBoleto.getTableHeader().setForeground(new Color(255,255,255));
+        tablaVueloBoleto.setRowHeight(25);
         
         // Obtener la lista de orígenes desde VueloDAO
         List<String> origenes = objVD.obtenerOrigenes();
@@ -107,10 +116,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
-        cboOrigen = new javax.swing.JComboBox<>();
-        cboDestino = new javax.swing.JComboBox<>();
-        cboDuracion = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
+        cboOrigen = new util.Cbox();
+        cboDestino = new util.Cbox();
+        cboDuracion = new util.Cbox();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -190,7 +199,7 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Duración:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, 20));
 
         tablaVueloBoleto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,51 +238,42 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Ida:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 20));
 
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 80, -1));
+        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 120, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("Destino:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 20));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("Vuelta:");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, 20));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, 20));
 
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField8ActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 80, -1));
+        jPanel1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 120, -1));
 
-        cboOrigen.setToolTipText("");
-        cboOrigen.setAutoscrolls(true);
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Origen:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 20));
+
         cboOrigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboOrigenActionPerformed(evt);
             }
         });
-        jPanel1.add(cboOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 160, -1));
-
-        jPanel1.add(cboDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 160, -1));
-
-        cboDuracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboDuracionActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cboDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 160, -1));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel12.setText("Origen:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
+        jPanel1.add(cboOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 160, 20));
+        jPanel1.add(cboDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 160, 20));
+        jPanel1.add(cboDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 160, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -474,13 +474,8 @@ public class frmCompraBole extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstadis2MouseClicked
 
     private void cboOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboOrigenActionPerformed
-        //String origenSeleccionado = (String) cboOrigen.getSelectedItem();
-        //filtrarTabla();
-    }//GEN-LAST:event_cboOrigenActionPerformed
-
-    private void cboDuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDuracionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboDuracionActionPerformed
+    }//GEN-LAST:event_cboOrigenActionPerformed
     
 
     /**
@@ -527,9 +522,9 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
     private javax.swing.JButton btnReservar;
-    private javax.swing.JComboBox<String> cboDestino;
-    private javax.swing.JComboBox<String> cboDuracion;
-    private javax.swing.JComboBox<String> cboOrigen;
+    private util.Cbox cboDestino;
+    private util.Cbox cboDuracion;
+    private util.Cbox cboOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -8,6 +8,8 @@ import static Vista.Controladores.objAD;
 import static Vista.Controladores.objAvD;
 import static Vista.Controladores.objVD;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,13 @@ public class frmRegVue extends javax.swing.JFrame {
           for (String nombreAvion : avion) {
             cboAvion.addItem(nombreAvion);
         }
+          
+        //tablita
+        tablaVuelo.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
+        tablaVuelo.getTableHeader().setOpaque(false);
+        tablaVuelo.getTableHeader().setBackground(new Color(12, 64, 160));
+        tablaVuelo.getTableHeader().setForeground(new Color(255,255,255));
+        tablaVuelo.setRowHeight(25);
           
         listado();
     }

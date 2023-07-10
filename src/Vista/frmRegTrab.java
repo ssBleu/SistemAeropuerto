@@ -9,6 +9,8 @@ import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
 //import static Vista.Controladores.objTR;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,13 @@ public class frmRegTrab extends javax.swing.JFrame {
         List<Integer> nombresAerolineas = objAD.obtenerAerolineas();
           for (int nombreAerolinea : nombresAerolineas) {
             jCID.addItem(String.valueOf(nombreAerolinea));
+            
+                //tablita
+        TablaTra.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
+        TablaTra.getTableHeader().setOpaque(false);
+        TablaTra.getTableHeader().setBackground(new Color(12, 64, 160));
+        TablaTra.getTableHeader().setForeground(new Color(255,255,255));
+        TablaTra.setRowHeight(25);
         }
     listado();
     }
@@ -82,8 +91,8 @@ public class frmRegTrab extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtIDT = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jCCargo = new javax.swing.JComboBox<>();
-        jCID = new javax.swing.JComboBox<>();
+        jCCargo = new util.Cbox();
+        jCID = new util.Cbox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -349,7 +358,7 @@ public class frmRegTrab extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Cargo:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, 20));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, 20));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setText("Salario:");
@@ -372,16 +381,11 @@ public class frmRegTrab extends javax.swing.JFrame {
         jLabel24.setText("Nombre:");
         jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 20));
 
-        jCCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azafatas", "Pilotos", "Administrador", "Limpieza", "Mantenimiento", " ", " " }));
-        jPanel1.add(jCCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 110, -1));
+        jCCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Azafatas", "Pilotos", "Administrador", "Limpieza", "Mantenimiento" }));
+        jPanel1.add(jCCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, 30));
 
-        jCID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccionar--" }));
-        jCID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCIDActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jCID, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 110, -1));
+        jCID.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Seleccionar--" }));
+        jPanel1.add(jCID, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 140, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 860, 420));
 
@@ -549,10 +553,6 @@ public class frmRegTrab extends javax.swing.JFrame {
 
     }//GEN-LAST:event_TablaTraMouseClicked
 
-    private void jCIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCIDActionPerformed
-        
-    }//GEN-LAST:event_jCIDActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -600,8 +600,8 @@ public class frmRegTrab extends javax.swing.JFrame {
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
-    private javax.swing.JComboBox<String> jCCargo;
-    private javax.swing.JComboBox<String> jCID;
+    private util.Cbox jCCargo;
+    private util.Cbox jCID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

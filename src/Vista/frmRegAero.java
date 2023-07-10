@@ -4,6 +4,8 @@ package Vista;
 import Modelo.Aerolinea;
 import static Vista.Controladores.objAD;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,9 +15,16 @@ public class frmRegAero extends javax.swing.JFrame {
     public frmRegAero() {
         initComponents();
     listado();
+    
+                              //tablita
+        tablaAerolinea.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
+        tablaAerolinea.getTableHeader().setOpaque(false);
+        tablaAerolinea.getTableHeader().setBackground(new Color(12, 64, 160));
+        tablaAerolinea.getTableHeader().setForeground(new Color(255,255,255));
+        tablaAerolinea.setRowHeight(25);
     }
     void listado(){
-        DefaultTableModel dt=(DefaultTableModel)jTable1.getModel();
+        DefaultTableModel dt=(DefaultTableModel)tablaAerolinea.getModel();
         
         dt.setRowCount(0);
         for(Aerolinea x:objAD.Listado()){
@@ -38,7 +47,7 @@ public class frmRegAero extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaAerolinea = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -144,7 +153,7 @@ public class frmRegAero extends javax.swing.JFrame {
         jLabel10.setText("Año de fundación:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAerolinea.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -155,12 +164,12 @@ public class frmRegAero extends javax.swing.JFrame {
                 "ID Aerolínea", "Nombre", "Origen", "Telefono", "Pagina Web", "Fecha fundación"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaAerolinea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tablaAerolineaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaAerolinea);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 580, 180));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 170, -1));
@@ -193,6 +202,12 @@ public class frmRegAero extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 80, -1));
+
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 170, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -447,9 +462,9 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
             }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int Pr = jTable1.getSelectedRow();
-        int Codigo = Integer.parseInt(jTable1.getValueAt(Pr, 0).toString());
+    private void tablaAerolineaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAerolineaMouseClicked
+        int Pr = tablaAerolinea.getSelectedRow();
+        int Codigo = Integer.parseInt(tablaAerolinea.getValueAt(Pr, 0).toString());
         
         Aerolinea x = objAD.buscarAerolinea(Codigo);
         
@@ -459,7 +474,7 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
         txtTelefono.setText(x.getTelefono());
         txtPagina.setText(x.getPaginaWeb());
         DCDate.setDate(x.getFechaFundacion());
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tablaAerolineaMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
           try {
@@ -499,6 +514,10 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
                 JOptionPane.showMessageDialog(null,"Seleccione una Aerolinea");
             }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -566,7 +585,7 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaAerolinea;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPagina;

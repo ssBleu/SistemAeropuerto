@@ -4,6 +4,8 @@ package Vista;
 import Modelo.Pasajero;
 import Modelo.Reserva;
 import static Vista.Controladores.objRS;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +16,12 @@ public class frmReserva extends javax.swing.JFrame {
 
     public frmReserva() {
         initComponents();
-
+                          //tablita
+        tablaReservas.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
+        tablaReservas.getTableHeader().setOpaque(false);
+        tablaReservas.getTableHeader().setBackground(new Color(12, 64, 160));
+        tablaReservas.getTableHeader().setForeground(new Color(255,255,255));
+        tablaReservas.setRowHeight(25);
     }
     
     public void cargarPasajeros(int idVuelo) {
