@@ -3,6 +3,7 @@ package Vista;
 
 import Modelo.Pasajero;
 import Modelo.Reserva;
+import static Vista.Controladores.objPS;
 import static Vista.Controladores.objRS;
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +17,13 @@ public class frmReserva extends javax.swing.JFrame {
 
     public frmReserva() {
         initComponents();
+        
+        List<Pasajero> dnisPasajeros = objPS.Listado();
+          for (Pasajero x : dnisPasajeros) {
+            cboDNIs.addItem(String.valueOf(x.getDniPasajero()));
+            }
+        
+        
                           //tablita
         tablaReservas.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaReservas.getTableHeader().setOpaque(false);
@@ -93,12 +101,11 @@ public class frmReserva extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaReservas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         btnComprar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        txtDNI = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lblIdVuelo = new javax.swing.JLabel();
+        cboDNIs = new util.Cbox();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator8 = new javax.swing.JSeparator();
@@ -200,14 +207,6 @@ public class frmReserva extends javax.swing.JFrame {
         jLabel1.setText("VUELOS");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
-        jButton1.setText("Ingresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 80, -1));
-
         btnComprar.setText("Comprar");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,13 +222,13 @@ public class frmReserva extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 80, -1));
-        jPanel1.add(txtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 150, -1));
 
         jLabel7.setText("VUELO");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
 
         lblIdVuelo.setText("jLabel5");
         jPanel1.add(lblIdVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
+        jPanel1.add(cboDNIs, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -382,10 +381,6 @@ public class frmReserva extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnBusCli2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseClicked
         frmBusCli frmBuCli=new frmBusCli();
         frmBuCli.setVisible(true);
@@ -418,8 +413,8 @@ public class frmReserva extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
 
-        
-        int dniPasajero = Integer.parseInt(txtDNI.getText());
+        int dniPasajero = Integer.parseInt((String) cboDNIs.getSelectedItem());
+
         try{
         if(String.valueOf(dniPasajero).length()==8){
 
@@ -427,7 +422,6 @@ public class frmReserva extends javax.swing.JFrame {
                 Date fechaReserva = Calendar.getInstance().getTime();
                 Reserva rs=new Reserva(0,dniPasajero,IdVuelo,fechaReserva);
                 objRS.crearReserva(rs);
-                txtDNI.setText("");
                 cargarPasajeros(IdVuelo);
                 //listado();
                 JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");
@@ -494,7 +488,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnReVue2;
     private javax.swing.JLabel btnRegVue;
-    private javax.swing.JButton jButton1;
+    private util.Cbox cboDNIs;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -515,6 +509,5 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblIdVuelo;
     private javax.swing.JTable tablaReservas;
-    private javax.swing.JTextField txtDNI;
     // End of variables declaration//GEN-END:variables
 }

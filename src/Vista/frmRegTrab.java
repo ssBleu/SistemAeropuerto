@@ -400,6 +400,11 @@ public class frmRegTrab extends javax.swing.JFrame {
         jPanel1.add(jCCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, 30));
 
         jCID.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Seleccionar--" }));
+        jCID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCIDActionPerformed(evt);
+            }
+        });
         jPanel1.add(jCID, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 140, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 860, 420));
@@ -573,6 +578,10 @@ public class frmRegTrab extends javax.swing.JFrame {
         frmRegVue.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnRegVueMouseClicked
+
+    private void jCIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCIDActionPerformed
 
     /**
      * @param args the command line arguments
