@@ -386,7 +386,7 @@ public class frmRegCli extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+
         try {
         int dni = Integer.parseInt(txtDni.getText());
         String nom =txtApellido.getText();

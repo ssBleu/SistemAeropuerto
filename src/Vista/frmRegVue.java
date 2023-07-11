@@ -1,10 +1,7 @@
 
 package Vista;
 
-import Modelo.Aerolinea;
-import Modelo.Avion;
 import Modelo.Vuelo;
-import static Vista.Controladores.objAD;
 import static Vista.Controladores.objAvD;
 import static Vista.Controladores.objVD;
 import com.toedter.calendar.JDateChooser;
@@ -450,10 +447,10 @@ public class frmRegVue extends javax.swing.JFrame {
             String duracion = txtDurac.getText();
             String tipo = txtTipo.getText();
             
-            JDateChooser dateChooser = FSalida; // Asigna el JDateChooser a una variable
-            Date Fsali = dateChooser.getDate(); // Obtiene la fecha seleccionada
-            JDateChooser jdateChooser = FLlegada; // Asigna el JDateChooser a una variable
-            Date Flleg = dateChooser.getDate(); // Obtiene la fecha seleccionada
+            JDateChooser dateChooser = FSalida;
+            Date Fsali = dateChooser.getDate();
+            JDateChooser jdateChooser = FLlegada;
+            Date Flleg = dateChooser.getDate();
             double precio = Double.parseDouble(txtPrecio.getText());
             
             String modeloAvion = (String) cboAvion.getSelectedItem();

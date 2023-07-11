@@ -14,15 +14,10 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 public class frmLogin extends javax.swing.JFrame {
-    //Se necesitan 5 variables
-    //Se estableceran rutas de conexiones
-
-    
+  
     Conexion conexion = new Conexion();
     Connection connection = conexion.getConexion();
 
-    //cree esto por mi cuenta y juicio, lo que hace es abrir la pestana de frmRegistrarUsuario
-    
     public frmLogin() {
         initComponents();
         //para centrar el jframe
@@ -41,14 +36,11 @@ public class frmLogin extends javax.swing.JFrame {
             if (trabajadorDAO.validarCredenciales(usuario, contrasena)) {
                 frmRegCli form= new frmRegCli();
                 form.setVisible(true);
-                //para que salga de esta clase y visualice la otra
                 this.dispose();
             } else {
-                // Credenciales inválidas, mostrar mensaje de error
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
-            // Manejar el error de la base de datos
             e.printStackTrace();
         }
     }

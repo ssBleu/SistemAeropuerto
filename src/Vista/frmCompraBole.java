@@ -18,8 +18,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         listadoVuelosInicial();
-        
-                                      //tablita
+
         tablaVueloBoleto.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaVueloBoleto.getTableHeader().setOpaque(false);
         tablaVueloBoleto.getTableHeader().setBackground(new Color(12, 64, 160));
@@ -60,7 +59,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
     }
     
-    // CHEQUEAR
     private void filtrarTabla() {
         DefaultTableModel dt = (DefaultTableModel) tablaVueloBoleto.getModel();
         String origenSeleccionado = (String) cboOrigen.getSelectedItem();
@@ -69,7 +67,6 @@ public class frmCompraBole extends javax.swing.JFrame {
    
         int precioElegido = slifer.getValue();
 
-        // Verificar si el filtro es "Cualquiera" y asignar cadena vacía en su lugar
         if (origenSeleccionado.equals("Cualquiera")) {
             origenSeleccionado = "";
         }
@@ -80,18 +77,11 @@ public class frmCompraBole extends javax.swing.JFrame {
             duracionSeleccionada = "";
         }
         
-        
-        
-        // Remover todas las filas de la tabla
         dt.setRowCount(0);
-
-        // Obtener los vuelos filtrados desde VueloDAO
         List<Vuelo> vuelosFiltrados = objVD.obtenerVuelosFiltrados(origenSeleccionado, destinoSeleccionado, duracionSeleccionada, precioElegido);
 
-        
         // Verificar si la lista de vuelos filtrados está vacía
         if (vuelosFiltrados.isEmpty()) {
-            // Mostrar un mensaje de error
             JOptionPane.showMessageDialog(null, "No se encontraron vuelos que cumplan con los criterios de búsqueda.");
         } else {
             // Agregar las filas filtradas a la tabla
@@ -605,9 +595,6 @@ public class frmCompraBole extends javax.swing.JFrame {
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
         // Obtener el índice de la fila seleccionada
         int selectedRow = tablaVueloBoleto.getSelectedRow();
-        
-        //del selectedRow buscar el ID
-
         // Verificar si se ha seleccionado una fila
         if (selectedRow != -1) {
             // Obtener el idVuelo de la fila seleccionada
@@ -619,7 +606,6 @@ public class frmCompraBole extends javax.swing.JFrame {
             frmReser.setVisible(true);
             this.setVisible(false);
         } else {
-            // Mostrar un mensaje de error indicando que no se ha seleccionado ningún vuelo
             JOptionPane.showMessageDialog(this, "Debe seleccionar un vuelo para realizar la reserva", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnReservarActionPerformed

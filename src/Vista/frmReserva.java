@@ -35,22 +35,16 @@ public class frmReserva extends javax.swing.JFrame {
     
     public void cargarPasajeros(int idVuelo) {
         lblIdVuelo.setText(String.valueOf(idVuelo));
-        // Obtener los pasajeros por vuelo desde el PasajeroDAO
+
         List<Pasajero> pasajeros = objRS.obtenerPasajerosPorVuelo(idVuelo);
-
-        // Obtener las reservas por vuelo desde el ReservaDAO
         List<Reserva> reservas = objRS.obtenerReservasPorVuelo(idVuelo);
-
-        // Luego, puedes mostrar los pasajeros y las reservas en la interfaz gráfica
         DefaultTableModel dt = (DefaultTableModel) tablaReservas.getModel();
         dt.setRowCount(0);
 
-        // Recorrer los pasajeros y buscar la reserva correspondiente para cada pasajero
         for (Pasajero pasajero : pasajeros) {
             int dniPasajero = pasajero.getDniPasajero();
             Reserva reservaPasajero = null;
 
-            // Buscar la reserva correspondiente al pasajero
             for (Reserva reserva : reservas) {
                 if (reserva.getDniPasajero() == dniPasajero) {
                     reservaPasajero = reserva;
@@ -59,33 +53,14 @@ public class frmReserva extends javax.swing.JFrame {
             }
 
             if (reservaPasajero != null) {
-                // Obtener los datos de la reserva
                 int idReserva = reservaPasajero.getIdReserva();
                 Date fechaReserva = reservaPasajero.getFechaReserva();
-
-                // Agregar los datos a la tabla
                 Object[] row = {idReserva, idVuelo, dniPasajero, fechaReserva, pasajero.getNombre(), pasajero.getApellido()};
                 dt.addRow(row);
             } else {
-                // Si no se encuentra reserva para el pasajero, agregar una fila vacía
                 Object[] row = {null, idVuelo, dniPasajero, null, pasajero.getNombre(), pasajero.getApellido()};
                 dt.addRow(row);
             }
-        }
-    }
-
-    
-    
-    private void mostrarReservas(List<Reserva> reservas) {
-        DefaultTableModel dt = (DefaultTableModel) tablaReservas.getModel();
-
-        // Remover todas las filas de la tabla
-        dt.setRowCount(0);
-
-        // Agregar las reservas a la tabla
-        for (Reserva reserva : reservas) {
-            Object r[] = {reserva.getIdReserva(), reserva.getDniPasajero(), reserva.getFechaReserva()};
-            dt.addRow(r);
         }
     }
 

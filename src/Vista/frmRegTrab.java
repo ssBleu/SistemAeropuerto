@@ -1,13 +1,9 @@
 
 package Vista;
 
-import Modelo.Aerolinea;
-import Modelo.Pasajero;
 import Modelo.Trabajador;
 import static Vista.Controladores.objAD;
-import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
-//import static Vista.Controladores.objTR;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
@@ -462,8 +458,8 @@ public class frmRegTrab extends javax.swing.JFrame {
             int idt = Integer.parseInt(txtIDT.getText());
             String nombre = txtNombre.getText();
             String apel = txtApellido.getText();
-            JDateChooser dateChooser = DCNacimiento; // Asigna el JDateChooser a una variable
-            Date naci = dateChooser.getDate(); // Obtiene la fecha seleccionada
+            JDateChooser dateChooser = DCNacimiento;
+            Date naci = dateChooser.getDate();
             String usu = txtUsuario.getText();
             String contra = txtContraseña.getText();
             String cargo = jCCargo.getSelectedItem().toString();
@@ -497,8 +493,8 @@ public class frmRegTrab extends javax.swing.JFrame {
             int idt = Integer.parseInt(txtIDT.getText());
             String nombre = txtNombre.getText();
             String apel = txtApellido.getText();
-            JDateChooser dateChooser = DCNacimiento; // Asigna el JDateChooser a una variable
-            Date naci = dateChooser.getDate(); // Obtiene la fecha seleccionada
+            JDateChooser dateChooser = DCNacimiento;
+            Date naci = dateChooser.getDate();
             String usu = txtUsuario.getText();
             String contra = txtContraseña.getText();
             String cargo = jCCargo.getSelectedItem().toString();

@@ -17,14 +17,14 @@ public class frmRegAero extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
     listado();
-    
-                              //tablita
+
         tablaAerolinea.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaAerolinea.getTableHeader().setOpaque(false);
         tablaAerolinea.getTableHeader().setBackground(new Color(12, 64, 160));
         tablaAerolinea.getTableHeader().setForeground(new Color(255,255,255));
         tablaAerolinea.setRowHeight(25);
     }
+    
     void listado(){
         DefaultTableModel dt=(DefaultTableModel)tablaAerolinea.getModel();
         
@@ -395,8 +395,8 @@ public class frmRegAero extends javax.swing.JFrame {
         String telefono =txtTelefono.getText();
         String paginaWeb =txtPagina.getText();
         
-        JDateChooser dateChooser = DCDate; // Asigna el JDateChooser a una variable
-        Date fechaFundacion = dateChooser.getDate(); // Obtiene la fecha seleccionada
+        JDateChooser dateChooser = DCDate;
+        Date fechaFundacion = dateChooser.getDate();
         if(nombre.length()>0){
             if(codigo>0){
          Aerolinea pr=new Aerolinea(codigo,nombre,paisOrigen,telefono,paginaWeb, fechaFundacion);
@@ -501,8 +501,8 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
             String paisOrigen =txtPais.getText();
             String telefono =txtTelefono.getText();
             String paginaWeb =txtPagina.getText();
-            JDateChooser dateChooser = DCDate; // Asigna el JDateChooser a una variable
-            Date fechaFundacion = dateChooser.getDate(); // Obtiene la fecha seleccionada
+            JDateChooser dateChooser = DCDate;
+            Date fechaFundacion = dateChooser.getDate();
            
                 if(nombre.length()>0){
                     if(idAerolinea>0){

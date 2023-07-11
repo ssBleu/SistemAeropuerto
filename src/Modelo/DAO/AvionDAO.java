@@ -2,7 +2,6 @@ package Modelo.DAO;
 
 import Modelo.Avion;
 import Modelo.Conexion.Conexion;
-import Modelo.Pasajero;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
