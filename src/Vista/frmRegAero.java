@@ -14,6 +14,8 @@ public class frmRegAero extends javax.swing.JFrame {
 
     public frmRegAero() {
         initComponents();
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
     listado();
     
                               //tablita

@@ -12,6 +12,8 @@ public class frmBusCli extends javax.swing.JFrame {
 
     public frmBusCli() {
         initComponents();
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         listado();
         
         //tablita

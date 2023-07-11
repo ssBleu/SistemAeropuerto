@@ -21,7 +21,8 @@ public class frmRegVue extends javax.swing.JFrame {
 
     public frmRegVue() {
         initComponents();
-        
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         List<String> avion = objAvD.obtenerAvion();
           for (String nombreAvion : avion) {
             cboAvion.addItem(nombreAvion);

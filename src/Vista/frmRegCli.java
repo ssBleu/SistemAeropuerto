@@ -14,6 +14,8 @@ public class frmRegCli extends javax.swing.JFrame {
 
     public frmRegCli() {
         initComponents();
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         listado();
         
         //tablita

@@ -21,6 +21,8 @@ public class frmRegTrab extends javax.swing.JFrame {
 
     public frmRegTrab() {
         initComponents();
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         List<Integer> nombresAerolineas = objAD.obtenerAerolineas();
           for (int nombreAerolinea : nombresAerolineas) {
             jCID.addItem(String.valueOf(nombreAerolinea));

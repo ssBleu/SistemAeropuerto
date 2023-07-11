@@ -18,7 +18,8 @@ public class frmRegAv extends javax.swing.JFrame {
 
     public frmRegAv() {
         initComponents();
-        
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         List<String> nombresAerolineas = objAD.obtenerNombresAerolineas();
           for (String nombreAerolinea : nombresAerolineas) {
             cboAerol.addItem(nombreAerolinea);

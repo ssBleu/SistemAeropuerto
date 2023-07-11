@@ -17,7 +17,8 @@ public class frmReserva extends javax.swing.JFrame {
 
     public frmReserva() {
         initComponents();
-        
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         List<Pasajero> dnisPasajeros = objPS.Listado();
           for (Pasajero x : dnisPasajeros) {
             cboDNIs.addItem(String.valueOf(x.getDniPasajero()));
