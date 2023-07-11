@@ -182,7 +182,7 @@ public class VueloDAO {
             
             
             
-        public List<Vuelo> obtenerVuelosFiltrados(String origenSeleccionado, String destinoSeleccionado, String duracionSeleccionada) {
+        public List<Vuelo> obtenerVuelosFiltrados(String origenSeleccionado, String destinoSeleccionado, String duracionSeleccionada, int precioElegido) {
             List<Vuelo> vuelosFiltrados = new ArrayList<>();
             Connection cn = Conexion.getConexion();
 
@@ -200,6 +200,12 @@ public class VueloDAO {
                 if (!duracionSeleccionada.isEmpty()) {
                     sql += " AND duracion = ?";
                 }
+                
+                if (precioElegido > 0 | precioElegido < 1000) {
+                    sql += " AND precio <= ?";
+                }
+
+
 
                 PreparedStatement statement = cn.prepareStatement(sql);
 
@@ -217,6 +223,11 @@ public class VueloDAO {
 
                 if (!duracionSeleccionada.isEmpty()) {
                     statement.setString(parameterIndex, duracionSeleccionada);
+                }
+                
+                if (precioElegido > 0 | precioElegido < 1000) {
+                    statement.setDouble(parameterIndex, precioElegido);
+                    parameterIndex++;
                 }
 
                 ResultSet resultSet = statement.executeQuery();
