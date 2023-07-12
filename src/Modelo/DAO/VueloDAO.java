@@ -28,7 +28,61 @@ public class VueloDAO {
         }
     }
 
-    
+    public Vuelo buscarVuelo(int id) {
+        Vuelo ep=null;
+        Connection cn=Conexion.getConexion();
+        try {
+            String sql="SELECT id_vuelo, origen, destino, fecha_salida, fecha_llegada, duracion, id_avion, precio, tipo_vuelo FROM vuelo where id_vuelo=?" ;
+            PreparedStatement st=cn.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs=st.executeQuery();
+            if(rs.next()){//Si lee significa que existe
+                ep=new Vuelo("","","",null,null,"","",0,"");
+                ep.setIdVuelo(rs.getString(1));
+                ep.setOrigen(rs.getString(2));
+                ep.setDestino(rs.getString(3));
+                ep.setFechaSalida(rs.getDate(4));
+                ep.setFechaLlegada(rs.getDate(5));
+                ep.setDuracion(rs.getString(6));
+                ep.setIdAvion(rs.getString(7));
+                ep.setPrecio(rs.getDouble(8));
+                ep.setTipo(rs.getString(9));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try { cn.close();} catch(Exception e2) {};
+        }
+        return ep;
+    }
+    public void modificarVuelo(Vuelo vuelo) throws SQLException {
+    Connection cn = Conexion.getConexion();
+    String sql = "UPDATE vuelo SET origen = ?, destino = ?, fecha_salida = ?, fecha_llegada = ?, duracion = ?, id_avion = ?, precio = ?, tipo_vuelo = ? WHERE id_vuelo = ?";
+
+    try (PreparedStatement statement = cn.prepareStatement(sql)) {
+        statement.setString(1, vuelo.getOrigen());
+        statement.setString(2, vuelo.getDestino());
+        statement.setDate(3, new java.sql.Date(vuelo.getFechaSalida().getTime()));
+        statement.setDate(4, new java.sql.Date(vuelo.getFechaLlegada().getTime()));
+        statement.setString(5, vuelo.getDuracion());
+        statement.setString(6, vuelo.getIdAvion());
+        statement.setDouble(7, vuelo.getPrecio());
+        statement.setString(8, vuelo.getTipo());
+        statement.setString(9, vuelo.getIdVuelo());
+
+        statement.executeUpdate();
+    }
+}
+    public void eliminarVuelo(String idVuelo) throws SQLException {
+    Connection cn = Conexion.getConexion();
+    String sql = "DELETE FROM vuelo WHERE id_vuelo = ?";
+
+    try (PreparedStatement statement = cn.prepareStatement(sql)) {
+        statement.setString(1, idVuelo);
+        statement.executeUpdate();
+    }
+}
+ 
         public List<Vuelo> obtenerListaVuelos() {
             List<Vuelo> listaVuelos = new ArrayList<>();
             Connection cn = Conexion.getConexion();
