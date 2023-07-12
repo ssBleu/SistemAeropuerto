@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 public class frmRegCli extends javax.swing.JFrame {
@@ -38,6 +39,8 @@ public class frmRegCli extends javax.swing.JFrame {
 }
 
     @SuppressWarnings("unchecked")
+    int x = 210;
+    int a = 0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -46,6 +49,7 @@ public class frmRegCli extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -114,12 +118,24 @@ public class frmRegCli extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("CLIENTE");
 
+        jLabel22.setBackground(new java.awt.Color(0, 102, 204));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
+        jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel22.setOpaque(true);
+        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel22MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
+                .addComponent(jLabel22)
+                .addGap(147, 147, 147)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
@@ -140,8 +156,9 @@ public class frmRegCli extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel1))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(jLabel1)))
+                    .addComponent(jLabel22))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 640, 60));
@@ -545,6 +562,45 @@ public class frmRegCli extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRegVue2MouseClicked
 
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+        if ( x == 210 ) {
+            jPanel3.setSize(210, 552);
+            Thread th = new Thread() {
+                @Override
+                public void run(){
+                    try {
+
+                        for ( int i = 210; i >= 0; i--){
+                            Thread.sleep(1);
+                            jPanel3.setSize(i, 552);
+
+                            a++;
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                }
+            };th.start();
+            x=0;
+        } else if( x == 0 ){
+            jPanel3.setSize(x, 552);
+            Thread th = new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        for (int i = 0; i <= x; i++){
+                            Thread.sleep(1);
+                            jPanel3.setSize(i, 552);
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                }
+            };th.start();
+            x = 210;
+        }
+    }//GEN-LAST:event_jLabel22MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -604,6 +660,7 @@ public class frmRegCli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -627,4 +684,11 @@ public class frmRegCli extends javax.swing.JFrame {
     private javax.swing.JTextField txtNacionalidad;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+private void labelcolor(JLabel label){
+        label.setBackground(new java.awt.Color(53,162,107));
+    }
+    
+    private void resetlabelcolor(JLabel label){
+        label.setBackground(new java.awt.Color(54,70,78));
+    }
 }
