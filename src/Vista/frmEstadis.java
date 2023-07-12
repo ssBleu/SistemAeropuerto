@@ -1,6 +1,16 @@
 
 package Vista;
 
+import Modelo.DAO.Aerolinea_preferidaDAO;
+import Modelo.DAO.Reserva_del_diaDAO;
+import Modelo.DAO.Vuelos_mas_vendidosDAO;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
 
 public class frmEstadis extends javax.swing.JFrame {
@@ -15,10 +25,15 @@ public class frmEstadis extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -45,22 +60,62 @@ public class frmEstadis extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Grafico");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 80, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
 
-        jRadioButton1.setText("Aerlínea Preferida");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jButton3.setText("Grafico");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
 
-        jRadioButton2.setText("Vuelos más vendidos");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jButton4.setText("Grafico");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
 
-        jRadioButton3.setText("Reservas del día");
-        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        jButton5.setText("Ver");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+
+        jButton6.setText("Ver");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
+
+        jButton7.setText("Ver");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
+
+        jLabel1.setText("Aerolinea preferida");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+
+        jLabel4.setText("Vuelos mas vendidos");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+
+        jLabel5.setText("Reservas del dia");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 620, 420));
 
@@ -255,10 +310,6 @@ public class frmEstadis extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         this.setState(frmLogin.ICONIFIED);
     }//GEN-LAST:event_jLabel3MouseClicked
@@ -307,6 +358,173 @@ public class frmEstadis extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRegVueMouseClicked
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String url = "jdbc:mysql://localhost:3306/bd_vuelos";
+    String username = "root";
+    String password = "";
+
+    // Variables para almacenar la aerolínea preferida
+    String aerolineaPreferida = "";
+    int vuelosMaximos = 0;
+
+    try {
+        // Establecer conexión con la base de datos
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        // Crear una declaración SQL para obtener la aerolínea preferida
+        String query = "SELECT a.nombre AS aerolinea, COUNT(*) AS total "
+                + "FROM aerolinea a "
+                + "JOIN avion av ON a.id_aerolinea = av.id_aerolinea "
+                + "JOIN vuelo v ON av.id_avion = v.id_avion "
+                + "GROUP BY a.nombre "
+                + "ORDER BY total DESC "
+                + "LIMIT 1";
+
+        // Crear una declaración SQL
+        Statement statement = connection.createStatement();
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery(query);
+
+        // Obtener la aerolínea preferida
+        if (resultSet.next()) {
+            aerolineaPreferida = resultSet.getString("aerolinea");
+            vuelosMaximos = resultSet.getInt("total");
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // Mostrar el mensaje con la aerolínea preferida en un aviso
+    JOptionPane.showMessageDialog(this, "La aerolínea preferida es: " + aerolineaPreferida);
+
+    // Resto de tu código dentro del método jButton5ActionPerformed
+    // ...
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Aerolinea_preferidaDAO ae = new Aerolinea_preferidaDAO();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        // Obtener los datos de la base de datos
+    String url = "jdbc:mysql://localhost:3306/bd_vuelos";
+    String username = "root";
+    String password = "";
+
+    // Variables para almacenar el vuelo más vendido
+    String vueloMasVendido = "";
+
+    try {
+        // Establecer conexión con la base de datos
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        // Crear una declaración SQL para obtener el vuelo más vendido
+        String query = "SELECT v.destino "
+                + "FROM reserva_vuelo rv "
+                + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
+                + "GROUP BY v.destino "
+                + "ORDER BY COUNT(*) DESC "
+                + "LIMIT 1";
+
+        // Crear una declaración SQL
+        Statement statement = connection.createStatement();
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery(query);
+
+        // Obtener el vuelo más vendido
+        if (resultSet.next()) {
+            vueloMasVendido = resultSet.getString("destino");
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // Mostrar el mensaje con el vuelo más vendido en un aviso
+    JOptionPane.showMessageDialog(this, "El vuelo más vendido es: " + vueloMasVendido);
+
+    // Resto de tu código dentro del método jButton6ActionPerformed
+    // ...
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        // Obtener los datos de la base de datos
+    String url = "jdbc:mysql://localhost:3306/bd_vuelos";
+    String username = "root";
+    String password = "";
+
+    // Variables para almacenar el destino más popular
+    String destinoPopular = "";
+    int ventasMaximas = 0;
+
+    // Obtener la fecha actual
+    LocalDate fechaActual = LocalDate.now();
+
+    try {
+        // Establecer conexión con la base de datos
+        Connection connection = DriverManager.getConnection(url, username, password);
+
+        // Crear una declaración SQL para obtener el destino más popular del día actual
+        String query = "SELECT v.destino, COUNT(*) AS total "
+                + "FROM reserva_vuelo rv "
+                + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
+                + "WHERE DATE(rv.fecha_reserva) = ? "
+                + "GROUP BY v.destino "
+                + "ORDER BY total DESC "
+                + "LIMIT 1";
+
+        // Crear una declaración SQL
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setDate(1, java.sql.Date.valueOf(fechaActual));
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery();
+
+        // Obtener el destino más popular del día actual
+        if (resultSet.next()) {
+            destinoPopular = resultSet.getString("destino");
+            ventasMaximas = resultSet.getInt("total");
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    // Mostrar el mensaje con el destino más popular en un aviso
+    JOptionPane.showMessageDialog(this, "El destino más popular del día de hoy es: " + destinoPopular);
+    
+    // Resto de tu código dentro del método jButton4ActionPerformed
+    // ...
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Vuelos_mas_vendidosDAO vu = new Vuelos_mas_vendidosDAO();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Reserva_del_diaDAO res = new Reserva_del_diaDAO();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,20 +568,25 @@ public class frmEstadis extends javax.swing.JFrame {
     private javax.swing.JLabel btnReVue2;
     private javax.swing.JLabel btnRegVue;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
