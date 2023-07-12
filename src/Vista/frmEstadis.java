@@ -82,7 +82,7 @@ public class frmEstadis extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
 
         jButton5.setText("Ver");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
