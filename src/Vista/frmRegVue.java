@@ -463,8 +463,17 @@ public class frmRegVue extends javax.swing.JFrame {
             String idAvion = String.valueOf(objAvD.obtenerIdAvionPorModelo(modeloAvion));
             Vuelo vuelo = new Vuelo(IDVuelo, origen, destino, Fsali, Flleg, duracion, idAvion, precio, tipo);
             objVD.crearVuelo(vuelo);
+            txtIDVuelo.setText("");
+            txtOrigen.setText("");
+            txtDestino.setText("");
+            txtDurac.setText("");
+            txtTipo.setText("");
+            FSalida.setDate(null);
+            FLlegada.setDate(null);
+            txtPrecio.setText("");
+            cboAvion.setSelectedItem("");
             listado();
-                
+
         } catch (SQLException ex) {
             Logger.getLogger(frmRegAv.class.getName()).log(Level.SEVERE, null, ex);
         }
