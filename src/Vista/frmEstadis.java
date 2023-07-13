@@ -1,9 +1,15 @@
 
 package Vista;
 
-import Modelo.DAO.Aerolinea_preferidaDAO;
+import Modelo.DAO.AerolineaDAO;
+
 import Modelo.DAO.Reserva_del_diaDAO;
 import Modelo.DAO.Vuelos_mas_vendidosDAO;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GradientPaint;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -13,12 +19,67 @@ import java.time.LocalDate;
 import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class frmEstadis extends javax.swing.JFrame {
 
     public frmEstadis() {
         initComponents();
+        panelGrafic.setLayout(new FlowLayout());
     }
+    
+public ChartPanel crearGrafico() {
+    DefaultCategoryDataset datosBD = AerolineaDAO.crearGrafico();
+
+    // Crear el gráfico
+    JFreeChart chart = ChartFactory.createBarChart3D(
+        "Gráfico de Aerolíneas Preferidas", // Título del gráfico
+        "Aerolínea", // Etiqueta del eje horizontal
+        "Cantidad de Veces Pedido", // Etiqueta del eje vertical
+        datosBD, // Datos
+        PlotOrientation.VERTICAL, // Orientación del gráfico (vertical)
+        true, // Incluir leyenda
+        true, // Mostrar información al pasar el ratón
+        false // No se utilizan URLs
+    );
+
+    // Estilizar el gráfico
+    chart.setBackgroundPaint(Color.GRAY);
+    chart.getTitle().setPaint(Color.WHITE);
+
+    CategoryPlot plot = chart.getCategoryPlot();
+    plot.setBackgroundPaint(Color.WHITE);
+    plot.setDomainGridlinesVisible(true);
+    plot.setRangeGridlinePaint(Color.BLACK);
+
+    NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+    rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+    BarRenderer renderer = (BarRenderer) plot.getRenderer();
+    renderer.setDrawBarOutline(true);
+
+    GradientPaint gp = new GradientPaint(0.0f, 0.0f, Color.GREEN, 0.0f, 0.0f, new Color(0, 64, 0));
+    renderer.setSeriesPaint(0, gp);
+
+    CategoryAxis domainAxis = plot.getDomainAxis();
+    domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));
+
+    // Crear un ChartPanel y devolverlo
+    ChartPanel chartPanel = new ChartPanel(chart);
+    return chartPanel;
+}
+
+   
 
     @SuppressWarnings("unchecked")
     int x = 210;
@@ -28,7 +89,7 @@ public class frmEstadis extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnGraficar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -37,6 +98,7 @@ public class frmEstadis extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        panelGrafic = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -70,13 +132,13 @@ public class frmEstadis extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("Grafico");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGraficar.setText("Grafico");
+        btnGraficar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGraficarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
+        jPanel1.add(btnGraficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         jButton3.setText("Grafico");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +146,7 @@ public class frmEstadis extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, -1));
 
         jButton4.setText("Grafico");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +154,7 @@ public class frmEstadis extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, -1));
 
         jButton5.setText("Ver");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +162,7 @@ public class frmEstadis extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
         jButton6.setText("Ver");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +170,7 @@ public class frmEstadis extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
 
         jButton7.setText("Ver");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -116,16 +178,29 @@ public class frmEstadis extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
 
         jLabel1.setText("Aerolinea preferida");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel4.setText("Vuelos mas vendidos");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
         jLabel5.setText("Reservas del dia");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+
+        javax.swing.GroupLayout panelGraficLayout = new javax.swing.GroupLayout(panelGrafic);
+        panelGrafic.setLayout(panelGraficLayout);
+        panelGraficLayout.setHorizontalGroup(
+            panelGraficLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 540, Short.MAX_VALUE)
+        );
+        panelGraficLayout.setVerticalGroup(
+            panelGraficLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(panelGrafic, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 610, 420));
 
@@ -175,7 +250,7 @@ public class frmEstadis extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,10 +470,16 @@ public class frmEstadis extends javax.swing.JFrame {
     // ...
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        Aerolinea_preferidaDAO ae = new Aerolinea_preferidaDAO();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
+        panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
+
+        ChartPanel chartPanel = crearGrafico();
+        chartPanel.setPreferredSize(new Dimension(540, 290)); // Establecer el tamaño preferido del ChartPanel
+
+        panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
+
+        jPanel1.revalidate(); // Actualizar el contenedor principal
+    }//GEN-LAST:event_btnGraficarActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -634,12 +715,12 @@ public class frmEstadis extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBusCli2;
+    private javax.swing.JButton btnGraficar;
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnRegVue;
     private javax.swing.JLabel btnRegVue2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -669,6 +750,7 @@ public class frmEstadis extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel panelGrafic;
     // End of variables declaration//GEN-END:variables
 private void labelcolor(JLabel label){
         label.setBackground(new java.awt.Color(53,162,107));

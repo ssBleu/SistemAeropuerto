@@ -5,6 +5,7 @@ import Modelo.Conexion.Conexion;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class AerolineaDAO {
 
@@ -202,5 +203,48 @@ public class AerolineaDAO {
         }
         return aeropuertos;
     }
+    
+    
+    
+    
+    
+    
+    //PARA EL GRAFICO
+    
+     public static DefaultCategoryDataset crearGrafico() {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        Connection cn=Conexion.getConexion();
 
+    try {
+
+        // Crear una declaración SQL
+        Statement statement = cn.createStatement();
+
+        // Construir la consulta SQL para obtener las aerolíneas y la cantidad de vuelos asociados
+        String query = "SELECT a.nombre AS aerolinea, COUNT(*) AS total " +
+                       "FROM aerolinea a " +
+                       "JOIN avion av ON a.id_aerolinea = av.id_aerolinea " +
+                       "JOIN vuelo v ON av.id_avion = v.id_avion " +
+                       "GROUP BY a.nombre " +
+                       "ORDER BY total DESC";
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery(query);
+
+        // Agregar los datos al dataset
+        while (resultSet.next()) {
+            String aerolinea = resultSet.getString("aerolinea");
+            int total = resultSet.getInt("total");
+            dataset.setValue(total, "Aerolínea", aerolinea);
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        cn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return dataset;
+     }
 }

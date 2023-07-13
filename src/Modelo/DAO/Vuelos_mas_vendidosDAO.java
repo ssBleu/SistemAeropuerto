@@ -1,4 +1,5 @@
 package Modelo.DAO;
+import Modelo.Conexion.Conexion;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -40,18 +41,13 @@ public class Vuelos_mas_vendidosDAO extends JFrame {
 
     public void crearGrafico() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        // Obtener los datos de la base de datos
-        String url = "jdbc:mysql://localhost:3306/bd_vuelos";
-        String username = "root";
-        String password = "";
+        Connection cn=Conexion.getConexion();
 
         try {
-            // Establecer conexión con la base de datos
-            Connection connection = DriverManager.getConnection(url, username, password);
+
 
             // Crear una declaración SQL
-            Statement statement = connection.createStatement();
+            Statement statement = cn.createStatement();
 
             // Construir la consulta SQL para obtener los vuelos más vendidos y su destino
             String query = "SELECT v.destino, COUNT(*) AS total " +
@@ -73,7 +69,7 @@ public class Vuelos_mas_vendidosDAO extends JFrame {
             // Cerrar la conexión y liberar recursos
             resultSet.close();
             statement.close();
-            connection.close();
+            cn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
