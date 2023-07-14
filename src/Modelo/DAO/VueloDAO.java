@@ -6,6 +6,7 @@ import Modelo.Vuelo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class VueloDAO {
 
@@ -328,5 +329,44 @@ public class VueloDAO {
 
             return vuelosFiltrados;
         }
+        
+        
+        
+        
+        public static DefaultCategoryDataset obtenerDatos2(String fechaInicial, String fechaFinal) {
+      DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+      Connection cn = Conexion.getConexion();
+
+      try {
+          // Crear una declaración SQL
+          Statement statement = cn.createStatement();
+
+          // Construir la consulta SQL para obtener los vuelos más vendidos y su destino en el rango de fechas
+          String query = "SELECT v.origen, COUNT(*) AS total " +
+                  "FROM reserva_vuelo rv " +
+                  "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo " +
+                  "WHERE rv.fecha_reserva BETWEEN '" + fechaInicial + "' AND '" + fechaFinal + "' " +
+                  "GROUP BY v.origen " +
+                  "ORDER BY total DESC";
+
+          // Ejecutar la consulta SQL
+          ResultSet resultSet = statement.executeQuery(query);
+
+          // Agregar los datos al dataset
+          while (resultSet.next()) {
+              String origen = resultSet.getString("origen");
+              int total = resultSet.getInt("total");
+              dataset.setValue(total, "Vuelos más Vendidos", origen);
+          }
+
+          // Cerrar la conexión y liberar recursos
+          resultSet.close();
+          statement.close();
+          cn.close();
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      return dataset;
+  }
 
 }

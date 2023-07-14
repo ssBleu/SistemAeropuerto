@@ -1,34 +1,24 @@
 
 package Vista;
 
-import Modelo.DAO.AerolineaDAO;
-
-import Modelo.DAO.Reserva_del_diaDAO;
-import Modelo.DAO.Vuelos_mas_vendidosDAO;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import Modelo.Graficos;
+import static Vista.Controladores.objAD;
+import static Vista.Controladores.objRS;
+import static Vista.Controladores.objVD;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GradientPaint;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.swing.JLabel;
-
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.CategoryLabelPositions;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class frmEstadis extends javax.swing.JFrame {
@@ -36,51 +26,15 @@ public class frmEstadis extends javax.swing.JFrame {
     public frmEstadis() {
         initComponents();
         panelGrafic.setLayout(new FlowLayout());
+        
+        // Obtener la fecha actual
+        Date fechaActual = new Date();
+        desPopFechaInic.setDate(fechaActual);
+        desPopFechaFinal.setDate(fechaActual);
+
+
     }
     
-public ChartPanel crearGrafico() {
-    DefaultCategoryDataset datosBD = AerolineaDAO.crearGrafico();
-
-    // Crear el gráfico
-    JFreeChart chart = ChartFactory.createBarChart3D(
-        "Gráfico de Aerolíneas Preferidas", // Título del gráfico
-        "Aerolínea", // Etiqueta del eje horizontal
-        "Cantidad de Veces Pedido", // Etiqueta del eje vertical
-        datosBD, // Datos
-        PlotOrientation.VERTICAL, // Orientación del gráfico (vertical)
-        true, // Incluir leyenda
-        true, // Mostrar información al pasar el ratón
-        false // No se utilizan URLs
-    );
-
-    // Estilizar el gráfico
-    chart.setBackgroundPaint(Color.GRAY);
-    chart.getTitle().setPaint(Color.WHITE);
-
-    CategoryPlot plot = chart.getCategoryPlot();
-    plot.setBackgroundPaint(Color.WHITE);
-    plot.setDomainGridlinesVisible(true);
-    plot.setRangeGridlinePaint(Color.BLACK);
-
-    NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-    rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-
-    BarRenderer renderer = (BarRenderer) plot.getRenderer();
-    renderer.setDrawBarOutline(true);
-
-    GradientPaint gp = new GradientPaint(0.0f, 0.0f, Color.GREEN, 0.0f, 0.0f, new Color(0, 64, 0));
-    renderer.setSeriesPaint(0, gp);
-
-    CategoryAxis domainAxis = plot.getDomainAxis();
-    domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0));
-
-    // Crear un ChartPanel y devolverlo
-    ChartPanel chartPanel = new ChartPanel(chart);
-    return chartPanel;
-}
-
-   
-
     @SuppressWarnings("unchecked")
     int x = 210;
     int a = 0;
@@ -89,9 +43,9 @@ public ChartPanel crearGrafico() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        btnGraficar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnGrafico1 = new javax.swing.JButton();
+        btnGrafico2 = new javax.swing.JButton();
+        btnGrafico3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -99,6 +53,12 @@ public ChartPanel crearGrafico() {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         panelGrafic = new javax.swing.JPanel();
+        desPopFechaInic = new com.toedter.calendar.JDateChooser();
+        desPopFechaFinal = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -132,29 +92,29 @@ public ChartPanel crearGrafico() {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnGraficar.setText("Grafico");
-        btnGraficar.addActionListener(new java.awt.event.ActionListener() {
+        btnGrafico1.setText("Grafico");
+        btnGrafico1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficarActionPerformed(evt);
+                btnGrafico1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGraficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+        jPanel1.add(btnGrafico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
 
-        jButton3.setText("Grafico");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnGrafico2.setText("Grafico");
+        btnGrafico2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnGrafico2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, -1));
+        jPanel1.add(btnGrafico2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, -1, -1));
 
-        jButton4.setText("Grafico");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnGrafico3.setText("Grafico");
+        btnGrafico3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnGrafico3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, -1));
+        jPanel1.add(btnGrafico3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, -1, -1));
 
         jButton5.setText("Ver");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +122,7 @@ public ChartPanel crearGrafico() {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
 
         jButton6.setText("Ver");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +130,7 @@ public ChartPanel crearGrafico() {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+        jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, -1, -1));
 
         jButton7.setText("Ver");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -178,16 +138,16 @@ public ChartPanel crearGrafico() {
                 jButton7ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
+        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, -1, -1));
 
         jLabel1.setText("Aerolinea preferida");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        jLabel4.setText("Vuelos mas vendidos");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+        jLabel4.setText("Originenes más populares reservados");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, -1, -1));
 
-        jLabel5.setText("Reservas del dia");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+        jLabel5.setText("Destinos más populares reservados");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, -1, -1));
 
         javax.swing.GroupLayout panelGraficLayout = new javax.swing.GroupLayout(panelGrafic);
         panelGrafic.setLayout(panelGraficLayout);
@@ -202,7 +162,26 @@ public ChartPanel crearGrafico() {
 
         jPanel1.add(panelGrafic, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 610, 420));
+        desPopFechaInic.setDateFormatString("yyyy-MM-dd");
+        desPopFechaInic.setMaxSelectableDate(new java.util.Date(253370786481000L));
+        jPanel1.add(desPopFechaInic, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 290, 100, -1));
+
+        desPopFechaFinal.setDateFormatString("yyyy-MM-dd");
+        jPanel1.add(desPopFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, -1, -1));
+
+        jLabel9.setText("a:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, -1, -1));
+
+        jLabel12.setText("de:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, -1, -1));
+
+        jLabel15.setText("Datos \"Temporales\" depende de las reservas:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, -1, -1));
+
+        jLabel16.setText("Datos \"Atemporales\" de la empresa (no depende de las reservas):");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 790, 420));
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 255));
 
@@ -250,7 +229,7 @@ public ChartPanel crearGrafico() {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,7 +256,7 @@ public ChartPanel crearGrafico() {
             .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 610, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 790, -1));
 
         jPanel3.setBackground(new java.awt.Color(54, 70, 78));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -470,16 +449,13 @@ public ChartPanel crearGrafico() {
     // ...
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
+    private void btnGrafico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico1ActionPerformed
         panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
-
-        ChartPanel chartPanel = crearGrafico();
+        ChartPanel chartPanel = Graficos.crearGrafico1(objAD.obtenerDatos1());
         chartPanel.setPreferredSize(new Dimension(540, 290)); // Establecer el tamaño preferido del ChartPanel
-
         panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
-
         jPanel1.revalidate(); // Actualizar el contenedor principal
-    }//GEN-LAST:event_btnGraficarActionPerformed
+    }//GEN-LAST:event_btnGrafico1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -584,15 +560,34 @@ public ChartPanel crearGrafico() {
     // ...
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        Vuelos_mas_vendidosDAO vu = new Vuelos_mas_vendidosDAO();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnGrafico2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        Reserva_del_diaDAO res = new Reserva_del_diaDAO();
-    }//GEN-LAST:event_jButton4ActionPerformed
+        panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaI = dateFormat.format(desPopFechaInic.getDate());
+        String fechaF = dateFormat.format(desPopFechaFinal.getDate());
+
+        
+        ChartPanel chartPanel = Graficos.crearGrafico2(objVD.obtenerDatos2(fechaI, fechaF));
+        chartPanel.setPreferredSize(new Dimension(540, 290)); // Establecer el tamaño preferido del ChartPanel
+        panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
+        jPanel1.revalidate(); // Actualizar el contenedor principal
+    }//GEN-LAST:event_btnGrafico2ActionPerformed
+
+    private void btnGrafico3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico3ActionPerformed
+
+        panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaI = dateFormat.format(desPopFechaInic.getDate());
+        String fechaF = dateFormat.format(desPopFechaFinal.getDate());
+
+        ChartPanel chartPanel = Graficos.crearGrafico3(objRS.obtenerDatos3(fechaI, fechaF));
+        chartPanel.setPreferredSize(new Dimension(540, 290)); // Establecer el tamaño preferido del ChartPanel
+        panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
+        jPanel1.revalidate(); // Actualizar el contenedor principal
+    }//GEN-LAST:event_btnGrafico3ActionPerformed
 
     private void btnReTra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseClicked
         frmRegTrab frmReTrab=new frmRegTrab();
@@ -715,22 +710,27 @@ public ChartPanel crearGrafico() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBusCli2;
-    private javax.swing.JButton btnGraficar;
+    private javax.swing.JButton btnGrafico1;
+    private javax.swing.JButton btnGrafico2;
+    private javax.swing.JButton btnGrafico3;
     private javax.swing.JLabel btnReAero2;
     private javax.swing.JLabel btnReTra2;
     private javax.swing.JLabel btnRegVue;
     private javax.swing.JLabel btnRegVue2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser desPopFechaFinal;
+    private com.toedter.calendar.JDateChooser desPopFechaInic;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -741,6 +741,7 @@ public ChartPanel crearGrafico() {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -750,7 +751,7 @@ public ChartPanel crearGrafico() {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPanel panelGrafic;
+    public javax.swing.JPanel panelGrafic;
     // End of variables declaration//GEN-END:variables
 private void labelcolor(JLabel label){
         label.setBackground(new java.awt.Color(53,162,107));

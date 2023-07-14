@@ -211,7 +211,7 @@ public class AerolineaDAO {
     
     //PARA EL GRAFICO
     
-     public static DefaultCategoryDataset crearGrafico() {
+     public static DefaultCategoryDataset obtenerDatos1() {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Connection cn=Conexion.getConexion();
 
