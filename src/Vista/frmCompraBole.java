@@ -3,21 +3,42 @@ package Vista;
 
 import Modelo.Vuelo;
 import static Vista.Controladores.objVD;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane; //para poner un panel detras
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 
 public class frmCompraBole extends javax.swing.JFrame {
+        
 
+    
     public frmCompraBole() {
         initComponents();
         
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+         JLayeredPane layeredPane = getLayeredPane();
+        layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(jPanel1, JLayeredPane.DEFAULT_LAYER); // Cambiado a DEFAULT_LAYER para que esté por encima de panelDetras
+        jPanel1.getParent().add(panelDetras, jPanel1.getParent().getComponentZOrder(jPanel1) - 1);
+        panelDetras.setBounds(jPanel1.getBounds());
 
+        panelDetras.setSize(250, 660);
+
+        panelDetras.setVisible(false);
+
+        
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        
+        
         listadoVuelosInicial();
 
         tablaVueloBoleto.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
@@ -96,8 +117,13 @@ public class frmCompraBole extends javax.swing.JFrame {
  
 
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
+    int x = 250;///////////////
+    int a = 0;//////////////
+    
+    private void cambiarColorTexto(Component component, Color color) {
+    component.setForeground(color);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -106,7 +132,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        SliderDelMenu = new javax.swing.JLabel();
         panelRound1 = new util.PanelRound();
         cboDestino = new util.Cbox();
         cboOrigen = new util.Cbox();
@@ -149,6 +175,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         btnRegVue2 = new javax.swing.JLabel();
+        panelDetras = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -180,20 +207,20 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("COMPRA DE BOLETOS");
 
-        jLabel22.setBackground(new java.awt.Color(0, 102, 204));
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
-        jLabel22.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel22.setOpaque(true);
-        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+        SliderDelMenu.setBackground(new java.awt.Color(0, 102, 204));
+        SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SliderDelMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
+        SliderDelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SliderDelMenu.setOpaque(true);
+        SliderDelMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel22MouseClicked(evt);
+                SliderDelMenuMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel22MouseEntered(evt);
+                SliderDelMenuMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel22MouseExited(evt);
+                SliderDelMenuMouseExited(evt);
             }
         });
 
@@ -202,8 +229,9 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
+                .addGap(47, 47, 47)
+                .addComponent(SliderDelMenu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,14 +252,14 @@ public class frmCompraBole extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
-                        .addGap(0, 6, Short.MAX_VALUE))
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(SliderDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, -5, 830, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundBottomLeft(20);
@@ -332,7 +360,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 490, 150));
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 480, 150));
 
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setRoundBottomLeft(20);
@@ -370,7 +398,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 800, 310));
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 800, 310));
 
         btnReservar.setText("Reservar");
         btnReservar.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +406,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 btnReservarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 610, 100, -1));
+        jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 100, -1));
 
         panelRound3.setBackground(new java.awt.Color(255, 255, 255));
         panelRound3.setRoundBottomLeft(20);
@@ -411,7 +439,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         panel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -436,7 +464,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,21 +485,21 @@ public class frmCompraBole extends javax.swing.JFrame {
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 
-        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 280, 150));
+        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 300, 150));
 
         jPanel3.setBackground(new java.awt.Color(54, 70, 78));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -486,15 +514,22 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnReTra2.setBackground(new java.awt.Color(255, 255, 255));
         btnReTra2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnReTra2.setForeground(new java.awt.Color(255, 255, 255));
+        btnReTra2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnReTra2.setText("Registro de Trabajador");
         btnReTra2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnReTra2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReTra2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReTra2MouseExited(evt);
+            }
         });
-        jPanel4.add(btnReTra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jPanel4.add(btnReTra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 140, 50));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 190, 60));
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 60));
 
         jPanel5.setBackground(new java.awt.Color(54, 70, 78));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -511,10 +546,16 @@ public class frmCompraBole extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBusCli2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBusCli2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBusCli2MouseExited(evt);
+            }
         });
         jPanel5.add(btnBusCli2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, -1));
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 180, 50));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 180, 50));
 
         jPanel7.setBackground(new java.awt.Color(54, 70, 78));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -526,15 +567,22 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnReAero2.setBackground(new java.awt.Color(255, 255, 255));
         btnReAero2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnReAero2.setForeground(new java.awt.Color(255, 255, 255));
+        btnReAero2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnReAero2.setText("   Registro de Aerolínea");
         btnReAero2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnReAero2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReAero2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReAero2MouseExited(evt);
+            }
         });
-        jPanel7.add(btnReAero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        jPanel7.add(btnReAero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 50));
 
-        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 180, 70));
+        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 180, 70));
 
         jPanel8.setBackground(new java.awt.Color(54, 70, 78));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -545,15 +593,22 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Estadisticas");
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel17MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel17MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel17MouseExited(evt);
+            }
         });
-        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 80, 20));
+        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 130, 40));
 
-        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 40));
+        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 180, 40));
 
         jPanel9.setBackground(new java.awt.Color(54, 70, 78));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -565,18 +620,25 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnRegVue.setBackground(new java.awt.Color(255, 255, 255));
         btnRegVue.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnRegVue.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegVue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegVue.setText("  Registro de Avion");
         btnRegVue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegVueMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegVueMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegVueMouseExited(evt);
+            }
         });
-        jPanel9.add(btnRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jPanel9.add(btnRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 8, 140, 40));
 
-        jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 180, 50));
+        jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 180, 50));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario (1).png"))); // NOI18N
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 60, 60));
 
         jPanel10.setBackground(new java.awt.Color(54, 70, 78));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -587,19 +649,42 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         btnRegVue2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnRegVue2.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegVue2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRegVue2.setText("  Registro de Vuelos");
         btnRegVue2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegVue2MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegVue2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegVue2MouseExited(evt);
+            }
         });
-        jPanel10.add(btnRegVue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jPanel10.add(btnRegVue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 140, 50));
 
-        jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 180, 50));
+        jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 180, 50));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 590));
+        panelDetras.setBackground(new java.awt.Color(255, 51, 51));
+        panelDetras.setPreferredSize(new java.awt.Dimension(260, 660));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 590));
+        javax.swing.GroupLayout panelDetrasLayout = new javax.swing.GroupLayout(panelDetras);
+        panelDetras.setLayout(panelDetrasLayout);
+        panelDetrasLayout.setHorizontalGroup(
+            panelDetrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+        panelDetrasLayout.setVerticalGroup(
+            panelDetrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
         pack();
         setLocationRelativeTo(null);
@@ -689,52 +774,97 @@ public class frmCompraBole extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnRegVue2MouseClicked
 
-    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
-        if ( x == 210 ) {
-            jPanel3.setSize(210, 552);
-            Thread th = new Thread() {
-                @Override
-                public void run(){
-                    try {
 
-                        for ( int i = 210; i >= 0; i--){
-                            Thread.sleep(1);
-                            jPanel3.setSize(i, 552);
 
-                            a++;
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
+    private void SliderDelMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseClicked
+   int initialSize = jPanel3.getWidth();
+    int finalSize = (initialSize == 250) ? 0 : 250;
+    int increment = (finalSize < initialSize) ? -5 : 5; // El tamaño cambia en incrementos de -5 o 5 (puedes ajustarlo según tu preferencia)
+    int delay = 5; // Retardo entre cada incremento (en milisegundos)
+
+    Timer timer = new Timer(delay, new ActionListener() {
+        int currentSize = initialSize;
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if ((increment < 0 && currentSize >= finalSize) || (increment > 0 && currentSize <= finalSize)) {
+                jPanel3.setSize(currentSize, 660);
+                panelDetras.setSize(250 - currentSize, 660); // Ajustar el tamaño del panelDetras en sentido inverso
+                currentSize += increment;
+            } else {
+                ((Timer) e.getSource()).stop();
+                x = finalSize;
+
+                if (finalSize == 0) {
+                    // Mostrar el panelDetras
+                    panelDetras.setVisible(true);
+                } else {
+                    // Ocultar el panelDetras
+                    panelDetras.setVisible(false);
                 }
-            };th.start();
-            x=0;
-        } else if( x == 0 ){
-            jPanel3.setSize(x, 552);
-            Thread th = new Thread(){
-                @Override
-                public void run(){
-                    try {
-                        for (int i = 0; i <= x; i++){
-                            Thread.sleep(1);
-                            jPanel3.setSize(i, 552);
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                }
-            };th.start();
-            x = 210;
+
+                jPanel3.getParent().repaint(); // Repintar el contenedor para actualizar la visualización
+            }
         }
-    }//GEN-LAST:event_jLabel22MouseClicked
+    });
+    timer.start();
+    }//GEN-LAST:event_SliderDelMenuMouseClicked
 
-    private void jLabel22MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseEntered
-        labelcolor(jLabel3);
-    }//GEN-LAST:event_jLabel22MouseEntered
+    private void SliderDelMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseEntered
 
-    private void jLabel22MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseExited
-        resetlabelcolor(jLabel3);
-    }//GEN-LAST:event_jLabel22MouseExited
+    }//GEN-LAST:event_SliderDelMenuMouseEntered
+
+    private void SliderDelMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseExited
+
+    }//GEN-LAST:event_SliderDelMenuMouseExited
+
+    private void btnBusCli2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseEntered
+        cambiarColorTexto(btnBusCli2, Color.RED);
+    }//GEN-LAST:event_btnBusCli2MouseEntered
+
+    private void btnBusCli2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseExited
+        cambiarColorTexto(btnBusCli2, Color.WHITE);
+    }//GEN-LAST:event_btnBusCli2MouseExited
+
+    private void btnReTra2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseEntered
+        cambiarColorTexto(btnReTra2, Color.RED);
+    }//GEN-LAST:event_btnReTra2MouseEntered
+
+    private void btnReTra2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseExited
+        cambiarColorTexto(btnReTra2, Color.WHITE);
+    }//GEN-LAST:event_btnReTra2MouseExited
+
+    private void btnReAero2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAero2MouseEntered
+        cambiarColorTexto(btnReAero2, Color.RED);
+    }//GEN-LAST:event_btnReAero2MouseEntered
+
+    private void btnReAero2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAero2MouseExited
+        cambiarColorTexto(btnReAero2, Color.WHITE);
+    }//GEN-LAST:event_btnReAero2MouseExited
+
+    private void btnRegVue2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVue2MouseEntered
+        cambiarColorTexto(btnRegVue2, Color.RED);
+    }//GEN-LAST:event_btnRegVue2MouseEntered
+
+    private void btnRegVue2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVue2MouseExited
+        cambiarColorTexto(btnRegVue2, Color.WHITE);
+    }//GEN-LAST:event_btnRegVue2MouseExited
+
+    private void btnRegVueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseEntered
+        cambiarColorTexto(btnRegVue, Color.RED);
+    }//GEN-LAST:event_btnRegVueMouseEntered
+
+    private void btnRegVueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseExited
+        cambiarColorTexto(btnRegVue, Color.WHITE);
+    }//GEN-LAST:event_btnRegVueMouseExited
+
+    private void jLabel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseEntered
+        cambiarColorTexto(jLabel17, Color.RED);
+    }//GEN-LAST:event_jLabel17MouseEntered
+
+    private void jLabel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseExited
+        cambiarColorTexto(jLabel17, Color.WHITE);
+    }//GEN-LAST:event_jLabel17MouseExited
     
 
     /**
@@ -774,6 +904,7 @@ public class frmCompraBole extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel SliderDelMenu;
     private javax.swing.JLabel btnBusCli2;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnReAero2;
@@ -796,7 +927,6 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -816,6 +946,7 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private util.panel panel1;
     private util.panel panel2;
+    private javax.swing.JPanel panelDetras;
     private util.PanelRound panelRound1;
     private util.PanelRound panelRound2;
     private util.PanelRound panelRound3;
