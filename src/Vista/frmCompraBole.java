@@ -11,6 +11,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -82,6 +84,11 @@ public class frmCompraBole extends javax.swing.JFrame {
         } else {
              System.out.println("Se supone que esto no debe pasar XD");
         }
+         
+        LocalTime horaActual = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaDeInicio = horaActual.format(formatter);
+        lblTiempSes.setText(""+horaDeInicio);
  
     }
    
@@ -127,9 +134,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
     }
  
-    private void cambiarColorTexto(Component component, Color color) {
-    component.setForeground(color);
-    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,24 +168,25 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        panelReTra = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        btnReTra2 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        btnReTra = new javax.swing.JLabel();
+        panelBusCli = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        btnBusCli2 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        btnBusCli = new javax.swing.JLabel();
+        lblFotoSes2 = new javax.swing.JLabel();
+        panelReAero = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        btnReAero2 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        btnRegVue = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
+        btnReAero = new javax.swing.JLabel();
+        panelRegVue = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
-        btnRegVue2 = new javax.swing.JLabel();
+        btnRegVue = new javax.swing.JLabel();
+        panelRegAvion = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        btnRegAvion = new javax.swing.JLabel();
+        panelEstadisticas = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        btnEstadisticas = new javax.swing.JLabel();
         panelDetras = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -193,9 +199,8 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblApeUsu = new javax.swing.JLabel();
         lblIDUsu = new javax.swing.JLabel();
         lblFotoSes = new javax.swing.JLabel();
-        lblFotoSes2 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         lblUsuarioSes2 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -204,7 +209,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(239, 231, 231));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(12, 64, 160));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
         jLabel3.setText("-");
@@ -225,9 +230,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("COMPRA DE BOLETOS");
 
-        SliderDelMenu.setBackground(new java.awt.Color(0, 102, 204));
+        SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
         SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SliderDelMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
         SliderDelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -522,128 +528,149 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 300, 150));
 
-        jPanel3.setBackground(new java.awt.Color(54, 70, 78));
+        jPanel3.setBackground(new java.awt.Color(67, 90, 132));
         jPanel3.setPreferredSize(new java.awt.Dimension(250, 660));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(54, 70, 78));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelReTra.setBackground(new java.awt.Color(67, 90, 132));
+        panelReTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelReTraMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelReTraMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelReTraMouseExited(evt);
+            }
+        });
+        panelReTra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retra (1).png"))); // NOI18N
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+        panelReTra.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
-        btnReTra2.setBackground(new java.awt.Color(255, 255, 255));
-        btnReTra2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        btnReTra2.setForeground(new java.awt.Color(255, 255, 255));
-        btnReTra2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnReTra2.setText("Registro de Trabajador");
-        btnReTra2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReTra.setBackground(new java.awt.Color(67, 90, 132));
+        btnReTra.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnReTra.setForeground(new java.awt.Color(255, 255, 255));
+        btnReTra.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReTra.setText("Registro de Trabajador");
+        btnReTra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReTra2MouseClicked(evt);
+                btnReTraMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReTra2MouseEntered(evt);
+                btnReTraMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReTra2MouseExited(evt);
+                btnReTraMouseExited(evt);
             }
         });
-        jPanel4.add(btnReTra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 140, 50));
+        panelReTra.add(btnReTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 60));
+        jPanel3.add(panelReTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, 50));
 
-        jPanel5.setBackground(new java.awt.Color(54, 70, 78));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelBusCli.setBackground(new java.awt.Color(67, 90, 132));
+        panelBusCli.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBusCliMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelBusCliMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelBusCliMouseExited(evt);
+            }
+        });
+        panelBusCli.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscli (1).png"))); // NOI18N
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+        panelBusCli.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
-        btnBusCli2.setBackground(new java.awt.Color(255, 255, 255));
-        btnBusCli2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        btnBusCli2.setForeground(new java.awt.Color(255, 255, 255));
-        btnBusCli2.setText("    Busqueda de Cliente");
-        btnBusCli2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBusCli.setBackground(new java.awt.Color(255, 255, 255));
+        btnBusCli.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnBusCli.setForeground(new java.awt.Color(255, 255, 255));
+        btnBusCli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnBusCli.setText("Búsqueda de Cliente");
+        btnBusCli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBusCli2MouseClicked(evt);
+                btnBusCliMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBusCli2MouseEntered(evt);
+                btnBusCliMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBusCli2MouseExited(evt);
+                btnBusCliMouseExited(evt);
             }
         });
-        jPanel5.add(btnBusCli2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 150, -1));
+        panelBusCli.add(btnBusCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 180, 50));
+        jPanel3.add(panelBusCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 250, 50));
 
-        jPanel7.setBackground(new java.awt.Color(54, 70, 78));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        lblFotoSes2.setText("jLabel15");
+        jPanel3.add(lblFotoSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 90));
+
+        panelReAero.setBackground(new java.awt.Color(67, 90, 132));
+        panelReAero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelReAeroMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelReAeroMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelReAeroMouseExited(evt);
+            }
+        });
+        panelReAero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/viajE1.png"))); // NOI18N
-        jPanel7.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 50, 50));
+        panelReAero.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
-        btnReAero2.setBackground(new java.awt.Color(255, 255, 255));
-        btnReAero2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        btnReAero2.setForeground(new java.awt.Color(255, 255, 255));
-        btnReAero2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnReAero2.setText("   Registro de Aerolínea");
-        btnReAero2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReAero.setBackground(new java.awt.Color(255, 255, 255));
+        btnReAero.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnReAero.setForeground(new java.awt.Color(255, 255, 255));
+        btnReAero.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnReAero.setText("Registro de Aerolínea");
+        btnReAero.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReAero2MouseClicked(evt);
+                btnReAeroMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReAero2MouseEntered(evt);
+                btnReAeroMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReAero2MouseExited(evt);
+                btnReAeroMouseExited(evt);
             }
         });
-        jPanel7.add(btnReAero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 50));
+        panelReAero.add(btnReAero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
-        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 180, 70));
+        jPanel3.add(panelReAero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 250, 50));
 
-        jPanel8.setBackground(new java.awt.Color(54, 70, 78));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
-        jPanel8.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 40));
-
-        jLabel17.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("Estadisticas");
-        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelRegVue.setBackground(new java.awt.Color(67, 90, 132));
+        panelRegVue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel17MouseClicked(evt);
+                panelRegVueMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel17MouseEntered(evt);
+                panelRegVueMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel17MouseExited(evt);
+                panelRegVueMouseExited(evt);
             }
         });
-        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 130, 40));
+        panelRegVue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 180, 40));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario.png"))); // NOI18N
+        panelRegVue.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
-        jPanel9.setBackground(new java.awt.Color(54, 70, 78));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boletos-deavion.png"))); // NOI18N
-        jPanel9.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
-
-        btnRegVue.setBackground(new java.awt.Color(255, 255, 255));
         btnRegVue.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnRegVue.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegVue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegVue.setText("  Registro de Avion");
+        btnRegVue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRegVue.setText("Registro de Vuelos");
         btnRegVue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegVueMouseClicked(evt);
@@ -655,83 +682,157 @@ public class frmCompraBole extends javax.swing.JFrame {
                 btnRegVueMouseExited(evt);
             }
         });
-        jPanel9.add(btnRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 8, 140, 40));
+        panelRegVue.add(btnRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
-        jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 180, 50));
+        jPanel3.add(panelRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 250, -1));
 
-        jPanel10.setBackground(new java.awt.Color(54, 70, 78));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario.png"))); // NOI18N
-        jPanel10.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
-
-        btnRegVue2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        btnRegVue2.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegVue2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnRegVue2.setText("  Registro de Vuelos");
-        btnRegVue2.addMouseListener(new java.awt.event.MouseAdapter() {
+        panelRegAvion.setBackground(new java.awt.Color(67, 90, 132));
+        panelRegAvion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegVue2MouseClicked(evt);
+                panelRegAvionMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegVue2MouseEntered(evt);
+                panelRegAvionMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegVue2MouseExited(evt);
+                panelRegAvionMouseExited(evt);
             }
         });
-        jPanel10.add(btnRegVue2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 140, 50));
+        panelRegAvion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 180, 50));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boletos-deavion.png"))); // NOI18N
+        panelRegAvion.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
-        panelDetras.setBackground(new java.awt.Color(204, 255, 255));
+        btnRegAvion.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegAvion.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnRegAvion.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegAvion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRegAvion.setText("Registro de Avion");
+        btnRegAvion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegAvionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRegAvionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRegAvionMouseExited(evt);
+            }
+        });
+        panelRegAvion.add(btnRegAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
+
+        jPanel3.add(panelRegAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 250, -1));
+
+        panelEstadisticas.setBackground(new java.awt.Color(67, 90, 132));
+        panelEstadisticas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelEstadisticasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelEstadisticasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panelEstadisticasMouseExited(evt);
+            }
+        });
+        panelEstadisticas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
+        panelEstadisticas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
+
+        btnEstadisticas.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        btnEstadisticas.setForeground(new java.awt.Color(255, 255, 255));
+        btnEstadisticas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEstadisticas.setText("Estadísticas");
+        btnEstadisticas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEstadisticasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEstadisticasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEstadisticasMouseExited(evt);
+            }
+        });
+        panelEstadisticas.add(btnEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
+
+        jPanel3.add(panelEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 250, -1));
+
+        panelDetras.setBackground(new java.awt.Color(69, 80, 135));
         panelDetras.setPreferredSize(new java.awt.Dimension(250, 660));
         panelDetras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Nombre:");
-        panelDetras.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        panelDetras.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 30));
 
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Usuario:");
-        panelDetras.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        panelDetras.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, 30));
 
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Apellido:");
-        panelDetras.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        panelDetras.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 30));
 
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Inicio de sesión:");
-        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
+        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, -1, -1));
 
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("ID Usuario:");
-        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, 30));
 
-        lblTiempSes.setText("USER");
-        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
+        lblTiempSes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTiempSes.setForeground(new java.awt.Color(204, 255, 204));
+        lblTiempSes.setText("TIME");
+        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 70, 20));
 
+        lblUsuarioSes.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        lblUsuarioSes.setForeground(new java.awt.Color(204, 255, 204));
         lblUsuarioSes.setText("USER");
-        panelDetras.add(lblUsuarioSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+        panelDetras.add(lblUsuarioSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 80, 30));
 
+        lblNombreSes.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        lblNombreSes.setForeground(new java.awt.Color(204, 255, 204));
         lblNombreSes.setText("NAME");
-        panelDetras.add(lblNombreSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
+        panelDetras.add(lblNombreSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 80, 30));
 
+        lblApeUsu.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        lblApeUsu.setForeground(new java.awt.Color(204, 255, 204));
         lblApeUsu.setText("APE");
-        panelDetras.add(lblApeUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, -1, -1));
+        panelDetras.add(lblApeUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 80, 30));
 
+        lblIDUsu.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        lblIDUsu.setForeground(new java.awt.Color(204, 255, 204));
         lblIDUsu.setText("ID");
-        panelDetras.add(lblIDUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+        panelDetras.add(lblIDUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 80, 30));
 
-        lblFotoSes.setText("imagen");
-        panelDetras.add(lblFotoSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 90));
+        lblFotoSes.setForeground(new java.awt.Color(255, 255, 255));
+        lblFotoSes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelDetras.add(lblFotoSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 90, 90));
 
         jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
-        lblFotoSes2.setText("jLabel15");
-        jPanel3.add(lblFotoSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 90));
-
-        jLabel15.setText("Usuario:");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-
+        lblUsuarioSes2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblUsuarioSes2.setForeground(new java.awt.Color(204, 255, 204));
         lblUsuarioSes2.setText("USER");
-        jPanel3.add(lblUsuarioSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+        lblUsuarioSes2.setMaximumSize(new java.awt.Dimension(55, 20));
+        lblUsuarioSes2.setMinimumSize(new java.awt.Dimension(55, 20));
+        lblUsuarioSes2.setPreferredSize(new java.awt.Dimension(55, 20));
+        jPanel3.add(lblUsuarioSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Usuario:");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 160, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
@@ -784,42 +885,42 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sliferStateChanged
 
-    private void btnReTra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseClicked
+    private void btnReTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseClicked
         frmRegTrab frmReTrab=new frmRegTrab();
         frmReTrab.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnReTra2MouseClicked
+    }//GEN-LAST:event_btnReTraMouseClicked
 
-    private void btnBusCli2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseClicked
+    private void btnBusCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseClicked
         frmBusCli frmBuCli=new frmBusCli();
         frmBuCli.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnBusCli2MouseClicked
+    }//GEN-LAST:event_btnBusCliMouseClicked
 
-    private void btnReAero2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAero2MouseClicked
+    private void btnReAeroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseClicked
         frmRegAero frmReAero=new frmRegAero();
         frmReAero.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnReAero2MouseClicked
+    }//GEN-LAST:event_btnReAeroMouseClicked
 
-    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+    private void btnEstadisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisticasMouseClicked
         frmEstadis frmEsta=new frmEstadis();
         frmEsta.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jLabel17MouseClicked
+    }//GEN-LAST:event_btnEstadisticasMouseClicked
 
-    private void btnRegVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseClicked
+    private void btnRegAvionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegAvionMouseClicked
         frmRegAv frmReVue=new frmRegAv();
         frmReVue.setVisible(true);
         this.setVisible(false);
 
-    }//GEN-LAST:event_btnRegVueMouseClicked
+    }//GEN-LAST:event_btnRegAvionMouseClicked
 
-    private void btnRegVue2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVue2MouseClicked
+    private void btnRegVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseClicked
         frmRegVue frmRegVue=new frmRegVue();
         frmRegVue.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnRegVue2MouseClicked
+    }//GEN-LAST:event_btnRegVueMouseClicked
 
 
     @SuppressWarnings("unchecked")
@@ -869,54 +970,183 @@ public class frmCompraBole extends javax.swing.JFrame {
     private void SliderDelMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseExited
 
     }//GEN-LAST:event_SliderDelMenuMouseExited
+    
+    //colores panel/jlabel"botones" xd
+    private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
+    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
+    private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
+    
+    private void cambiarColores(Component component, Color color) {
+    component.setForeground(color);
+    }
+    
+    private boolean maus = false;
+    
+    private void cambiarColores(Component boton, Component panel) {
+    if (maus) {
+        boton.setForeground(ColorEnteredBoton);
+        panel.setBackground(ColorEnteredPanel);
+    } else {
+        boton.setForeground(Color.WHITE);
+        panel.setBackground(ColorOriginalPanel);
+    }
+}
+    
+    private void btnBusCliMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseEntered
+        maus = true;
+        cambiarColores(btnBusCli,panelBusCli);
+    }//GEN-LAST:event_btnBusCliMouseEntered
 
-    private void btnBusCli2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseEntered
-        cambiarColorTexto(btnBusCli2, Color.RED);
-    }//GEN-LAST:event_btnBusCli2MouseEntered
+    private void btnBusCliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseExited
+        maus = false;
+        cambiarColores(btnBusCli,panelBusCli);
+    }//GEN-LAST:event_btnBusCliMouseExited
 
-    private void btnBusCli2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCli2MouseExited
-        cambiarColorTexto(btnBusCli2, Color.WHITE);
-    }//GEN-LAST:event_btnBusCli2MouseExited
+    private void btnReTraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseEntered
+        maus = true;
+        cambiarColores(btnReTra,panelReTra);
+    }//GEN-LAST:event_btnReTraMouseEntered
 
-    private void btnReTra2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseEntered
-        cambiarColorTexto(btnReTra2, Color.RED);
-    }//GEN-LAST:event_btnReTra2MouseEntered
+    private void btnReTraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseExited
+        maus = false;
+        cambiarColores(btnReTra,panelReTra);
+    }//GEN-LAST:event_btnReTraMouseExited
 
-    private void btnReTra2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseExited
-        cambiarColorTexto(btnReTra2, Color.WHITE);
-    }//GEN-LAST:event_btnReTra2MouseExited
+    private void btnReAeroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseEntered
+        maus = true;
+        cambiarColores(btnReAero,panelReAero);
+    }//GEN-LAST:event_btnReAeroMouseEntered
 
-    private void btnReAero2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAero2MouseEntered
-        cambiarColorTexto(btnReAero2, Color.RED);
-    }//GEN-LAST:event_btnReAero2MouseEntered
-
-    private void btnReAero2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAero2MouseExited
-        cambiarColorTexto(btnReAero2, Color.WHITE);
-    }//GEN-LAST:event_btnReAero2MouseExited
-
-    private void btnRegVue2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVue2MouseEntered
-        cambiarColorTexto(btnRegVue2, Color.RED);
-    }//GEN-LAST:event_btnRegVue2MouseEntered
-
-    private void btnRegVue2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVue2MouseExited
-        cambiarColorTexto(btnRegVue2, Color.WHITE);
-    }//GEN-LAST:event_btnRegVue2MouseExited
+    private void btnReAeroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseExited
+        maus = false;
+        cambiarColores(btnReAero,panelReAero);
+    }//GEN-LAST:event_btnReAeroMouseExited
 
     private void btnRegVueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseEntered
-        cambiarColorTexto(btnRegVue, Color.RED);
+        maus = true;
+        cambiarColores(btnRegVue,panelRegVue);
     }//GEN-LAST:event_btnRegVueMouseEntered
 
     private void btnRegVueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseExited
-        cambiarColorTexto(btnRegVue, Color.WHITE);
+        maus = false;
+        cambiarColores(btnRegVue,panelRegVue);
     }//GEN-LAST:event_btnRegVueMouseExited
 
-    private void jLabel17MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseEntered
-        cambiarColorTexto(jLabel17, Color.RED);
-    }//GEN-LAST:event_jLabel17MouseEntered
+    private void btnRegAvionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegAvionMouseEntered
+        maus = true;
+        cambiarColores(btnRegAvion,panelRegAvion);
+    }//GEN-LAST:event_btnRegAvionMouseEntered
 
-    private void jLabel17MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseExited
-        cambiarColorTexto(jLabel17, Color.WHITE);
-    }//GEN-LAST:event_jLabel17MouseExited
+    private void btnRegAvionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegAvionMouseExited
+        maus = false;
+        cambiarColores(btnRegAvion,panelRegAvion);
+    }//GEN-LAST:event_btnRegAvionMouseExited
+
+    private void btnEstadisticasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisticasMouseEntered
+        maus = true;
+        cambiarColores(btnEstadisticas,panelEstadisticas);
+    }//GEN-LAST:event_btnEstadisticasMouseEntered
+
+    private void btnEstadisticasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisticasMouseExited
+        maus = false;
+        cambiarColores(btnEstadisticas,panelEstadisticas);
+    }//GEN-LAST:event_btnEstadisticasMouseExited
+//paneles
+    private void panelBusCliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBusCliMouseExited
+        maus = false;
+        cambiarColores(btnBusCli,panelBusCli);
+    }//GEN-LAST:event_panelBusCliMouseExited
+
+    private void panelBusCliMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBusCliMouseEntered
+        maus = true;
+        cambiarColores(btnBusCli, panelBusCli);
+    }//GEN-LAST:event_panelBusCliMouseEntered
+
+    private void panelReTraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReTraMouseExited
+        maus = false;
+        cambiarColores(btnReTra, panelReTra);
+    }//GEN-LAST:event_panelReTraMouseExited
+
+    private void panelReTraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReTraMouseEntered
+        maus = true;
+        cambiarColores(btnReTra, panelReTra);
+    }//GEN-LAST:event_panelReTraMouseEntered
+
+    private void panelReAeroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReAeroMouseExited
+        maus = false;
+        cambiarColores(btnReAero, panelReAero);
+    }//GEN-LAST:event_panelReAeroMouseExited
+
+    private void panelReAeroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReAeroMouseEntered
+        maus = true;
+        cambiarColores(btnReAero, panelReAero);
+    }//GEN-LAST:event_panelReAeroMouseEntered
+
+    private void panelRegVueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegVueMouseExited
+        maus = false;
+        cambiarColores(btnRegVue, panelRegVue);
+    }//GEN-LAST:event_panelRegVueMouseExited
+
+    private void panelRegVueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegVueMouseEntered
+        maus = true;
+        cambiarColores(btnRegVue, panelRegVue);
+    }//GEN-LAST:event_panelRegVueMouseEntered
+
+    private void panelRegAvionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegAvionMouseExited
+        maus = false;
+        cambiarColores(btnRegAvion, panelRegAvion);
+    }//GEN-LAST:event_panelRegAvionMouseExited
+
+    private void panelRegAvionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegAvionMouseEntered
+        maus = true;
+        cambiarColores(btnRegAvion, panelRegAvion);
+    }//GEN-LAST:event_panelRegAvionMouseEntered
+
+    private void panelEstadisticasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstadisticasMouseExited
+        maus = false;
+        cambiarColores(btnEstadisticas, panelEstadisticas);
+    }//GEN-LAST:event_panelEstadisticasMouseExited
+
+    private void panelEstadisticasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstadisticasMouseEntered
+        maus = true;
+        cambiarColores(btnEstadisticas, panelEstadisticas);
+    }//GEN-LAST:event_panelEstadisticasMouseEntered
+
+    private void panelBusCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBusCliMouseClicked
+        frmBusCli frmBuCli=new frmBusCli();
+        frmBuCli.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panelBusCliMouseClicked
+
+    private void panelReTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReTraMouseClicked
+        frmRegTrab frmRegTrab=new frmRegTrab();
+        frmRegTrab.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panelReTraMouseClicked
+
+    private void panelReAeroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReAeroMouseClicked
+        frmRegAero frmRegAero=new frmRegAero();
+        frmRegAero.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panelReAeroMouseClicked
+
+    private void panelRegVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegVueMouseClicked
+        frmRegVue frmRegVue=new frmRegVue();
+        frmRegVue.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panelRegVueMouseClicked
+
+    private void panelRegAvionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegAvionMouseClicked
+        frmRegAv frmRegAv=new frmRegAv();
+        frmRegAv.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panelRegAvionMouseClicked
+
+    private void panelEstadisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstadisticasMouseClicked
+        frmEstadis frmEstadis=new frmEstadis();
+        frmEstadis.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_panelEstadisticasMouseClicked
     
 
     /**
@@ -957,12 +1187,13 @@ public class frmCompraBole extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SliderDelMenu;
-    private javax.swing.JLabel btnBusCli2;
+    private javax.swing.JLabel btnBusCli;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JLabel btnReAero2;
-    private javax.swing.JLabel btnReTra2;
+    private javax.swing.JLabel btnEstadisticas;
+    private javax.swing.JLabel btnReAero;
+    private javax.swing.JLabel btnReTra;
+    private javax.swing.JLabel btnRegAvion;
     private javax.swing.JLabel btnRegVue;
-    private javax.swing.JLabel btnRegVue2;
     private javax.swing.JButton btnReservar;
     private util.Cbox cboDestino;
     private util.Cbox cboDuracion;
@@ -975,7 +1206,6 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -992,14 +1222,8 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
     private javax.swing.JLabel lblFotoSes;
@@ -1011,7 +1235,13 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuarioSes2;
     private util.panel panel1;
     private util.panel panel2;
+    private javax.swing.JPanel panelBusCli;
     private javax.swing.JPanel panelDetras;
+    private javax.swing.JPanel panelEstadisticas;
+    private javax.swing.JPanel panelReAero;
+    private javax.swing.JPanel panelReTra;
+    private javax.swing.JPanel panelRegAvion;
+    private javax.swing.JPanel panelRegVue;
     private util.PanelRound panelRound1;
     private util.PanelRound panelRound2;
     private util.PanelRound panelRound3;
