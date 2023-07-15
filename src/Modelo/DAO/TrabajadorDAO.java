@@ -85,7 +85,7 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
                     Date fechaNacimiento = rs.getDate(4);
                     String usuario = rs.getString(5);
                     String contrasena = rs.getString(6);
-                    // Leer los bytes de la imagen desde la base de datos
+                    // lee los bytes de la imagen desde la base de datos
                     byte[] fotoBytes = rs.getBytes(7);
                     double salario = rs.getDouble(8);
                     Date fechaContratacion = rs.getDate(9);

@@ -25,17 +25,13 @@ public class frmCompraBole extends javax.swing.JFrame {
     public frmCompraBole() {
         initComponents();
         
-         JLayeredPane layeredPane = getLayeredPane();
+        JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
-        layeredPane.add(jPanel1, JLayeredPane.DEFAULT_LAYER); // Cambiado a DEFAULT_LAYER para que esté por encima de panelDetras
-        jPanel1.getParent().add(panelDetras, jPanel1.getParent().getComponentZOrder(jPanel1) - 1);
-        panelDetras.setBounds(jPanel1.getBounds());
-
-        panelDetras.setSize(250, 660);
-
+        //layeredPane.add(jPanel1, JLayeredPane.DEFAULT_LAYER); // Cambiado a DEFAULT_LAYER para que esté por encima de panelDetras
+        //jPanel1.getParent().add(panelDetras, jPanel1.getParent().getComponentZOrder(jPanel1) - 1);
+        //panelDetras.setBounds(jPanel1.getBounds());
         panelDetras.setVisible(false);
 
-        
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         
         
@@ -116,9 +112,6 @@ public class frmCompraBole extends javax.swing.JFrame {
     }
  
 
-    @SuppressWarnings("unchecked")
-    int x = 250;///////////////
-    int a = 0;//////////////
     
     private void cambiarColorTexto(Component component, Color color) {
     component.setForeground(color);
@@ -176,6 +169,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         btnRegVue2 = new javax.swing.JLabel();
         panelDetras = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -231,16 +225,17 @@ public class frmCompraBole extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(SliderDelMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 695, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
                         .addComponent(jLabel1)
-                        .addGap(254, 254, 254))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,12 +245,12 @@ public class frmCompraBole extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel1)
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(SliderDelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(SliderDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -502,6 +497,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 300, 150));
 
         jPanel3.setBackground(new java.awt.Color(54, 70, 78));
+        jPanel3.setPreferredSize(new java.awt.Dimension(250, 660));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(54, 70, 78));
@@ -667,22 +663,30 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 180, 50));
 
         panelDetras.setBackground(new java.awt.Color(255, 51, 51));
-        panelDetras.setPreferredSize(new java.awt.Dimension(260, 660));
+        panelDetras.setPreferredSize(new java.awt.Dimension(250, 660));
+
+        jLabel15.setText("AEA");
 
         javax.swing.GroupLayout panelDetrasLayout = new javax.swing.GroupLayout(panelDetras);
         panelDetras.setLayout(panelDetrasLayout);
         panelDetrasLayout.setHorizontalGroup(
             panelDetrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(panelDetrasLayout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         panelDetrasLayout.setVerticalGroup(
             panelDetrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
+            .addGroup(panelDetrasLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(519, Short.MAX_VALUE))
         );
 
-        jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+        jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
@@ -775,39 +779,44 @@ public class frmCompraBole extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegVue2MouseClicked
 
 
+    @SuppressWarnings("unchecked")
+
 
     private void SliderDelMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseClicked
-   int initialSize = jPanel3.getWidth();
-    int finalSize = (initialSize == 250) ? 0 : 250;
-    int increment = (finalSize < initialSize) ? -5 : 5; // El tamaño cambia en incrementos de -5 o 5 (puedes ajustarlo según tu preferencia)
-    int delay = 5; // Retardo entre cada incremento (en milisegundos)
+        // desactiva el botoncito para que no presiones a cada rato :,v
+       SliderDelMenu.setEnabled(false);
 
-    Timer timer = new Timer(delay, new ActionListener() {
-        int currentSize = initialSize;
+       int initialSize = jPanel3.getWidth();
+       int finalSize = (initialSize == 250) ? 0 : 250;
+       int increment = (finalSize < initialSize) ? -5 : 5; // El tamaño cambia de -5 o 5 (puede cambiarse)
+       int delay = 5; // Retardo (ms)
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if ((increment < 0 && currentSize >= finalSize) || (increment > 0 && currentSize <= finalSize)) {
-                jPanel3.setSize(currentSize, 660);
-                panelDetras.setSize(250 - currentSize, 660); // Ajustar el tamaño del panelDetras en sentido inverso
-                currentSize += increment;
-            } else {
-                ((Timer) e.getSource()).stop();
-                x = finalSize;
+       Timer timer = new Timer(delay, new ActionListener() {
+           int currentSize = initialSize; // 0 o 250
 
-                if (finalSize == 0) {
-                    // Mostrar el panelDetras
-                    panelDetras.setVisible(true);
-                } else {
-                    // Ocultar el panelDetras
-                    panelDetras.setVisible(false);
-                }
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               if ((increment < 0 && currentSize >= finalSize) || (increment > 0 && currentSize <= finalSize)) {
+                   jPanel3.setSize(currentSize, 660); //0 o 250 dependiendo :v
+                   panelDetras.setLocation(currentSize, panelDetras.getY()); // el panel se mueve mientras el otro aparece :v 
+                   panelDetras.setSize(250 - currentSize, 660); // Ajustar el tamaño //(desactivar para ver la magia)
+                   currentSize += increment;
+                   panelDetras.setVisible(true); //UNA HORA POR ESTA WEAAA
+               } else {
+                   ((Timer) e.getSource()).stop();
 
-                jPanel3.getParent().repaint(); // Repintar el contenedor para actualizar la visualización
-            }
-        }
-    });
-    timer.start();
+                   if (finalSize == 0) {
+                       panelDetras.setVisible(true);
+                   } else {
+                       panelDetras.setVisible(false);
+                   }
+
+                   // activa el botoncito
+                   SliderDelMenu.setEnabled(true);
+               }
+           }
+       });
+       timer.start();
     }//GEN-LAST:event_SliderDelMenuMouseClicked
 
     private void SliderDelMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseEntered
@@ -921,6 +930,7 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
