@@ -28,6 +28,9 @@ public class frmRegCli extends javax.swing.JFrame {
         
         
     }
+    
+
+    
     void listado(){
         DefaultTableModel dt=(DefaultTableModel)TablaDatos.getModel();
         

@@ -2,8 +2,8 @@ package Vista;
 
 import Modelo.Conexion.Conexion;
 import Modelo.DAO.TrabajadorDAO;
-import Modelo.DAO.Usuario;
 import Modelo.Trabajador;
+import static Vista.Controladores.objTR;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,11 +30,11 @@ public class frmLogin extends javax.swing.JFrame {
         String usuario = txtUsuario.getText();
         String contrasena = String.valueOf(txtContra.getPassword());
         
-        Usuario trabajadorDAO = new Usuario(connection);
-
         try {
-            if (trabajadorDAO.validarCredenciales(usuario, contrasena)) {
-                frmRegCli form= new frmRegCli();
+            if (objTR.validarCredenciales(usuario, contrasena)) {
+                //frmRegCli form= new frmRegCli();
+                frmCompraBole form = new frmCompraBole();
+                form.obtenerUsuarioSes(objTR.obtenerIdTrabajador(usuario, contrasena));
                 form.setVisible(true);
                 this.dispose();
             } else {

@@ -1,7 +1,9 @@
 
 package Vista;
 
+import Modelo.Trabajador;
 import Modelo.Vuelo;
+import static Vista.Controladores.objTR;
 import static Vista.Controladores.objVD;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,6 +12,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane; //para poner un panel detras
 import javax.swing.JOptionPane;
@@ -20,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmCompraBole extends javax.swing.JFrame {
         
-
+    private byte[] imagenUsuarioSes;
     
     public frmCompraBole() {
         initComponents();
@@ -57,15 +60,37 @@ public class frmCompraBole extends javax.swing.JFrame {
         for (String origen : origenes) {
             cboOrigen.addItem(origen);
         }
-        
-                for (String duracion : duraciones) {
+        for (String duracion : duraciones) {
             cboDuracion.addItem(duracion);
         }
-                
-                        for (String destino : destinos) {
+        for (String destino : destinos) {
             cboDestino.addItem(destino);
         }
+
+   
     }
+    
+    void obtenerUsuarioSes(int ID){ //PARA SEGUIRLA XD (PROVISIONAL)
+        lblIDUsu.setText(""+ID);
+        Trabajador trabajador = objTR.buscarTrabajador(ID);
+   
+         if (trabajador != null) {
+        lblUsuarioSes.setText(trabajador.getUsuario());
+        lblNombreSes.setText(trabajador.getNombre());
+        lblApeUsu.setText(trabajador.getApellido());
+        
+        imagenUsuarioSes = trabajador.getFoto();
+        ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
+        lblFotoSes.setIcon(IconoSelec);
+        
+        } else {
+             System.out.println("Se supone que esto no debe pasar XD");
+        }
+ 
+    }
+    
+
+
     
     void listadoVuelosInicial(){
         DefaultTableModel dt=(DefaultTableModel)tablaVueloBoleto.getModel();
@@ -169,7 +194,17 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         btnRegVue2 = new javax.swing.JLabel();
         panelDetras = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        lblTiempSes = new javax.swing.JLabel();
+        lblUsuarioSes = new javax.swing.JLabel();
+        lblNombreSes = new javax.swing.JLabel();
+        lblApeUsu = new javax.swing.JLabel();
+        lblIDUsu = new javax.swing.JLabel();
+        lblFotoSes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -664,25 +699,40 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         panelDetras.setBackground(new java.awt.Color(255, 51, 51));
         panelDetras.setPreferredSize(new java.awt.Dimension(250, 660));
+        panelDetras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setText("AEA");
+        jLabel19.setText("Nombre:");
+        panelDetras.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
-        javax.swing.GroupLayout panelDetrasLayout = new javax.swing.GroupLayout(panelDetras);
-        panelDetras.setLayout(panelDetrasLayout);
-        panelDetrasLayout.setHorizontalGroup(
-            panelDetrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDetrasLayout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
-        panelDetrasLayout.setVerticalGroup(
-            panelDetrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDetrasLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(519, Short.MAX_VALUE))
-        );
+        jLabel22.setText("Usuario:");
+        panelDetras.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        jLabel23.setText("Apellido:");
+        panelDetras.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        jLabel24.setText("Inicio de sesión:");
+        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, -1, -1));
+
+        jLabel25.setText("ID Usuario:");
+        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+
+        lblTiempSes.setText("USER");
+        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
+
+        lblUsuarioSes.setText("USER");
+        panelDetras.add(lblUsuarioSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        lblNombreSes.setText("NAME");
+        panelDetras.add(lblNombreSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
+
+        lblApeUsu.setText("APE");
+        panelDetras.add(lblApeUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, -1, -1));
+
+        lblIDUsu.setText("ID");
+        panelDetras.add(lblIDUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+
+        lblFotoSes.setText("imagen");
+        panelDetras.add(lblFotoSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 90));
 
         jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
@@ -904,7 +954,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create alblImalblFotoSesgenSesnd display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmCompraBole().setVisible(true);
@@ -930,13 +980,17 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -954,6 +1008,12 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblApeUsu;
+    private javax.swing.JLabel lblFotoSes;
+    private javax.swing.JLabel lblIDUsu;
+    private javax.swing.JLabel lblNombreSes;
+    private javax.swing.JLabel lblTiempSes;
+    private javax.swing.JLabel lblUsuarioSes;
     private util.panel panel1;
     private util.panel panel2;
     private javax.swing.JPanel panelDetras;
