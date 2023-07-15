@@ -6,7 +6,6 @@ import Modelo.Trabajador;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
 
 public class TrabajadorDAO {
 
@@ -85,12 +84,10 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
                     Date fechaNacimiento = rs.getDate(4);
                     String usuario = rs.getString(5);
                     String contrasena = rs.getString(6);
-                    // lee los bytes de la imagen desde la base de datos
                     byte[] fotoBytes = rs.getBytes(7);
                     double salario = rs.getDouble(8);
                     Date fechaContratacion = rs.getDate(9);
 
-                    // Crear un objeto Trabajador con los datos obtenidos
                     Trabajador trabajador = new Trabajador(codigoTra, nombre, apellido, fechaNacimiento, usuario, contrasena, fotoBytes, salario, fechaContratacion);
 
                     lis.add(trabajador);
@@ -137,10 +134,7 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
         return trabajador;
     }
     
-    
-    
-    
-    
+
          public boolean validarCredenciales(String usuario, String contrasena) throws SQLException {
         Connection cn=Conexion.getConexion();
     String sql = "SELECT COUNT(*) FROM trabajador WHERE usuario = ? AND contrasena = ?";
@@ -175,6 +169,6 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
             }
         }
 
-        return -1; // Valor de retorno predeterminado si no se encuentra el trabajador
+        return -1;
     }
 }

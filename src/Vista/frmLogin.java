@@ -20,7 +20,6 @@ public class frmLogin extends javax.swing.JFrame {
 
     public frmLogin() {
         initComponents();
-        //para centrar el jframe
         this.setLocationRelativeTo(null);
     }
     
@@ -32,7 +31,7 @@ public class frmLogin extends javax.swing.JFrame {
         
         try {
             if (objTR.validarCredenciales(usuario, contrasena)) {
-                //frmRegCli form= new frmRegCli();
+                //frmRegCli form= new frmRegCli(); PARA TESTEAR LO CAMBIÉ XD
                 frmCompraBole form = new frmCompraBole();
                 form.obtenerUsuarioSes(objTR.obtenerIdTrabajador(usuario, contrasena));
                 form.setVisible(true);

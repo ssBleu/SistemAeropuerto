@@ -146,11 +146,7 @@ public class PasajeroDAO {
         return clientes;
     }
     
-    
-    
-    
-    
-    
+
     
 
 }

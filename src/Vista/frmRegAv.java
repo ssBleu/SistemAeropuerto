@@ -436,15 +436,6 @@ public class frmRegAv extends javax.swing.JFrame {
         txtIDAvion.setText("" + x.getIdAvion());
         txtModelo.setText(x.getModelo());
         cboCapacidad.setSelectedItem(x.getCapacidadPasajeros());
-
-        /*// Recorrer el combobox para encontrar y seleccionar el nombre de la aerolínea
-        for (int i = 0; i < cboAerol.getItemCount(); i++) {
-            String nombreAerolinea = (String) cboAerol.getItemAt(i);
-            if (nombreAerolinea.equals(x.getNombreAerolinea())) {
-                cboAerol.setSelectedIndex(i);
-                break;
-            }
-        }*/
     }//GEN-LAST:event_tablaAvionMouseClicked
 
     private void cboAerolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAerolActionPerformed

@@ -27,7 +27,6 @@ public class frmEstadis extends javax.swing.JFrame {
         initComponents();
         panelGrafic.setLayout(new FlowLayout());
         
-        // Obtener la fecha actual
         Date fechaActual = new Date();
         desPopFechaInic.setDate(fechaActual);
         desPopFechaFinal.setDate(fechaActual);
@@ -405,12 +404,10 @@ public class frmEstadis extends javax.swing.JFrame {
     String username = "root";
     String password = "";
 
-    // Variables para almacenar la aerolínea preferida
     String aerolineaPreferida = "";
     int vuelosMaximos = 0;
 
     try {
-        // Establecer conexión con la base de datos
         Connection connection = DriverManager.getConnection(url, username, password);
 
         // Crear una declaración SQL para obtener la aerolínea preferida
@@ -422,19 +419,15 @@ public class frmEstadis extends javax.swing.JFrame {
                 + "ORDER BY total DESC "
                 + "LIMIT 1";
 
-        // Crear una declaración SQL
         Statement statement = connection.createStatement();
 
-        // Ejecutar la consulta SQL
         ResultSet resultSet = statement.executeQuery(query);
 
-        // Obtener la aerolínea preferida
         if (resultSet.next()) {
             aerolineaPreferida = resultSet.getString("aerolinea");
             vuelosMaximos = resultSet.getInt("total");
         }
 
-        // Cerrar la conexión y liberar recursos
         resultSet.close();
         statement.close();
         connection.close();
@@ -442,11 +435,8 @@ public class frmEstadis extends javax.swing.JFrame {
         e.printStackTrace();
     }
 
-    // Mostrar el mensaje con la aerolínea preferida en un aviso
     JOptionPane.showMessageDialog(this, "La aerolínea preferida es: " + aerolineaPreferida);
 
-    // Resto de tu código dentro del método jButton5ActionPerformed
-    // ...
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnGrafico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico1ActionPerformed
@@ -458,20 +448,16 @@ public class frmEstadis extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGrafico1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        // Obtener los datos de la base de datos
+
     String url = "jdbc:mysql://localhost:3306/bd_vuelos";
     String username = "root";
     String password = "";
 
-    // Variables para almacenar el vuelo más vendido
     String vueloMasVendido = "";
 
     try {
-        // Establecer conexión con la base de datos
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        // Crear una declaración SQL para obtener el vuelo más vendido
         String query = "SELECT v.destino "
                 + "FROM reserva_vuelo rv "
                 + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
@@ -479,18 +465,14 @@ public class frmEstadis extends javax.swing.JFrame {
                 + "ORDER BY COUNT(*) DESC "
                 + "LIMIT 1";
 
-        // Crear una declaración SQL
         Statement statement = connection.createStatement();
 
-        // Ejecutar la consulta SQL
         ResultSet resultSet = statement.executeQuery(query);
 
-        // Obtener el vuelo más vendido
         if (resultSet.next()) {
             vueloMasVendido = resultSet.getString("destino");
         }
 
-        // Cerrar la conexión y liberar recursos
         resultSet.close();
         statement.close();
         connection.close();
@@ -498,32 +480,25 @@ public class frmEstadis extends javax.swing.JFrame {
         e.printStackTrace();
     }
 
-    // Mostrar el mensaje con el vuelo más vendido en un aviso
     JOptionPane.showMessageDialog(this, "El vuelo más vendido es: " + vueloMasVendido);
 
-    // Resto de tu código dentro del método jButton6ActionPerformed
-    // ...
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        // Obtener los datos de la base de datos
+
     String url = "jdbc:mysql://localhost:3306/bd_vuelos";
     String username = "root";
     String password = "";
 
-    // Variables para almacenar el destino más popular
     String destinoPopular = "";
     int ventasMaximas = 0;
 
-    // Obtener la fecha actual
     LocalDate fechaActual = LocalDate.now();
 
     try {
-        // Establecer conexión con la base de datos
+
         Connection connection = DriverManager.getConnection(url, username, password);
 
-        // Crear una declaración SQL para obtener el destino más popular del día actual
         String query = "SELECT v.destino, COUNT(*) AS total "
                 + "FROM reserva_vuelo rv "
                 + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
@@ -532,20 +507,16 @@ public class frmEstadis extends javax.swing.JFrame {
                 + "ORDER BY total DESC "
                 + "LIMIT 1";
 
-        // Crear una declaración SQL
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setDate(1, java.sql.Date.valueOf(fechaActual));
 
-        // Ejecutar la consulta SQL
         ResultSet resultSet = statement.executeQuery();
 
-        // Obtener el destino más popular del día actual
         if (resultSet.next()) {
             destinoPopular = resultSet.getString("destino");
             ventasMaximas = resultSet.getInt("total");
         }
 
-        // Cerrar la conexión y liberar recursos
         resultSet.close();
         statement.close();
         connection.close();
@@ -553,16 +524,14 @@ public class frmEstadis extends javax.swing.JFrame {
         e.printStackTrace();
     }
 
-    // Mostrar el mensaje con el destino más popular en un aviso
     JOptionPane.showMessageDialog(this, "El destino más popular del día de hoy es: " + destinoPopular);
     
-    // Resto de tu código dentro del método jButton4ActionPerformed
-    // ...
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnGrafico2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico2ActionPerformed
 
-        panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
+        panelGrafic.removeAll();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fechaI = dateFormat.format(desPopFechaInic.getDate());
@@ -570,23 +539,23 @@ public class frmEstadis extends javax.swing.JFrame {
 
         
         ChartPanel chartPanel = Graficos.crearGrafico2(objVD.obtenerDatos2(fechaI, fechaF));
-        chartPanel.setPreferredSize(new Dimension(540, 290)); // Establecer el tamaño preferido del ChartPanel
-        panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
-        jPanel1.revalidate(); // Actualizar el contenedor principal
+        chartPanel.setPreferredSize(new Dimension(540, 290));
+        panelGrafic.add(chartPanel);
+        jPanel1.revalidate();
     }//GEN-LAST:event_btnGrafico2ActionPerformed
 
     private void btnGrafico3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico3ActionPerformed
 
-        panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
+        panelGrafic.removeAll();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fechaI = dateFormat.format(desPopFechaInic.getDate());
         String fechaF = dateFormat.format(desPopFechaFinal.getDate());
 
         ChartPanel chartPanel = Graficos.crearGrafico3(objRS.obtenerDatos3(fechaI, fechaF));
-        chartPanel.setPreferredSize(new Dimension(540, 290)); // Establecer el tamaño preferido del ChartPanel
-        panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
-        jPanel1.revalidate(); // Actualizar el contenedor principal
+        chartPanel.setPreferredSize(new Dimension(540, 290)); 
+        panelGrafic.add(chartPanel);
+        jPanel1.revalidate();
     }//GEN-LAST:event_btnGrafico3ActionPerformed
 
     private void btnReTra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTra2MouseClicked

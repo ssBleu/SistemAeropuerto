@@ -173,7 +173,7 @@ public class AvionDAO {
             }
         }
 
-        return -1; // O cualquier otro valor que desees usar como indicador de que no se encontró el ID
+        return -1;
     }
     
         // Falta eliminar y metodos extras

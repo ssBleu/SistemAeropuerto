@@ -37,11 +37,8 @@ public class frmRegTrab extends javax.swing.JFrame {
         TablaTra.getTableHeader().setForeground(new Color(255,255,255));
         TablaTra.setRowHeight(25);
         
-        int rowHeight = 80; // Altura deseada de las celdas en píxeles
+        int rowHeight = 80;
         TablaTra.setRowHeight(rowHeight);
-
-        //int columnWidth = 100; // Ancho deseado de la columna en píxeles
-        //TablaTra.getColumnModel().getColumn(indiceColumna).setPreferredWidth(columnWidth);
 
         listado();
         
@@ -76,13 +73,12 @@ public class frmRegTrab extends javax.swing.JFrame {
             v[3] = x.getFechaNacimiento();
             v[4] = x.getUsuario();
             v[5] = x.getContrasena();
-            v[6] = new ImageIcon(x.getFoto()); // Crear un ImageIcon a partir de los bytes de la imagen
+            v[6] = new ImageIcon(x.getFoto()); 
             v[7] = x.getSalario();
             v[8] = x.getFechaContratacion();
             dt.addRow(v);
         }
 
-        // Establecer el renderizador personalizado para la columna de la imagen
         TablaTra.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
     }
     
@@ -95,8 +91,8 @@ public class frmRegTrab extends javax.swing.JFrame {
         txtContraseña.setText("");
         txtSalario.setText("");
         DCContrato.setDate(null);
-        lblImagenSeleccionada.setIcon(null); // Restablecer la imagen en el JLabel
-        imagenSeleccionadaBytes = null; // Restablecer los bytes de la imagen seleccionada
+        lblImagenSeleccionada.setIcon(null); 
+        imagenSeleccionadaBytes = null; 
     }
     
     
@@ -105,18 +101,14 @@ public class frmRegTrab extends javax.swing.JFrame {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             String extension = obtenerExtensionArchivo(file);
             BufferedImage imagenOriginal = ImageIO.read(file);
-            // Obtener el tamaño deseado del JLabel
             int anchoDeseado = lblImagenSeleccionada.getWidth();
             int altoDeseado = lblImagenSeleccionada.getHeight();
-            // Redimensionar la imagen al tamaño deseado
             BufferedImage imagenRedimensionada = new BufferedImage(anchoDeseado, altoDeseado, imagenOriginal.getType());
             Graphics2D g2d = imagenRedimensionada.createGraphics();
             g2d.drawImage(imagenOriginal, 0, 0, anchoDeseado, altoDeseado, null);
             g2d.dispose();
-            // Mostrar la imagen redimensionada en el JLabel
             ImageIcon imagenRedimensionadaIcono = new ImageIcon(imagenRedimensionada);
             lblImagenSeleccionada.setIcon(imagenRedimensionadaIcono);
-            // Obtener los bytes de la imagen redimensionada
             ImageIO.write(imagenRedimensionada, extension, baos);
             return baos.toByteArray();
         } catch (IOException e) {
@@ -545,7 +537,6 @@ public class frmRegTrab extends javax.swing.JFrame {
                 Trabajador pr = new Trabajador(idt, nombre, apel, naci, usu, contra, imagenSeleccionadaBytes, sueldo, contrato); // Pasar los bytes de la imagen seleccionada al objeto Trabajador
                 objTR.crearTrabajador(pr);
 
-                // Restablecer los campos y la imagen en el JLabel
                 limpiarCampos();
 
                 listado();
@@ -575,7 +566,6 @@ public class frmRegTrab extends javax.swing.JFrame {
                     Trabajador trabajador = new Trabajador(idTrabajador, nombre, apellido, fechaNacimiento, usuario, contrasena, imagenSeleccionadaBytes, salario, fechaContratacion);
                     objTR.modificarTrabajador(trabajador);
 
-                    // Limpiar los campos y la imagen seleccionada
                     limpiarCampos();
                     lblImagenSeleccionada.setIcon(null);
 
@@ -635,7 +625,6 @@ public class frmRegTrab extends javax.swing.JFrame {
                 File file = fileChooser.getSelectedFile();
                 imagenSeleccionadaBytes = convertirArchivoABytes(file);
 
-                // Mostrar la imagen seleccionada en el JLabel
                 ImageIcon imagenIcono = new ImageIcon(imagenSeleccionadaBytes);
                 lblImagenSeleccionada.setIcon(imagenIcono);
             }

@@ -30,9 +30,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
-        //layeredPane.add(jPanel1, JLayeredPane.DEFAULT_LAYER); // Cambiado a DEFAULT_LAYER para que esté por encima de panelDetras
-        //jPanel1.getParent().add(panelDetras, jPanel1.getParent().getComponentZOrder(jPanel1) - 1);
-        //panelDetras.setBounds(jPanel1.getBounds());
         panelDetras.setVisible(false);
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -46,12 +43,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         tablaVueloBoleto.getTableHeader().setForeground(new Color(255,255,255));
         tablaVueloBoleto.setRowHeight(25);
         
-        // Obtener la lista de orígenes desde VueloDAO
         List<String> origenes = objVD.obtenerOrigenes();
         List<String> duraciones = objVD.obtenerDuraciones();
         List<String> destinos = objVD.obtenerDestino();
   
-
         // Añadir los orígenes al JComboBox
         cboOrigen.addItem("Cualquiera");
         cboDuracion.addItem("Cualquiera");
@@ -66,8 +61,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         for (String destino : destinos) {
             cboDestino.addItem(destino);
         }
-
-   
     }
     
     void obtenerUsuarioSes(int ID){ //PARA SEGUIRLA XD (PROVISIONAL)
@@ -75,23 +68,23 @@ public class frmCompraBole extends javax.swing.JFrame {
         Trabajador trabajador = objTR.buscarTrabajador(ID);
    
          if (trabajador != null) {
+        //para parte no visible
         lblUsuarioSes.setText(trabajador.getUsuario());
         lblNombreSes.setText(trabajador.getNombre());
         lblApeUsu.setText(trabajador.getApellido());
-        
         imagenUsuarioSes = trabajador.getFoto();
         ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
         lblFotoSes.setIcon(IconoSelec);
         
+        //parte visible
+        lblFotoSes2.setIcon(IconoSelec);
+        lblUsuarioSes2.setText(trabajador.getUsuario());
         } else {
              System.out.println("Se supone que esto no debe pasar XD");
         }
  
     }
-    
-
-
-    
+   
     void listadoVuelosInicial(){
         DefaultTableModel dt=(DefaultTableModel)tablaVueloBoleto.getModel();
 
@@ -123,11 +116,9 @@ public class frmCompraBole extends javax.swing.JFrame {
         dt.setRowCount(0);
         List<Vuelo> vuelosFiltrados = objVD.obtenerVuelosFiltrados(origenSeleccionado, destinoSeleccionado, duracionSeleccionada, precioElegido);
 
-        // Verificar si la lista de vuelos filtrados está vacía
         if (vuelosFiltrados.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se encontraron vuelos que cumplan con los criterios de búsqueda.");
         } else {
-            // Agregar las filas filtradas a la tabla
             for (Vuelo x : vuelosFiltrados) {
                 Object v[] = {x.getIdVuelo(), x.getOrigen(), x.getDestino(), x.getDuracion(), x.getTipo(),
                         x.getNombreAerolinea(), String.valueOf(x.getPrecio())};
@@ -136,8 +127,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
     }
  
-
-    
     private void cambiarColorTexto(Component component, Color color) {
     component.setForeground(color);
     }
@@ -189,7 +178,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         btnRegVue = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         btnRegVue2 = new javax.swing.JLabel();
@@ -205,6 +193,9 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblApeUsu = new javax.swing.JLabel();
         lblIDUsu = new javax.swing.JLabel();
         lblFotoSes = new javax.swing.JLabel();
+        lblFotoSes2 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lblUsuarioSes2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -668,9 +659,6 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jPanel3.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 180, 50));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario (1).png"))); // NOI18N
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 60, 60));
-
         jPanel10.setBackground(new java.awt.Color(54, 70, 78));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -697,7 +685,7 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jPanel3.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 180, 50));
 
-        panelDetras.setBackground(new java.awt.Color(255, 51, 51));
+        panelDetras.setBackground(new java.awt.Color(204, 255, 255));
         panelDetras.setPreferredSize(new java.awt.Dimension(250, 660));
         panelDetras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -736,6 +724,15 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
+        lblFotoSes2.setText("jLabel15");
+        jPanel3.add(lblFotoSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 90));
+
+        jLabel15.setText("Usuario:");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        lblUsuarioSes2.setText("USER");
+        jPanel3.add(lblUsuarioSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
@@ -757,14 +754,10 @@ public class frmCompraBole extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        // Obtener el índice de la fila seleccionada
-        int selectedRow = tablaVueloBoleto.getSelectedRow();
-        // Verificar si se ha seleccionado una fila
-        if (selectedRow != -1) {
-            // Obtener el idVuelo de la fila seleccionada
-            int idVuelo = Integer.parseInt(tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
 
-            // Llamar al método cargarPasajeros de frmReserva y pasar el idVuelo
+        int selectedRow = tablaVueloBoleto.getSelectedRow();
+        if (selectedRow != -1) {
+            int idVuelo = Integer.parseInt(tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
             frmReserva frmReser = new frmReserva();
             frmReser.cargarPasajeros(idVuelo);
             frmReser.setVisible(true);
@@ -980,12 +973,12 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1010,10 +1003,12 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
     private javax.swing.JLabel lblFotoSes;
+    private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
     private javax.swing.JLabel lblNombreSes;
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;
+    private javax.swing.JLabel lblUsuarioSes2;
     private util.panel panel1;
     private util.panel panel2;
     private javax.swing.JPanel panelDetras;

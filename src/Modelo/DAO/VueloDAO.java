@@ -37,7 +37,7 @@ public class VueloDAO {
             PreparedStatement st=cn.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs=st.executeQuery();
-            if(rs.next()){//Si lee significa que existe
+            if(rs.next()){
                 ep=new Vuelo("","","",null,null,"","",0,"");
                 ep.setIdVuelo(rs.getString(1));
                 ep.setOrigen(rs.getString(2));
@@ -338,10 +338,8 @@ public class VueloDAO {
       Connection cn = Conexion.getConexion();
 
       try {
-          // Crear una declaración SQL
           Statement statement = cn.createStatement();
 
-          // Construir la consulta SQL para obtener los vuelos más vendidos y su destino en el rango de fechas
           String query = "SELECT v.origen, COUNT(*) AS total " +
                   "FROM reserva_vuelo rv " +
                   "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo " +
@@ -349,17 +347,14 @@ public class VueloDAO {
                   "GROUP BY v.origen " +
                   "ORDER BY total DESC";
 
-          // Ejecutar la consulta SQL
           ResultSet resultSet = statement.executeQuery(query);
 
-          // Agregar los datos al dataset
           while (resultSet.next()) {
               String origen = resultSet.getString("origen");
               int total = resultSet.getInt("total");
               dataset.setValue(total, "Vuelos más Vendidos", origen);
           }
 
-          // Cerrar la conexión y liberar recursos
           resultSet.close();
           statement.close();
           cn.close();
