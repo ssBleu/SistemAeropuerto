@@ -7,9 +7,9 @@ import java.awt.RenderingHints;
 
 public class panel extends javax.swing.JPanel {
 
-    private java.awt.Color Color1 = new java.awt.Color(153, 162, 199);
-    private java.awt.Color Color0 = new java.awt.Color(88, 143, 244);
-    private java.awt.Color Color2 = new java.awt.Color(12, 64, 160);
+    private java.awt.Color Color1 = new java.awt.Color(153, 162, 199);//claro arriba
+    //private java.awt.Color Color0 = new java.awt.Color(88, 143, 244);
+    private java.awt.Color Color2 = new java.awt.Color(12, 64, 160);//oscuro abajo
     private float alpha = 1.0f;
 
     public panel() {

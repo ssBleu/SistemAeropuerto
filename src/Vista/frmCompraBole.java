@@ -1,6 +1,8 @@
 
 package Vista;
 
+import Controlador.LoginControlador;
+import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
 import Modelo.Vuelo;
 import static Vista.Controladores.objTR;
@@ -36,7 +38,6 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         
-        
         listadoVuelosInicial();
 
         tablaVueloBoleto.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
@@ -63,34 +64,33 @@ public class frmCompraBole extends javax.swing.JFrame {
         for (String destino : destinos) {
             cboDestino.addItem(destino);
         }
+        
+        obtenerUsuarioSesionado();
     }
     
-    void obtenerUsuarioSes(int ID){ //PARA SEGUIRLA XD (PROVISIONAL)
-        lblIDUsu.setText(""+ID);
-        Trabajador trabajador = objTR.buscarTrabajador(ID);
-   
-         if (trabajador != null) {
-        //para parte no visible
-        lblUsuarioSes.setText(trabajador.getUsuario());
-        lblNombreSes.setText(trabajador.getNombre());
-        lblApeUsu.setText(trabajador.getApellido());
-        imagenUsuarioSes = trabajador.getFoto();
-        ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
-        lblFotoSes.setIcon(IconoSelec);
-        
-        //parte visible
-        lblFotoSes2.setIcon(IconoSelec);
-        lblUsuarioSes2.setText(trabajador.getUsuario());
+    public void obtenerUsuarioSesionado() {
+        Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
+        if (trabajadorSesionado != null) {
+
+            lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
+            lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
+            lblNombreSes.setText(trabajadorSesionado.getNombre());
+            lblApeUsu.setText(trabajadorSesionado.getApellido());
+            imagenUsuarioSes = trabajadorSesionado.getFoto();
+            ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
+            lblFotoSes.setIcon(IconoSelec);
+            lblFotoSes2.setIcon(IconoSelec);
+            lblUsuarioSes2.setText(trabajadorSesionado.getUsuario());
+
+            LocalTime horaActual = LocalTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaDeInicio = horaActual.format(formatter);
+            lblTiempSes.setText(""+horaDeInicio);
         } else {
-             System.out.println("Se supone que esto no debe pasar XD");
+            System.out.println("Se supone que esto no debe pasar XD");
         }
-         
-        LocalTime horaActual = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String horaDeInicio = horaActual.format(formatter);
-        lblTiempSes.setText(""+horaDeInicio);
- 
     }
+    
    
     void listadoVuelosInicial(){
         DefaultTableModel dt=(DefaultTableModel)tablaVueloBoleto.getModel();
@@ -199,6 +199,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblApeUsu = new javax.swing.JLabel();
         lblIDUsu = new javax.swing.JLabel();
         lblFotoSes = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
         lblUsuarioSes2 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
@@ -207,6 +208,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(239, 231, 231));
+        jPanel1.setVerifyInputWhenFocusTarget(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(12, 64, 160));
@@ -466,7 +468,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         panel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -491,7 +493,7 @@ public class frmCompraBole extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,7 +521,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -783,7 +785,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Inicio de sesión:");
-        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, -1, -1));
+        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -793,7 +795,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblTiempSes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTiempSes.setForeground(new java.awt.Color(204, 255, 204));
         lblTiempSes.setText("TIME");
-        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 70, 20));
+        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, 70, 20));
 
         lblUsuarioSes.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         lblUsuarioSes.setForeground(new java.awt.Color(204, 255, 204));
@@ -819,7 +821,17 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblFotoSes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelDetras.add(lblFotoSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 90, 90));
 
-        jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 730));
+        cerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        panelDetras.add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, -1, -1));
+
+        jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
 
         lblUsuarioSes2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblUsuarioSes2.setForeground(new java.awt.Color(204, 255, 204));
@@ -834,7 +846,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel15.setText("Usuario:");
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 160, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 680));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
@@ -976,9 +988,6 @@ public class frmCompraBole extends javax.swing.JFrame {
     private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
     private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
     
-    private void cambiarColores(Component component, Color color) {
-    component.setForeground(color);
-    }
     
     private boolean maus = false;
     
@@ -1147,6 +1156,13 @@ public class frmCompraBole extends javax.swing.JFrame {
         frmEstadis.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_panelEstadisticasMouseClicked
+
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        cerrarSesion();
+        frmLogin frmLogin=new frmLogin();
+        frmLogin.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cerrarSesionMouseClicked
     
 
     /**
@@ -1198,6 +1214,7 @@ public class frmCompraBole extends javax.swing.JFrame {
     private util.Cbox cboDestino;
     private util.Cbox cboDuracion;
     private util.Cbox cboOrigen;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

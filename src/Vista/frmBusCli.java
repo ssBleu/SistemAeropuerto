@@ -1,6 +1,8 @@
 
 package Vista;
 
+import Controlador.LoginControlador;
+import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
 import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
@@ -47,33 +49,31 @@ public class frmBusCli extends javax.swing.JFrame {
         BuscCliente.getTableHeader().setBackground(new Color(12, 64, 160));
         BuscCliente.getTableHeader().setForeground(new Color(255,255,255));
         BuscCliente.setRowHeight(25);
+        obtenerUsuarioSesionado();
     }
-     void obtenerUsuarioSes(int ID){ //PARA SEGUIRLA XD (PROVISIONAL)
-        lblIDUsu.setText(""+ID);
-        Trabajador trabajador = objTR.buscarTrabajador(ID);
-   
-         if (trabajador != null) {
-        //para parte no visible
-        lblUsuarioSes.setText(trabajador.getUsuario());
-        lblNombreSes.setText(trabajador.getNombre());
-        lblApeUsu.setText(trabajador.getApellido());
-        imagenUsuarioSes = trabajador.getFoto();
-        ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
-        lblFotoSes.setIcon(IconoSelec);
-        
-        //parte visible
-        lblFotoSes2.setIcon(IconoSelec);
-        lblUsuarioSes2.setText(trabajador.getUsuario());
+    public void obtenerUsuarioSesionado() {
+        Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
+        if (trabajadorSesionado != null) {
+
+            lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
+            lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
+            lblNombreSes.setText(trabajadorSesionado.getNombre());
+            lblApeUsu.setText(trabajadorSesionado.getApellido());
+            imagenUsuarioSes = trabajadorSesionado.getFoto();
+            ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
+            lblFotoSes.setIcon(IconoSelec);
+            lblFotoSes2.setIcon(IconoSelec);
+            lblUsuarioSes2.setText(trabajadorSesionado.getUsuario());
+
+            LocalTime horaActual = LocalTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaDeInicio = horaActual.format(formatter);
+            lblTiempSes.setText(""+horaDeInicio);
         } else {
-             System.out.println("Se supone que esto no debe pasar XD");
+            System.out.println("Se supone que esto no debe pasar XD");
         }
-         
-        LocalTime horaActual = LocalTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String horaDeInicio = horaActual.format(formatter);
-        lblTiempSes.setText(""+horaDeInicio);
- 
     }
+    
     void listado(){
         DefaultTableModel dt=(DefaultTableModel)BuscCliente.getModel();
         
@@ -90,13 +90,21 @@ public class frmBusCli extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel6 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        BuscCliente = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jTextField5 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         panelReTra = new javax.swing.JPanel();
-        jLabel23 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         btnReTra = new javax.swing.JLabel();
         panelBusCli = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         btnBusCli = new javax.swing.JLabel();
         lblFotoSes2 = new javax.swing.JLabel();
         panelReAero = new javax.swing.JPanel();
@@ -109,44 +117,93 @@ public class frmBusCli extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         btnRegAvion = new javax.swing.JLabel();
         panelEstadisticas = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         btnEstadisticas = new javax.swing.JLabel();
-        lblUsuarioSes2 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        SliderDelMenu = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        BuscCliente = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         panelDetras = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
         lblTiempSes = new javax.swing.JLabel();
         lblUsuarioSes = new javax.swing.JLabel();
         lblNombreSes = new javax.swing.JLabel();
         lblApeUsu = new javax.swing.JLabel();
         lblIDUsu = new javax.swing.JLabel();
         lblFotoSes = new javax.swing.JLabel();
+        cerrarSesion = new javax.swing.JLabel();
+        lblUsuarioSes2 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        SliderDelMenu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(239, 231, 231));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(239, 231, 231));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("DNI:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, 20));
+
+        BuscCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva"
+            }
+        ));
+        jScrollPane1.setViewportView(BuscCliente);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 640, 410));
+
+        jButton1.setText("Comprar Boletos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 120, -1));
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 170, -1));
+
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 160, 80, -1));
+
+        jButton3.setText("Cancelar vuelo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 620, 120, -1));
+
+        jButton4.setText("Registrar Cliente");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 120, -1));
 
         jPanel3.setBackground(new java.awt.Color(67, 90, 132));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -165,9 +222,9 @@ public class frmBusCli extends javax.swing.JFrame {
         });
         panelReTra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retra (1).png"))); // NOI18N
-        panelReTra.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/retra (1).png"))); // NOI18N
+        panelReTra.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
         btnReTra.setBackground(new java.awt.Color(67, 90, 132));
         btnReTra.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -203,9 +260,9 @@ public class frmBusCli extends javax.swing.JFrame {
         });
         panelBusCli.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscli (1).png"))); // NOI18N
-        panelBusCli.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscli (1).png"))); // NOI18N
+        panelBusCli.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
         btnBusCli.setBackground(new java.awt.Color(255, 255, 255));
         btnBusCli.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -357,9 +414,9 @@ public class frmBusCli extends javax.swing.JFrame {
         });
         panelEstadisticas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
-        panelEstadisticas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
+        panelEstadisticas.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
         btnEstadisticas.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnEstadisticas.setForeground(new java.awt.Color(255, 255, 255));
@@ -380,196 +437,39 @@ public class frmBusCli extends javax.swing.JFrame {
 
         jPanel3.add(panelEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 250, -1));
 
-        lblUsuarioSes2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblUsuarioSes2.setForeground(new java.awt.Color(204, 255, 204));
-        lblUsuarioSes2.setText("USER");
-        lblUsuarioSes2.setMaximumSize(new java.awt.Dimension(55, 20));
-        lblUsuarioSes2.setMinimumSize(new java.awt.Dimension(55, 20));
-        lblUsuarioSes2.setPreferredSize(new java.awt.Dimension(55, 20));
-        jPanel3.add(lblUsuarioSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, -1, -1));
-
-        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("Usuario:");
-        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 160, -1, -1));
-
-        jPanel6.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 690));
-
-        jPanel2.setBackground(new java.awt.Color(12, 64, 160));
-
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
-        jLabel3.setText("-");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 24)); // NOI18N
-        jLabel2.setText("x");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel6.setText("RESERVAS");
-
-        SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
-        SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SliderDelMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
-        SliderDelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        SliderDelMenu.setOpaque(true);
-        SliderDelMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SliderDelMenuMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SliderDelMenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                SliderDelMenuMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(SliderDelMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(202, 202, 202)))
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(0, 39, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 40, Short.MAX_VALUE)
-                        .addComponent(jLabel6))
-                    .addComponent(SliderDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel6.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 700, -1));
-
-        jPanel1.setBackground(new java.awt.Color(239, 231, 231));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("DNI:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 20));
-
-        BuscCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva"
-            }
-        ));
-        jScrollPane1.setViewportView(BuscCliente);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 640, 410));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("REGISTRADAS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
-
-        jButton1.setText("Comprar Boletos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 120, -1));
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 170, -1));
-
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 80, -1));
-
-        jButton3.setText("Cancelar vuelo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 120, -1));
-
-        jButton4.setText("Registrar Cliente");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 540, 120, -1));
-
-        jPanel6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 700, 580));
-
         panelDetras.setBackground(new java.awt.Color(69, 80, 135));
         panelDetras.setPreferredSize(new java.awt.Dimension(250, 660));
         panelDetras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Nombre:");
-        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 30));
-
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("Usuario:");
-        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, 30));
+        jLabel25.setText("Nombre:");
+        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 30));
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Usuario:");
+        panelDetras.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, 30));
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Apellido:");
+        panelDetras.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 30));
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Inicio de sesión:");
+        panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Apellido:");
-        panelDetras.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, 30));
-
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel27.setText("Inicio de sesión:");
-        panelDetras.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 600, -1, -1));
-
-        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel28.setText("ID Usuario:");
-        panelDetras.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, 30));
+        jLabel26.setText("ID Usuario:");
+        panelDetras.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, 30));
 
         lblTiempSes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTiempSes.setForeground(new java.awt.Color(204, 255, 204));
         lblTiempSes.setText("TIME");
-        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, 70, 20));
+        panelDetras.add(lblTiempSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 550, 70, 20));
 
         lblUsuarioSes.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         lblUsuarioSes.setForeground(new java.awt.Color(204, 255, 204));
@@ -595,9 +495,113 @@ public class frmBusCli extends javax.swing.JFrame {
         lblFotoSes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelDetras.add(lblFotoSes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 90, 90));
 
-        jPanel6.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 760));
+        cerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarSesionMouseClicked(evt);
+            }
+        });
+        panelDetras.add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, -1, -1));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 660));
+        jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+
+        lblUsuarioSes2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblUsuarioSes2.setForeground(new java.awt.Color(204, 255, 204));
+        lblUsuarioSes2.setText("USER");
+        lblUsuarioSes2.setMaximumSize(new java.awt.Dimension(55, 20));
+        lblUsuarioSes2.setMinimumSize(new java.awt.Dimension(55, 20));
+        lblUsuarioSes2.setPreferredSize(new java.awt.Dimension(55, 20));
+        jPanel3.add(lblUsuarioSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Usuario:");
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 160, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+
+        jPanel2.setBackground(new java.awt.Color(12, 64, 160));
+
+        jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
+        jLabel3.setText("-");
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 24)); // NOI18N
+        jLabel2.setText("x");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("BÚSQUEDA DE CLIENTES");
+
+        SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
+        SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SliderDelMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
+        SliderDelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SliderDelMenu.setOpaque(true);
+        SliderDelMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SliderDelMenuMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SliderDelMenuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SliderDelMenuMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(SliderDelMenu)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 695, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SliderDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
         pack();
         setLocationRelativeTo(null);
@@ -632,26 +636,7 @@ public class frmBusCli extends javax.swing.JFrame {
         frmReTrab.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnReTraMouseClicked
-     //colores panel/jlabel"botones" xd
-    private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
-    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
-    private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
-    
-    private void cambiarColores(Component component, Color color) {
-    component.setForeground(color);
-    }
-    
-    private boolean maus = false;
-    
-    private void cambiarColores(Component boton, Component panel) {
-    if (maus) {
-        boton.setForeground(ColorEnteredBoton);
-        panel.setBackground(ColorEnteredPanel);
-    } else {
-        boton.setForeground(Color.WHITE);
-        panel.setBackground(ColorOriginalPanel);
-    }
-}
+
     private void btnReTraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseEntered
         maus = true;
         cambiarColores(btnReTra,panelReTra);
@@ -838,6 +823,17 @@ public class frmBusCli extends javax.swing.JFrame {
         cambiarColores(btnEstadisticas, panelEstadisticas);
     }//GEN-LAST:event_panelEstadisticasMouseExited
 
+    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
+        cerrarSesion();
+        frmLogin frmLogin=new frmLogin();
+        frmLogin.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cerrarSesionMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.setState(frmLogin.ICONIFIED);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int result = JOptionPane.showConfirmDialog(null, "¿Desea salir?","EXIT",dialogButton);
@@ -845,10 +841,6 @@ public class frmBusCli extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.setState(frmLogin.ICONIFIED);
-    }//GEN-LAST:event_jLabel3MouseClicked
 
     private void SliderDelMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseClicked
         // desactiva el botoncito para que no presiones a cada rato :,v
@@ -894,7 +886,26 @@ public class frmBusCli extends javax.swing.JFrame {
     private void SliderDelMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseExited
 
     }//GEN-LAST:event_SliderDelMenuMouseExited
-
+     //colores panel/jlabel"botones" xd
+    private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
+    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
+    private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
+    
+    private void cambiarColores(Component component, Color color) {
+    component.setForeground(color);
+    }
+    
+    private boolean maus = false;
+    
+    private void cambiarColores(Component boton, Component panel) {
+    if (maus) {
+        boton.setForeground(ColorEnteredBoton);
+        panel.setBackground(ColorEnteredPanel);
+    } else {
+        boton.setForeground(Color.WHITE);
+        panel.setBackground(ColorOriginalPanel);
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -939,31 +950,30 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JLabel btnReTra;
     private javax.swing.JLabel btnRegAvion;
     private javax.swing.JLabel btnRegVue;
+    private javax.swing.JLabel cerrarSesion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblApeUsu;

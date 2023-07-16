@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.LoginControlador;
 import Modelo.Conexion.Conexion;
 import Modelo.DAO.TrabajadorDAO;
 import Modelo.Trabajador;
@@ -30,10 +31,8 @@ public class frmLogin extends javax.swing.JFrame {
         String contrasena = String.valueOf(txtContra.getPassword());
         
         try {
-            if (objTR.validarCredenciales(usuario, contrasena)) {
-                //frmRegCli form= new frmRegCli(); PARA TESTEAR LO CAMBIÉ XD
+            if (LoginControlador.validarTrabajador(usuario, contrasena)) {
                 frmCompraBole form = new frmCompraBole();
-                form.obtenerUsuarioSes(objTR.obtenerIdTrabajador(usuario, contrasena));
                 form.setVisible(true);
                 this.dispose();
             } else {
