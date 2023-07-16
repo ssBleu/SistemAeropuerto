@@ -93,29 +93,6 @@ public class frmRegVue extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaVuelo = new javax.swing.JTable();
-        btnGuardar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        txtDestino = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtTipo = new javax.swing.JTextField();
-        FSalida = new com.toedter.calendar.JDateChooser();
-        FLlegada = new com.toedter.calendar.JDateChooser();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        txtDurac = new javax.swing.JTextField();
-        txtIDVuelo = new javax.swing.JTextField();
-        txtOrigen = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txtPrecio = new javax.swing.JTextField();
-        cboAvion = new util.Cbox();
         jPanel3 = new javax.swing.JPanel();
         panelReTra = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -156,6 +133,38 @@ public class frmRegVue extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         SliderDelMenu = new javax.swing.JLabel();
+        panelRound1 = new util.PanelRound();
+        txtIDVuelo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cboAvion = new util.Cbox();
+        jLabel8 = new javax.swing.JLabel();
+        txtOrigen = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtDestino = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtDurac = new javax.swing.JTextField();
+        FSalida = new com.toedter.calendar.JDateChooser();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        FLlegada = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        txtTipo = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        panelRound2 = new util.PanelRound();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaVuelo = new javax.swing.JTable();
+        panelRound3 = new util.PanelRound();
+        panel1 = new util.panel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        panel2 = new util.panel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -163,99 +172,6 @@ public class frmRegVue extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(239, 231, 231));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Avion:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Origen:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Destino:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, 20));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Tipo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, -1, 20));
-
-        tablaVuelo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Vuelo", "ID Avion", "ModeloAvion", "Aerolinea", "Origen", "Destino", "Duración", "F. Salida", "F. Llegada", "Tipo", "Precio"
-            }
-        ));
-        tablaVuelo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaVueloMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tablaVuelo);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 790, 200));
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 260, 80, -1));
-
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 310, -1, -1));
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 360, 80, -1));
-        jPanel1.add(txtDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 110, -1));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("ID Vuelo:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
-        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 150, -1));
-
-        FSalida.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(FSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 150, -1));
-
-        FLlegada.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(FLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, 150, -1));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel12.setText("Duración:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, 20));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setText("Fecha Salida:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, 20));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel14.setText("Fecha Llegada:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 290, -1, 20));
-        jPanel1.add(txtDurac, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 380, 100, -1));
-        jPanel1.add(txtIDVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 110, -1));
-        jPanel1.add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 110, -1));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setText("Precio:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, 20));
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, 150, -1));
-        jPanel1.add(cboAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(67, 90, 132));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -652,6 +568,182 @@ public class frmRegVue extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
+
+        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setRoundBottomLeft(20);
+        panelRound1.setRoundBottomRight(20);
+        panelRound1.setRoundTopLeft(20);
+        panelRound1.setRoundTopRight(20);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRound1.add(txtIDVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 140, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("ID Vuelo:");
+        panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Avion:");
+        panelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        panelRound1.add(cboAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 140, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Origen:");
+        panelRound1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        panelRound1.add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 140, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Destino:");
+        panelRound1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
+        panelRound1.add(txtDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 140, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Duración:");
+        panelRound1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
+        panelRound1.add(txtDurac, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 140, -1));
+
+        FSalida.setDateFormatString("yyyy-MM-dd");
+        panelRound1.add(FSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 140, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setText("Fecha Salida:");
+        panelRound1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, 20));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("Fecha Llegada:");
+        panelRound1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, 20));
+
+        FLlegada.setDateFormatString("yyyy-MM-dd");
+        panelRound1.add(FLlegada, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 140, -1));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Precio:");
+        panelRound1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, 20));
+        panelRound1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 140, -1));
+        panelRound1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 140, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Tipo:");
+        panelRound1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, 20));
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 80, -1));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 80, -1));
+
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 530, 220));
+
+        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound2.setRoundBottomLeft(20);
+        panelRound2.setRoundBottomRight(20);
+        panelRound2.setRoundTopLeft(20);
+        panelRound2.setRoundTopRight(20);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaVuelo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Vuelo", "ID Avion", "ModeloAvion", "Aerolinea", "Origen", "Destino", "Duración", "F. Salida", "F. Llegada", "Tipo", "Precio"
+            }
+        ));
+        tablaVuelo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaVueloMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaVuelo);
+
+        panelRound2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 760, 270));
+
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 800, 310));
+
+        panelRound3.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound3.setRoundBottomLeft(20);
+        panelRound3.setRoundBottomRight(20);
+        panelRound3.setRoundTopLeft(20);
+        panelRound3.setRoundTopRight(20);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Media de Precio de Vuelos:");
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmVuel/vueloPrecio.png"))); // NOI18N
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(24, 24, 24))
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel7))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        panelRound3.add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 220, 55));
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Tipo de Vuelos más registrado");
+
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmVuel/vueloTipo.png"))); // NOI18N
+
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addContainerGap())
+        );
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel28))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        panelRound3.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 220, 55));
+
+        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 260, 220));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
@@ -1118,9 +1210,11 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1128,10 +1222,12 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1146,6 +1242,8 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;
     private javax.swing.JLabel lblUsuarioSes2;
+    private util.panel panel1;
+    private util.panel panel2;
     private javax.swing.JPanel panelBusCli;
     private javax.swing.JPanel panelDetras;
     private javax.swing.JPanel panelEstadisticas;
@@ -1153,6 +1251,9 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JPanel panelReTra;
     private javax.swing.JPanel panelRegAvion;
     private javax.swing.JPanel panelRegVue;
+    private util.PanelRound panelRound1;
+    private util.PanelRound panelRound2;
+    private util.PanelRound panelRound3;
     private javax.swing.JTable tablaVuelo;
     private javax.swing.JTextField txtDestino;
     private javax.swing.JTextField txtDurac;

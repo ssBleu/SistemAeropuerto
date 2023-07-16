@@ -173,30 +173,6 @@ public class frmRegTrab extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnGuardar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TablaTra = new javax.swing.JTable();
-        jLabel16 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtApellido = new javax.swing.JTextField();
-        jLabel22 = new javax.swing.JLabel();
-        DCNacimiento = new com.toedter.calendar.JDateChooser();
-        jLabel23 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        txtSalario = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        DCContrato = new com.toedter.calendar.JDateChooser();
-        txtIDT = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        subirFoto = new javax.swing.JButton();
-        lblImagenSeleccionada = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelReTra = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -237,6 +213,32 @@ public class frmRegTrab extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         SliderDelMenu = new javax.swing.JLabel();
+        panelRound1 = new util.PanelRound();
+        txtContraseña = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        DCNacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtIDT = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtSalario = new javax.swing.JTextField();
+        DCContrato = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        subirFoto = new javax.swing.JButton();
+        lblImagenSeleccionada = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        panelRound2 = new util.PanelRound();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaTra = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -244,117 +246,6 @@ public class frmRegTrab extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(239, 231, 231));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 290, 80, -1));
-
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, -1, -1));
-
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 80, -1));
-
-        TablaTra.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Trabajador", "Nombre", "Apellido", "Nacimiento", "Usuario", "Contraseña", "Foto", "Salario", "Contrato"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TablaTra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TablaTraMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(TablaTra);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 790, 200));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setText("Codigo");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, 20));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, 180, -1));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Apellido:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, -1, 20));
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 180, -1));
-
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel22.setText("Nacimiento:");
-        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, 20));
-
-        DCNacimiento.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(DCNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 120, -1));
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel23.setText("Usuario:");
-        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, 20));
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 90, -1));
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Contraseña:");
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, -1, 20));
-        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 80, -1));
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel19.setText("Salario:");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, -1, 20));
-        jPanel1.add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 110, -1));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Foto:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, -1, 20));
-
-        DCContrato.setDateFormatString("yyyy-MM-dd");
-        jPanel1.add(DCContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
-        jPanel1.add(txtIDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 90, -1));
-
-        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel24.setText("Nombre:");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, 20));
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel12.setText("Fecha de contrato:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, 20));
-
-        subirFoto.setText("Subir Foto");
-        subirFoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subirFotoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(subirFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, -1, -1));
-
-        lblImagenSeleccionada.setText("imagen");
-        jPanel1.add(lblImagenSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 80, 90));
 
         jPanel3.setBackground(new java.awt.Color(67, 90, 132));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -751,6 +642,136 @@ public class frmRegTrab extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
+
+        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound1.setRoundBottomLeft(20);
+        panelRound1.setRoundBottomRight(20);
+        panelRound1.setRoundTopLeft(20);
+        panelRound1.setRoundTopRight(20);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelRound1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 140, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Contraseña:");
+        panelRound1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, 20));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel23.setText("Usuario:");
+        panelRound1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, 20));
+        panelRound1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 140, -1));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel22.setText("Nacimiento:");
+        panelRound1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 20));
+
+        DCNacimiento.setDateFormatString("yyyy-MM-dd");
+        panelRound1.add(DCNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 140, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Apellido:");
+        panelRound1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, 20));
+        panelRound1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 140, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel24.setText("Nombre:");
+        panelRound1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, 20));
+        panelRound1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 140, -1));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Codigo");
+        panelRound1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, 20));
+        panelRound1.add(txtIDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 140, -1));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setText("Salario:");
+        panelRound1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, 20));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Fecha de contrato:");
+        panelRound1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, -1, 20));
+        panelRound1.add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 140, -1));
+
+        DCContrato.setDateFormatString("yyyy-MM-dd");
+        panelRound1.add(DCContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 140, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Foto:");
+        panelRound1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, 20));
+
+        subirFoto.setText("Subir Foto");
+        subirFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subirFotoActionPerformed(evt);
+            }
+        });
+        panelRound1.add(subirFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 100, -1));
+
+        lblImagenSeleccionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImagenSeleccionada.setText("imagen");
+        panelRound1.add(lblImagenSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 80, 90));
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 90, -1));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 90, -1));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, 90, -1));
+
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 800, 230));
+
+        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRound2.setRoundBottomLeft(20);
+        panelRound2.setRoundBottomRight(20);
+        panelRound2.setRoundTopLeft(20);
+        panelRound2.setRoundTopRight(20);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TablaTra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Trabajador", "Nombre", "Apellido", "Nacimiento", "Usuario", "Contraseña", "Foto", "Salario", "Contrato"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaTraMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(TablaTra);
+
+        panelRound2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 760, 260));
+
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 800, 300));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
@@ -1236,6 +1257,8 @@ public class frmRegTrab extends javax.swing.JFrame {
     private javax.swing.JPanel panelReTra;
     private javax.swing.JPanel panelRegAvion;
     private javax.swing.JPanel panelRegVue;
+    private util.PanelRound panelRound1;
+    private util.PanelRound panelRound2;
     private javax.swing.JButton subirFoto;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtContraseña;
