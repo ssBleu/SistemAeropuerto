@@ -242,7 +242,7 @@ public class frmRegTrab extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(239, 231, 231));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnGuardar.setText("Guardar");
@@ -695,7 +695,7 @@ public class frmRegTrab extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("COMPRA DE BOLETOS");
+        jLabel1.setText("REGISTRO DE TRABAJADOR");
 
         SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
         SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

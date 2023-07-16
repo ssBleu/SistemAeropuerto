@@ -32,7 +32,7 @@ public class frmLogin extends javax.swing.JFrame {
         
         try {
             if (LoginControlador.validarTrabajador(usuario, contrasena)) {
-                frmCompraBole form = new frmCompraBole();
+                frmBusCli form = new frmBusCli();
                 form.setVisible(true);
                 this.dispose();
             } else {

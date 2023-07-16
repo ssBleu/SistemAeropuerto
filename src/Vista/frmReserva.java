@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +29,10 @@ public class frmReserva extends javax.swing.JFrame {
     private byte[] imagenUsuarioSes;
     public frmReserva() {
         initComponents();
+        
+        JLayeredPane layeredPane = getLayeredPane();
+        layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
+        panelDetras.setVisible(false);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         List<Pasajero> dnisPasajeros = objPS.Listado();
@@ -160,7 +165,7 @@ public class frmReserva extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(239, 231, 231));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

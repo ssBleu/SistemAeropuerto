@@ -39,11 +39,11 @@ public class Graficos {
         );
 
         // Estilizar el gráfico
-        chart.setBackgroundPaint(Color.GRAY);
-        chart.getTitle().setPaint(Color.WHITE);
+        chart.setBackgroundPaint(new Color(180, 212, 238 ));
+        chart.getTitle().setPaint(new Color(12,64,160 ));
 
         CategoryPlot plot = chart.getCategoryPlot();
-        plot.setBackgroundPaint(Color.WHITE);
+        plot.setBackgroundPaint(new Color(237, 246, 253 ));
         plot.setDomainGridlinesVisible(true);
         plot.setRangeGridlinePaint(Color.BLACK);
 
@@ -64,8 +64,6 @@ public class Graficos {
         return chartPanel;
     }
     
-    
-    
     public static ChartPanel crearGrafico2(DefaultCategoryDataset datosBD) {
 
         // Crear el gráfico de barras
@@ -81,11 +79,11 @@ public class Graficos {
         );
 
         // Estilizar el gráfico
-        chart.setBackgroundPaint(Color.GRAY);
-        chart.getTitle().setPaint(Color.WHITE);
+        chart.setBackgroundPaint(new Color(180, 212, 238 ));
+        chart.getTitle().setPaint(new Color(12,64,160 ));
 
         CategoryPlot plot = chart.getCategoryPlot();
-        plot.setBackgroundPaint(Color.WHITE);
+        plot.setBackgroundPaint(new Color(237, 246, 253 ));
         plot.setDomainGridlinesVisible(true);
         plot.setRangeGridlinePaint(Color.BLACK);
 
@@ -118,14 +116,14 @@ public class Graficos {
                 false
         );
 
-        chart.setBackgroundPaint(Color.GRAY);
-        chart.getTitle().setPaint(Color.WHITE);
+        chart.setBackgroundPaint(new Color(180, 212, 238 ));
+        chart.getTitle().setPaint(new Color(12,64,160 ));
 
-        // Personalizar el gráfico
-        TextTitle subtitle1 = new TextTitle("Subtitle Demo");
-        chart.addSubtitle(subtitle1);
-        chart.setBorderVisible(true);
-        chart.setBorderPaint(Color.RED);
+        
+        CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(new Color(237, 246, 253 ));
+        plot.setDomainGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.BLACK);
 
         // Configurar el eje vertical para que muestre números enteros
         NumberAxis rangeAxis = (NumberAxis) chart.getCategoryPlot().getRangeAxis();
