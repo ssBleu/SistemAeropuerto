@@ -6,6 +6,7 @@ import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
 import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.SQLException;
@@ -18,8 +19,10 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -44,11 +47,11 @@ public class frmBusCli extends javax.swing.JFrame {
         listado();
         
         //tablita
-        BuscCliente.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
-        BuscCliente.getTableHeader().setOpaque(false);
-        BuscCliente.getTableHeader().setBackground(new Color(12, 64, 160));
-        BuscCliente.getTableHeader().setForeground(new Color(255,255,255));
-        BuscCliente.setRowHeight(25);
+        TablaBuscCliente.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
+        TablaBuscCliente.getTableHeader().setOpaque(false);
+        TablaBuscCliente.getTableHeader().setBackground(new Color(12, 64, 160));
+        TablaBuscCliente.getTableHeader().setForeground(new Color(255,255,255));
+        TablaBuscCliente.setRowHeight(25);
         obtenerUsuarioSesionado();
     }
     public void obtenerUsuarioSesionado() {
@@ -75,12 +78,53 @@ public class frmBusCli extends javax.swing.JFrame {
     }
     
     void listado(){
-        DefaultTableModel dt=(DefaultTableModel)BuscCliente.getModel();
+        DefaultTableModel dt=(DefaultTableModel)TablaBuscCliente.getModel();
         
         dt.setRowCount(0);
       
         for(Object[] Clientes :objPS.listarPasajerosVuelo()){
             dt.addRow(Clientes);
+        }
+    }
+    
+    void limpiarCampos(){
+        txtDNIbusc.setText("");
+        txtNombreBusc.setText("");
+        txtApeBusc.setText("");
+        txtOrigenBusc.setText("");
+        txtDestinoBusc.setText("");
+        dateInicial.setDate(null);
+        dateFinal.setDate(null);
+    }
+    
+    private void filtrarTabla() {
+        DefaultTableModel dt = (DefaultTableModel) TablaBuscCliente.getModel();
+        String dni = txtDNIbusc.getText();
+        String nom = txtNombreBusc.getText();
+        String ape = txtApeBusc.getText();
+        String ori = txtOrigenBusc.getText();
+        String des = txtDestinoBusc.getText();
+        
+        JDateChooser dateChooser1 = dateInicial;
+        JDateChooser dateChooser2 = dateFinal;
+  
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String fecIni = dateChooser1.getDate() != null ? dateFormat.format(dateChooser1.getDate()) : null;
+        String fecFin = dateChooser2.getDate() != null ? dateFormat.format(dateChooser2.getDate()) : null;
+
+        
+        dt.setRowCount(0);
+        List<Object[]> pasajerosReserFiltro;
+        pasajerosReserFiltro = objPS.obtenerPasajerosReservadosFiltrados(dni, nom, ape, ori, des, fecIni, fecFin);
+
+        if (pasajerosReserFiltro.isEmpty()) {
+            listado();
+            JOptionPane.showMessageDialog(null, "No se encontraron pasajeros que cumplan con los criterios de búsqueda.");
+        } else {
+            for (Object[] fila : pasajerosReserFiltro) {
+                dt.addRow(fila);
+            }
         }
     }
     
@@ -132,10 +176,21 @@ public class frmBusCli extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         SliderDelMenu = new javax.swing.JLabel();
         panelRound1 = new util.PanelRound();
-        jTextField5 = new javax.swing.JTextField();
+        txtDNIbusc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        panelRound2 = new util.PanelRound();
-        jButton2 = new javax.swing.JButton();
+        btnBuscarCli = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        dateInicial = new com.toedter.calendar.JDateChooser();
+        dateFinal = new com.toedter.calendar.JDateChooser();
+        txtNombreBusc = new javax.swing.JTextField();
+        txtApeBusc = new javax.swing.JTextField();
+        txtOrigenBusc = new javax.swing.JTextField();
+        txtDestinoBusc = new javax.swing.JTextField();
+        btnLimpiar = new javax.swing.JButton();
         panelRound3 = new util.PanelRound();
         panel4 = new util.panel();
         jLabel5 = new javax.swing.JLabel();
@@ -150,7 +205,7 @@ public class frmBusCli extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         panelRound5 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
-        BuscCliente = new javax.swing.JTable();
+        TablaBuscCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -498,7 +553,7 @@ public class frmBusCli extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BÚSQUEDA DE CLIENTES");
+        jLabel1.setText("BÚSQUEDA CLIENTES CON RESERVA");
 
         SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
         SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -560,70 +615,90 @@ public class frmBusCli extends javax.swing.JFrame {
         panelRound1.setRoundBottomRight(20);
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtDNIbusc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtDNIbuscActionPerformed(evt);
             }
         });
+        panelRound1.add(txtDNIbusc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 170, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("DNI:");
+        panelRound1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 20));
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 580, 80));
-
-        panelRound2.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound2.setRoundBottomLeft(20);
-        panelRound2.setRoundBottomRight(20);
-        panelRound2.setRoundTopLeft(20);
-        panelRound2.setRoundTopRight(20);
-
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarCli.setText("Buscar");
+        btnBuscarCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnBuscarCliActionPerformed(evt);
             }
         });
+        panelRound1.add(btnBuscarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 80, -1));
 
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(26, 26, 26))
-        );
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("Nombre:");
+        panelRound1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 20));
 
-        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 110, 200, 80));
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Apellido:");
+        panelRound1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Origen:");
+        panelRound1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 20));
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel20.setText("Fecha Reserva");
+        panelRound1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, 20));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel28.setText("Destino:");
+        panelRound1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 20));
+
+        dateInicial.setDateFormatString("yyyy-MM-dd");
+        panelRound1.add(dateInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, -1, -1));
+
+        dateFinal.setDateFormatString("yyyy-MM-dd");
+        panelRound1.add(dateFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, -1, -1));
+
+        txtNombreBusc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreBuscActionPerformed(evt);
+            }
+        });
+        panelRound1.add(txtNombreBusc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 170, -1));
+
+        txtApeBusc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApeBuscActionPerformed(evt);
+            }
+        });
+        panelRound1.add(txtApeBusc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 170, -1));
+
+        txtOrigenBusc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrigenBuscActionPerformed(evt);
+            }
+        });
+        panelRound1.add(txtOrigenBusc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 170, -1));
+
+        txtDestinoBusc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDestinoBuscActionPerformed(evt);
+            }
+        });
+        panelRound1.add(txtDestinoBusc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 170, -1));
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 80, -1));
+
+        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 570, 190));
 
         panelRound3.setBackground(new java.awt.Color(255, 255, 255));
         panelRound3.setRoundBottomLeft(20);
@@ -682,7 +757,7 @@ public class frmBusCli extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,23 +774,23 @@ public class frmBusCli extends javax.swing.JFrame {
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(panel4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
-        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, 200, 130));
+        jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 210, 190));
 
         panelRound4.setBackground(new java.awt.Color(255, 255, 255));
         panelRound4.setRoundBottomLeft(20);
@@ -749,26 +824,26 @@ public class frmBusCli extends javax.swing.JFrame {
         panelRound4Layout.setHorizontalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(32, 32, 32))
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(35, 35, 35)
                 .addComponent(jButton1)
-                .addGap(41, 41, 41)
+                .addGap(119, 119, 119)
                 .addComponent(jButton3)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
-        jPanel1.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 280));
+        jPanel1.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 310, 160, 320));
 
         panelRound5.setBackground(new java.awt.Color(255, 255, 255));
         panelRound5.setRoundBottomLeft(20);
@@ -776,7 +851,7 @@ public class frmBusCli extends javax.swing.JFrame {
         panelRound5.setRoundTopLeft(20);
         panelRound5.setRoundTopRight(20);
 
-        BuscCliente.setModel(new javax.swing.table.DefaultTableModel(
+        TablaBuscCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -787,26 +862,26 @@ public class frmBusCli extends javax.swing.JFrame {
                 "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva"
             }
         ));
-        jScrollPane1.setViewportView(BuscCliente);
+        jScrollPane1.setViewportView(TablaBuscCliente);
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
         panelRound5.setLayout(panelRound5Layout);
         panelRound5Layout.setHorizontalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 580, 420));
+        jPanel1.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 620, 320));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
@@ -820,13 +895,15 @@ public class frmBusCli extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtDNIbuscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIbuscActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtDNIbuscActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnBuscarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCliActionPerformed
+       
+        filtrarTabla();
+        
+    }//GEN-LAST:event_btnBuscarCliActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -1093,6 +1170,26 @@ public class frmBusCli extends javax.swing.JFrame {
     private void SliderDelMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseExited
 
     }//GEN-LAST:event_SliderDelMenuMouseExited
+
+    private void txtNombreBuscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreBuscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreBuscActionPerformed
+
+    private void txtApeBuscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApeBuscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApeBuscActionPerformed
+
+    private void txtOrigenBuscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrigenBuscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrigenBuscActionPerformed
+
+    private void txtDestinoBuscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDestinoBuscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDestinoBuscActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
      //colores panel/jlabel"botones" xd
     private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
     private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
@@ -1149,17 +1246,20 @@ public class frmBusCli extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable BuscCliente;
     private javax.swing.JLabel SliderDelMenu;
+    private javax.swing.JTable TablaBuscCliente;
     private javax.swing.JLabel btnBusCli;
+    private javax.swing.JButton btnBuscarCli;
     private javax.swing.JLabel btnEstadisticas;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel btnReAero;
     private javax.swing.JLabel btnReTra;
     private javax.swing.JLabel btnRegAvion;
     private javax.swing.JLabel btnRegVue;
     private javax.swing.JLabel cerrarSesion;
+    private com.toedter.calendar.JDateChooser dateFinal;
+    private com.toedter.calendar.JDateChooser dateInicial;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -1167,10 +1267,14 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1178,18 +1282,16 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblApeUsu;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
@@ -1199,7 +1301,6 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JLabel lblUsuarioSes;
     private javax.swing.JLabel lblUsuarioSes2;
     private util.panel panel1;
-    private util.panel panel3;
     private util.panel panel4;
     private javax.swing.JPanel panelBusCli;
     private javax.swing.JPanel panelDetras;
@@ -1209,10 +1310,14 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JPanel panelRegAvion;
     private javax.swing.JPanel panelRegVue;
     private util.PanelRound panelRound1;
-    private util.PanelRound panelRound2;
     private util.PanelRound panelRound3;
     private util.PanelRound panelRound4;
     private util.PanelRound panelRound5;
+    private javax.swing.JTextField txtApeBusc;
+    private javax.swing.JTextField txtDNIbusc;
+    private javax.swing.JTextField txtDestinoBusc;
+    private javax.swing.JTextField txtNombreBusc;
+    private javax.swing.JTextField txtOrigenBusc;
     // End of variables declaration//GEN-END:variables
 
    

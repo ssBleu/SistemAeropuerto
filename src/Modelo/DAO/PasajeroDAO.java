@@ -111,7 +111,7 @@ public class PasajeroDAO {
         Connection cn = Conexion.getConexion();
 
         try {
-            String sql = "SELECT r.id_reserva, p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, aero.nombre AS aerolinea, v.precio " +
+            String sql = "SELECT r.id_reserva, p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, aero.nombre AS aerolinea, r.fecha_reserva " +
                          "FROM reserva_vuelo r " +
                          "JOIN pasajero p ON r.dni_pasajero = p.dni_pasajero " +
                          "JOIN vuelo v ON r.id_vuelo = v.id_vuelo " +
@@ -128,9 +128,9 @@ public class PasajeroDAO {
                 String origen = resultSet.getString("origen");
                 String destino = resultSet.getString("destino");
                 String aerolinea = resultSet.getString("aerolinea");
-                double precio = resultSet.getDouble("precio");
+                String fechaReserva = resultSet.getString("fecha_reserva");
 
-                Object[] cliente = {dniPasajero, nombre, apellido, origen, destino, aerolinea, precio};
+                Object[] cliente = {dniPasajero, nombre, apellido, origen, destino, aerolinea, fechaReserva};
                 clientes.add(cliente);
             }
         } catch (SQLException ex) {
@@ -146,6 +146,105 @@ public class PasajeroDAO {
         return clientes;
     }
     
+    
+public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nombre, String apellido, String origen, String destino, String fechaInicial, String fechaFinal) {
+    List<Object[]> pasajerosReservadosFiltrados = new ArrayList<>();
+    Connection cn = Conexion.getConexion();
+
+    try {
+        String sql = "SELECT p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, a.nombre AS aerolinea, r.fecha_reserva" +
+                     " FROM Reserva_vuelo r" +
+                     " INNER JOIN Pasajero p ON r.dni_pasajero = p.dni_pasajero" +
+                     " INNER JOIN Vuelo v ON r.id_vuelo = v.id_vuelo" +
+                     " INNER JOIN avion av ON v.id_avion = av.id_avion" +
+                     " INNER JOIN aerolinea a ON av.id_aerolinea = a.id_aerolinea" +
+                     " WHERE 1=1";
+
+        if (dni != null && !dni.isEmpty()) {
+            sql += " AND p.dni_pasajero = ?";
+        }
+
+        if (nombre != null && !nombre.isEmpty()) {
+            sql += " AND p.nombre LIKE ?";
+        }
+
+        if (apellido != null && !apellido.isEmpty()) {
+            sql += " AND p.apellido LIKE ?";
+        }
+
+        if (origen != null && !origen.isEmpty()) {
+            sql += " AND v.origen = ?";
+        }
+
+        if (destino != null && !destino.isEmpty()) {
+            sql += " AND v.destino = ?";
+        }
+
+        if (fechaInicial != null && fechaFinal != null) {
+            sql += " AND r.fecha_reserva BETWEEN ? AND ?";
+        }
+
+        PreparedStatement statement = cn.prepareStatement(sql);
+
+        int parameterIndex = 1;
+
+        if (dni != null && !dni.isEmpty()) {
+            statement.setString(parameterIndex, dni);
+            parameterIndex++;
+        }
+
+        if (nombre != null && !nombre.isEmpty()) {
+            statement.setString(parameterIndex, nombre + "%");
+            parameterIndex++;
+        }
+
+        if (apellido != null && !apellido.isEmpty()) {
+            statement.setString(parameterIndex, apellido + "%");
+            parameterIndex++;
+        }
+
+        if (origen != null && !origen.isEmpty()) {
+            statement.setString(parameterIndex, origen);
+            parameterIndex++;
+        }
+
+        if (destino != null && !destino.isEmpty()) {
+            statement.setString(parameterIndex, destino);
+            parameterIndex++;
+        }
+
+        if (fechaInicial != null && fechaFinal != null) {
+            statement.setString(parameterIndex, fechaInicial);
+            parameterIndex++;
+            statement.setString(parameterIndex, fechaFinal);
+        }
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Object[] fila = new Object[7];
+            fila[0] = resultSet.getInt("dni_pasajero");
+            fila[1] = resultSet.getString("nombre");
+            fila[2] = resultSet.getString("apellido");
+            fila[3] = resultSet.getString("origen");
+            fila[4] = resultSet.getString("destino");
+            fila[5] = resultSet.getString("aerolinea");
+            fila[6] = resultSet.getDate("fecha_reserva");
+
+            pasajerosReservadosFiltrados.add(fila);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            cn.close();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+
+    return pasajerosReservadosFiltrados;
+}
 
     
 
