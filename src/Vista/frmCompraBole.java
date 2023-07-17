@@ -873,8 +873,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         int selectedRow = tablaVueloBoleto.getSelectedRow();
         if (selectedRow != -1) {
             int idVuelo = Integer.parseInt(tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
+            
+            Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
             frmReserva frmReser = new frmReserva();
-            frmReser.cargarPasajeros(idVuelo);
+            frmReser.cargarPasajeros(vueloSeleccionado);
             frmReser.setVisible(true);
             this.setVisible(false);
         } else {

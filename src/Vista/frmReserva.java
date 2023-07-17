@@ -76,11 +76,12 @@ public class frmReserva extends javax.swing.JFrame {
         }
     }
     
-    public void cargarPasajeros(int idVuelo) {
-        lblIdVuelo.setText(String.valueOf(idVuelo));
-        Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
-        String a = vueloSeleccionado.getNombreAerolinea();
-        lblAerolinea.setText(a);
+    public void cargarPasajeros(Vuelo vuelo) {
+        lblIdVuelo.setText(String.valueOf(vuelo.getIdVuelo()));
+
+        int idVuelo = Integer.parseInt(vuelo.getIdVuelo());
+        double a = vuelo.getPrecio();
+        lblAerolinea.setText(String.valueOf(a));
         
         List<Pasajero> pasajeros = objRS.obtenerPasajerosPorVuelo(idVuelo);
         List<Reserva> reservas = objRS.obtenerReservasPorVuelo(idVuelo);
@@ -172,6 +173,7 @@ public class frmReserva extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblAerolinea = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         panelRound4 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaReservas = new javax.swing.JTable();
@@ -651,11 +653,15 @@ public class frmReserva extends javax.swing.JFrame {
         panelRound3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setText("Aerolinea:");
-        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jLabel12.setText("Precio");
+        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         lblAerolinea.setText("jLabel13");
         panelRound3.add(lblAerolinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setText("Aerolinea:");
+        panelRound3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 300, 160));
 
@@ -710,11 +716,13 @@ public class frmReserva extends javax.swing.JFrame {
         try{
         if(String.valueOf(dniPasajero).length()==8){
 
+                
                 int IdVuelo = Integer.parseInt(lblIdVuelo.getText());
+                Vuelo vuelito = objVD.buscarVuelo(IdVuelo);
                 Date fechaReserva = Calendar.getInstance().getTime();
                 Reserva rs=new Reserva(0,dniPasajero,IdVuelo,fechaReserva);
                 objRS.crearReserva(rs);
-                cargarPasajeros(IdVuelo);
+                cargarPasajeros(vuelito);
                 //listado();
                 JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");
         } else {
@@ -1056,6 +1064,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
