@@ -6,8 +6,10 @@ import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Pasajero;
 import Modelo.Reserva;
 import Modelo.Trabajador;
+import Modelo.Vuelo;
 import static Vista.Controladores.objPS;
 import static Vista.Controladores.objRS;
+import static Vista.Controladores.objVD;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -76,7 +78,10 @@ public class frmReserva extends javax.swing.JFrame {
     
     public void cargarPasajeros(int idVuelo) {
         lblIdVuelo.setText(String.valueOf(idVuelo));
-
+        Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
+        String a = vueloSeleccionado.getNombreAerolinea();
+        lblAerolinea.setText(a);
+        
         List<Pasajero> pasajeros = objRS.obtenerPasajerosPorVuelo(idVuelo);
         List<Reserva> reservas = objRS.obtenerReservasPorVuelo(idVuelo);
         DefaultTableModel dt = (DefaultTableModel) tablaReservas.getModel();
@@ -106,8 +111,7 @@ public class frmReserva extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -160,9 +164,14 @@ public class frmReserva extends javax.swing.JFrame {
         cboDNIs = new util.Cbox();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblApellido = new javax.swing.JLabel();
         panelRound3 = new util.PanelRound();
         jLabel7 = new javax.swing.JLabel();
         lblIdVuelo = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lblAerolinea = new javax.swing.JLabel();
         panelRound4 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaReservas = new javax.swing.JTable();
@@ -607,11 +616,19 @@ public class frmReserva extends javax.swing.JFrame {
         panelRound2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
         panelRound2.add(cboDNIs, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Nombre:");
         panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Apellido:");
         panelRound2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        lblNombre.setText("jLabel16");
+        panelRound2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
+
+        lblApellido.setText("jLabel17");
+        panelRound2.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 250, 160));
 
@@ -622,11 +639,23 @@ public class frmReserva extends javax.swing.JFrame {
         panelRound3.setRoundTopRight(20);
         panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("VUELO");
-        panelRound3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        panelRound3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         lblIdVuelo.setText("jLabel5");
-        panelRound3.add(lblIdVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+        panelRound3.add(lblIdVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setText("ID vuelo:");
+        panelRound3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setText("Aerolinea:");
+        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        lblAerolinea.setText("jLabel13");
+        panelRound3.add(lblAerolinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 300, 160));
 
@@ -1026,6 +1055,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -1042,15 +1072,19 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAerolinea;
     private javax.swing.JLabel lblApeUsu;
+    private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
     private javax.swing.JLabel lblIdVuelo;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreSes;
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;
