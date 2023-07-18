@@ -16,8 +16,9 @@ public class Vuelo {
 
     private String nombreAvion;
     private String nombreAerolinea;
+    private String estadoVuelo;
 
-    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio, String tipo) {
+    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio, String tipo,String estadoVuelo) {
         this.idVuelo = idVuelo;
         this.origen = origen;
         this.destino = destino;
@@ -27,6 +28,15 @@ public class Vuelo {
         this.idAvion = idAvion;
         this.precio = precio;
         this.tipo = tipo;
+        this.estadoVuelo = estadoVuelo;
+    }
+
+    public String getEstadoVuelo() {
+        return estadoVuelo;
+    }
+
+    public void setEstadoVuelo(String estadoVuelo) {
+        this.estadoVuelo = estadoVuelo;
     }
 
     public String getIdVuelo() {

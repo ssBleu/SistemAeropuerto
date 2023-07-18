@@ -415,13 +415,13 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         tablaVueloBoleto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID_Vuelo", "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio"
+                "ID_Vuelo", "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tablaVueloBoleto);

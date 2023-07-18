@@ -4,8 +4,10 @@ package Modelo.DAO;
 import Modelo.Conexion.Conexion;
 import Modelo.Vuelo;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class VueloDAO {
@@ -38,7 +40,7 @@ public class VueloDAO {
             st.setInt(1, id);
             ResultSet rs=st.executeQuery();
             if(rs.next()){
-                ep=new Vuelo("","","",null,null,"","",0,"");
+                ep=new Vuelo("","","",null,null,"","",0,"",null);
                 ep.setIdVuelo(rs.getString(1));
                 ep.setOrigen(rs.getString(2));
                 ep.setDestino(rs.getString(3));
@@ -90,7 +92,7 @@ public class VueloDAO {
 
             try {
                 String sql = "SELECT v.id_vuelo, v.origen, v.destino, v.fecha_salida, v.fecha_llegada, "
-                        + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, av.modelo, ae.nombre " +
+                        + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, v.estado_vuelo, av.modelo, ae.nombre " +
                              "FROM vuelo v " +
                              "JOIN avion av ON v.id_avion = av.id_avion " +
                              "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea";
@@ -107,11 +109,13 @@ public class VueloDAO {
                     String idAvion = resultSet.getString("id_avion");
                     double precio = resultSet.getDouble("precio");
                     String tipo = resultSet.getString("tipo_vuelo");
+                    String estado_vuelo = resultSet.getString("estado_vuelo");
+
 
                     String nombreAvion = resultSet.getString("modelo");                
                     String nombreAerolinea = resultSet.getString("nombre");
 
-                    Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo);
+                    Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, estado_vuelo);
                     vuelo.setNombreAvion(nombreAvion);
                     vuelo.setNombreAerolinea(nombreAerolinea);
                     listaVuelos.add(vuelo);
@@ -219,7 +223,7 @@ public class VueloDAO {
                 String nombreAerolinea = resultSet.getString("aerolinea");
                 double precio = resultSet.getDouble("precio");
 
-                Vuelo vuelo = new Vuelo(null, origen, destino, null, null, duracion, null, precio, tipoVuelo);
+                Vuelo vuelo = new Vuelo(null, origen, destino, null, null, duracion, null, precio, tipoVuelo, null);
                 vuelo.setNombreAerolinea(nombreAerolinea);
                 vuelosFiltrados.add(vuelo);
             }
@@ -311,7 +315,7 @@ public class VueloDAO {
                         String nombreAerolinea = resultSetAerolinea.getString("nombre");
 
                         // Crea el objeto Vuelo y asigna el nombre de la aerolínea
-                        Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo);
+                        Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, null);
                         vuelo.setNombreAerolinea(nombreAerolinea);
 
                         vuelosFiltrados.add(vuelo);
@@ -438,5 +442,33 @@ public class VueloDAO {
       }
       return dataset;
   }
+        
+        
+    public void cambiarEstadoVuelo(String idVuelo, String estadoActual) {
+        Connection cn = Conexion.getConexion();
+
+        String nuevoEstado = estadoActual.equalsIgnoreCase("ACTIVO") ? "CANCELADO" : "ACTIVO";
+        String fechaCancelacion = (nuevoEstado.equals("CANCELADO")) ? "CURDATE()" : "NULL";;
+
+        try {
+            String sql = "UPDATE vuelo SET estado_vuelo = ?, fecha_cancelacion = " + fechaCancelacion + " WHERE id_vuelo = ?";
+            PreparedStatement statement = cn.prepareStatement(sql);
+
+            statement.setString(1, nuevoEstado);
+            statement.setString(2, idVuelo);
+
+            statement.executeUpdate();
+
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
 
 }

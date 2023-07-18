@@ -93,7 +93,7 @@ public class frmRegVue extends javax.swing.JFrame {
         dt.setRowCount(0);
         for(Vuelo x:objVD.obtenerListaVuelos()){
             Object v[]={x.getIdVuelo(),x.getIdAvion(), x.getNombreAvion(), x.getNombreAerolinea(), x.getOrigen(),
-            x.getDestino(), x.getDuracion(), x.getFechaSalida(), x.getFechaSalida(),x.getTipo(), x.getPrecio()};
+            x.getDestino(), x.getDuracion(), x.getFechaSalida(), x.getFechaSalida(),x.getTipo(), x.getPrecio(), x.getEstadoVuelo()};
             dt.addRow(v);
         }
     }
@@ -167,6 +167,7 @@ public class frmRegVue extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnCambiarEstado = new javax.swing.JButton();
         panelRound2 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVuelo = new javax.swing.JTable();
@@ -653,7 +654,7 @@ public class frmRegVue extends javax.swing.JFrame {
                 btnActualizarActionPerformed(evt);
             }
         });
-        panelRound1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
+        panelRound1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -661,7 +662,15 @@ public class frmRegVue extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        panelRound1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 80, -1));
+        panelRound1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 80, -1));
+
+        btnCambiarEstado.setText("Cambiar Estado");
+        btnCambiarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarEstadoActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnCambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 530, 220));
 
@@ -674,13 +683,13 @@ public class frmRegVue extends javax.swing.JFrame {
 
         tablaVuelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Vuelo", "ID Avion", "ModeloAvion", "Aerolinea", "Origen", "Destino", "Duración", "F. Salida", "F. Llegada", "Tipo", "Precio"
+                "ID Vuelo", "ID Avion", "ModeloAvion", "Aerolinea", "Origen", "Destino", "Duración", "F. Salida", "F. Llegada", "Tipo", "Precio", "Estado"
             }
         ));
         tablaVuelo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -823,7 +832,7 @@ public class frmRegVue extends javax.swing.JFrame {
             
             String modeloAvion = (String) cboAvion.getSelectedItem();
             String idAvion = String.valueOf(objAvD.obtenerIdAvionPorModelo(modeloAvion));
-            Vuelo vuelo = new Vuelo(IDVuelo, origen, destino, Fsali, Flleg, duracion, idAvion, precio, tipo);
+            Vuelo vuelo = new Vuelo(IDVuelo, origen, destino, Fsali, Flleg, duracion, idAvion, precio, tipo, null);
             objVD.crearVuelo(vuelo);
             txtIDVuelo.setText("");
             txtOrigen.setText("");
@@ -888,7 +897,7 @@ public class frmRegVue extends javax.swing.JFrame {
                     if(precio>0){
                         String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
                         if (confirm.equals("CONTINUAR")){
-                                Vuelo pr=new Vuelo(IDVuelo,origen,destino,Fsali,Flleg,duracion,idAvion,precio,tipo);
+                                Vuelo pr=new Vuelo(IDVuelo,origen,destino,Fsali,Flleg,duracion,idAvion,precio,tipo,null);
                                 objVD.modificarVuelo(pr);
                                 txtIDVuelo.setText("");
                                 txtOrigen.setText("");
@@ -1190,6 +1199,35 @@ public class frmRegVue extends javax.swing.JFrame {
 
     }//GEN-LAST:event_SliderDelMenuMouseExited
 
+    private void btnCambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarEstadoActionPerformed
+        int filaSeleccionada = tablaVuelo.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            String idVuelo = tablaVuelo.getValueAt(filaSeleccionada, 0).toString();
+            String estadoVuelo = tablaVuelo.getValueAt(filaSeleccionada, 11).toString();
+
+            int confirmacion;
+            String mensaje;
+
+            if (estadoVuelo.equalsIgnoreCase("CANCELADO")) {
+                confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de descancelar el vuelo?", "Confirmar descancelación", JOptionPane.YES_NO_OPTION);
+                mensaje = "Vuelo descancelado exitosamente";
+            } else {
+                confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cancelar el vuelo?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
+                mensaje = "Vuelo cancelado exitosamente";
+            }
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                objVD.cambiarEstadoVuelo(idVuelo, estadoVuelo);
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+            listado();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona un vuelo de la tabla");
+        }
+    }//GEN-LAST:event_btnCambiarEstadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1231,6 +1269,7 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JLabel SliderDelMenu;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JLabel btnBusCli;
+    private javax.swing.JButton btnCambiarEstado;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel btnEstadisticas;
     private javax.swing.JButton btnGuardar;
