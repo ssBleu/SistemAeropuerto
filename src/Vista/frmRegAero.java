@@ -48,6 +48,7 @@ public class frmRegAero extends javax.swing.JFrame {
         tablaAerolinea.setRowHeight(25);
         
         obtenerUsuarioSesionado();
+        Datitos();
     }
     
         public void obtenerUsuarioSesionado() {
@@ -71,6 +72,17 @@ public class frmRegAero extends javax.swing.JFrame {
         } else {
             System.out.println("Se supone que esto no debe pasar XD");
         }
+    }
+        
+        
+    void Datitos(){
+           
+        int TotalAerolineasRegistradas = objAD.obtenerTotalAerolineasRegistradas();
+        lblAeroRegistradas.setText("" + TotalAerolineasRegistradas);
+                
+        String AerolineaConMasReservas = objAD.obtenerAerolineaConMasReservas();
+        lblAeroCMReservas.setText(AerolineaConMasReservas);
+        
     }
     
     void listado(){
@@ -153,9 +165,11 @@ public class frmRegAero extends javax.swing.JFrame {
         panel2 = new util.panel();
         jLabel6 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lblAeroCMReservas = new javax.swing.JLabel();
         panel1 = new util.panel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lblAeroRegistradas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -765,59 +779,34 @@ public class frmRegAero extends javax.swing.JFrame {
         panelRound3.setRoundTopLeft(20);
         panelRound3.setRoundTopRight(20);
 
+        panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Aerolinea con más Reservas");
+        panel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 6, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmAerol/aerolineaPreferida.png"))); // NOI18N
+        panel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 6, -1, -1));
 
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblAeroCMReservas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAeroCMReservas.setForeground(new java.awt.Color(255, 255, 255));
+        lblAeroCMReservas.setText("Datito2");
+        panel2.add(lblAeroCMReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
+        panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Aerolíneas Registradas");
+        panel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmAerol/aerolineaRegistrada.png"))); // NOI18N
+        panel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, -1, -1));
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(29, 29, 29))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblAeroRegistradas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAeroRegistradas.setForeground(new java.awt.Color(255, 255, 255));
+        lblAeroRegistradas.setText("Datito1");
+        panel1.add(lblAeroRegistradas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -1320,6 +1309,8 @@ String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar 
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAeroCMReservas;
+    private javax.swing.JLabel lblAeroRegistradas;
     private javax.swing.JLabel lblApeUsu;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;

@@ -43,10 +43,6 @@ public class frmRegAv extends javax.swing.JFrame {
             cboAerol.addItem(nombreAerolinea);
         }
           
-        cboCapacidad.addItem("1");
-        cboCapacidad.addItem("2");
-        cboCapacidad.addItem("3");
-          
           
         //tablita
         tablaAvion.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
@@ -58,9 +54,10 @@ public class frmRegAv extends javax.swing.JFrame {
         listado();
         
         obtenerUsuarioSesionado();
+        Datitos();
     }
     
-            public void obtenerUsuarioSesionado() {
+    public void obtenerUsuarioSesionado() {
         Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
         if (trabajadorSesionado != null) {
 
@@ -81,6 +78,23 @@ public class frmRegAv extends javax.swing.JFrame {
         } else {
             System.out.println("Se supone que esto no debe pasar XD");
         }
+    }
+    
+    void limpiarCampos(){
+        txtIDAvion.setText("");
+        //cboAerol;
+        txtModelo.setText("");
+        txtCapacidad.setText("");
+    }
+    
+    void Datitos(){
+           
+        String avionPreferido = objAvD.obtenerAvionPreferido();
+        lblAvionPreferido.setText("" + avionPreferido);
+                
+        int capacidadPromAvion = objAvD.obtenerCapacidadPromedioAvion();
+        lblcapacPromAviones.setText(""+capacidadPromAvion);
+        
     }
     
               
@@ -147,19 +161,21 @@ public class frmRegAv extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cboCapacidad = new util.Cbox();
         txtModelo = new javax.swing.JTextField();
         cboAerol = new util.Cbox();
         btnGuardar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        txtCapacidad = new javax.swing.JTextField();
         panelRound2 = new util.PanelRound();
         panel1 = new util.panel();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lblAvionPreferido = new javax.swing.JLabel();
         panel2 = new util.panel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lblcapacPromAviones = new javax.swing.JLabel();
         panelRound3 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAvion = new javax.swing.JTable();
@@ -584,12 +600,6 @@ public class frmRegAv extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Capacidad de pasajeros:");
 
-        cboCapacidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboCapacidadActionPerformed(evt);
-            }
-        });
-
         cboAerol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboAerolActionPerformed(evt);
@@ -604,6 +614,11 @@ public class frmRegAv extends javax.swing.JFrame {
         });
 
         jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -635,7 +650,7 @@ public class frmRegAv extends javax.swing.JFrame {
                             .addGroup(panelRound1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
@@ -666,8 +681,8 @@ public class frmRegAv extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar)
-                    .addComponent(cboCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -679,59 +694,33 @@ public class frmRegAv extends javax.swing.JFrame {
         panelRound2.setRoundTopLeft(20);
         panelRound2.setRoundTopRight(20);
 
+        panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Modelo de avión preferido:");
+        panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 6, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmAv/modeloAvion.png"))); // NOI18N
+        panel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, -1, -1));
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addContainerGap())
-        );
+        lblAvionPreferido.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAvionPreferido.setForeground(new java.awt.Color(255, 255, 255));
+        lblAvionPreferido.setText("Datito1");
+        panel1.add(lblAvionPreferido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+
+        panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Capacidad Promedio de Avión:");
+        panel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 6, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmAv/capacidadPasajeros.png"))); // NOI18N
+        panel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, -1, -1));
 
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel6))
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
+        lblcapacPromAviones.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblcapacPromAviones.setForeground(new java.awt.Color(255, 255, 255));
+        lblcapacPromAviones.setText("Datito2");
+        panel2.add(lblcapacPromAviones, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 28, -1, -1));
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
         panelRound2.setLayout(panelRound2Layout);
@@ -813,7 +802,7 @@ public class frmRegAv extends javax.swing.JFrame {
 
         txtIDAvion.setText("" + x.getIdAvion());
         txtModelo.setText(x.getModelo());
-        cboCapacidad.setSelectedItem(x.getCapacidadPasajeros());
+        txtCapacidad.setText(""+x.getCapacidadPasajeros());
     }//GEN-LAST:event_tablaAvionMouseClicked
 
     private void btnReTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseClicked
@@ -1104,6 +1093,7 @@ public class frmRegAv extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Seleccione un Cliente");
         }
+        limpiarCampos();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -1112,7 +1102,7 @@ public class frmRegAv extends javax.swing.JFrame {
             int IDAvion = Integer.parseInt(txtIDAvion.getText());
             String modelo = txtModelo.getText();
 
-            int capacidadPasajeros = Integer.parseInt((String) cboCapacidad.getSelectedItem());
+            int capacidadPasajeros = Integer.parseInt(txtCapacidad.getText());
 
             String nombreAerolinea = (String) cboAerol.getSelectedItem();
             int idAerolinea = objAD.obtenerIdAerolineaPorNombre(nombreAerolinea);
@@ -1130,9 +1120,9 @@ public class frmRegAv extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboAerolActionPerformed
 
-    private void cboCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCapacidadActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboCapacidadActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1181,7 +1171,6 @@ public class frmRegAv extends javax.swing.JFrame {
     private javax.swing.JLabel btnRegAvion;
     private javax.swing.JLabel btnRegVue;
     private util.Cbox cboAerol;
-    private util.Cbox cboCapacidad;
     private javax.swing.JLabel cerrarSesion;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -1212,6 +1201,7 @@ public class frmRegAv extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
+    private javax.swing.JLabel lblAvionPreferido;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
@@ -1219,6 +1209,7 @@ public class frmRegAv extends javax.swing.JFrame {
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;
     private javax.swing.JLabel lblUsuarioSes2;
+    private javax.swing.JLabel lblcapacPromAviones;
     private util.panel panel1;
     private util.panel panel2;
     private javax.swing.JPanel panelBusCli;
@@ -1232,6 +1223,7 @@ public class frmRegAv extends javax.swing.JFrame {
     private util.PanelRound panelRound2;
     private util.PanelRound panelRound3;
     private javax.swing.JTable tablaAvion;
+    private javax.swing.JTextField txtCapacidad;
     private javax.swing.JTextField txtIDAvion;
     private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables

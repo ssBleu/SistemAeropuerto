@@ -50,6 +50,7 @@ public class frmRegVue extends javax.swing.JFrame {
           
         listado();
         obtenerUsuarioSesionado();
+        Datitos();
     }
     
         public void obtenerUsuarioSesionado() {
@@ -73,6 +74,17 @@ public class frmRegVue extends javax.swing.JFrame {
         } else {
             System.out.println("Se supone que esto no debe pasar XD");
         }
+    }
+        
+                
+    void Datitos(){
+           
+        double PromPrecioVue = objVD.calcularTendenciaPromedioPrecios();
+        lblPromPrecioVue.setText("" + PromPrecioVue);
+                
+        String TipoVueloMRegistrado = objVD.obtenerTipoVueloMasRegistrado();
+        lblVueloMRegistrado.setText(TipoVueloMRegistrado);
+        
     }
     
     void listado(){
@@ -162,9 +174,11 @@ public class frmRegVue extends javax.swing.JFrame {
         panel1 = new util.panel();
         jLabel7 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        lblPromPrecioVue = new javax.swing.JLabel();
         panel2 = new util.panel();
         jLabel17 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        lblVueloMRegistrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -692,6 +706,10 @@ public class frmRegVue extends javax.swing.JFrame {
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmVuel/vueloPrecio.png"))); // NOI18N
 
+        lblPromPrecioVue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPromPrecioVue.setForeground(new java.awt.Color(255, 255, 255));
+        lblPromPrecioVue.setText("Datito1");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -699,18 +717,26 @@ public class frmRegVue extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(lblPromPrecioVue)))
                 .addGap(24, 24, 24))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel7))
-                .addContainerGap(9, Short.MAX_VALUE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPromPrecioVue)))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         panelRound3.add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 220, 55));
@@ -720,15 +746,24 @@ public class frmRegVue extends javax.swing.JFrame {
 
         jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmVuel/vueloTipo.png"))); // NOI18N
 
+        lblVueloMRegistrado.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblVueloMRegistrado.setForeground(new java.awt.Color(255, 255, 255));
+        lblVueloMRegistrado.setText("Datito2");
+
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addComponent(jLabel28)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(lblVueloMRegistrado)))
                 .addContainerGap())
         );
         panel2Layout.setVerticalGroup(
@@ -736,9 +771,12 @@ public class frmRegVue extends javax.swing.JFrame {
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblVueloMRegistrado))
                     .addComponent(jLabel28))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         panelRound3.add(panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 220, 55));
@@ -780,7 +818,7 @@ public class frmRegVue extends javax.swing.JFrame {
             JDateChooser dateChooser = FSalida;
             Date Fsali = dateChooser.getDate();
             JDateChooser jdateChooser = FLlegada;
-            Date Flleg = dateChooser.getDate();
+            Date Flleg = jdateChooser.getDate();
             double precio = Double.parseDouble(txtPrecio.getText());
             
             String modeloAvion = (String) cboAvion.getSelectedItem();
@@ -1239,9 +1277,11 @@ public class frmRegVue extends javax.swing.JFrame {
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
     private javax.swing.JLabel lblNombreSes;
+    private javax.swing.JLabel lblPromPrecioVue;
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;
     private javax.swing.JLabel lblUsuarioSes2;
+    private javax.swing.JLabel lblVueloMRegistrado;
     private util.panel panel1;
     private util.panel panel2;
     private javax.swing.JPanel panelBusCli;

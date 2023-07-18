@@ -39,7 +39,7 @@ public class frmRegCli extends javax.swing.JFrame {
         TablaDatos.setRowHeight(25);
         
         obtenerUsuarioSesionado();
-        
+        Datitos();
     }
     
     
@@ -66,6 +66,15 @@ public class frmRegCli extends javax.swing.JFrame {
         }
     }
     
+    void Datitos(){
+           
+        int totalPasajeros = objPS.contarPasajeros();
+        lblCantidadPasRegis.setText("" + totalPasajeros);
+                
+        String nacionalMRegistrada = objPS.obtenerNacionalidadMasRegistrada();
+        lblNacMasRegis.setText(""+nacionalMRegistrada);
+        
+    }
 
     
     void listado(){
@@ -145,9 +154,11 @@ public class frmRegCli extends javax.swing.JFrame {
         panel1 = new util.panel();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lblCantidadPasRegis = new javax.swing.JLabel();
         panel2 = new util.panel();
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lblNacMasRegis = new javax.swing.JLabel();
         panelRound3 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaDatos = new javax.swing.JTable();
@@ -709,6 +720,10 @@ public class frmRegCli extends javax.swing.JFrame {
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmRegCli/clientesRegistrados.png"))); // NOI18N
 
+        lblCantidadPasRegis.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCantidadPasRegis.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantidadPasRegis.setText("Datito1");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -717,23 +732,32 @@ public class frmRegCli extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(lblCantidadPasRegis))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel5))
-                .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCantidadPasRegis)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Nacionalidad más registrada:");
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmRegCli/nacionalidadCliente.png"))); // NOI18N
+
+        lblNacMasRegis.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNacMasRegis.setForeground(new java.awt.Color(255, 255, 255));
+        lblNacMasRegis.setText("Datito2");
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -743,17 +767,22 @@ public class frmRegCli extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(lblNacMasRegis))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel7))
-                .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNacMasRegis)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
@@ -1304,9 +1333,11 @@ public class frmRegCli extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
+    private javax.swing.JLabel lblCantidadPasRegis;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
+    private javax.swing.JLabel lblNacMasRegis;
     private javax.swing.JLabel lblNombreSes;
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;

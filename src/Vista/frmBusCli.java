@@ -33,7 +33,9 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmBusCli extends javax.swing.JFrame {
+    
     private byte[] imagenUsuarioSes;
+    
     public frmBusCli() {
         initComponents();
         
@@ -53,6 +55,7 @@ public class frmBusCli extends javax.swing.JFrame {
         TablaBuscCliente.getTableHeader().setForeground(new Color(255,255,255));
         TablaBuscCliente.setRowHeight(25);
         obtenerUsuarioSesionado();
+        Datitos();
     }
     public void obtenerUsuarioSesionado() {
         Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
@@ -95,6 +98,16 @@ public class frmBusCli extends javax.swing.JFrame {
         txtDestinoBusc.setText("");
         dateInicial.setDate(null);
         dateFinal.setDate(null);
+    }
+    
+    void Datitos(){
+           
+        int totalClienteCReserva = objPS.contarPasajerosConReservas();
+        lblClientesReserva.setText("" + totalClienteCReserva);
+                
+        int totalClientes = objPS.contarPasajeros();
+        lblTotalClientes.setText("" + totalClientes);
+        
     }
     
     private void filtrarTabla() {
@@ -196,9 +209,11 @@ public class frmBusCli extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lblClientesReserva = new javax.swing.JLabel();
         panel1 = new util.panel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lblTotalClientes = new javax.swing.JLabel();
         panelRound4 = new util.PanelRound();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -707,67 +722,37 @@ public class frmBusCli extends javax.swing.JFrame {
         panelRound3.setRoundTopRight(20);
 
         panel4.setBackground(new java.awt.Color(255, 255, 255));
+        panel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Clientes con Reserva");
+        panel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 6, -1, -1));
 
         jLabel7.setText("alrededor de: 50");
+        panel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 52, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmBuscCli/clientesReservados.png"))); // NOI18N
+        panel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
-        javax.swing.GroupLayout panel4Layout = new javax.swing.GroupLayout(panel4);
-        panel4.setLayout(panel4Layout);
-        panel4Layout.setHorizontalGroup(
-            panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(59, 59, 59))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        panel4Layout.setVerticalGroup(
-            panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7))
-        );
+        lblClientesReserva.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblClientesReserva.setForeground(new java.awt.Color(255, 255, 255));
+        lblClientesReserva.setText("Datito");
+        panel4.add(lblClientesReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
+        panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Total de Clientes");
+        panel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmBuscCli/clientes.png"))); // NOI18N
+        panel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 6, -1, -1));
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblTotalClientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTotalClientes.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotalClientes.setText("Datito2");
+        panel1.add(lblTotalClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -1293,11 +1278,13 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
+    private javax.swing.JLabel lblClientesReserva;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
     private javax.swing.JLabel lblNombreSes;
     private javax.swing.JLabel lblTiempSes;
+    private javax.swing.JLabel lblTotalClientes;
     private javax.swing.JLabel lblUsuarioSes;
     private javax.swing.JLabel lblUsuarioSes2;
     private util.panel panel1;

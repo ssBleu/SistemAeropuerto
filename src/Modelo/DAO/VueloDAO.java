@@ -332,6 +332,81 @@ public class VueloDAO {
         
         
         
+    public String obtenerDestinoMasPopular() {
+        String destinoMasPopular = null;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT destino, COUNT(*) AS cantidad FROM vuelo v INNER JOIN reserva_vuelo rv ON v.id_vuelo = rv.id_vuelo GROUP BY destino ORDER BY COUNT(*) DESC LIMIT 1";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                destinoMasPopular = resultSet.getString("destino");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return destinoMasPopular;
+    }
+        
+    public double calcularTendenciaPromedioPrecios() {
+        double tendenciaPromedioPrecios = 0;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT AVG(precio) AS promedio FROM vuelo";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                tendenciaPromedioPrecios = resultSet.getDouble("promedio");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return tendenciaPromedioPrecios;
+    }
+
+    public String obtenerTipoVueloMasRegistrado() {
+        String tipoVueloMasRegistrado = null;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT tipo_vuelo, COUNT(*) AS cantidad FROM vuelo GROUP BY tipo_vuelo ORDER BY COUNT(*) DESC LIMIT 1";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                tipoVueloMasRegistrado = resultSet.getString("tipo_vuelo");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return tipoVueloMasRegistrado;
+    }
+        
         
         public static DefaultCategoryDataset obtenerDatos2(String fechaInicial, String fechaFinal) {
       DefaultCategoryDataset dataset = new DefaultCategoryDataset();

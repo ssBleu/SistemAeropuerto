@@ -205,7 +205,56 @@ public class AerolineaDAO {
     }
     
     
+    public int obtenerTotalAerolineasRegistradas() {
+        int totalAerolineas = 0;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT COUNT(*) AS total FROM aerolinea";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                totalAerolineas = resultSet.getInt("total");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return totalAerolineas;
+    }
     
+    public String obtenerAerolineaConMasReservas() {
+        String aerolineaConMasReservas = null;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT a.nombre, COUNT(*) AS cantidad FROM aerolinea a INNER JOIN avion av ON a.id_aerolinea = av.id_aerolinea INNER JOIN Vuelo v ON av.id_avion = v.id_avion INNER JOIN Reserva_vuelo rv ON v.id_vuelo = rv.id_vuelo GROUP BY a.nombre ORDER BY COUNT(*) DESC LIMIT 1";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                aerolineaConMasReservas = resultSet.getString("nombre");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return aerolineaConMasReservas;
+    }
+
     
     
     

@@ -154,7 +154,7 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
     return false;
     }
          
-         public int obtenerIdTrabajador(String usuario, String contrasena) throws SQLException {
+    public int obtenerIdTrabajador(String usuario, String contrasena) throws SQLException {
         Connection cn = Conexion.getConexion();
         String sql = "SELECT id_trabajador FROM trabajador WHERE usuario = ? AND contrasena = ?";
 
@@ -171,4 +171,8 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
 
         return -1;
     }
+         
+         
+         
+
 }

@@ -246,6 +246,80 @@ public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nom
     return pasajerosReservadosFiltrados;
 }
 
+        public int contarPasajeros() {
+        int cantidadPasajeros = 0;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT COUNT(*) AS cantidad FROM Pasajero";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                cantidadPasajeros = resultSet.getInt("cantidad");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return cantidadPasajeros;
+    }
     
+    public int contarPasajerosConReservas() {
+        int cantidadPasajerosConReservas = 0;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT COUNT(DISTINCT dni_pasajero) AS cantidad FROM Reserva_vuelo";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                cantidadPasajerosConReservas = resultSet.getInt("cantidad");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return cantidadPasajerosConReservas;
+    }
+    
+    
+    public String obtenerNacionalidadMasRegistrada() {
+        String nacionalidadMasRegistrada = null;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT nacionalidad, COUNT(*) AS cantidad FROM pasajero GROUP BY nacionalidad ORDER BY COUNT(*) DESC LIMIT 1";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                nacionalidadMasRegistrada = resultSet.getString("nacionalidad");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return nacionalidadMasRegistrada;
+    }
 
 }

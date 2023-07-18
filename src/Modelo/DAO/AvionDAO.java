@@ -177,4 +177,56 @@ public class AvionDAO {
     }
     
         // Falta eliminar y metodos extras
+        
+        
+    public String obtenerAvionPreferido() {
+        String avionPreferido = null;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT av.modelo, COUNT(*) AS cantidad FROM avion av INNER JOIN Vuelo v ON av.id_avion = v.id_avion INNER JOIN Reserva_vuelo rv ON v.id_vuelo = rv.id_vuelo GROUP BY av.modelo ORDER BY COUNT(*) DESC LIMIT 1";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                avionPreferido = resultSet.getString("modelo");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return avionPreferido;
+    }
+    
+    public int obtenerCapacidadPromedioAvion() {
+        int capacidadPromedio = 0;
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "SELECT AVG(capacidad_pasajeros) AS capacidad_promedio FROM avion";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                capacidadPromedio = resultSet.getInt("capacidad_promedio");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return capacidadPromedio;
+    }
+
 }

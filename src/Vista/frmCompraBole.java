@@ -5,6 +5,7 @@ import Controlador.LoginControlador;
 import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
 import Modelo.Vuelo;
+import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
 import static Vista.Controladores.objVD;
 import java.awt.BorderLayout;
@@ -66,6 +67,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
         
         obtenerUsuarioSesionado();
+        Datitos();
     }
     
     public void obtenerUsuarioSesionado() {
@@ -89,6 +91,16 @@ public class frmCompraBole extends javax.swing.JFrame {
         } else {
             System.out.println("Se supone que esto no debe pasar XD");
         }
+    }
+    
+        void Datitos(){
+           
+        double promedioPrecios = objVD.calcularTendenciaPromedioPrecios();
+        lblPromedioPrecios.setText("" + promedioPrecios);
+                
+        String destinoPopular = objVD.obtenerDestinoMasPopular();
+        lblDestinoPopular.setText(destinoPopular);
+        
     }
     
    
@@ -163,10 +175,12 @@ public class frmCompraBole extends javax.swing.JFrame {
         panel1 = new util.panel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblDestinoPopular = new javax.swing.JLabel();
         panel2 = new util.panel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lblPromedioPrecios = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelReTra = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -446,68 +460,37 @@ public class frmCompraBole extends javax.swing.JFrame {
         panelRound3.setRoundTopRight(20);
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
+        panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Destino más popular:");
+        panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmBole/viajecito.png"))); // NOI18N
+        panel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 6, -1, -1));
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel8)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8))
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
+        lblDestinoPopular.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDestinoPopular.setForeground(new java.awt.Color(255, 255, 255));
+        lblDestinoPopular.setText("Datito1");
+        panel1.add(lblDestinoPopular, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
         panel2.setBackground(new java.awt.Color(255, 255, 255));
+        panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Tendencia promedio de precios:");
+        panel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 6, -1, -1));
 
         jLabel7.setText("alrededor de: 50");
+        panel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 52, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/frmBole/incrementar.png"))); // NOI18N
+        panel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 6, -1, -1));
 
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(59, 59, 59))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        lblPromedioPrecios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPromedioPrecios.setForeground(new java.awt.Color(255, 255, 255));
+        lblPromedioPrecios.setText("Datito2");
+        panel2.add(lblPromedioPrecios, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
         panelRound3.setLayout(panelRound3Layout);
@@ -1247,10 +1230,12 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
+    private javax.swing.JLabel lblDestinoPopular;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
     private javax.swing.JLabel lblNombreSes;
+    private javax.swing.JLabel lblPromedioPrecios;
     private javax.swing.JLabel lblTiempSes;
     private javax.swing.JLabel lblUsuarioSes;
     private javax.swing.JLabel lblUsuarioSes2;
