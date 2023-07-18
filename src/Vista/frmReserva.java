@@ -171,6 +171,8 @@ public class frmReserva extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblApellido = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lblNacionalidad = new javax.swing.JLabel();
         panelRound3 = new util.PanelRound();
         lblIdVuelo = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -637,14 +639,21 @@ public class frmReserva extends javax.swing.JFrame {
         panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Apellido:");
-        panelRound2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jLabel8.setText("País natal:");
+        panelRound2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         lblNombre.setText("jLabel16");
-        panelRound2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+        panelRound2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         lblApellido.setText("jLabel17");
-        panelRound2.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        panelRound2.add(lblApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel16.setText("Apellido:");
+        panelRound2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        lblNacionalidad.setText("jLabel18");
+        panelRound2.add(lblNacionalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 250, 160));
 
@@ -665,7 +674,7 @@ public class frmReserva extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Precio:");
-        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         lblOrigen.setText("jLabel13");
         panelRound3.add(lblOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
@@ -675,14 +684,14 @@ public class frmReserva extends javax.swing.JFrame {
         panelRound3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         lblPrecio.setText("jLabel16");
-        panelRound3.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        panelRound3.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Destino:");
-        panelRound3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 10));
+        panelRound3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 10));
 
         lblDestino.setText("jLabel16");
-        panelRound3.add(lblDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        panelRound3.add(lblDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 300, 160));
 
@@ -1035,7 +1044,20 @@ public class frmReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_SliderDelMenuMouseExited
 
     private void cboDNIsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDNIsActionPerformed
-        // TODO add your handling code here:
+            // Obtener el elemento seleccionado del JComboBox
+        String selectedItem = cboDNIs.getSelectedItem().toString();
+
+        List<Pasajero> dnisPasajeros = objPS.Listado();
+        
+          for (Pasajero x : dnisPasajeros) {
+            // Actualizar los JLabels según el elemento seleccionado
+            if (selectedItem.equals(String.valueOf(x.getDniPasajero()))) {
+            lblNombre.setText(x.getNombre());
+            lblApellido.setText(x.getApellido());
+            lblNacionalidad.setText(x.getNacionalidad());
+            
+            }
+          }
     }//GEN-LAST:event_cboDNIsActionPerformed
 
     /**
@@ -1092,6 +1114,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1118,6 +1141,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel lblFotoSes2;
     private javax.swing.JLabel lblIDUsu;
     private javax.swing.JLabel lblIdVuelo;
+    private javax.swing.JLabel lblNacionalidad;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreSes;
     private javax.swing.JLabel lblOrigen;
