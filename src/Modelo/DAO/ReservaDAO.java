@@ -170,5 +170,87 @@ public class ReservaDAO {
 
             return dataset;
         }
+        
+        
+        public boolean existeReserva(int dniPasajero, int idVuelo) {
+            Connection cn = Conexion.getConexion();
+            boolean existeReserva = false;
+
+            try {
+                String sql = "SELECT COUNT(*) AS count FROM Reserva_vuelo WHERE dni_pasajero = ? AND id_vuelo = ?";
+                PreparedStatement statement = cn.prepareStatement(sql);
+                statement.setInt(1, dniPasajero);
+                statement.setInt(2, idVuelo);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    existeReserva = (count > 0);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    cn.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+            return existeReserva;
+        }
+        
+        
+        public int obtenerCapacidadAsientos(int idVuelo) {
+            Connection cn = Conexion.getConexion();
+            int capacidad = 0;
+
+            try {
+                String sql = "SELECT capacidad_pasajeros FROM avion INNER JOIN vuelo ON avion.id_avion = vuelo.id_avion WHERE id_vuelo = ?";
+                PreparedStatement statement = cn.prepareStatement(sql);
+                statement.setInt(1, idVuelo);
+                ResultSet resultSet = statement.executeQuery();
+
+                if (resultSet.next()) {
+                    capacidad = resultSet.getInt("capacidad_pasajeros");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    cn.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+            return capacidad;
+        }
+        
+        public int obtenerCantidadReservas(int idVuelo) {
+    int cantidadReservas = 0;
+    Connection cn = Conexion.getConexion();
+
+    try {
+        String sql = "SELECT COUNT(*) AS cantidad FROM Reserva_vuelo WHERE id_vuelo = ?";
+        PreparedStatement statement = cn.prepareStatement(sql);
+        statement.setInt(1, idVuelo);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            cantidadReservas = resultSet.getInt("cantidad");
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        try {
+            cn.close();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+
+    return cantidadReservas;
+}
 
 }

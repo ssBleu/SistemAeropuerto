@@ -40,9 +40,7 @@ public class frmReserva extends javax.swing.JFrame {
         List<Pasajero> dnisPasajeros = objPS.Listado();
           for (Pasajero x : dnisPasajeros) {
             cboDNIs.addItem(String.valueOf(x.getDniPasajero()));
-            lblNombre.setText(x.getNombre());
-            lblApellido.setText(x.getApellido());
-            }
+        }
         
         
                           //tablita
@@ -81,23 +79,26 @@ public class frmReserva extends javax.swing.JFrame {
     public void cargarPasajeros(Vuelo vuelo) {
         lblIdVuelo.setText(String.valueOf(vuelo.getIdVuelo()));
 
+        //setear datitos de vuelo
         int idVuelo = Integer.parseInt(vuelo.getIdVuelo());
         String name = vuelo.getOrigen();
         double a = vuelo.getPrecio();
         lblPrecio.setText(String.valueOf(a));
         lblOrigen.setText(name);
         lblDestino.setText(vuelo.getDestino());
+        
+
         List<Pasajero> pasajeros = objRS.obtenerPasajerosPorVuelo(idVuelo);
         List<Reserva> reservas = objRS.obtenerReservasPorVuelo(idVuelo);
         DefaultTableModel dt = (DefaultTableModel) tablaReservas.getModel();
         dt.setRowCount(0);
 
         for (Pasajero pasajero : pasajeros) {
-            int dniPasajero = pasajero.getDniPasajero();
+            int dniPasajero = pasajero.getDniPasajero();//
             Reserva reservaPasajero = null;
 
             for (Reserva reserva : reservas) {
-                if (reserva.getDniPasajero() == dniPasajero) {
+                if (reserva.getDniPasajero() == dniPasajero) {//////
                     reservaPasajero = reserva;
                     break;
                 }
@@ -703,13 +704,13 @@ public class frmReserva extends javax.swing.JFrame {
 
         tablaReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID Reserva", "ID Vuelo", "DNI", "Fecha"
+                "ID Reserva", "ID Vuelo", "DNI", "Fecha", "Title 5", "Title 6"
             }
         ));
         jScrollPane1.setViewportView(tablaReservas);
@@ -741,30 +742,42 @@ public class frmReserva extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
 
-        int dniPasajero = Integer.parseInt((String) cboDNIs.getSelectedItem());
+    int dniPasajero = Integer.parseInt((String) cboDNIs.getSelectedItem());
 
-        try{
-        if(String.valueOf(dniPasajero).length()==8){
+    
+        try {
+            int IdVuelo = Integer.parseInt(lblIdVuelo.getText());
+            Vuelo vuelito = objVD.buscarVuelo(IdVuelo);
+           // Obtener la capacidad de asientos del vuelo
+            int capacidadAsientos = objRS.obtenerCapacidadAsientos(IdVuelo);
+            System.out.println("Asientos capaci" + capacidadAsientos);
+           // Obtener la cantidad actual de reservas para el vuelo
+            int reservasActuales = objRS.obtenerCantidadReservas(IdVuelo);
+            System.out.println("reservas actu" + reservasActuales);
 
+            // Verificar si el pasajero ya tiene una reserva en el mismo vuelo
+            if (objRS.existeReserva(dniPasajero, IdVuelo)) {
+                JOptionPane.showMessageDialog(null, "El pasajero ya tiene una reserva en este vuelo.");
+            } else {
+
+                if (reservasActuales >= capacidadAsientos) {
                 
-                int IdVuelo = Integer.parseInt(lblIdVuelo.getText());
-                Vuelo vuelito = objVD.buscarVuelo(IdVuelo);
-                Date fechaReserva = Calendar.getInstance().getTime();
-                Reserva rs=new Reserva(0,dniPasajero,IdVuelo,fechaReserva);
-                objRS.crearReserva(rs);
-                cargarPasajeros(vuelito);
-                //listado();
-                JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");
-        } else {
-                JOptionPane.showMessageDialog(null, "Ingrese un DNI válido");
-        }
-        
-                } catch (Exception e1){
+                    JOptionPane.showMessageDialog(null, "No hay más asientos disponibles en este vuelo.\nLa capacidad máxima es: "+capacidadAsientos);
+                } else{
+                    Date fechaReserva = Calendar.getInstance().getTime();
+                    Reserva rs = new Reserva(0, dniPasajero, IdVuelo, fechaReserva);
+                    objRS.crearReserva(rs);
+                    cargarPasajeros(vuelito);
+                    JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");
+                }
+            }
+        } catch (Exception e1) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos en las casillas correctamente");
         }
-
     }//GEN-LAST:event_btnComprarActionPerformed
 
+
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
