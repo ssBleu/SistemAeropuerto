@@ -11,6 +11,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class ReservaDAO {
 
+    
     public void crearReserva(Reserva reserva) throws SQLException {
         Connection cn = Conexion.getConexion();
         String sql = "INSERT INTO reserva_vuelo (dni_pasajero, id_vuelo, fecha_reserva) VALUES (?, ?, ?)";
@@ -279,5 +280,136 @@ public class ReservaDAO {
             }
         }
     }
+            
+            
+public static DefaultCategoryDataset obtenerDatosGananciasPerdidas(String fechaInicio, String fechaFin) {
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    Connection cn = Conexion.getConexion();
+
+    try {
+        // Crear una declaración SQL preparada
+        String query = "SELECT fecha_reserva, estado_reserva, precio " +
+                       "FROM reserva_vuelo rv " +
+                       "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo " +
+                       "WHERE fecha_reserva >= ? AND fecha_reserva <= ? " +
+                       "ORDER BY fecha_reserva ASC";
+        PreparedStatement statement = cn.prepareStatement(query);
+
+        // Establecer los parámetros en la consulta preparada
+        statement.setString(1, fechaInicio);
+        statement.setString(2, fechaFin);
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery();
+
+        // Variables para realizar el seguimiento de las ganancias y pérdidas acumuladas
+        double gananciasAcumuladas = 0.0;
+        double perdidasAcumuladas = 0.0;
+
+        // Agregar los datos al dataset
+        while (resultSet.next()) {
+            String fechaReserva = resultSet.getString("fecha_reserva");
+            String estadoReserva = resultSet.getString("estado_reserva");
+            double precio = resultSet.getDouble("precio");
+
+            if (estadoReserva.equals("CANCELADO")) {
+                // Reserva cancelada (pérdida)
+                perdidasAcumuladas += precio;
+            } else {
+                // Reserva activa (ganancia)
+                gananciasAcumuladas += precio;
+            }
+
+            dataset.addValue(gananciasAcumuladas, "Ganancias", fechaReserva);
+            dataset.addValue(-perdidasAcumuladas, "Pérdidas", fechaReserva);
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        cn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return dataset;
+}
+
+
+public static DefaultCategoryDataset obtenerDatosReservasCanceladas(String fechaInicio, String fechaFin) {
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    Connection cn = Conexion.getConexion();
+
+    try {
+        // Crear una declaración SQL preparada
+        String query = "SELECT fecha_reserva, estado_reserva, COUNT(*) AS total " +
+                       "FROM reserva_vuelo " +
+                       "WHERE fecha_reserva >= ? AND fecha_reserva <= ? " +
+                       "GROUP BY fecha_reserva, estado_reserva " +
+                       "ORDER BY fecha_reserva ASC";
+        PreparedStatement statement = cn.prepareStatement(query);
+
+        // Establecer los parámetros en la consulta preparada
+        statement.setString(1, fechaInicio);
+        statement.setString(2, fechaFin);
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery();
+
+        // Agregar los datos al dataset
+        while (resultSet.next()) {
+            String fechaReserva = resultSet.getString("fecha_reserva");
+            String estadoReserva = resultSet.getString("estado_reserva");
+            int cantidad = resultSet.getInt("total");
+
+            dataset.addValue(cantidad, estadoReserva, fechaReserva);
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        cn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return dataset;
+}
+
+
+
+public void actualizarReservasEstadoRealizado() {
+    Connection cn = Conexion.getConexion();
+
+    try {
+        // Obtener las reservas con fecha de salida mayor o igual a la fecha de reserva
+        String query = "SELECT rv.id_reserva " +
+                       "FROM reserva_vuelo rv " +
+                       "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo " +
+                       "WHERE v.fecha_salida >= rv.fecha_reserva";
+        PreparedStatement statement = cn.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+
+        // Actualizar el estado de las reservas a "REALIZADO"
+        while (resultSet.next()) {
+            String idReserva = resultSet.getString("id_reserva");
+
+            String queryActualizar = "UPDATE reserva_vuelo SET estado_reserva = 'REALIZADO' WHERE id_reserva = ?";
+            PreparedStatement statementActualizar = cn.prepareStatement(queryActualizar);
+            statementActualizar.setString(1, idReserva);
+            statementActualizar.executeUpdate();
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        cn.close();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+
+
+
 
 }

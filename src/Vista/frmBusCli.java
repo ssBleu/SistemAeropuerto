@@ -40,7 +40,7 @@ public class frmBusCli extends javax.swing.JFrame {
     
     public frmBusCli() {
         initComponents();
-        
+        objRS.actualizarReservasEstadoRealizado();
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);

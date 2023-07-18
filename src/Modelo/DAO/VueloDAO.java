@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 public class VueloDAO {
 
@@ -538,5 +542,80 @@ public class VueloDAO {
             }
         }
     }
+    
+    
+    public static DefaultPieDataset obtenerDatosVuelosCanceladosActivos() {
+    DefaultPieDataset dataset = new DefaultPieDataset();
+    Connection cn = Conexion.getConexion();
+
+    try {
+        // Crear una declaración SQL
+        Statement statement = cn.createStatement();
+
+        // Consulta SQL para obtener la cantidad de vuelos cancelados y activos
+        String query = "SELECT estado_vuelo, COUNT(*) AS total " +
+                       "FROM vuelo " +
+                       "GROUP BY estado_vuelo";
+
+        // Ejecutar la consulta SQL
+        ResultSet resultSet = statement.executeQuery(query);
+
+        // Calcular el total de vuelos para obtener el porcentaje
+        int totalVuelos = 0;
+        while (resultSet.next()) {
+            int total = resultSet.getInt("total");
+            totalVuelos += total;
+        }
+
+        // Volver a ejecutar la consulta para obtener los datos reales
+        resultSet.beforeFirst();
+        while (resultSet.next()) {
+            String estadoVuelo = resultSet.getString("estado_vuelo");
+            int total = resultSet.getInt("total");
+            double porcentaje = (double) total / totalVuelos * 100;
+            dataset.setValue(estadoVuelo + " (" + total + ", " + String.format("%.2f", porcentaje) + "%)", total);
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        cn.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return dataset;
+}
+    
+    
+    public void actualizarEstadosVuelosRealizados() {
+    Connection cn = Conexion.getConexion();
+    LocalDate fechaActual = LocalDate.now();
+
+    try {
+        // Obtener los vuelos con fecha de salida menor o igual a la fecha actual
+        String query = "SELECT id_vuelo FROM vuelo WHERE fecha_salida <= ?";
+        PreparedStatement statement = cn.prepareStatement(query);
+        statement.setDate(1, java.sql.Date.valueOf(fechaActual));
+        ResultSet resultSet = statement.executeQuery();
+
+        // Actualizar el estado de los vuelos a "REALIZADO"
+        while (resultSet.next()) {
+            String idVuelo = resultSet.getString("id_vuelo");
+
+            String queryActualizar = "UPDATE vuelo SET estado_vuelo = 'REALIZADO' WHERE id_vuelo = ?";
+            PreparedStatement statementActualizar = cn.prepareStatement(queryActualizar);
+            statementActualizar.setString(1, idVuelo);
+            statementActualizar.executeUpdate();
+        }
+
+        // Cerrar la conexión y liberar recursos
+        resultSet.close();
+        statement.close();
+        cn.close();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+
 
 }

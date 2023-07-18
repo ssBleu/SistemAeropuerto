@@ -6,6 +6,7 @@ import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
 import Modelo.Vuelo;
 import static Vista.Controladores.objAvD;
+import static Vista.Controladores.objRS;
 import static Vista.Controladores.objVD;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
@@ -30,6 +31,8 @@ public class frmRegVue extends javax.swing.JFrame {
     private byte[] imagenUsuarioSes;
     public frmRegVue() {
         initComponents();
+        objVD.actualizarEstadosVuelosRealizados();
+        
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);

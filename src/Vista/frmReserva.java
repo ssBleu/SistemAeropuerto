@@ -31,7 +31,6 @@ public class frmReserva extends javax.swing.JFrame {
     private byte[] imagenUsuarioSes;
     public frmReserva() {
         initComponents();
-       
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);

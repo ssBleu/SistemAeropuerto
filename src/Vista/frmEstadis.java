@@ -122,23 +122,26 @@ public class frmEstadis extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         SliderDelMenu = new javax.swing.JLabel();
-        panelRound1 = new util.PanelRound();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        btnGrafico1 = new javax.swing.JButton();
         panelRound2 = new util.PanelRound();
         jLabel15 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
         btnGrafico2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
         btnGrafico3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnGrafico1 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         desPopFechaInic = new com.toedter.calendar.JDateChooser();
-        desPopFechaFinal = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
+        desPopFechaFinal = new com.toedter.calendar.JDateChooser();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        btnGraficoCancelActiv = new javax.swing.JButton();
+        btnGananPerdid = new javax.swing.JButton();
+        btnReservCancel = new javax.swing.JButton();
         panelRound3 = new util.PanelRound();
         panelGrafic = new javax.swing.JPanel();
 
@@ -545,77 +548,18 @@ public class frmEstadis extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
 
-        panelRound1.setBackground(new java.awt.Color(255, 255, 255));
-        panelRound1.setRoundBottomLeft(20);
-        panelRound1.setRoundBottomRight(20);
-        panelRound1.setRoundTopLeft(20);
-        panelRound1.setRoundTopRight(20);
-
-        jLabel16.setText("Datos \"Atemporales\" de la empresa (no depende de las reservas):");
-
-        jLabel1.setText("Aerolinea preferida");
-
-        jButton5.setText("Ver");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        btnGrafico1.setText("Grafico");
-        btnGrafico1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGrafico1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnGrafico1))
-                    .addComponent(jLabel16))
-                .addContainerGap(374, Short.MAX_VALUE))
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel16)
-                .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton5)
-                    .addComponent(btnGrafico1))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 740, 80));
-
         panelRound2.setBackground(new java.awt.Color(255, 255, 255));
         panelRound2.setRoundBottomLeft(20);
         panelRound2.setRoundBottomRight(20);
         panelRound2.setRoundTopLeft(20);
         panelRound2.setRoundTopRight(20);
+        panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setText("Datos \"Temporales\" depende de las reservas:");
+        jLabel15.setText("Datos de clientes:");
+        panelRound2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 6, -1, -1));
 
-        jLabel4.setText("Originenes más populares reservados");
-
-        jButton6.setText("Ver");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Origenes más populares reservados");
+        panelRound2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 37, -1, -1));
 
         btnGrafico2.setText("Grafico");
         btnGrafico2.addActionListener(new java.awt.event.ActionListener() {
@@ -623,15 +567,10 @@ public class frmEstadis extends javax.swing.JFrame {
                 btnGrafico2ActionPerformed(evt);
             }
         });
+        panelRound2.add(btnGrafico2, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 34, -1, -1));
 
         jLabel5.setText("Destinos más populares reservados");
-
-        jButton7.setText("Ver");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
+        panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 66, -1, -1));
 
         btnGrafico3.setText("Grafico");
         btnGrafico3.addActionListener(new java.awt.event.ActionListener() {
@@ -639,81 +578,74 @@ public class frmEstadis extends javax.swing.JFrame {
                 btnGrafico3ActionPerformed(evt);
             }
         });
+        panelRound2.add(btnGrafico3, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 63, -1, -1));
+
+        jLabel1.setText("Aerolinea preferida");
+        panelRound2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
+
+        btnGrafico1.setText("Grafico");
+        btnGrafico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrafico1ActionPerformed(evt);
+            }
+        });
+        panelRound2.add(btnGrafico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, -1, -1));
+
+        jLabel16.setText("Datos de la empresa:");
+        panelRound2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
+
+        jLabel6.setText("Vuelos Cancelados-Activos (grafioco de area)");
+        panelRound2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, 20));
 
         jLabel12.setText("de:");
+        panelRound2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
         desPopFechaInic.setDateFormatString("yyyy-MM-dd");
         desPopFechaInic.setMaxSelectableDate(new java.util.Date(253370786481000L));
-
-        desPopFechaFinal.setDateFormatString("yyyy-MM-dd");
+        panelRound2.add(desPopFechaInic, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 100, -1));
 
         jLabel9.setText("a:");
+        panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
 
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel4))
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGrafico2)))
-                .addGap(47, 47, 47)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGrafico3))
-                    .addComponent(jLabel5))
-                .addGap(58, 58, 58)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel9))
-                .addGap(27, 27, 27)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(desPopFechaInic, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(desPopFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6)
-                            .addComponent(btnGrafico2)
-                            .addComponent(jButton7)
-                            .addComponent(btnGrafico3)))
-                    .addGroup(panelRound2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9))
-                            .addGroup(panelRound2Layout.createSequentialGroup()
-                                .addComponent(desPopFechaInic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(desPopFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(10, Short.MAX_VALUE))
-        );
+        desPopFechaFinal.setDateFormatString("yyyy-MM-dd");
+        panelRound2.add(desPopFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
 
-        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 740, 90));
+        jLabel13.setText("Rango de fechas:");
+        panelRound2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel20.setText("Cantidad de reservas- reservas Canceladas (tiempo)");
+        panelRound2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel27.setText("Ganancias-perdidas de la empresa:");
+        panelRound2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
+
+        btnGraficoCancelActiv.setText("Gráficos (nt)");
+        btnGraficoCancelActiv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficoCancelActivActionPerformed(evt);
+            }
+        });
+        panelRound2.add(btnGraficoCancelActiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, -1, -1));
+
+        btnGananPerdid.setText("Gráficos");
+        btnGananPerdid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGananPerdidActionPerformed(evt);
+            }
+        });
+        panelRound2.add(btnGananPerdid, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, -1, -1));
+
+        btnReservCancel.setText("Gráfico");
+        btnReservCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservCancelActionPerformed(evt);
+            }
+        });
+        panelRound2.add(btnReservCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+
+        jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 800, 180));
 
         panelRound3.setBackground(new java.awt.Color(255, 255, 255));
         panelRound3.setRoundBottomLeft(20);
@@ -760,135 +692,17 @@ public class frmEstadis extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String url = "jdbc:mysql://localhost:3306/bd_vuelos";
-    String username = "root";
-    String password = "";
-
-    String aerolineaPreferida = "";
-    int vuelosMaximos = 0;
-
-    try {
-        Connection connection = DriverManager.getConnection(url, username, password);
-
-        // Crear una declaración SQL para obtener la aerolínea preferida
-        String query = "SELECT a.nombre AS aerolinea, COUNT(*) AS total "
-                + "FROM aerolinea a "
-                + "JOIN avion av ON a.id_aerolinea = av.id_aerolinea "
-                + "JOIN vuelo v ON av.id_avion = v.id_avion "
-                + "GROUP BY a.nombre "
-                + "ORDER BY total DESC "
-                + "LIMIT 1";
-
-        Statement statement = connection.createStatement();
-
-        ResultSet resultSet = statement.executeQuery(query);
-
-        if (resultSet.next()) {
-            aerolineaPreferida = resultSet.getString("aerolinea");
-            vuelosMaximos = resultSet.getInt("total");
-        }
-
-        resultSet.close();
-        statement.close();
-        connection.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
-    JOptionPane.showMessageDialog(this, "La aerolínea preferida es: " + aerolineaPreferida);
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void btnGrafico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico1ActionPerformed
-        panelGrafic.removeAll(); // Eliminar componentes anteriores del panel
-        ChartPanel chartPanel = Graficos.crearGrafico1(objAD.obtenerDatos1());
+        panelGrafic.removeAll();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaI = dateFormat.format(desPopFechaInic.getDate());
+        String fechaF = dateFormat.format(desPopFechaFinal.getDate());
+        
+        ChartPanel chartPanel = Graficos.crearGrafico1(objAD.obtenerDatosAerolineaPreferida(fechaI, fechaF));
         chartPanel.setPreferredSize(new Dimension(788, 328)); // Establecer el tamaño preferido del ChartPanel
         panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
         jPanel1.revalidate(); // Actualizar el contenedor principal
     }//GEN-LAST:event_btnGrafico1ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
-    String url = "jdbc:mysql://localhost:3306/bd_vuelos";
-    String username = "root";
-    String password = "";
-
-    String vueloMasVendido = "";
-
-    try {
-        Connection connection = DriverManager.getConnection(url, username, password);
-
-        String query = "SELECT v.destino "
-                + "FROM reserva_vuelo rv "
-                + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
-                + "GROUP BY v.destino "
-                + "ORDER BY COUNT(*) DESC "
-                + "LIMIT 1";
-
-        Statement statement = connection.createStatement();
-
-        ResultSet resultSet = statement.executeQuery(query);
-
-        if (resultSet.next()) {
-            vueloMasVendido = resultSet.getString("destino");
-        }
-
-        resultSet.close();
-        statement.close();
-        connection.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
-    JOptionPane.showMessageDialog(this, "El vuelo más vendido es: " + vueloMasVendido);
-
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
-    String url = "jdbc:mysql://localhost:3306/bd_vuelos";
-    String username = "root";
-    String password = "";
-
-    String destinoPopular = "";
-    int ventasMaximas = 0;
-
-    LocalDate fechaActual = LocalDate.now();
-
-    try {
-
-        Connection connection = DriverManager.getConnection(url, username, password);
-
-        String query = "SELECT v.destino, COUNT(*) AS total "
-                + "FROM reserva_vuelo rv "
-                + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
-                + "WHERE DATE(rv.fecha_reserva) = ? "
-                + "GROUP BY v.destino "
-                + "ORDER BY total DESC "
-                + "LIMIT 1";
-
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setDate(1, java.sql.Date.valueOf(fechaActual));
-
-        ResultSet resultSet = statement.executeQuery();
-
-        if (resultSet.next()) {
-            destinoPopular = resultSet.getString("destino");
-            ventasMaximas = resultSet.getInt("total");
-        }
-
-        resultSet.close();
-        statement.close();
-        connection.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-
-    JOptionPane.showMessageDialog(this, "El destino más popular del día de hoy es: " + destinoPopular);
-    
-
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnGrafico2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafico2ActionPerformed
 
@@ -1193,6 +1007,45 @@ public class frmEstadis extends javax.swing.JFrame {
 
     }//GEN-LAST:event_SliderDelMenuMouseExited
 
+    private void btnGraficoCancelActivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficoCancelActivActionPerformed
+        panelGrafic.removeAll();
+        
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //String fechaI = dateFormat.format(desPopFechaInic.getDate());
+        //String fechaF = dateFormat.format(desPopFechaFinal.getDate());
+
+        ChartPanel chartPanel = Graficos.crearGraficoVuelosCanceladosActivos(objVD.obtenerDatosVuelosCanceladosActivos());
+        chartPanel.setPreferredSize(new Dimension(788, 328)); 
+        panelGrafic.add(chartPanel);
+        jPanel1.revalidate();
+    }//GEN-LAST:event_btnGraficoCancelActivActionPerformed
+
+    private void btnGananPerdidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGananPerdidActionPerformed
+        panelGrafic.removeAll();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaI = dateFormat.format(desPopFechaInic.getDate());
+        String fechaF = dateFormat.format(desPopFechaFinal.getDate());
+        
+        ChartPanel chartPanel = Graficos.crearGraficoGananciasPerdidas(objRS.obtenerDatosGananciasPerdidas(fechaI, fechaF));
+        chartPanel.setPreferredSize(new Dimension(788, 328)); 
+        panelGrafic.add(chartPanel);
+        jPanel1.revalidate();
+    }//GEN-LAST:event_btnGananPerdidActionPerformed
+
+    private void btnReservCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservCancelActionPerformed
+                panelGrafic.removeAll();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaI = dateFormat.format(desPopFechaInic.getDate());
+        String fechaF = dateFormat.format(desPopFechaFinal.getDate());
+        
+        ChartPanel chartPanel = Graficos.crearGraficoReservasCanceladas(objRS.obtenerDatosReservasCanceladas(fechaI, fechaF));
+        chartPanel.setPreferredSize(new Dimension(788, 328)); 
+        panelGrafic.add(chartPanel);
+        jPanel1.revalidate();
+    }//GEN-LAST:event_btnReservCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1232,24 +1085,25 @@ public class frmEstadis extends javax.swing.JFrame {
     private javax.swing.JLabel SliderDelMenu;
     private javax.swing.JLabel btnBusCli;
     private javax.swing.JLabel btnEstadisticas;
+    private javax.swing.JButton btnGananPerdid;
     private javax.swing.JButton btnGrafico1;
     private javax.swing.JButton btnGrafico2;
     private javax.swing.JButton btnGrafico3;
+    private javax.swing.JButton btnGraficoCancelActiv;
     private javax.swing.JLabel btnReAero;
     private javax.swing.JLabel btnReTra;
     private javax.swing.JLabel btnRegAvion;
     private javax.swing.JLabel btnRegVue;
+    private javax.swing.JButton btnReservCancel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel cerrarSesion;
     private com.toedter.calendar.JDateChooser desPopFechaFinal;
     private com.toedter.calendar.JDateChooser desPopFechaInic;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1257,14 +1111,17 @@ public class frmEstadis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1287,7 +1144,6 @@ public class frmEstadis extends javax.swing.JFrame {
     private javax.swing.JPanel panelReTra;
     private javax.swing.JPanel panelRegAvion;
     private javax.swing.JPanel panelRegVue;
-    private util.PanelRound panelRound1;
     private util.PanelRound panelRound2;
     private util.PanelRound panelRound3;
     // End of variables declaration//GEN-END:variables

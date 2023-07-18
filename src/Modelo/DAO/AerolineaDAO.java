@@ -259,26 +259,29 @@ public class AerolineaDAO {
     
     
     //PARA EL GRAFICO
-    
-     public static DefaultCategoryDataset obtenerDatos1() {
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Connection cn=Conexion.getConexion();
+
+    public static DefaultCategoryDataset obtenerDatosAerolineaPreferida(String fechaInicio, String fechaFin) {
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    Connection cn = Conexion.getConexion();
 
     try {
-
-        // Crear una declaración SQL
-        Statement statement = cn.createStatement();
-
-        // Construir la consulta SQL para obtener las aerolíneas y la cantidad de vuelos asociados
+        // Crear una declaración SQL preparada
         String query = "SELECT a.nombre AS aerolinea, COUNT(*) AS total " +
                        "FROM aerolinea a " +
                        "JOIN avion av ON a.id_aerolinea = av.id_aerolinea " +
                        "JOIN vuelo v ON av.id_avion = v.id_avion " +
+                       "JOIN reserva_vuelo rv ON v.id_vuelo = rv.id_vuelo " +
+                       "WHERE rv.fecha_reserva >= ? AND rv.fecha_reserva <= ? " +
                        "GROUP BY a.nombre " +
                        "ORDER BY total DESC";
+        PreparedStatement statement = cn.prepareStatement(query);
+        
+        // Establecer los parámetros en la consulta preparada
+        statement.setString(1, fechaInicio);
+        statement.setString(2, fechaFin);
 
         // Ejecutar la consulta SQL
-        ResultSet resultSet = statement.executeQuery(query);
+        ResultSet resultSet = statement.executeQuery();
 
         // Agregar los datos al dataset
         while (resultSet.next()) {
@@ -295,5 +298,6 @@ public class AerolineaDAO {
         e.printStackTrace();
     }
     return dataset;
-     }
+    }
+
 }
