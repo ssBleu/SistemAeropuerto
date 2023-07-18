@@ -1205,7 +1205,7 @@ public class frmRegVue extends javax.swing.JFrame {
         if (filaSeleccionada != -1) {
             String idVuelo = tablaVuelo.getValueAt(filaSeleccionada, 0).toString();
             String estadoVuelo = tablaVuelo.getValueAt(filaSeleccionada, 11).toString();
-
+            
             int confirmacion;
             String mensaje;
 

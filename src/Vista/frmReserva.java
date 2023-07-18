@@ -787,7 +787,7 @@ public class frmReserva extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No hay más asientos disponibles en este vuelo.\nLa capacidad máxima es: "+capacidadAsientos);
                 } else{
                     Date fechaReserva = Calendar.getInstance().getTime();
-                    Reserva rs = new Reserva(0, dniPasajero, IdVuelo, fechaReserva);
+                    Reserva rs = new Reserva(0, dniPasajero, IdVuelo, fechaReserva,null);
                     objRS.crearReserva(rs);
                     cargarPasajeros(vuelito);
                     JOptionPane.showMessageDialog(null, "Pasajero agregado correctamente");

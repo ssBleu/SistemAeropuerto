@@ -8,12 +8,22 @@ public class Reserva {
     private int dniPasajero;
     private int idVuelo;
     private Date fechaReserva;
+    private String estadoReserva;
 
-    public Reserva(int idReserva, int dniPasajero, int idVuelo, Date fechaReserva) {
+    public Reserva(int idReserva, int dniPasajero, int idVuelo, Date fechaReserva, String estadoReserva) {
         this.idReserva = idReserva;
         this.dniPasajero = dniPasajero;
         this.idVuelo = idVuelo;
         this.fechaReserva = fechaReserva;
+        this.estadoReserva = estadoReserva;
+    }
+
+    public String getEstadoReserva() {
+        return estadoReserva;
+    }
+
+    public void setEstadoReserva(String estadoReserva) {
+        this.estadoReserva = estadoReserva;
     }
 
     public int getIdReserva() {

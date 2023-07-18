@@ -112,7 +112,7 @@ public class PasajeroDAO {
         Connection cn = Conexion.getConexion();
 
         try {
-            String sql = "SELECT r.id_reserva, p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, aero.nombre AS aerolinea, r.fecha_reserva " +
+            String sql = "SELECT r.id_reserva, p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, aero.nombre AS aerolinea, r.fecha_reserva, r.estado_reserva " +
                          "FROM reserva_vuelo r " +
                          "JOIN pasajero p ON r.dni_pasajero = p.dni_pasajero " +
                          "JOIN vuelo v ON r.id_vuelo = v.id_vuelo " +
@@ -130,8 +130,10 @@ public class PasajeroDAO {
                 String destino = resultSet.getString("destino");
                 String aerolinea = resultSet.getString("aerolinea");
                 String fechaReserva = resultSet.getString("fecha_reserva");
+                String id_Reserva = resultSet.getString("id_reserva");
+                String estadoReserva = resultSet.getString("estado_reserva");
 
-                Object[] cliente = {dniPasajero, nombre, apellido, origen, destino, aerolinea, fechaReserva};
+                Object[] cliente = {dniPasajero, nombre, apellido, origen, destino, aerolinea, fechaReserva, id_Reserva ,estadoReserva};
                 clientes.add(cliente);
             }
         } catch (SQLException ex) {
@@ -146,8 +148,7 @@ public class PasajeroDAO {
 
         return clientes;
     }
-    
-    
+
 public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nombre, String apellido, String origen, String destino, String fechaInicial, String fechaFinal) {
     List<Object[]> pasajerosReservadosFiltrados = new ArrayList<>();
     Connection cn = Conexion.getConexion();

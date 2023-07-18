@@ -5,6 +5,7 @@ import Controlador.LoginControlador;
 import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
 import static Vista.Controladores.objPS;
+import static Vista.Controladores.objRS;
 import static Vista.Controladores.objTR;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
@@ -101,7 +102,38 @@ public class frmBusCli extends javax.swing.JFrame {
         dateFinal.setDate(null);
     }
     
-void cancelarVuelo() {
+    void cancelarReserva(){
+        
+        int filaSeleccionada = TablaBuscCliente.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            String idReserva = TablaBuscCliente.getValueAt(filaSeleccionada, 7).toString();
+            String estadoReserva = TablaBuscCliente.getValueAt(filaSeleccionada, 8).toString();
+            
+            int confirmacion;
+            String mensaje;
+
+            if (estadoReserva.equalsIgnoreCase("CANCELADO")) {
+                confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de descancelar la reserva?", "Confirmar descancelación", JOptionPane.YES_NO_OPTION);
+                mensaje = "Vuelo descancelado exitosamente";
+            } else {
+                confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cancelar la reserva?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
+                mensaje = "Vuelo cancelado exitosamente";
+            }
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                objRS.cambiarEstadoReserva(idReserva, estadoReserva);
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
+            listado();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecciona un vuelo de la tabla");
+        }
+
+    }
+    
+void eliminarReserva() {
     if (filaSeleccionada != -1) {
         String dniPasajero = TablaBuscCliente.getValueAt(filaSeleccionada, 0).toString(); // Obtiene el DNI de la columna 0
         String fechaReserva = TablaBuscCliente.getValueAt(filaSeleccionada, 6).toString(); // Obtiene la fecha de reserva de la columna 6
@@ -242,6 +274,7 @@ void cancelarVuelo() {
         btnCancelarRes = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnEliminarReserva = new javax.swing.JButton();
         panelRound5 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaBuscCliente = new javax.swing.JTable();
@@ -814,7 +847,7 @@ void cancelarVuelo() {
                 btnCancelarResActionPerformed(evt);
             }
         });
-        panelRound4.add(btnCancelarRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 134, -1));
+        panelRound4.add(btnCancelarRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 134, 20));
 
         jButton4.setText("Registrar Cliente");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -832,6 +865,14 @@ void cancelarVuelo() {
         });
         panelRound4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 35, 134, -1));
 
+        btnEliminarReserva.setText("Eliminar Reserva");
+        btnEliminarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarReservaActionPerformed(evt);
+            }
+        });
+        panelRound4.add(btnEliminarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 130, -1));
+
         jPanel1.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 310, 160, 320));
 
         panelRound5.setBackground(new java.awt.Color(255, 255, 255));
@@ -842,13 +883,13 @@ void cancelarVuelo() {
 
         TablaBuscCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva"
+                "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva", "ID Reserva", "Estado Reserva"
             }
         ));
         TablaBuscCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -900,7 +941,7 @@ void cancelarVuelo() {
     }//GEN-LAST:event_btnBuscarCliActionPerformed
 
     private void btnCancelarResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarResActionPerformed
-        cancelarVuelo();
+        cancelarReserva();
     }//GEN-LAST:event_btnCancelarResActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1195,6 +1236,10 @@ void cancelarVuelo() {
         filaSeleccionada = fila;
 
     }//GEN-LAST:event_TablaBuscClienteMouseClicked
+
+    private void btnEliminarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarReservaActionPerformed
+        eliminarReserva();
+    }//GEN-LAST:event_btnEliminarReservaActionPerformed
      //colores panel/jlabel"botones" xd
     private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
     private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
@@ -1256,6 +1301,7 @@ void cancelarVuelo() {
     private javax.swing.JLabel btnBusCli;
     private javax.swing.JButton btnBuscarCli;
     private javax.swing.JButton btnCancelarRes;
+    private javax.swing.JButton btnEliminarReserva;
     private javax.swing.JLabel btnEstadisticas;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel btnReAero;

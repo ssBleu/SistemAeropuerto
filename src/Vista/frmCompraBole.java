@@ -108,7 +108,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         DefaultTableModel dt=(DefaultTableModel)tablaVueloBoleto.getModel();
 
         dt.setRowCount(0);
-        for(Vuelo x:objVD.obtenerListaVuelos()){
+        for(Vuelo x:objVD.obtenerListaVuelosActivos()){
             Object v[]={x.getIdVuelo(), x.getOrigen(),x.getDestino(), x.getDuracion(),x.getTipo(),x.getNombreAerolinea(), x.getPrecio()};
             dt.addRow(v);
         }
@@ -415,13 +415,13 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         tablaVueloBoleto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID_Vuelo", "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio", "Estado"
+                "ID_Vuelo", "Origen", "Destino", "Duración", "Tipo", "Aerolínea", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tablaVueloBoleto);

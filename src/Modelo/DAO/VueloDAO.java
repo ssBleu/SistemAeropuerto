@@ -86,7 +86,56 @@ public class VueloDAO {
     }
 }
  
-        public List<Vuelo> obtenerListaVuelos() {
+        public List<Vuelo> obtenerListaVuelosActivos() {
+            List<Vuelo> listaVuelos = new ArrayList<>();
+            Connection cn = Conexion.getConexion();
+
+            try {
+                String sql = "SELECT v.id_vuelo, v.origen, v.destino, v.fecha_salida, v.fecha_llegada, "
+                        + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, v.estado_vuelo, av.modelo, "
+                        + "ae.nombre FROM vuelo v "
+                        + "JOIN avion av ON v.id_avion = av.id_avion "
+                        + "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea "
+                        + "WHERE v.estado_vuelo = 'ACTIVO';";
+                PreparedStatement statement = cn.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    String idVuelo = resultSet.getString("id_vuelo");
+                    String origen = resultSet.getString("origen");
+                    String destino = resultSet.getString("destino");
+                    Date fechaSalida = resultSet.getDate("fecha_salida");
+                    Date fechaLlegada = resultSet.getDate("fecha_llegada");
+                    String duracion = resultSet.getString("duracion");
+                    String idAvion = resultSet.getString("id_avion");
+                    double precio = resultSet.getDouble("precio");
+                    String tipo = resultSet.getString("tipo_vuelo");
+                    String estado_vuelo = resultSet.getString("estado_vuelo");
+
+
+                    String nombreAvion = resultSet.getString("modelo");                
+                    String nombreAerolinea = resultSet.getString("nombre");
+
+                    Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, estado_vuelo);
+                    vuelo.setNombreAvion(nombreAvion);
+                    vuelo.setNombreAerolinea(nombreAerolinea);
+                    listaVuelos.add(vuelo);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    cn.close();
+                } catch (Exception e2) {
+                }
+            }
+
+            return listaVuelos;
+        }
+        
+        
+        
+                public List<Vuelo> obtenerListaVuelos() {
             List<Vuelo> listaVuelos = new ArrayList<>();
             Connection cn = Conexion.getConexion();
 
@@ -448,7 +497,7 @@ public class VueloDAO {
         Connection cn = Conexion.getConexion();
 
         String nuevoEstado = estadoActual.equalsIgnoreCase("ACTIVO") ? "CANCELADO" : "ACTIVO";
-        String fechaCancelacion = (nuevoEstado.equals("CANCELADO")) ? "CURDATE()" : "NULL";;
+        String fechaCancelacion = (nuevoEstado.equals("CANCELADO")) ? "CURDATE()" : "NULL";
 
         try {
             String sql = "UPDATE vuelo SET estado_vuelo = ?, fecha_cancelacion = " + fechaCancelacion + " WHERE id_vuelo = ?";
@@ -459,6 +508,25 @@ public class VueloDAO {
 
             statement.executeUpdate();
 
+            if ("CANCELADO".equals(nuevoEstado)) {
+                // Cancelar la reserva asociada al vuelo cancelado
+                String sqlCancelarReserva = "UPDATE reserva_vuelo SET estado_reserva = 'CANCELADO', fecha_cancelacion = " + fechaCancelacion + " WHERE id_vuelo = ?";
+                PreparedStatement statementCancelarReserva = cn.prepareStatement(sqlCancelarReserva);
+                System.out.println("HOLA NO FUNCION:");
+                statementCancelarReserva.setString(1, idVuelo);
+                statementCancelarReserva.executeUpdate();
+            } 
+            
+            if ("ACTIVO".equals(nuevoEstado)) {
+                // Descancelar la reserva asociada al vuelo descancelado
+                System.out.println("HOLA FUNCIONO?");
+                String sqlDescancelarReserva = "UPDATE reserva_vuelo SET estado_reserva = 'ACTIVO', fecha_cancelacion = NULL WHERE id_vuelo = ?";
+                PreparedStatement statementDescancelarReserva = cn.prepareStatement(sqlDescancelarReserva);
+
+                statementDescancelarReserva.setString(1, idVuelo);
+                statementDescancelarReserva.executeUpdate();
+            
+            }
             
         } catch (SQLException ex) {
             ex.printStackTrace();

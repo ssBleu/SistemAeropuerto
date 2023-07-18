@@ -46,7 +46,7 @@ public class ReservaDAO {
                     int  idVuelo = resultSet.getInt("id_vuelo");
                     Date fechaReserva = resultSet.getDate("fecha_reserva");
 
-                    return new Reserva(id, dniPasajero, idVuelo, fechaReserva);
+                    return new Reserva(id, dniPasajero, idVuelo, fechaReserva, null);
                 }
             }
         }
@@ -70,7 +70,7 @@ public class ReservaDAO {
                 int dniPasajero = resultSet.getInt("dni_pasajero");
                 Date fechaReserva = resultSet.getDate("fecha_reserva");
 
-                Reserva reserva = new Reserva(idReserva, dniPasajero, idVuelo, fechaReserva);
+                Reserva reserva = new Reserva(idReserva, dniPasajero, idVuelo, fechaReserva, null);
                 reservas.add(reserva);
             }
         } catch (SQLException ex) {
@@ -252,5 +252,32 @@ public class ReservaDAO {
 
     return cantidadReservas;
 }
+        
+            public void cambiarEstadoReserva(String idReserva, String estadoReserva) {
+        Connection cn = Conexion.getConexion();
+
+        String nuevoEstado = estadoReserva.equalsIgnoreCase("ACTIVO") ? "CANCELADO" : "ACTIVO";
+        String fechaCancelacion = (nuevoEstado.equals("CANCELADO")) ? "CURDATE()" : "NULL";
+
+        try {
+            String sql = "UPDATE reserva_vuelo SET estado_reserva = ?, fecha_cancelacion = " + fechaCancelacion + " WHERE id_reserva = ?";
+            PreparedStatement statement = cn.prepareStatement(sql);
+
+            statement.setString(1, nuevoEstado);
+            statement.setString(2, idReserva);
+
+            statement.executeUpdate();
+
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
 
 }
