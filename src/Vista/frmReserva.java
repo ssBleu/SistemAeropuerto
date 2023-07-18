@@ -87,6 +87,10 @@ public class frmReserva extends javax.swing.JFrame {
         lblOrigen.setText(name);
         lblDestino.setText(vuelo.getDestino());
         
+        int capacidadAsientos = objRS.obtenerCapacidadAsientos(idVuelo);
+        lblCapacidad.setText(""+capacidadAsientos);
+
+        
 
         List<Pasajero> pasajeros = objRS.obtenerPasajerosPorVuelo(idVuelo);
         List<Reserva> reservas = objRS.obtenerReservasPorVuelo(idVuelo);
@@ -183,6 +187,9 @@ public class frmReserva extends javax.swing.JFrame {
         lblPrecio = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblDestino = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        lblCapacidad = new javax.swing.JLabel();
+        btnCambVuelo = new javax.swing.JButton();
         panelRound4 = new util.PanelRound();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaReservas = new javax.swing.JTable();
@@ -675,7 +682,7 @@ public class frmReserva extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Precio:");
-        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        panelRound3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         lblOrigen.setText("jLabel13");
         panelRound3.add(lblOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
@@ -685,14 +692,29 @@ public class frmReserva extends javax.swing.JFrame {
         panelRound3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         lblPrecio.setText("jLabel16");
-        panelRound3.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
+        panelRound3.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Destino:");
-        panelRound3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 10));
+        panelRound3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, 20));
 
         lblDestino.setText("jLabel16");
-        panelRound3.add(lblDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+        panelRound3.add(lblDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel17.setText("Capacidad:");
+        panelRound3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+
+        lblCapacidad.setText("jLabel20");
+        panelRound3.add(lblCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, -1, -1));
+
+        btnCambVuelo.setText("Escoger otro vuelo");
+        btnCambVuelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambVueloActionPerformed(evt);
+            }
+        });
+        panelRound3.add(btnCambVuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 130, -1));
 
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 300, 160));
 
@@ -1073,6 +1095,12 @@ public class frmReserva extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_cboDNIsActionPerformed
 
+    private void btnCambVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambVueloActionPerformed
+       frmCompraBole frmComBole=new frmCompraBole();
+       frmComBole.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnCambVueloActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1111,6 +1139,7 @@ public class frmReserva extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SliderDelMenu;
     private javax.swing.JLabel btnBusCli;
+    private javax.swing.JButton btnCambVuelo;
     private javax.swing.JButton btnComprar;
     private javax.swing.JLabel btnEstadisticas;
     private javax.swing.JLabel btnReAero;
@@ -1128,6 +1157,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -1149,6 +1179,7 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApeUsu;
     private javax.swing.JLabel lblApellido;
+    private javax.swing.JLabel lblCapacidad;
     private javax.swing.JLabel lblDestino;
     private javax.swing.JLabel lblFotoSes;
     private javax.swing.JLabel lblFotoSes2;
