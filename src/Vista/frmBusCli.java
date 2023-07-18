@@ -19,6 +19,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -85,8 +86,8 @@ public class frmBusCli extends javax.swing.JFrame {
         
         dt.setRowCount(0);
       
-        for(Object[] Clientes :objPS.listarPasajerosVuelo()){
-            dt.addRow(Clientes);
+        for(Object[] ClientesCReserva :objPS.listarPasajerosVuelo()){
+            dt.addRow(ClientesCReserva);
         }
     }
     
@@ -99,6 +100,29 @@ public class frmBusCli extends javax.swing.JFrame {
         dateInicial.setDate(null);
         dateFinal.setDate(null);
     }
+    
+void cancelarVuelo() {
+    if (filaSeleccionada != -1) {
+        String dniPasajero = TablaBuscCliente.getValueAt(filaSeleccionada, 0).toString(); // Obtiene el DNI de la columna 0
+        String fechaReserva = TablaBuscCliente.getValueAt(filaSeleccionada, 6).toString(); // Obtiene la fecha de reserva de la columna 6
+
+        // Mostrar un cuadro de diálogo de confirmación
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar la reserva?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if (opcion == JOptionPane.YES_OPTION) {
+            objPS.eliminarReservaPorDniYFechaReserva(dniPasajero, fechaReserva);
+
+            // Eliminar la fila seleccionada de la tabla
+            DefaultTableModel model = (DefaultTableModel) TablaBuscCliente.getModel();
+            model.removeRow(filaSeleccionada);
+
+            // Reiniciar la variable filaSeleccionada
+            filaSeleccionada = -1;
+        }
+    } else {
+        JOptionPane.showMessageDialog(this,"No se ha seleccionado una reserva", "Error",JOptionPane.ERROR_MESSAGE);
+    }
+}
     
     void Datitos(){
            
@@ -215,7 +239,7 @@ public class frmBusCli extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         lblTotalClientes = new javax.swing.JLabel();
         panelRound4 = new util.PanelRound();
-        jButton3 = new javax.swing.JButton();
+        btnCancelarRes = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         panelRound5 = new util.PanelRound();
@@ -782,13 +806,15 @@ public class frmBusCli extends javax.swing.JFrame {
         panelRound4.setRoundBottomRight(20);
         panelRound4.setRoundTopLeft(20);
         panelRound4.setRoundTopRight(20);
+        panelRound4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setText("Cancelar vuelo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarRes.setText("Cancelar Reserva");
+        btnCancelarRes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnCancelarResActionPerformed(evt);
             }
         });
+        panelRound4.add(btnCancelarRes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 134, -1));
 
         jButton4.setText("Registrar Cliente");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -796,6 +822,7 @@ public class frmBusCli extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+        panelRound4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 250, 134, -1));
 
         jButton1.setText("Comprar Boletos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -803,30 +830,7 @@ public class frmBusCli extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
-        panelRound4.setLayout(panelRound4Layout);
-        panelRound4Layout.setHorizontalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound4Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
-        );
-        panelRound4Layout.setVerticalGroup(
-            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound4Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addGap(119, 119, 119)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(47, 47, 47))
-        );
+        panelRound4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 35, 134, -1));
 
         jPanel1.add(panelRound4, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 310, 160, 320));
 
@@ -847,6 +851,11 @@ public class frmBusCli extends javax.swing.JFrame {
                 "DNI", "Nombre", "Apellido", "Origen", "Destino", "Aerolínea", "Fecha Reserva"
             }
         ));
+        TablaBuscCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaBuscClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaBuscCliente);
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
@@ -890,9 +899,9 @@ public class frmBusCli extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscarCliActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnCancelarResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarResActionPerformed
+        cancelarVuelo();
+    }//GEN-LAST:event_btnCancelarResActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
       frmRegCli frmReCli= new frmRegCli();
@@ -1175,6 +1184,17 @@ public class frmBusCli extends javax.swing.JFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarCampos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private int filaSeleccionada = -1;
+    
+    private void TablaBuscClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaBuscClienteMouseClicked
+
+        // Obtener el índice de la fila seleccionada
+        int fila = TablaBuscCliente.getSelectedRow();
+        // Asignar el valor de la fila seleccionada a la variable filaSeleccionada
+        filaSeleccionada = fila;
+
+    }//GEN-LAST:event_TablaBuscClienteMouseClicked
      //colores panel/jlabel"botones" xd
     private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
     private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
@@ -1235,6 +1255,7 @@ public class frmBusCli extends javax.swing.JFrame {
     private javax.swing.JTable TablaBuscCliente;
     private javax.swing.JLabel btnBusCli;
     private javax.swing.JButton btnBuscarCli;
+    private javax.swing.JButton btnCancelarRes;
     private javax.swing.JLabel btnEstadisticas;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel btnReAero;
@@ -1245,7 +1266,6 @@ public class frmBusCli extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateFinal;
     private com.toedter.calendar.JDateChooser dateInicial;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

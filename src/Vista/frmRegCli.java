@@ -18,6 +18,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,11 @@ public class frmRegCli extends javax.swing.JFrame {
         initComponents();
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        
+        JLayeredPane layeredPane = getLayeredPane();
+        layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
+        panelDetras.setVisible(false);
+        
         listado();
         
         //tablita

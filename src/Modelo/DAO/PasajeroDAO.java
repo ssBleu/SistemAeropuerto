@@ -4,6 +4,7 @@ package Modelo.DAO;
 import Modelo.Conexion.Conexion;
 import Modelo.Pasajero;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -320,6 +321,27 @@ public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nom
         }
 
         return nacionalidadMasRegistrada;
+    }
+    
+    public void eliminarReservaPorDniYFechaReserva(String dniPasajero, String fechaReserva) {
+        Connection cn = Conexion.getConexion();
+
+        try {
+            String sql = "DELETE FROM Reserva_vuelo WHERE dni_pasajero = ? AND fecha_reserva = ?";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            statement.setString(1, dniPasajero);
+            statement.setString(2, fechaReserva);
+
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 
 }
