@@ -154,7 +154,7 @@ public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nom
     Connection cn = Conexion.getConexion();
 
     try {
-        String sql = "SELECT p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, a.nombre AS aerolinea, r.fecha_reserva" +
+        String sql = "SELECT p.dni_pasajero, p.nombre, p.apellido, v.origen, v.destino, a.nombre AS aerolinea, r.fecha_reserva, r.id_reserva, r.estado_reserva" +
                      " FROM Reserva_vuelo r" +
                      " INNER JOIN Pasajero p ON r.dni_pasajero = p.dni_pasajero" +
                      " INNER JOIN Vuelo v ON r.id_vuelo = v.id_vuelo" +
@@ -224,7 +224,7 @@ public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nom
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            Object[] fila = new Object[7];
+            Object[] fila = new Object[9];
             fila[0] = resultSet.getInt("dni_pasajero");
             fila[1] = resultSet.getString("nombre");
             fila[2] = resultSet.getString("apellido");
@@ -232,7 +232,8 @@ public List<Object[]> obtenerPasajerosReservadosFiltrados(String dni, String nom
             fila[4] = resultSet.getString("destino");
             fila[5] = resultSet.getString("aerolinea");
             fila[6] = resultSet.getDate("fecha_reserva");
-
+            fila[7] = resultSet.getInt("id_reserva");
+            fila[8] = resultSet.getString("estado_reserva");
             pasajerosReservadosFiltrados.add(fila);
         }
     } catch (SQLException ex) {

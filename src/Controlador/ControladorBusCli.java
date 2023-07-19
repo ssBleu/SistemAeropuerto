@@ -386,36 +386,37 @@ public class ControladorBusCli implements ActionListener, MouseListener {
         }
     }
 
-    void cancelarReserva() {
+void cancelarReserva() {
+    int filaSeleccionada = busCliForm.TablaBuscCliente.getSelectedRow();
 
-        int filaSeleccionada = busCliForm.TablaBuscCliente.getSelectedRow();
+    if (filaSeleccionada != -1) {
+        String idReserva = busCliForm.TablaBuscCliente.getValueAt(filaSeleccionada, 7).toString();
+        String estadoReserva = busCliForm.TablaBuscCliente.getValueAt(filaSeleccionada, 8).toString();
 
-        if (filaSeleccionada != -1) {
-            String idReserva = busCliForm.TablaBuscCliente.getValueAt(filaSeleccionada, 7).toString();
-            String estadoReserva = busCliForm.TablaBuscCliente.getValueAt(filaSeleccionada, 8).toString();
+        int confirmacion;
+        String mensaje;
 
-            int confirmacion;
-            String mensaje;
-
-            if (estadoReserva.equalsIgnoreCase("CANCELADO")) {
-                confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de descancelar la reserva?", "Confirmar descancelación", JOptionPane.YES_NO_OPTION);
-                mensaje = "Vuelo descancelado exitosamente";
-            } else {
-                confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cancelar la reserva?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
-                mensaje = "Vuelo cancelado exitosamente";
-            }
-
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                objRS.cambiarEstadoReserva(idReserva, estadoReserva);
-                JOptionPane.showMessageDialog(null, mensaje);
-            }
-            listado();
-
+        if (estadoReserva.equalsIgnoreCase("CANCELADO")) {
+            confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de descancelar la reserva?", "Confirmar descancelación", JOptionPane.YES_NO_OPTION);
+            mensaje = "Vuelo descancelado exitosamente";
+        } else if (estadoReserva.equalsIgnoreCase("REALIZADO")) {
+            JOptionPane.showMessageDialog(null, "No se puede cancelar un vuelo realizado");
+            return; // Finaliza el método sin realizar ninguna acción
         } else {
-            JOptionPane.showMessageDialog(null, "Selecciona un vuelo de la tabla");
+            confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cancelar la reserva?", "Confirmar cancelación", JOptionPane.YES_NO_OPTION);
+            mensaje = "Vuelo cancelado exitosamente";
         }
 
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            objRS.cambiarEstadoReserva(idReserva, estadoReserva);
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
+        listado();
+
+    } else {
+        JOptionPane.showMessageDialog(null, "Selecciona un vuelo de la tabla");
     }
+}
 
     private void cambiarColores(Component boton, Component panel) {
         if (maus) {

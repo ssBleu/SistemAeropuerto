@@ -139,6 +139,7 @@ public class frmEstadis extends javax.swing.JFrame {
         panelRound2.setRoundTopRight(20);
         panelRound2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setText("Datos de clientes:");
         panelRound2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 6, -1, -1));
 
@@ -146,24 +147,25 @@ public class frmEstadis extends javax.swing.JFrame {
         panelRound2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 37, -1, -1));
 
         btnOrigenPop.setText("Grafico");
-        panelRound2.add(btnOrigenPop, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 34, -1, -1));
+        panelRound2.add(btnOrigenPop, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
         jLabel5.setText("Destinos más populares reservados");
         panelRound2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 66, -1, -1));
 
         btnDestinoPop.setText("Grafico");
-        panelRound2.add(btnDestinoPop, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 63, -1, -1));
+        panelRound2.add(btnDestinoPop, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
 
         jLabel1.setText("Aerolinea preferida");
         panelRound2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, -1));
 
         btnAerolineaPop.setText("Grafico");
-        panelRound2.add(btnAerolineaPop, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, -1, -1));
+        panelRound2.add(btnAerolineaPop, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, -1, -1));
 
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("Datos de la empresa:");
         panelRound2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
-        jLabel6.setText("Vuelos Cancelados-Activos (grafioco de area)");
+        jLabel6.setText("Vuelos Cancelados VS Activos");
         panelRound2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, 20));
 
         jLabel12.setText("de:");
@@ -171,7 +173,7 @@ public class frmEstadis extends javax.swing.JFrame {
 
         desPopFechaInic.setDateFormatString("yyyy-MM-dd");
         desPopFechaInic.setMaxSelectableDate(new java.util.Date(253370786481000L));
-        panelRound2.add(desPopFechaInic, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 100, -1));
+        panelRound2.add(desPopFechaInic, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 100, -1));
 
         jLabel9.setText("a:");
         panelRound2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, -1, -1));
@@ -179,25 +181,24 @@ public class frmEstadis extends javax.swing.JFrame {
         desPopFechaFinal.setDateFormatString("yyyy-MM-dd");
         panelRound2.add(desPopFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Rango de fechas:");
         panelRound2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel20.setText("Cantidad de reservas- reservas Canceladas (tiempo)");
+        jLabel20.setText("Cantidad de reservas VS reservas Canceladas ");
         panelRound2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel27.setText("Ganancias-perdidas de la empresa:");
+        jLabel27.setText("Ganancias VS perdidas de la empresa:");
         panelRound2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
 
-        btnGraficoCancelActiv.setText("Gráficos (nt)");
+        btnGraficoCancelActiv.setText("Gráficos");
         panelRound2.add(btnGraficoCancelActiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, -1, -1));
 
         btnGananPerdid.setText("Gráficos");
         panelRound2.add(btnGananPerdid, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, -1, -1));
 
         btnReservCancel.setText("Gráfico");
-        panelRound2.add(btnReservCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
+        panelRound2.add(btnReservCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 800, 180));
 
