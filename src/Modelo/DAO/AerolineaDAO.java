@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class AerolineaDAO {
+public class AerolineaDAO{
 
     public void crearAerolinea(Aerolinea aerolinea) throws SQLException {
         Connection cn = Conexion.getConexion();
