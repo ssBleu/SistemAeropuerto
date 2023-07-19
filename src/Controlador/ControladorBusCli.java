@@ -33,8 +33,8 @@ public class ControladorBusCli implements ActionListener, MouseListener {
 
     private frmBusCli busCliForm;
 
-        private byte[] imagenUsuarioSes;
-        
+    private byte[] imagenUsuarioSes;
+
     public ControladorBusCli(frmBusCli form) {
         busCliForm = form;
 
@@ -57,26 +57,25 @@ public class ControladorBusCli implements ActionListener, MouseListener {
         //Para el panel Deslizante
         busCliForm.SliderDelMenu.addMouseListener(this);
         busCliForm.cerrarSesion.addMouseListener(this);
-        
+
         //Elementos del menu principal
         busCliForm.btnBusCli.addMouseListener(this);
         busCliForm.panelBusCli.addMouseListener(this);
-        
+
         busCliForm.btnReTra.addMouseListener(this);
         busCliForm.panelReTra.addMouseListener(this);
-        
+
         busCliForm.btnReAero.addMouseListener(this);
         busCliForm.panelReAero.addMouseListener(this);
-        
+
         busCliForm.btnRegVue.addMouseListener(this);
         busCliForm.panelRegVue.addMouseListener(this);
-        
+
         busCliForm.btnRegAvion.addMouseListener(this);
         busCliForm.panelRegAvion.addMouseListener(this);
-        
+
         busCliForm.btnEstadisticas.addMouseListener(this);
         busCliForm.panelEstadisticas.addMouseListener(this);
-        
 
     }
 
@@ -131,55 +130,51 @@ public class ControladorBusCli implements ActionListener, MouseListener {
             int fila = busCliForm.TablaBuscCliente.getSelectedRow();
             filaSeleccionada = fila;
         }
-        
+
         if (e.getSource() == busCliForm.cerrarSesion) {
             cerrarSesion();
-            frmLogin frmLogin=new frmLogin();
+            frmLogin frmLogin = new frmLogin();
             frmLogin.setVisible(true);
             busCliForm.setVisible(false);
         }
-        
-       
-        
+
         //elementos menu principal
-        if (e.getSource() == busCliForm.btnReTra | e.getSource() == busCliForm. panelReTra) {
-            frmRegTrab frmReTrab=new frmRegTrab();
+        if (e.getSource() == busCliForm.btnReTra | e.getSource() == busCliForm.panelReTra) {
+            frmRegTrab frmReTrab = new frmRegTrab();
             frmReTrab.setVisible(true);
             busCliForm.setVisible(false);
         }
-        
+
         if (e.getSource() == busCliForm.btnBusCli | e.getSource() == busCliForm.panelBusCli) {
-            frmBusCli frmBuCli=new frmBusCli();
+            frmBusCli frmBuCli = new frmBusCli();
             frmBuCli.setVisible(true);
             busCliForm.setVisible(false);
         }
-        
+
         if (e.getSource() == busCliForm.btnReAero | e.getSource() == busCliForm.panelReAero) {
-            frmRegAero frmRegAero=new frmRegAero();
+            frmRegAero frmRegAero = new frmRegAero();
             frmRegAero.setVisible(true);
             busCliForm.setVisible(false);
         }
-                
+
         if (e.getSource() == busCliForm.btnRegVue | e.getSource() == busCliForm.panelRegVue) {
-            frmRegVue frmRegVue=new frmRegVue();
+            frmRegVue frmRegVue = new frmRegVue();
             frmRegVue.setVisible(true);
             busCliForm.setVisible(false);
         }
-        
+
         if (e.getSource() == busCliForm.btnRegAvion | e.getSource() == busCliForm.panelRegAvion) {
-            frmRegAv frmRegAv=new frmRegAv();
+            frmRegAv frmRegAv = new frmRegAv();
             frmRegAv.setVisible(true);
             busCliForm.setVisible(false);
         }
-        
+
         if (e.getSource() == busCliForm.btnEstadisticas | e.getSource() == busCliForm.btnEstadisticas) {
-            frmEstadis frmEstadis=new frmEstadis();
+            frmEstadis frmEstadis = new frmEstadis();
             frmEstadis.setVisible(true);
             busCliForm.setVisible(false);
         }
-       
 
-        
         //Slider
         if (e.getSource() == busCliForm.SliderDelMenu) {
             busCliForm.SliderDelMenu.setEnabled(false);
@@ -231,81 +226,80 @@ public class ControladorBusCli implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
         if (e.getSource() == busCliForm.btnBusCli | e.getSource() == busCliForm.panelBusCli) {
             maus = true;
-            cambiarColores(busCliForm.btnBusCli,busCliForm.panelBusCli);
+            cambiarColores(busCliForm.btnBusCli, busCliForm.panelBusCli);
         }
-        
+
         if (e.getSource() == busCliForm.btnReTra | e.getSource() == busCliForm.panelReTra) {
             maus = true;
-            cambiarColores(busCliForm.btnReTra,busCliForm.panelReTra);
+            cambiarColores(busCliForm.btnReTra, busCliForm.panelReTra);
         }
-                
+
         if (e.getSource() == busCliForm.btnReAero | e.getSource() == busCliForm.panelReAero) {
             maus = true;
-            cambiarColores(busCliForm.btnReAero,busCliForm.panelReAero);
+            cambiarColores(busCliForm.btnReAero, busCliForm.panelReAero);
         }
-        
+
         if (e.getSource() == busCliForm.btnRegVue | e.getSource() == busCliForm.panelRegVue) {
             maus = true;
-            cambiarColores(busCliForm.btnRegVue,busCliForm.panelRegVue);
+            cambiarColores(busCliForm.btnRegVue, busCliForm.panelRegVue);
         }
-        
+
         if (e.getSource() == busCliForm.btnRegAvion | e.getSource() == busCliForm.panelRegAvion) {
             maus = true;
-            cambiarColores(busCliForm.btnRegAvion,busCliForm.panelRegAvion);
+            cambiarColores(busCliForm.btnRegAvion, busCliForm.panelRegAvion);
         }
-        
+
         if (e.getSource() == busCliForm.btnEstadisticas | e.getSource() == busCliForm.panelEstadisticas) {
             maus = true;
-            cambiarColores(busCliForm.btnEstadisticas,busCliForm.panelEstadisticas);
+            cambiarColores(busCliForm.btnEstadisticas, busCliForm.panelEstadisticas);
         }
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {  
+    public void mouseExited(MouseEvent e) {
         if (e.getSource() == busCliForm.btnBusCli | e.getSource() == busCliForm.panelBusCli) {
             maus = false;
-            cambiarColores(busCliForm.btnBusCli,busCliForm.panelBusCli);
+            cambiarColores(busCliForm.btnBusCli, busCliForm.panelBusCli);
         }
-        
+
         if (e.getSource() == busCliForm.btnReTra | e.getSource() == busCliForm.panelReTra) {
             maus = false;
-            cambiarColores(busCliForm.btnReTra,busCliForm.panelReTra);
+            cambiarColores(busCliForm.btnReTra, busCliForm.panelReTra);
         }
-               
+
         if (e.getSource() == busCliForm.btnReTra | e.getSource() == busCliForm.panelReTra) {
             maus = false;
-            cambiarColores(busCliForm.btnReTra,busCliForm.panelReTra);
+            cambiarColores(busCliForm.btnReTra, busCliForm.panelReTra);
         }
-                
+
         if (e.getSource() == busCliForm.btnReAero | e.getSource() == busCliForm.panelReAero) {
             maus = false;
-            cambiarColores(busCliForm.btnReAero,busCliForm.panelReAero);
+            cambiarColores(busCliForm.btnReAero, busCliForm.panelReAero);
         }
-        
+
         if (e.getSource() == busCliForm.btnRegVue | e.getSource() == busCliForm.panelRegVue) {
             maus = false;
-            cambiarColores(busCliForm.btnRegVue,busCliForm.panelRegVue);
+            cambiarColores(busCliForm.btnRegVue, busCliForm.panelRegVue);
         }
-        
+
         if (e.getSource() == busCliForm.btnRegAvion | e.getSource() == busCliForm.panelRegAvion) {
             maus = false;
-            cambiarColores(busCliForm.btnRegAvion,busCliForm.panelRegAvion);
+            cambiarColores(busCliForm.btnRegAvion, busCliForm.panelRegAvion);
         }
-        
+
         if (e.getSource() == busCliForm.btnEstadisticas | e.getSource() == busCliForm.panelEstadisticas) {
             maus = false;
-            cambiarColores(busCliForm.btnEstadisticas,busCliForm.panelEstadisticas);
+            cambiarColores(busCliForm.btnEstadisticas, busCliForm.panelEstadisticas);
         }
-        
 
     }
-    
+
     private boolean maus = false;
     private int filaSeleccionada = -1;
-    
+
     //colores panel/jlabel"botones" xd
     private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
-    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
+    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67, 90, 132);
     private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
 
     //metodos
@@ -422,23 +416,22 @@ public class ControladorBusCli implements ActionListener, MouseListener {
         }
 
     }
-    
-    
+
     private void cambiarColores(Component boton, Component panel) {
-    if (maus) {
-        boton.setForeground(ColorEnteredBoton);
-        panel.setBackground(ColorEnteredPanel);
-    } else {
-        boton.setForeground(Color.WHITE);
-        panel.setBackground(ColorOriginalPanel);
+        if (maus) {
+            boton.setForeground(ColorEnteredBoton);
+            panel.setBackground(ColorEnteredPanel);
+        } else {
+            boton.setForeground(Color.WHITE);
+            panel.setBackground(ColorOriginalPanel);
+        }
     }
-}
-    
-        public void obtenerUsuarioSesionado() {
+
+    public void obtenerUsuarioSesionado() {
         Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
         if (trabajadorSesionado != null) {
 
-            busCliForm.lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
+            busCliForm.lblIDUsu.setText("" + trabajadorSesionado.getCodigoTra());
             busCliForm.lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
             busCliForm.lblNombreSes.setText(trabajadorSesionado.getNombre());
             busCliForm.lblApeUsu.setText(trabajadorSesionado.getApellido());
@@ -451,7 +444,7 @@ public class ControladorBusCli implements ActionListener, MouseListener {
             LocalTime horaActual = LocalTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
             String horaDeInicio = horaActual.format(formatter);
-            busCliForm.lblTiempSes.setText(""+horaDeInicio);
+            busCliForm.lblTiempSes.setText("" + horaDeInicio);
         } else {
             System.out.println("Se supone que esto no debe pasar XD");
         }
