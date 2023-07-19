@@ -45,6 +45,8 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
         //ActionListeners
         compraBoleForm.btnBuscar.addActionListener(this);
         compraBoleForm.btnReservar.addActionListener(this);
+        
+       
         //MouseListeners
         compraBoleForm.btnCerrar.addMouseListener(this);
         compraBoleForm.btnMinimizar.addMouseListener(this);
@@ -78,7 +80,10 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == compraBoleForm.btnMinimizar) {
+
+        
+        
+        if (e.getSource() == compraBoleForm.btnReservar) {
             int selectedRow = compraBoleForm.tablaVueloBoleto.getSelectedRow();
             if (selectedRow != -1) {
                 int idVuelo = Integer.parseInt(compraBoleForm.tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
