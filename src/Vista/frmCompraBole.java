@@ -1,6 +1,7 @@
 
 package Vista;
 
+import Controlador.ControladorCompraBole;
 import Controlador.LoginControlador;
 import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Trabajador;
@@ -27,11 +28,12 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class frmCompraBole extends javax.swing.JFrame {
-        
-    private byte[] imagenUsuarioSes;
+        private ControladorCompraBole controladorCompraBole;
+        private byte[] imagenUsuarioSes;
     
     public frmCompraBole() {
         initComponents();
+        controladorCompraBole = new  ControladorCompraBole(this);
         
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
@@ -39,7 +41,6 @@ public class frmCompraBole extends javax.swing.JFrame {
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         
-        listadoVuelosInicial();
 
         tablaVueloBoleto.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaVueloBoleto.getTableHeader().setOpaque(false);
@@ -66,97 +67,13 @@ public class frmCompraBole extends javax.swing.JFrame {
             cboDestino.addItem(destino);
         }
         
-        obtenerUsuarioSesionado();
-        Datitos();
     }
     
-    public void obtenerUsuarioSesionado() {
-        Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
-        if (trabajadorSesionado != null) {
 
-            lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
-            lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
-            lblNombreSes.setText(trabajadorSesionado.getNombre());
-            lblApeUsu.setText(trabajadorSesionado.getApellido());
-            imagenUsuarioSes = trabajadorSesionado.getFoto();
-            ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
-            lblFotoSes.setIcon(IconoSelec);
-            lblFotoSes2.setIcon(IconoSelec);
-            lblUsuarioSes2.setText(trabajadorSesionado.getUsuario());
-
-            LocalTime horaActual = LocalTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String horaDeInicio = horaActual.format(formatter);
-            lblTiempSes.setText(""+horaDeInicio);
-        } else {
-            System.out.println("Se supone que esto no debe pasar XD");
-        }
-    }
-    
-        void Datitos(){
-           
-        double promedioPrecios = objVD.calcularTendenciaPromedioPrecios();
-        lblPromedioPrecios.setText("" + promedioPrecios);
-                
-        String destinoPopular = objVD.obtenerDestinoMasPopular();
-        lblDestinoPopular.setText(destinoPopular);
-        
-    }
-    
-   
-    void listadoVuelosInicial(){
-        DefaultTableModel dt=(DefaultTableModel)tablaVueloBoleto.getModel();
-
-        dt.setRowCount(0);
-        for(Vuelo x:objVD.obtenerListaVuelosActivos()){
-            Object v[]={x.getIdVuelo(), x.getOrigen(),x.getDestino(), x.getDuracion(),x.getTipo(),x.getNombreAerolinea(), x.getPrecio()};
-            dt.addRow(v);
-        }
-    }
-    
-    private void filtrarTabla() {
-        DefaultTableModel dt = (DefaultTableModel) tablaVueloBoleto.getModel();
-        String origenSeleccionado = (String) cboOrigen.getSelectedItem();
-        String destinoSeleccionado = (String) cboDestino.getSelectedItem();
-        String duracionSeleccionada = (String) cboDuracion.getSelectedItem();
-   
-        int precioElegido = slifer.getValue();
-
-        if (origenSeleccionado.equals("Cualquiera")) {
-            origenSeleccionado = "";
-        }
-        if (destinoSeleccionado.equals("Cualquiera")) {
-            destinoSeleccionado = "";
-        }
-        if (duracionSeleccionada.equals("Cualquiera")) {
-            duracionSeleccionada = "";
-        }
-        
-        dt.setRowCount(0);
-        List<Vuelo> vuelosFiltrados = objVD.obtenerVuelosFiltrados(origenSeleccionado, destinoSeleccionado, duracionSeleccionada, precioElegido);
-
-        if (vuelosFiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No se encontraron vuelos que cumplan con los criterios de búsqueda.");
-        } else {
-            for (Vuelo x : vuelosFiltrados) {
-                Object v[] = {x.getIdVuelo(), x.getOrigen(), x.getDestino(), x.getDuracion(), x.getTipo(),
-                        x.getNombreAerolinea(), String.valueOf(x.getPrecio())};
-                dt.addRow(v);
-            }
-        }
-    }
- 
-    
-    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        SliderDelMenu = new javax.swing.JLabel();
         panelRound1 = new util.PanelRound();
         cboDestino = new util.Cbox();
         cboOrigen = new util.Cbox();
@@ -186,7 +103,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnReTra = new javax.swing.JLabel();
         panelBusCli = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         btnBusCli = new javax.swing.JLabel();
         lblFotoSes2 = new javax.swing.JLabel();
         panelReAero = new javax.swing.JPanel();
@@ -199,14 +116,14 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         btnRegAvion = new javax.swing.JLabel();
         panelEstadisticas = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         btnEstadisticas = new javax.swing.JLabel();
         panelDetras = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         lblTiempSes = new javax.swing.JLabel();
         lblUsuarioSes = new javax.swing.JLabel();
         lblNombreSes = new javax.swing.JLabel();
@@ -215,7 +132,12 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblFotoSes = new javax.swing.JLabel();
         cerrarSesion = new javax.swing.JLabel();
         lblUsuarioSes2 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnMinimizar = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        SliderDelMenu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -224,85 +146,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(239, 231, 231));
         jPanel1.setVerifyInputWhenFocusTarget(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(12, 64, 160));
-
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
-        jLabel3.setText("-");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 24)); // NOI18N
-        jLabel2.setText("x");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("COMPRA DE BOLETOS");
-
-        SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
-        SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SliderDelMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
-        SliderDelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        SliderDelMenu.setOpaque(true);
-        SliderDelMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SliderDelMenuMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SliderDelMenuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                SliderDelMenuMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(SliderDelMenu)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 695, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(SliderDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
 
         panelRound1.setBackground(new java.awt.Color(255, 255, 255));
         panelRound1.setRoundBottomLeft(20);
@@ -516,21 +359,9 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 300, 150));
 
         jPanel3.setBackground(new java.awt.Color(67, 90, 132));
-        jPanel3.setPreferredSize(new java.awt.Dimension(250, 660));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelReTra.setBackground(new java.awt.Color(67, 90, 132));
-        panelReTra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelReTraMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelReTraMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelReTraMouseExited(evt);
-            }
-        });
         panelReTra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -542,55 +373,22 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnReTra.setForeground(new java.awt.Color(255, 255, 255));
         btnReTra.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReTra.setText("Registro de Trabajador");
-        btnReTra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReTraMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReTraMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReTraMouseExited(evt);
-            }
-        });
         panelReTra.add(btnReTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
         jPanel3.add(panelReTra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, 50));
 
         panelBusCli.setBackground(new java.awt.Color(67, 90, 132));
-        panelBusCli.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelBusCliMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelBusCliMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelBusCliMouseExited(evt);
-            }
-        });
         panelBusCli.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscli (1).png"))); // NOI18N
-        panelBusCli.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscli (1).png"))); // NOI18N
+        panelBusCli.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
         btnBusCli.setBackground(new java.awt.Color(255, 255, 255));
         btnBusCli.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnBusCli.setForeground(new java.awt.Color(255, 255, 255));
         btnBusCli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnBusCli.setText("Búsqueda de Cliente");
-        btnBusCli.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBusCliMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBusCliMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBusCliMouseExited(evt);
-            }
-        });
         panelBusCli.add(btnBusCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
         jPanel3.add(panelBusCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 250, 50));
@@ -599,17 +397,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel3.add(lblFotoSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 90));
 
         panelReAero.setBackground(new java.awt.Color(67, 90, 132));
-        panelReAero.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelReAeroMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelReAeroMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelReAeroMouseExited(evt);
-            }
-        });
         panelReAero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -621,33 +408,11 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnReAero.setForeground(new java.awt.Color(255, 255, 255));
         btnReAero.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReAero.setText("Registro de Aerolínea");
-        btnReAero.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReAeroMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReAeroMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReAeroMouseExited(evt);
-            }
-        });
         panelReAero.add(btnReAero, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
         jPanel3.add(panelReAero, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 250, 50));
 
         panelRegVue.setBackground(new java.awt.Color(67, 90, 132));
-        panelRegVue.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRegVueMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelRegVueMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelRegVueMouseExited(evt);
-            }
-        });
         panelRegVue.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -658,33 +423,11 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnRegVue.setForeground(new java.awt.Color(255, 255, 255));
         btnRegVue.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRegVue.setText("Registro de Vuelos");
-        btnRegVue.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegVueMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegVueMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegVueMouseExited(evt);
-            }
-        });
         panelRegVue.add(btnRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
         jPanel3.add(panelRegVue, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 250, -1));
 
         panelRegAvion.setBackground(new java.awt.Color(67, 90, 132));
-        panelRegAvion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelRegAvionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelRegAvionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelRegAvionMouseExited(evt);
-            }
-        });
         panelRegAvion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -696,54 +439,21 @@ public class frmCompraBole extends javax.swing.JFrame {
         btnRegAvion.setForeground(new java.awt.Color(255, 255, 255));
         btnRegAvion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRegAvion.setText("Registro de Avion");
-        btnRegAvion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegAvionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRegAvionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRegAvionMouseExited(evt);
-            }
-        });
         panelRegAvion.add(btnRegAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
         jPanel3.add(panelRegAvion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 250, -1));
 
         panelEstadisticas.setBackground(new java.awt.Color(67, 90, 132));
-        panelEstadisticas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelEstadisticasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                panelEstadisticasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                panelEstadisticasMouseExited(evt);
-            }
-        });
         panelEstadisticas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
-        panelEstadisticas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/estadis (1).png"))); // NOI18N
+        panelEstadisticas.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 50, 50));
 
         btnEstadisticas.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnEstadisticas.setForeground(new java.awt.Color(255, 255, 255));
         btnEstadisticas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnEstadisticas.setText("Estadísticas");
-        btnEstadisticas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEstadisticasMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEstadisticasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEstadisticasMouseExited(evt);
-            }
-        });
         panelEstadisticas.add(btnEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 150, 30));
 
         jPanel3.add(panelEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 250, -1));
@@ -752,10 +462,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         panelDetras.setPreferredSize(new java.awt.Dimension(250, 660));
         panelDetras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Nombre:");
-        panelDetras.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 30));
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Nombre:");
+        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, 30));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
@@ -772,10 +482,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         jLabel24.setText("Inicio de sesión:");
         panelDetras.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel25.setText("ID Usuario:");
-        panelDetras.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, 30));
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("ID Usuario:");
+        panelDetras.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, 30));
 
         lblTiempSes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblTiempSes.setForeground(new java.awt.Color(204, 255, 204));
@@ -809,11 +519,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         cerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         cerrarSesion.setText("Cerrar Sesión");
-        cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cerrarSesionMouseClicked(evt);
-            }
-        });
         panelDetras.add(cerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 600, -1, -1));
 
         jPanel3.add(panelDetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
@@ -826,12 +531,70 @@ public class frmCompraBole extends javax.swing.JFrame {
         lblUsuarioSes2.setPreferredSize(new java.awt.Dimension(55, 20));
         jPanel3.add(lblUsuarioSes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 160, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Usuario:");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 160, -1, -1));
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Usuario:");
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 160, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 660));
+
+        jPanel2.setBackground(new java.awt.Color(12, 64, 160));
+
+        btnMinimizar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
+        btnMinimizar.setText("-");
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnCerrar.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 24)); // NOI18N
+        btnCerrar.setText("x");
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("COMPRA DE BOLETOS");
+
+        SliderDelMenu.setBackground(new java.awt.Color(12, 64, 160));
+        SliderDelMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SliderDelMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menuGOD.png"))); // NOI18N
+        SliderDelMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SliderDelMenu.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(SliderDelMenu)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 695, Short.MAX_VALUE)
+                        .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(166, 166, 166)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCerrar))
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SliderDelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 840, 80));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 660));
 
@@ -839,36 +602,12 @@ public class frmCompraBole extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        this.setState(frmLogin.ICONIFIED);
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int result = JOptionPane.showConfirmDialog(null, "¿Desea salir?","EXIT",dialogButton);
-        if(result == 0){
-            System.exit(0);
-        }
-    }//GEN-LAST:event_jLabel2MouseClicked
-
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
 
-        int selectedRow = tablaVueloBoleto.getSelectedRow();
-        if (selectedRow != -1) {
-            int idVuelo = Integer.parseInt(tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
-            
-            Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
-            frmReserva frmReser = new frmReserva();
-            frmReser.cargarPasajeros(vueloSeleccionado);
-            frmReser.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un vuelo para realizar la reserva", "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_btnReservarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        filtrarTabla();
+        //filtrarTabla();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cboOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboOrigenActionPerformed
@@ -884,91 +623,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sliferStateChanged
 
-    private void btnReTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseClicked
-        frmRegTrab frmReTrab=new frmRegTrab();
-        frmReTrab.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnReTraMouseClicked
-
-    private void btnBusCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseClicked
-        frmBusCli frmBuCli=new frmBusCli();
-        frmBuCli.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnBusCliMouseClicked
-
-    private void btnReAeroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseClicked
-        frmRegAero frmReAero=new frmRegAero();
-        frmReAero.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnReAeroMouseClicked
-
-    private void btnEstadisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisticasMouseClicked
-        frmEstadis frmEsta=new frmEstadis();
-        frmEsta.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnEstadisticasMouseClicked
-
-    private void btnRegAvionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegAvionMouseClicked
-        frmRegAv frmReVue=new frmRegAv();
-        frmReVue.setVisible(true);
-        this.setVisible(false);
-
-    }//GEN-LAST:event_btnRegAvionMouseClicked
-
-    private void btnRegVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseClicked
-        frmRegVue frmRegVue=new frmRegVue();
-        frmRegVue.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnRegVueMouseClicked
-
-
-    @SuppressWarnings("unchecked")
-
-
-    private void SliderDelMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseClicked
-        // desactiva el botoncito para que no presiones a cada rato :,v
-       SliderDelMenu.setEnabled(false);
-
-       int initialSize = jPanel3.getWidth();
-       int finalSize = (initialSize == 250) ? 0 : 250;
-       int increment = (finalSize < initialSize) ? -5 : 5; // El tamaño cambia de -5 o 5 (puede cambiarse)
-       int delay = 5; // Retardo (ms)
-
-       Timer timer = new Timer(delay, new ActionListener() {
-           int currentSize = initialSize; // 0 o 250
-
-           @Override
-           public void actionPerformed(ActionEvent e) {
-               if ((increment < 0 && currentSize >= finalSize) || (increment > 0 && currentSize <= finalSize)) {
-                   jPanel3.setSize(currentSize, 660); //0 o 250 dependiendo :v
-                   panelDetras.setLocation(currentSize, panelDetras.getY()); // el panel se mueve mientras el otro aparece :v 
-                   panelDetras.setSize(250 - currentSize, 660); // Ajustar el tamaño //(desactivar para ver la magia)
-                   currentSize += increment;
-                   panelDetras.setVisible(true); //UNA HORA POR ESTA WEAAA
-               } else {
-                   ((Timer) e.getSource()).stop();
-
-                   if (finalSize == 0) {
-                       panelDetras.setVisible(true);
-                   } else {
-                       panelDetras.setVisible(false);
-                   }
-
-                   // activa el botoncito
-                   SliderDelMenu.setEnabled(true);
-               }
-           }
-       });
-       timer.start();
-    }//GEN-LAST:event_SliderDelMenuMouseClicked
-
-    private void SliderDelMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseEntered
-
-    }//GEN-LAST:event_SliderDelMenuMouseEntered
-
-    private void SliderDelMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderDelMenuMouseExited
-
-    }//GEN-LAST:event_SliderDelMenuMouseExited
     
     //colores panel/jlabel"botones" xd
     private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
@@ -987,170 +641,7 @@ public class frmCompraBole extends javax.swing.JFrame {
         panel.setBackground(ColorOriginalPanel);
     }
 }
-    
-    private void btnBusCliMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseEntered
-        maus = true;
-        cambiarColores(btnBusCli,panelBusCli);
-    }//GEN-LAST:event_btnBusCliMouseEntered
-
-    private void btnBusCliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusCliMouseExited
-        maus = false;
-        cambiarColores(btnBusCli,panelBusCli);
-    }//GEN-LAST:event_btnBusCliMouseExited
-
-    private void btnReTraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseEntered
-        maus = true;
-        cambiarColores(btnReTra,panelReTra);
-    }//GEN-LAST:event_btnReTraMouseEntered
-
-    private void btnReTraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReTraMouseExited
-        maus = false;
-        cambiarColores(btnReTra,panelReTra);
-    }//GEN-LAST:event_btnReTraMouseExited
-
-    private void btnReAeroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseEntered
-        maus = true;
-        cambiarColores(btnReAero,panelReAero);
-    }//GEN-LAST:event_btnReAeroMouseEntered
-
-    private void btnReAeroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReAeroMouseExited
-        maus = false;
-        cambiarColores(btnReAero,panelReAero);
-    }//GEN-LAST:event_btnReAeroMouseExited
-
-    private void btnRegVueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseEntered
-        maus = true;
-        cambiarColores(btnRegVue,panelRegVue);
-    }//GEN-LAST:event_btnRegVueMouseEntered
-
-    private void btnRegVueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegVueMouseExited
-        maus = false;
-        cambiarColores(btnRegVue,panelRegVue);
-    }//GEN-LAST:event_btnRegVueMouseExited
-
-    private void btnRegAvionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegAvionMouseEntered
-        maus = true;
-        cambiarColores(btnRegAvion,panelRegAvion);
-    }//GEN-LAST:event_btnRegAvionMouseEntered
-
-    private void btnRegAvionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegAvionMouseExited
-        maus = false;
-        cambiarColores(btnRegAvion,panelRegAvion);
-    }//GEN-LAST:event_btnRegAvionMouseExited
-
-    private void btnEstadisticasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisticasMouseEntered
-        maus = true;
-        cambiarColores(btnEstadisticas,panelEstadisticas);
-    }//GEN-LAST:event_btnEstadisticasMouseEntered
-
-    private void btnEstadisticasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstadisticasMouseExited
-        maus = false;
-        cambiarColores(btnEstadisticas,panelEstadisticas);
-    }//GEN-LAST:event_btnEstadisticasMouseExited
-//paneles
-    private void panelBusCliMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBusCliMouseExited
-        maus = false;
-        cambiarColores(btnBusCli,panelBusCli);
-    }//GEN-LAST:event_panelBusCliMouseExited
-
-    private void panelBusCliMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBusCliMouseEntered
-        maus = true;
-        cambiarColores(btnBusCli, panelBusCli);
-    }//GEN-LAST:event_panelBusCliMouseEntered
-
-    private void panelReTraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReTraMouseExited
-        maus = false;
-        cambiarColores(btnReTra, panelReTra);
-    }//GEN-LAST:event_panelReTraMouseExited
-
-    private void panelReTraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReTraMouseEntered
-        maus = true;
-        cambiarColores(btnReTra, panelReTra);
-    }//GEN-LAST:event_panelReTraMouseEntered
-
-    private void panelReAeroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReAeroMouseExited
-        maus = false;
-        cambiarColores(btnReAero, panelReAero);
-    }//GEN-LAST:event_panelReAeroMouseExited
-
-    private void panelReAeroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReAeroMouseEntered
-        maus = true;
-        cambiarColores(btnReAero, panelReAero);
-    }//GEN-LAST:event_panelReAeroMouseEntered
-
-    private void panelRegVueMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegVueMouseExited
-        maus = false;
-        cambiarColores(btnRegVue, panelRegVue);
-    }//GEN-LAST:event_panelRegVueMouseExited
-
-    private void panelRegVueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegVueMouseEntered
-        maus = true;
-        cambiarColores(btnRegVue, panelRegVue);
-    }//GEN-LAST:event_panelRegVueMouseEntered
-
-    private void panelRegAvionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegAvionMouseExited
-        maus = false;
-        cambiarColores(btnRegAvion, panelRegAvion);
-    }//GEN-LAST:event_panelRegAvionMouseExited
-
-    private void panelRegAvionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegAvionMouseEntered
-        maus = true;
-        cambiarColores(btnRegAvion, panelRegAvion);
-    }//GEN-LAST:event_panelRegAvionMouseEntered
-
-    private void panelEstadisticasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstadisticasMouseExited
-        maus = false;
-        cambiarColores(btnEstadisticas, panelEstadisticas);
-    }//GEN-LAST:event_panelEstadisticasMouseExited
-
-    private void panelEstadisticasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstadisticasMouseEntered
-        maus = true;
-        cambiarColores(btnEstadisticas, panelEstadisticas);
-    }//GEN-LAST:event_panelEstadisticasMouseEntered
-
-    private void panelBusCliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBusCliMouseClicked
-        frmBusCli frmBuCli=new frmBusCli();
-        frmBuCli.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panelBusCliMouseClicked
-
-    private void panelReTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReTraMouseClicked
-        frmRegTrab frmRegTrab=new frmRegTrab();
-        frmRegTrab.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panelReTraMouseClicked
-
-    private void panelReAeroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReAeroMouseClicked
-        frmRegAero frmRegAero=new frmRegAero();
-        frmRegAero.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panelReAeroMouseClicked
-
-    private void panelRegVueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegVueMouseClicked
-        frmRegVue frmRegVue=new frmRegVue();
-        frmRegVue.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panelRegVueMouseClicked
-
-    private void panelRegAvionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRegAvionMouseClicked
-        frmRegAv frmRegAv=new frmRegAv();
-        frmRegAv.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panelRegAvionMouseClicked
-
-    private void panelEstadisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelEstadisticasMouseClicked
-        frmEstadis frmEstadis=new frmEstadis();
-        frmEstadis.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_panelEstadisticasMouseClicked
-
-    private void cerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarSesionMouseClicked
-        cerrarSesion();
-        frmLogin frmLogin=new frmLogin();
-        frmLogin.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_cerrarSesionMouseClicked
-    
+        
 
     /**
      * @param args the command line arguments
@@ -1189,36 +680,36 @@ public class frmCompraBole extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SliderDelMenu;
-    private javax.swing.JLabel btnBusCli;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JLabel btnEstadisticas;
-    private javax.swing.JLabel btnReAero;
-    private javax.swing.JLabel btnReTra;
-    private javax.swing.JLabel btnRegAvion;
-    private javax.swing.JLabel btnRegVue;
-    private javax.swing.JButton btnReservar;
-    private util.Cbox cboDestino;
-    private util.Cbox cboDuracion;
-    private util.Cbox cboOrigen;
-    private javax.swing.JLabel cerrarSesion;
+    public javax.swing.JLabel SliderDelMenu;
+    public javax.swing.JLabel btnBusCli;
+    public javax.swing.JButton btnBuscar;
+    public javax.swing.JLabel btnCerrar;
+    public javax.swing.JLabel btnEstadisticas;
+    public javax.swing.JLabel btnMinimizar;
+    public javax.swing.JLabel btnReAero;
+    public javax.swing.JLabel btnReTra;
+    public javax.swing.JLabel btnRegAvion;
+    public javax.swing.JLabel btnRegVue;
+    public javax.swing.JButton btnReservar;
+    public util.Cbox cboDestino;
+    public util.Cbox cboDuracion;
+    public util.Cbox cboOrigen;
+    public javax.swing.JLabel cerrarSesion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1227,33 +718,33 @@ public class frmCompraBole extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblApeUsu;
-    private javax.swing.JLabel lblDestinoPopular;
-    private javax.swing.JLabel lblFotoSes;
-    private javax.swing.JLabel lblFotoSes2;
-    private javax.swing.JLabel lblIDUsu;
-    private javax.swing.JLabel lblNombreSes;
-    private javax.swing.JLabel lblPromedioPrecios;
-    private javax.swing.JLabel lblTiempSes;
-    private javax.swing.JLabel lblUsuarioSes;
-    private javax.swing.JLabel lblUsuarioSes2;
+    public javax.swing.JLabel lblApeUsu;
+    public javax.swing.JLabel lblDestinoPopular;
+    public javax.swing.JLabel lblFotoSes;
+    public javax.swing.JLabel lblFotoSes2;
+    public javax.swing.JLabel lblIDUsu;
+    public javax.swing.JLabel lblNombreSes;
+    public javax.swing.JLabel lblPromedioPrecios;
+    public javax.swing.JLabel lblTiempSes;
+    public javax.swing.JLabel lblUsuarioSes;
+    public javax.swing.JLabel lblUsuarioSes2;
     private util.panel panel1;
     private util.panel panel2;
-    private javax.swing.JPanel panelBusCli;
-    private javax.swing.JPanel panelDetras;
-    private javax.swing.JPanel panelEstadisticas;
-    private javax.swing.JPanel panelReAero;
-    private javax.swing.JPanel panelReTra;
-    private javax.swing.JPanel panelRegAvion;
-    private javax.swing.JPanel panelRegVue;
+    public javax.swing.JPanel panelBusCli;
+    public javax.swing.JPanel panelDetras;
+    public javax.swing.JPanel panelEstadisticas;
+    public javax.swing.JPanel panelReAero;
+    public javax.swing.JPanel panelReTra;
+    public javax.swing.JPanel panelRegAvion;
+    public javax.swing.JPanel panelRegVue;
     private util.PanelRound panelRound1;
     private util.PanelRound panelRound2;
     private util.PanelRound panelRound3;
-    private javax.swing.JLabel sliderText;
-    private javax.swing.JSlider slifer;
-    private javax.swing.JTable tablaVueloBoleto;
+    public javax.swing.JLabel sliderText;
+    public javax.swing.JSlider slifer;
+    public javax.swing.JTable tablaVueloBoleto;
     // End of variables declaration//GEN-END:variables
 private void labelcolor(JLabel label){
         label.setBackground(new java.awt.Color(53,162,107));
