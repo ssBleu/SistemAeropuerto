@@ -2,43 +2,14 @@
 package Vista;
 
 import Controlador.ControladorBusCli;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Trabajador;
-import static Vista.Controladores.objPS;
-import static Vista.Controladores.objRS;
-import static Vista.Controladores.objTR;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.SQLException;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane; //para poner un panel detras
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
+
 
 public class frmBusCli extends javax.swing.JFrame {
     
     private ControladorBusCli controladorBusCli;
-    
     private byte[] imagenUsuarioSes;
     
     public frmBusCli() {
@@ -55,33 +26,9 @@ public class frmBusCli extends javax.swing.JFrame {
         TablaBuscCliente.getTableHeader().setOpaque(false);
         TablaBuscCliente.getTableHeader().setBackground(new Color(12, 64, 160));
         TablaBuscCliente.getTableHeader().setForeground(new Color(255,255,255));
-        TablaBuscCliente.setRowHeight(25);
-        obtenerUsuarioSesionado();
-        
+        TablaBuscCliente.setRowHeight(25);   
     }
-    public void obtenerUsuarioSesionado() {
-        Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
-        if (trabajadorSesionado != null) {
 
-            lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
-            lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
-            lblNombreSes.setText(trabajadorSesionado.getNombre());
-            lblApeUsu.setText(trabajadorSesionado.getApellido());
-            imagenUsuarioSes = trabajadorSesionado.getFoto();
-            ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
-            lblFotoSes.setIcon(IconoSelec);
-            lblFotoSes2.setIcon(IconoSelec);
-            lblUsuarioSes2.setText(trabajadorSesionado.getUsuario());
-
-            LocalTime horaActual = LocalTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String horaDeInicio = horaActual.format(formatter);
-            lblTiempSes.setText(""+horaDeInicio);
-        } else {
-            System.out.println("Se supone que esto no debe pasar XD");
-        }
-    }
-   
     @SuppressWarnings("unchecked")
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -677,7 +624,7 @@ public class frmBusCli extends javax.swing.JFrame {
     public javax.swing.JLabel lblTiempSes;
     public javax.swing.JLabel lblTotalClientes;
     public javax.swing.JLabel lblUsuarioSes;
-    private javax.swing.JLabel lblUsuarioSes2;
+    public javax.swing.JLabel lblUsuarioSes2;
     private util.panel panel1;
     private util.panel panel4;
     public javax.swing.JPanel panelBusCli;

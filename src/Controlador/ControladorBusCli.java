@@ -1,6 +1,7 @@
 package Controlador;
 
 import static Controlador.LoginControlador.cerrarSesion;
+import Modelo.Trabajador;
 import static Vista.Controladores.objPS;
 import static Vista.Controladores.objRS;
 import Vista.frmBusCli;
@@ -20,7 +21,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -29,11 +33,14 @@ public class ControladorBusCli implements ActionListener, MouseListener {
 
     private frmBusCli busCliForm;
 
+        private byte[] imagenUsuarioSes;
+        
     public ControladorBusCli(frmBusCli form) {
         busCliForm = form;
 
         listado();
         datitos();
+        obtenerUsuarioSesionado();
         objRS.actualizarReservasEstadoRealizado();
         //ActionListeners
         busCliForm.btnLimpiar.addActionListener(this);
@@ -426,4 +433,27 @@ public class ControladorBusCli implements ActionListener, MouseListener {
         panel.setBackground(ColorOriginalPanel);
     }
 }
+    
+        public void obtenerUsuarioSesionado() {
+        Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
+        if (trabajadorSesionado != null) {
+
+            busCliForm.lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
+            busCliForm.lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
+            busCliForm.lblNombreSes.setText(trabajadorSesionado.getNombre());
+            busCliForm.lblApeUsu.setText(trabajadorSesionado.getApellido());
+            imagenUsuarioSes = trabajadorSesionado.getFoto();
+            ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
+            busCliForm.lblFotoSes.setIcon(IconoSelec);
+            busCliForm.lblFotoSes2.setIcon(IconoSelec);
+            busCliForm.lblUsuarioSes2.setText(trabajadorSesionado.getUsuario());
+
+            LocalTime horaActual = LocalTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String horaDeInicio = horaActual.format(formatter);
+            busCliForm.lblTiempSes.setText(""+horaDeInicio);
+        } else {
+            System.out.println("Se supone que esto no debe pasar XD");
+        }
+    }
 }
