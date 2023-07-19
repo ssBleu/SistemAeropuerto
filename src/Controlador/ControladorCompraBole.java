@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 public class ControladorCompraBole implements ActionListener, MouseListener, ChangeListener {
 
     private frmCompraBole compraBoleForm;
+    
 
     private byte[] imagenUsuarioSes;
 
@@ -81,8 +82,6 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        
-        
         if (e.getSource() == compraBoleForm.btnReservar) {
             int selectedRow = compraBoleForm.tablaVueloBoleto.getSelectedRow();
             if (selectedRow != -1) {
@@ -90,7 +89,10 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
 
                 Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
                 frmReserva frmReser = new frmReserva();
-                frmReser.cargarPasajeros(vueloSeleccionado);
+                 // Crear una instancia de ControladorReserva
+                ControladorReserva controladorReserva = new ControladorReserva(frmReser);
+
+                controladorReserva.cargarPasajeros(vueloSeleccionado);
                 frmReser.setVisible(true);
                 compraBoleForm.setVisible(false);
             } else {
