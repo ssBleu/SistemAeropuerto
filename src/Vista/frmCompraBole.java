@@ -1,6 +1,8 @@
 package Vista;
 
 import Controlador.ControladorCompraBole;
+import Controlador.ControladorReserva;
+import Modelo.Vuelo;
 import static Vista.Controladores.objVD;
 import java.awt.Color;
 import java.awt.Component;
@@ -8,9 +10,10 @@ import java.awt.Font;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane; //para poner un panel detras
+import javax.swing.JOptionPane;
 
 public class frmCompraBole extends javax.swing.JFrame {
-
+private ControladorReserva controladorReserva;
     private ControladorCompraBole controladorCompraBole;
     private byte[] imagenUsuarioSes;
 
@@ -598,6 +601,8 @@ public class frmCompraBole extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel SliderDelMenu;

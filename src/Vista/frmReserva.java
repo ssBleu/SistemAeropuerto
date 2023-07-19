@@ -2,12 +2,17 @@ package Vista;
 
 import Controlador.ControladorReserva;
 import Modelo.Pasajero;
+import Modelo.Reserva;
+import Modelo.Vuelo;
 import static Vista.Controladores.objPS;
+import static Vista.Controladores.objRS;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmReserva extends javax.swing.JFrame {
 
@@ -16,7 +21,7 @@ public class frmReserva extends javax.swing.JFrame {
 
     public frmReserva() {
         initComponents();
-        controladorReserva = new ControladorReserva(this);
+        //controladorReserva = new ControladorReserva(this);
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);
@@ -35,7 +40,8 @@ public class frmReserva extends javax.swing.JFrame {
         tablaReservas.setRowHeight(25);
 
     }
-
+    
+   
     @SuppressWarnings("unchecked")
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

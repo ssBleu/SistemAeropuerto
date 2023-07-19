@@ -2,12 +2,9 @@ package Modelo;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import java.io.File;
-import java.io.IOException;
 import java.text.NumberFormat;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;

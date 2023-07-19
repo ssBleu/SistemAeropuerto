@@ -83,12 +83,13 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
         if (e.getSource() == compraBoleForm.btnReservar) {
             int selectedRow = compraBoleForm.tablaVueloBoleto.getSelectedRow();
             if (selectedRow != -1) {
-                int idVuelo = Integer.parseInt(compraBoleForm.tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
-
-                Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
+ 
                 frmReserva frmReser = new frmReserva();
-                // Crear una instancia de ControladorReserva
                 ControladorReserva controladorReserva = new ControladorReserva(frmReser);
+                
+                int idVuelo = Integer.parseInt(compraBoleForm.tablaVueloBoleto.getValueAt(selectedRow, 0).toString());
+                Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
+                // Crear una instancia de ControladorReserva
 
                 controladorReserva.cargarPasajeros(vueloSeleccionado);
                 frmReser.setVisible(true);

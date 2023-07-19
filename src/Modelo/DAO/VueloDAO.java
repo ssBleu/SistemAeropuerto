@@ -287,7 +287,7 @@ public class VueloDAO {
         Connection cn = Conexion.getConexion();
 
         try {
-            String sql = "SELECT v.*, av.id_aerolinea FROM vuelo v JOIN avion av ON v.id_avion = av.id_avion WHERE 1=1";
+            String sql = "SELECT v.*, av.id_aerolinea FROM vuelo v JOIN avion av ON v.id_avion = av.id_avion WHERE estado_vuelo='ACTIVO'";
 
             if (!origenSeleccionado.isEmpty()) {
                 sql += " AND origen = ?";
