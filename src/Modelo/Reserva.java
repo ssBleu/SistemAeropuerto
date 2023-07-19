@@ -1,9 +1,9 @@
-
 package Modelo;
 
 import java.util.Date;
 
 public class Reserva {
+
     private int idReserva;
     private int dniPasajero;
     private int idVuelo;

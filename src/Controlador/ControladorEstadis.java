@@ -111,9 +111,9 @@ public class ControladorEstadis implements ActionListener, MouseListener {
             String fechaF = dateFormat.format(estadForm.desPopFechaFinal.getDate());
 
             ChartPanel chartPanel = Graficos.crearGrafico1(objAD.obtenerDatosAerolineaPreferida(fechaI, fechaF));
-            chartPanel.setPreferredSize(new Dimension(788, 328)); // Establecer el tamaño preferido del ChartPanel
-            estadForm.panelGrafic.add(chartPanel); // Agregar el ChartPanel al panelGrafic
-            estadForm.jPanel1.revalidate(); // Actualizar el contenedor principal
+            chartPanel.setPreferredSize(new Dimension(788, 328));
+            estadForm.panelGrafic.add(chartPanel);
+            estadForm.jPanel1.revalidate();
         }
 
         if (e.getSource() == estadForm.btnReservCancel) {

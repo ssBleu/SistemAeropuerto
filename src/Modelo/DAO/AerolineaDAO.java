@@ -9,9 +9,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class AerolineaDAO {
 
-
-  public void crearAerolinea(Aerolinea aerolinea) throws SQLException {
-        Connection cn=Conexion.getConexion();
+    public void crearAerolinea(Aerolinea aerolinea) throws SQLException {
+        Connection cn = Conexion.getConexion();
         String sql = "INSERT INTO aerolinea (id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
@@ -25,40 +24,41 @@ public class AerolineaDAO {
             statement.executeUpdate();
         }
     }
-     public void modificarAerolinea(Aerolinea aerolinea) throws SQLException {
-    Connection cn = Conexion.getConexion();
-    String sql = "UPDATE aerolinea SET nombre = ?, pais_origen = ?, telefono = ?, pagina_web = ?, fecha_fundacion = ? WHERE id_aerolinea = ?";
 
-    try (PreparedStatement statement = cn.prepareStatement(sql)) {
-        statement.setString(1, aerolinea.getNombre());
-        statement.setString(2, aerolinea.getPaisOrigen());
-        statement.setString(3, aerolinea.getTelefono());
-        statement.setString(4, aerolinea.getPaginaWeb());
-        statement.setDate(5, new java.sql.Date(aerolinea.getFechaFundacion().getTime()));
-        statement.setInt(6, aerolinea.getIdAerolinea());
+    public void modificarAerolinea(Aerolinea aerolinea) throws SQLException {
+        Connection cn = Conexion.getConexion();
+        String sql = "UPDATE aerolinea SET nombre = ?, pais_origen = ?, telefono = ?, pagina_web = ?, fecha_fundacion = ? WHERE id_aerolinea = ?";
 
-        statement.executeUpdate();
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setString(1, aerolinea.getNombre());
+            statement.setString(2, aerolinea.getPaisOrigen());
+            statement.setString(3, aerolinea.getTelefono());
+            statement.setString(4, aerolinea.getPaginaWeb());
+            statement.setDate(5, new java.sql.Date(aerolinea.getFechaFundacion().getTime()));
+            statement.setInt(6, aerolinea.getIdAerolinea());
+
+            statement.executeUpdate();
+        }
     }
-}
-    public void eliminarAerolinea(int idAerolinea) throws SQLException {
-      Connection cn = Conexion.getConexion();
-      String sql = "DELETE FROM aerolinea WHERE id_aerolinea = ?";
-      try (PreparedStatement statement = cn.prepareStatement(sql)) {
-          statement.setInt(1, idAerolinea);
-          statement.executeUpdate();
-      }
-  }
- 
 
-        public List<Aerolinea> Listado() {
-        List<Aerolinea> lis=new ArrayList();
-        Connection cn=Conexion.getConexion();
+    public void eliminarAerolinea(int idAerolinea) throws SQLException {
+        Connection cn = Conexion.getConexion();
+        String sql = "DELETE FROM aerolinea WHERE id_aerolinea = ?";
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setInt(1, idAerolinea);
+            statement.executeUpdate();
+        }
+    }
+
+    public List<Aerolinea> Listado() {
+        List<Aerolinea> lis = new ArrayList();
+        Connection cn = Conexion.getConexion();
         try {
-            String sql="SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea" ;
-            PreparedStatement st=cn.prepareStatement(sql);
-            ResultSet rs=st.executeQuery();
-            while(rs.next()){
-                Aerolinea ep=new Aerolinea(0,"","","","",null);
+            String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Aerolinea ep = new Aerolinea(0, "", "", "", "", null);
                 ep.setIdAerolinea(rs.getInt(1));
                 ep.setNombre(rs.getString(2));
                 ep.setPaisOrigen(rs.getString(3));
@@ -70,20 +70,24 @@ public class AerolineaDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            try { cn.close();} catch(Exception e2) {};
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            };
         }
         return lis;
     }
+
     public Aerolinea buscarAerolinea(int id) {
-        Aerolinea ep=null;
-        Connection cn=Conexion.getConexion();
+        Aerolinea ep = null;
+        Connection cn = Conexion.getConexion();
         try {
-            String sql="SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea where id_aerolinea=?" ;
-            PreparedStatement st=cn.prepareStatement(sql);
+            String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea where id_aerolinea=?";
+            PreparedStatement st = cn.prepareStatement(sql);
             st.setInt(1, id);
-            ResultSet rs=st.executeQuery();
-            if(rs.next()){//Si lee significa que existe
-                ep=new Aerolinea(0,"","","","",null);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {//Si lee significa que existe
+                ep = new Aerolinea(0, "", "", "", "", null);
                 ep.setIdAerolinea(rs.getInt(1));
                 ep.setNombre(rs.getString(2));
                 ep.setPaisOrigen(rs.getString(3));
@@ -94,10 +98,14 @@ public class AerolineaDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            try { cn.close();} catch(Exception e2) {};
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            };
         }
         return ep;
     }
+
     public Aerolinea obtenerAerolineaPorId(int idAerolinea) throws SQLException {
         Connection cn = Conexion.getConexion();
         String sql = "SELECT id_aerolinea, nombre, pais_origen, telefono, pagina_web, fecha_fundacion FROM aerolinea WHERE id_aerolinea = ?";
@@ -121,7 +129,7 @@ public class AerolineaDAO {
 
         return null;
     }
-    
+
     public int obtenerIdAerolineaPorNombre(String nombreAerolinea) throws SQLException {
         Connection cn = Conexion.getConexion();
         String sql = "SELECT id_aerolinea FROM aerolinea WHERE nombre = ?";
@@ -138,8 +146,7 @@ public class AerolineaDAO {
 
         return -1;
     }
-    
-    
+
     public List<Integer> obtenerAerolineas() {
         List<Integer> aerolineas = new ArrayList<>();
         Connection cn = Conexion.getConexion();
@@ -160,8 +167,8 @@ public class AerolineaDAO {
         }
         return aerolineas;
     }
-    
-        public List<String> obtenerNombresAerolineas() {
+
+    public List<String> obtenerNombresAerolineas() {
         List<String> aerolineas = new ArrayList<>();
         Connection cn = Conexion.getConexion();
         try {
@@ -181,8 +188,7 @@ public class AerolineaDAO {
         }
         return aerolineas;
     }
-    
-        
+
     public List<String> obtenerNombreporIdAerolineas(int ID) {
         List<String> aeropuertos = new ArrayList<>();
         Connection cn = Conexion.getConexion();
@@ -203,8 +209,7 @@ public class AerolineaDAO {
         }
         return aeropuertos;
     }
-    
-    
+
     public int obtenerTotalAerolineasRegistradas() {
         int totalAerolineas = 0;
         Connection cn = Conexion.getConexion();
@@ -229,7 +234,7 @@ public class AerolineaDAO {
 
         return totalAerolineas;
     }
-    
+
     public String obtenerAerolineaConMasReservas() {
         String aerolineaConMasReservas = null;
         Connection cn = Conexion.getConexion();
@@ -255,49 +260,40 @@ public class AerolineaDAO {
         return aerolineaConMasReservas;
     }
 
-    
-    
-    
     //PARA EL GRAFICO
-
     public static DefaultCategoryDataset obtenerDatosAerolineaPreferida(String fechaInicio, String fechaFin) {
-    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-    Connection cn = Conexion.getConexion();
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        Connection cn = Conexion.getConexion();
 
-    try {
-        // Crear una declaración SQL preparada
-        String query = "SELECT a.nombre AS aerolinea, COUNT(*) AS total " +
-                       "FROM aerolinea a " +
-                       "JOIN avion av ON a.id_aerolinea = av.id_aerolinea " +
-                       "JOIN vuelo v ON av.id_avion = v.id_avion " +
-                       "JOIN reserva_vuelo rv ON v.id_vuelo = rv.id_vuelo " +
-                       "WHERE rv.fecha_reserva >= ? AND rv.fecha_reserva <= ? " +
-                       "GROUP BY a.nombre " +
-                       "ORDER BY total DESC";
-        PreparedStatement statement = cn.prepareStatement(query);
-        
-        // Establecer los parámetros en la consulta preparada
-        statement.setString(1, fechaInicio);
-        statement.setString(2, fechaFin);
+        try {
+            String query = "SELECT a.nombre AS aerolinea, COUNT(*) AS total "
+                    + "FROM aerolinea a "
+                    + "JOIN avion av ON a.id_aerolinea = av.id_aerolinea "
+                    + "JOIN vuelo v ON av.id_avion = v.id_avion "
+                    + "JOIN reserva_vuelo rv ON v.id_vuelo = rv.id_vuelo "
+                    + "WHERE rv.fecha_reserva >= ? AND rv.fecha_reserva <= ? "
+                    + "GROUP BY a.nombre "
+                    + "ORDER BY total DESC";
+            PreparedStatement statement = cn.prepareStatement(query);
 
-        // Ejecutar la consulta SQL
-        ResultSet resultSet = statement.executeQuery();
+            statement.setString(1, fechaInicio);
+            statement.setString(2, fechaFin);
 
-        // Agregar los datos al dataset
-        while (resultSet.next()) {
-            String aerolinea = resultSet.getString("aerolinea");
-            int total = resultSet.getInt("total");
-            dataset.setValue(total, "Aerolínea", aerolinea);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String aerolinea = resultSet.getString("aerolinea");
+                int total = resultSet.getInt("total");
+                dataset.setValue(total, "Aerolínea", aerolinea);
+            }
+
+            resultSet.close();
+            statement.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        // Cerrar la conexión y liberar recursos
-        resultSet.close();
-        statement.close();
-        cn.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return dataset;
+        return dataset;
     }
 
 }

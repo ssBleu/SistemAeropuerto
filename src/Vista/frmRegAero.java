@@ -2,26 +2,10 @@
 package Vista;
 
 import Controlador.ControladorRegAero;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Aerolinea;
-import Modelo.Trabajador;
-import static Vista.Controladores.objAD;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
 public class frmRegAero extends javax.swing.JFrame {
     private ControladorRegAero controladorRegAero;
@@ -35,26 +19,16 @@ public class frmRegAero extends javax.swing.JFrame {
         panelDetras.setVisible(false);
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        
-        
-        
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-
+ 
         tablaAerolinea.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaAerolinea.getTableHeader().setOpaque(false);
         tablaAerolinea.getTableHeader().setBackground(new Color(12, 64, 160));
         tablaAerolinea.getTableHeader().setForeground(new Color(255,255,255));
         tablaAerolinea.setRowHeight(25);
-   
     }
     
-
-    
-    
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -145,23 +119,11 @@ public class frmRegAero extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("ID Aerolínea:");
 
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Nombre:");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("País de Origen:");
-
-        txtPais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPaisActionPerformed(evt);
-            }
-        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("Teléfono:");
@@ -169,37 +131,16 @@ public class frmRegAero extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("Pagina web:");
 
-        txtPagina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPaginaActionPerformed(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Año de fundación:");
 
         DCDate.setDateFormatString("yyyy-MM-dd");
 
         btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
 
         btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -308,11 +249,6 @@ public class frmRegAero extends javax.swing.JFrame {
                 "ID Aerolínea", "Nombre", "Origen", "Telefono", "Pagina Web", "Fecha fundación"
             }
         ));
-        tablaAerolinea.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaAerolineaMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaAerolinea);
 
         javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
@@ -636,36 +572,6 @@ public class frmRegAero extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void txtPaginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaginaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPaginaActionPerformed
-
-    private void txtPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPaisActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void tablaAerolineaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAerolineaMouseClicked
-
-    }//GEN-LAST:event_tablaAerolineaMouseClicked
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-
-    }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
-
-
-    
     /**
      * @param args the command line arguments
      */

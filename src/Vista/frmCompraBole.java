@@ -1,62 +1,44 @@
-
 package Vista;
 
 import Controlador.ControladorCompraBole;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Trabajador;
-import Modelo.Vuelo;
-import static Vista.Controladores.objPS;
-import static Vista.Controladores.objTR;
 import static Vista.Controladores.objVD;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane; //para poner un panel detras
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
-
 
 public class frmCompraBole extends javax.swing.JFrame {
-        private ControladorCompraBole controladorCompraBole;
-        private byte[] imagenUsuarioSes;
-    
+
+    private ControladorCompraBole controladorCompraBole;
+    private byte[] imagenUsuarioSes;
+
     public frmCompraBole() {
         initComponents();
-        controladorCompraBole = new  ControladorCompraBole(this);
-        
+        controladorCompraBole = new ControladorCompraBole(this);
+
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        
 
         tablaVueloBoleto.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaVueloBoleto.getTableHeader().setOpaque(false);
         tablaVueloBoleto.getTableHeader().setBackground(new Color(12, 64, 160));
-        tablaVueloBoleto.getTableHeader().setForeground(new Color(255,255,255));
+        tablaVueloBoleto.getTableHeader().setForeground(new Color(255, 255, 255));
         tablaVueloBoleto.setRowHeight(25);
-        
+
         List<String> origenes = objVD.obtenerOrigenes();
         List<String> duraciones = objVD.obtenerDuraciones();
         List<String> destinos = objVD.obtenerDestino();
-  
+
         // Añadir los orígenes al JComboBox
         cboOrigen.addItem("Cualquiera");
         cboDuracion.addItem("Cualquiera");
         cboDestino.addItem("Cualquiera");
-        
+
         for (String origen : origenes) {
             cboOrigen.addItem(origen);
         }
@@ -66,9 +48,9 @@ public class frmCompraBole extends javax.swing.JFrame {
         for (String destino : destinos) {
             cboDestino.addItem(destino);
         }
-        
+
     }
-    
+
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -153,21 +135,10 @@ public class frmCompraBole extends javax.swing.JFrame {
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
 
-        cboOrigen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboOrigenActionPerformed(evt);
-            }
-        });
-
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Duración:");
 
         btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("Destino:");
@@ -178,11 +149,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         slifer.setMaximum(1000);
         slifer.setMinimum(200);
         slifer.setValue(1000);
-        slifer.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sliferStateChanged(evt);
-            }
-        });
 
         sliderText.setText("Filtrar por Precio");
 
@@ -289,11 +255,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 800, 310));
 
         btnReservar.setText("Reservar");
-        btnReservar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReservarActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 100, -1));
 
         panelRound3.setBackground(new java.awt.Color(255, 255, 255));
@@ -602,47 +563,6 @@ public class frmCompraBole extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-
-    }//GEN-LAST:event_btnReservarActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //filtrarTabla();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void cboOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboOrigenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboOrigenActionPerformed
-
-    private void sliferStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliferStateChanged
-        
-        if (slifer.getValue() < 1000) {
-            sliderText.setText("Menor o igual a: " + slifer.getValue());
-        } else{
-            sliderText.setText("Cualquier Precio");
-        }
-    }//GEN-LAST:event_sliferStateChanged
-
-    
-    //colores panel/jlabel"botones" xd
-    private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
-    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
-    private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
-    
-    
-    private boolean maus = false;
-    
-    private void cambiarColores(Component boton, Component panel) {
-    if (maus) {
-        boton.setForeground(ColorEnteredBoton);
-        panel.setBackground(ColorEnteredPanel);
-    } else {
-        boton.setForeground(Color.WHITE);
-        panel.setBackground(ColorOriginalPanel);
-    }
-}
-        
-
     /**
      * @param args the command line arguments
      */
@@ -746,11 +666,11 @@ public class frmCompraBole extends javax.swing.JFrame {
     public javax.swing.JSlider slifer;
     public javax.swing.JTable tablaVueloBoleto;
     // End of variables declaration//GEN-END:variables
-private void labelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(53,162,107));
+private void labelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(53, 162, 107));
     }
-    
-    private void resetlabelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(54,70,78));
+
+    private void resetlabelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(54, 70, 78));
     }
 }

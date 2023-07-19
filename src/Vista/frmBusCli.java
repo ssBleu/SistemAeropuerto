@@ -1,4 +1,3 @@
-
 package Vista;
 
 import Controlador.ControladorBusCli;
@@ -6,12 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLayeredPane; //para poner un panel detras
 
-
 public class frmBusCli extends javax.swing.JFrame {
-    
+
     private ControladorBusCli controladorBusCli;
     private byte[] imagenUsuarioSes;
-    
+
     public frmBusCli() {
         initComponents();
         controladorBusCli = new ControladorBusCli(this);
@@ -25,8 +23,8 @@ public class frmBusCli extends javax.swing.JFrame {
         TablaBuscCliente.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         TablaBuscCliente.getTableHeader().setOpaque(false);
         TablaBuscCliente.getTableHeader().setBackground(new Color(12, 64, 160));
-        TablaBuscCliente.getTableHeader().setForeground(new Color(255,255,255));
-        TablaBuscCliente.setRowHeight(25);   
+        TablaBuscCliente.getTableHeader().setForeground(new Color(255, 255, 255));
+        TablaBuscCliente.setRowHeight(25);
     }
 
     @SuppressWarnings("unchecked")
@@ -645,5 +643,4 @@ public class frmBusCli extends javax.swing.JFrame {
     public javax.swing.JTextField txtOrigenBusc;
     // End of variables declaration//GEN-END:variables
 
-   
 }

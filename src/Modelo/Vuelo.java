@@ -1,9 +1,9 @@
-
 package Modelo;
 
 import java.util.Date;
 
 public class Vuelo {
+
     private String idVuelo;
     private String origen;
     private String destino;
@@ -18,7 +18,7 @@ public class Vuelo {
     private String nombreAerolinea;
     private String estadoVuelo;
 
-    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio, String tipo,String estadoVuelo) {
+    public Vuelo(String idVuelo, String origen, String destino, Date fechaSalida, Date fechaLlegada, String duracion, String idAvion, double precio, String tipo, String estadoVuelo) {
         this.idVuelo = idVuelo;
         this.origen = origen;
         this.destino = destino;
@@ -119,12 +119,12 @@ public class Vuelo {
         this.nombreAerolinea = nombreAerolinea;
     }
 
-      public String getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
+
 }

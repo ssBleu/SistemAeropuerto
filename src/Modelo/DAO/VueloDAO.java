@@ -1,4 +1,3 @@
-
 package Modelo.DAO;
 
 import Modelo.Conexion.Conexion;
@@ -7,17 +6,13 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 public class VueloDAO {
 
     public void crearVuelo(Vuelo vuelo) throws SQLException {
-        Connection cn=Conexion.getConexion();
+        Connection cn = Conexion.getConexion();
         String sql = "INSERT INTO vuelo (id_vuelo, origen, destino, fecha_salida, fecha_llegada, duracion, id_avion, precio, tipo_vuelo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
@@ -28,7 +23,7 @@ public class VueloDAO {
             statement.setDate(5, new java.sql.Date(vuelo.getFechaLlegada().getTime()));
             statement.setString(6, vuelo.getDuracion());
             statement.setString(7, vuelo.getIdAvion());
-            statement.setDouble(8,vuelo.getPrecio());
+            statement.setDouble(8, vuelo.getPrecio());
             statement.setString(9, vuelo.getTipo());
 
             statement.executeUpdate();
@@ -36,15 +31,15 @@ public class VueloDAO {
     }
 
     public Vuelo buscarVuelo(int id) {
-        Vuelo ep=null;
-        Connection cn=Conexion.getConexion();
+        Vuelo ep = null;
+        Connection cn = Conexion.getConexion();
         try {
-            String sql="SELECT id_vuelo, origen, destino, fecha_salida, fecha_llegada, duracion, id_avion, precio, tipo_vuelo FROM vuelo where id_vuelo=?" ;
-            PreparedStatement st=cn.prepareStatement(sql);
+            String sql = "SELECT id_vuelo, origen, destino, fecha_salida, fecha_llegada, duracion, id_avion, precio, tipo_vuelo FROM vuelo where id_vuelo=?";
+            PreparedStatement st = cn.prepareStatement(sql);
             st.setInt(1, id);
-            ResultSet rs=st.executeQuery();
-            if(rs.next()){
-                ep=new Vuelo("","","",null,null,"","",0,"",null);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                ep = new Vuelo("", "", "", null, null, "", "", 0, "", null);
                 ep.setIdVuelo(rs.getString(1));
                 ep.setOrigen(rs.getString(2));
                 ep.setDestino(rs.getString(3));
@@ -58,212 +53,207 @@ public class VueloDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            try { cn.close();} catch(Exception e2) {};
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            };
         }
         return ep;
     }
+
     public void modificarVuelo(Vuelo vuelo) throws SQLException {
-    Connection cn = Conexion.getConexion();
-    String sql = "UPDATE vuelo SET origen = ?, destino = ?, fecha_salida = ?, fecha_llegada = ?, duracion = ?, id_avion = ?, precio = ?, tipo_vuelo = ? WHERE id_vuelo = ?";
+        Connection cn = Conexion.getConexion();
+        String sql = "UPDATE vuelo SET origen = ?, destino = ?, fecha_salida = ?, fecha_llegada = ?, duracion = ?, id_avion = ?, precio = ?, tipo_vuelo = ? WHERE id_vuelo = ?";
 
-    try (PreparedStatement statement = cn.prepareStatement(sql)) {
-        statement.setString(1, vuelo.getOrigen());
-        statement.setString(2, vuelo.getDestino());
-        statement.setDate(3, new java.sql.Date(vuelo.getFechaSalida().getTime()));
-        statement.setDate(4, new java.sql.Date(vuelo.getFechaLlegada().getTime()));
-        statement.setString(5, vuelo.getDuracion());
-        statement.setString(6, vuelo.getIdAvion());
-        statement.setDouble(7, vuelo.getPrecio());
-        statement.setString(8, vuelo.getTipo());
-        statement.setString(9, vuelo.getIdVuelo());
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setString(1, vuelo.getOrigen());
+            statement.setString(2, vuelo.getDestino());
+            statement.setDate(3, new java.sql.Date(vuelo.getFechaSalida().getTime()));
+            statement.setDate(4, new java.sql.Date(vuelo.getFechaLlegada().getTime()));
+            statement.setString(5, vuelo.getDuracion());
+            statement.setString(6, vuelo.getIdAvion());
+            statement.setDouble(7, vuelo.getPrecio());
+            statement.setString(8, vuelo.getTipo());
+            statement.setString(9, vuelo.getIdVuelo());
 
-        statement.executeUpdate();
+            statement.executeUpdate();
+        }
     }
-}
+
     public void eliminarVuelo(String idVuelo) throws SQLException {
-    Connection cn = Conexion.getConexion();
-    String sql = "DELETE FROM vuelo WHERE id_vuelo = ?";
+        Connection cn = Conexion.getConexion();
+        String sql = "DELETE FROM vuelo WHERE id_vuelo = ?";
 
-    try (PreparedStatement statement = cn.prepareStatement(sql)) {
-        statement.setString(1, idVuelo);
-        statement.executeUpdate();
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setString(1, idVuelo);
+            statement.executeUpdate();
+        }
     }
-}
- 
-        public List<Vuelo> obtenerListaVuelosActivos() {
-            List<Vuelo> listaVuelos = new ArrayList<>();
-            Connection cn = Conexion.getConexion();
 
-            try {
-                String sql = "SELECT v.id_vuelo, v.origen, v.destino, v.fecha_salida, v.fecha_llegada, "
-                        + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, v.estado_vuelo, av.modelo, "
-                        + "ae.nombre FROM vuelo v "
-                        + "JOIN avion av ON v.id_avion = av.id_avion "
-                        + "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea "
-                        + "WHERE v.estado_vuelo = 'ACTIVO';";
-                PreparedStatement statement = cn.prepareStatement(sql);
-                ResultSet resultSet = statement.executeQuery();
+    public List<Vuelo> obtenerListaVuelosActivos() {
+        List<Vuelo> listaVuelos = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
 
-                while (resultSet.next()) {
-                    String idVuelo = resultSet.getString("id_vuelo");
-                    String origen = resultSet.getString("origen");
-                    String destino = resultSet.getString("destino");
-                    Date fechaSalida = resultSet.getDate("fecha_salida");
-                    Date fechaLlegada = resultSet.getDate("fecha_llegada");
-                    String duracion = resultSet.getString("duracion");
-                    String idAvion = resultSet.getString("id_avion");
-                    double precio = resultSet.getDouble("precio");
-                    String tipo = resultSet.getString("tipo_vuelo");
-                    String estado_vuelo = resultSet.getString("estado_vuelo");
+        try {
+            String sql = "SELECT v.id_vuelo, v.origen, v.destino, v.fecha_salida, v.fecha_llegada, "
+                    + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, v.estado_vuelo, av.modelo, "
+                    + "ae.nombre FROM vuelo v "
+                    + "JOIN avion av ON v.id_avion = av.id_avion "
+                    + "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea "
+                    + "WHERE v.estado_vuelo = 'ACTIVO';";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
 
+            while (resultSet.next()) {
+                String idVuelo = resultSet.getString("id_vuelo");
+                String origen = resultSet.getString("origen");
+                String destino = resultSet.getString("destino");
+                Date fechaSalida = resultSet.getDate("fecha_salida");
+                Date fechaLlegada = resultSet.getDate("fecha_llegada");
+                String duracion = resultSet.getString("duracion");
+                String idAvion = resultSet.getString("id_avion");
+                double precio = resultSet.getDouble("precio");
+                String tipo = resultSet.getString("tipo_vuelo");
+                String estado_vuelo = resultSet.getString("estado_vuelo");
 
-                    String nombreAvion = resultSet.getString("modelo");                
-                    String nombreAerolinea = resultSet.getString("nombre");
+                String nombreAvion = resultSet.getString("modelo");
+                String nombreAerolinea = resultSet.getString("nombre");
 
-                    Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, estado_vuelo);
-                    vuelo.setNombreAvion(nombreAvion);
-                    vuelo.setNombreAerolinea(nombreAerolinea);
-                    listaVuelos.add(vuelo);
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    cn.close();
-                } catch (Exception e2) {
-                }
+                Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, estado_vuelo);
+                vuelo.setNombreAvion(nombreAvion);
+                vuelo.setNombreAerolinea(nombreAerolinea);
+                listaVuelos.add(vuelo);
             }
-
-            return listaVuelos;
-        }
-        
-        
-        
-                public List<Vuelo> obtenerListaVuelos() {
-            List<Vuelo> listaVuelos = new ArrayList<>();
-            Connection cn = Conexion.getConexion();
-
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             try {
-                String sql = "SELECT v.id_vuelo, v.origen, v.destino, v.fecha_salida, v.fecha_llegada, "
-                        + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, v.estado_vuelo, av.modelo, ae.nombre " +
-                             "FROM vuelo v " +
-                             "JOIN avion av ON v.id_avion = av.id_avion " +
-                             "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea";
-                PreparedStatement statement = cn.prepareStatement(sql);
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    String idVuelo = resultSet.getString("id_vuelo");
-                    String origen = resultSet.getString("origen");
-                    String destino = resultSet.getString("destino");
-                    Date fechaSalida = resultSet.getDate("fecha_salida");
-                    Date fechaLlegada = resultSet.getDate("fecha_llegada");
-                    String duracion = resultSet.getString("duracion");
-                    String idAvion = resultSet.getString("id_avion");
-                    double precio = resultSet.getDouble("precio");
-                    String tipo = resultSet.getString("tipo_vuelo");
-                    String estado_vuelo = resultSet.getString("estado_vuelo");
-
-
-                    String nombreAvion = resultSet.getString("modelo");                
-                    String nombreAerolinea = resultSet.getString("nombre");
-
-                    Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, estado_vuelo);
-                    vuelo.setNombreAvion(nombreAvion);
-                    vuelo.setNombreAerolinea(nombreAerolinea);
-                    listaVuelos.add(vuelo);
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    cn.close();
-                } catch (Exception e2) {
-                }
+                cn.close();
+            } catch (Exception e2) {
             }
-
-            return listaVuelos;
-        }
-        
-        
-        
-        public List<String> obtenerOrigenes() {
-            List<String> vuelo = new ArrayList<>();
-            Connection cn = Conexion.getConexion();
-            try {
-                String sql = "SELECT origen FROM vuelo";
-                PreparedStatement st = cn.prepareStatement(sql);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    vuelo.add(rs.getString(1));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    cn.close();
-                } catch (Exception e2) {
-                }
-            }
-            return vuelo;
-        }
-        
-        public List<String> obtenerDestino() {
-            List<String> vuelo = new ArrayList<>();
-            Connection cn = Conexion.getConexion();
-            try {
-                String sql = "SELECT destino FROM vuelo";
-                PreparedStatement st = cn.prepareStatement(sql);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    vuelo.add(rs.getString(1));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    cn.close();
-                } catch (Exception e2) {
-                }
-            }
-            return vuelo;
-        }
-        
-        public List<String> obtenerDuraciones() {
-            List<String> vuelo = new ArrayList<>();
-            Connection cn = Conexion.getConexion();
-            try {
-                String sql = "SELECT duracion FROM vuelo";
-                PreparedStatement st = cn.prepareStatement(sql);
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    vuelo.add(rs.getString(1));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    cn.close();
-                } catch (Exception e2) {
-                }
-            }
-            return vuelo;
         }
 
+        return listaVuelos;
+    }
 
+    public List<Vuelo> obtenerListaVuelos() {
+        List<Vuelo> listaVuelos = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
 
-        // PARA LOS FILTROS DE LOS COMBOBOX
-        
-            public List<Vuelo> obtenerVuelosPorOrigen(String origenSeleccionado) {
+        try {
+            String sql = "SELECT v.id_vuelo, v.origen, v.destino, v.fecha_salida, v.fecha_llegada, "
+                    + "v.duracion, v.id_avion, v.precio, v.tipo_vuelo, v.estado_vuelo, av.modelo, ae.nombre "
+                    + "FROM vuelo v "
+                    + "JOIN avion av ON v.id_avion = av.id_avion "
+                    + "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea";
+            PreparedStatement statement = cn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String idVuelo = resultSet.getString("id_vuelo");
+                String origen = resultSet.getString("origen");
+                String destino = resultSet.getString("destino");
+                Date fechaSalida = resultSet.getDate("fecha_salida");
+                Date fechaLlegada = resultSet.getDate("fecha_llegada");
+                String duracion = resultSet.getString("duracion");
+                String idAvion = resultSet.getString("id_avion");
+                double precio = resultSet.getDouble("precio");
+                String tipo = resultSet.getString("tipo_vuelo");
+                String estado_vuelo = resultSet.getString("estado_vuelo");
+
+                String nombreAvion = resultSet.getString("modelo");
+                String nombreAerolinea = resultSet.getString("nombre");
+
+                Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, estado_vuelo);
+                vuelo.setNombreAvion(nombreAvion);
+                vuelo.setNombreAerolinea(nombreAerolinea);
+                listaVuelos.add(vuelo);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+
+        return listaVuelos;
+    }
+
+    public List<String> obtenerOrigenes() {
+        List<String> vuelo = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "SELECT origen FROM vuelo";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                vuelo.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+        return vuelo;
+    }
+
+    public List<String> obtenerDestino() {
+        List<String> vuelo = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "SELECT destino FROM vuelo";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                vuelo.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+        return vuelo;
+    }
+
+    public List<String> obtenerDuraciones() {
+        List<String> vuelo = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
+        try {
+            String sql = "SELECT duracion FROM vuelo";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                vuelo.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
+        }
+        return vuelo;
+    }
+
+    public List<Vuelo> obtenerVuelosPorOrigen(String origenSeleccionado) {
         List<Vuelo> vuelosFiltrados = new ArrayList<>();
         Connection cn = Conexion.getConexion();
 
         try {
-            String sql = "SELECT v.origen, v.destino, v.duracion, v.tipo_vuelo, ae.nombre AS aerolinea, v.precio " +
-                         "FROM vuelo v " +
-                         "JOIN avion av ON v.id_avion = av.id_avion " +
-                         "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea " +
-                         "WHERE v.origen = ?";
+            String sql = "SELECT v.origen, v.destino, v.duracion, v.tipo_vuelo, ae.nombre AS aerolinea, v.precio "
+                    + "FROM vuelo v "
+                    + "JOIN avion av ON v.id_avion = av.id_avion "
+                    + "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea "
+                    + "WHERE v.origen = ?";
             PreparedStatement statement = cn.prepareStatement(sql);
             statement.setString(1, origenSeleccionado);
             ResultSet resultSet = statement.executeQuery();
@@ -291,104 +281,94 @@ public class VueloDAO {
 
         return vuelosFiltrados;
     }
-            
-            
-            
-        public List<Vuelo> obtenerVuelosFiltrados(String origenSeleccionado, String destinoSeleccionado, String duracionSeleccionada, int precioElegido) {
-            List<Vuelo> vuelosFiltrados = new ArrayList<>();
-            Connection cn = Conexion.getConexion();
 
-            try {
-                String sql = "SELECT v.*, av.id_aerolinea FROM vuelo v JOIN avion av ON v.id_avion = av.id_avion WHERE 1=1";
+    public List<Vuelo> obtenerVuelosFiltrados(String origenSeleccionado, String destinoSeleccionado, String duracionSeleccionada, int precioElegido) {
+        List<Vuelo> vuelosFiltrados = new ArrayList<>();
+        Connection cn = Conexion.getConexion();
 
-                if (!origenSeleccionado.isEmpty()) {
-                    sql += " AND origen = ?";
-                }
+        try {
+            String sql = "SELECT v.*, av.id_aerolinea FROM vuelo v JOIN avion av ON v.id_avion = av.id_avion WHERE 1=1";
 
-                if (!destinoSeleccionado.isEmpty()) {
-                    sql += " AND destino = ?";
-                }
-
-                if (!duracionSeleccionada.isEmpty()) {
-                    sql += " AND duracion = ?";
-                }
-                
-                if (precioElegido > 0 | precioElegido < 1000) {
-                    sql += " AND precio <= ?";
-                }
-
-
-
-                PreparedStatement statement = cn.prepareStatement(sql);
-
-                int parameterIndex = 1;
-
-                if (!origenSeleccionado.isEmpty()) {
-                    statement.setString(parameterIndex, origenSeleccionado);
-                    parameterIndex++;
-                }
-
-                if (!destinoSeleccionado.isEmpty()) {
-                    statement.setString(parameterIndex, destinoSeleccionado);
-                    parameterIndex++;
-                }
-
-                if (!duracionSeleccionada.isEmpty()) {
-                    statement.setString(parameterIndex, duracionSeleccionada);
-                }
-                
-                if (precioElegido > 0 | precioElegido < 1000) {
-                    statement.setDouble(parameterIndex, precioElegido);
-                    parameterIndex++;
-                }
-
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    // Obtener los datos de cada vuelo y crear objetos Vuelo
-                    String idVuelo = resultSet.getString("id_vuelo");
-                    String origen = resultSet.getString("origen");
-                    String destino = resultSet.getString("destino");
-                    Date fechaSalida = resultSet.getDate("fecha_salida");
-                    Date fechaLlegada = resultSet.getDate("fecha_llegada");
-                    String duracion = resultSet.getString("duracion");
-                    String idAvion = resultSet.getString("id_avion");
-                    double precio = resultSet.getDouble("precio");
-                    String tipo = resultSet.getString("tipo_vuelo");
-                    String idAerolinea = resultSet.getString("id_aerolinea");
-
-                    // Realiza una consulta para obtener el nombre de la aerolínea
-                    String sqlAerolinea = "SELECT nombre FROM aerolinea WHERE id_aerolinea = ?";
-                    PreparedStatement statementAerolinea = cn.prepareStatement(sqlAerolinea);
-                    statementAerolinea.setString(1, idAerolinea);
-                    ResultSet resultSetAerolinea = statementAerolinea.executeQuery();
-
-                    // Si se encuentra un resultado, obtén el nombre de la aerolínea
-                    if (resultSetAerolinea.next()) {
-                        String nombreAerolinea = resultSetAerolinea.getString("nombre");
-
-                        // Crea el objeto Vuelo y asigna el nombre de la aerolínea
-                        Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, null);
-                        vuelo.setNombreAerolinea(nombreAerolinea);
-
-                        vuelosFiltrados.add(vuelo);
-                    }
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    cn.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
+            if (!origenSeleccionado.isEmpty()) {
+                sql += " AND origen = ?";
             }
 
-            return vuelosFiltrados;
+            if (!destinoSeleccionado.isEmpty()) {
+                sql += " AND destino = ?";
+            }
+
+            if (!duracionSeleccionada.isEmpty()) {
+                sql += " AND duracion = ?";
+            }
+
+            if (precioElegido > 0 | precioElegido < 1000) {
+                sql += " AND precio <= ?";
+            }
+
+            PreparedStatement statement = cn.prepareStatement(sql);
+
+            int parameterIndex = 1;
+
+            if (!origenSeleccionado.isEmpty()) {
+                statement.setString(parameterIndex, origenSeleccionado);
+                parameterIndex++;
+            }
+
+            if (!destinoSeleccionado.isEmpty()) {
+                statement.setString(parameterIndex, destinoSeleccionado);
+                parameterIndex++;
+            }
+
+            if (!duracionSeleccionada.isEmpty()) {
+                statement.setString(parameterIndex, duracionSeleccionada);
+            }
+
+            if (precioElegido > 0 | precioElegido < 1000) {
+                statement.setDouble(parameterIndex, precioElegido);
+                parameterIndex++;
+            }
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String idVuelo = resultSet.getString("id_vuelo");
+                String origen = resultSet.getString("origen");
+                String destino = resultSet.getString("destino");
+                Date fechaSalida = resultSet.getDate("fecha_salida");
+                Date fechaLlegada = resultSet.getDate("fecha_llegada");
+                String duracion = resultSet.getString("duracion");
+                String idAvion = resultSet.getString("id_avion");
+                double precio = resultSet.getDouble("precio");
+                String tipo = resultSet.getString("tipo_vuelo");
+                String idAerolinea = resultSet.getString("id_aerolinea");
+
+                String sqlAerolinea = "SELECT nombre FROM aerolinea WHERE id_aerolinea = ?";
+                PreparedStatement statementAerolinea = cn.prepareStatement(sqlAerolinea);
+                statementAerolinea.setString(1, idAerolinea);
+                ResultSet resultSetAerolinea = statementAerolinea.executeQuery();
+
+                if (resultSetAerolinea.next()) {
+                    String nombreAerolinea = resultSetAerolinea.getString("nombre");
+
+                    Vuelo vuelo = new Vuelo(idVuelo, origen, destino, fechaSalida, fechaLlegada, duracion, idAvion, precio, tipo, null);
+                    vuelo.setNombreAerolinea(nombreAerolinea);
+
+                    vuelosFiltrados.add(vuelo);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
         }
-        
-        
-        
+
+        return vuelosFiltrados;
+    }
+
     public String obtenerDestinoMasPopular() {
         String destinoMasPopular = null;
         Connection cn = Conexion.getConexion();
@@ -413,7 +393,7 @@ public class VueloDAO {
 
         return destinoMasPopular;
     }
-        
+
     public double calcularTendenciaPromedioPrecios() {
         double tendenciaPromedioPrecios = 0;
         Connection cn = Conexion.getConexion();
@@ -463,40 +443,38 @@ public class VueloDAO {
 
         return tipoVueloMasRegistrado;
     }
-        
-        
-        public static DefaultCategoryDataset obtenerDatos2(String fechaInicial, String fechaFinal) {
-      DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-      Connection cn = Conexion.getConexion();
 
-      try {
-          Statement statement = cn.createStatement();
+    public static DefaultCategoryDataset obtenerDatos2(String fechaInicial, String fechaFinal) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        Connection cn = Conexion.getConexion();
 
-          String query = "SELECT v.origen, COUNT(*) AS total " +
-                  "FROM reserva_vuelo rv " +
-                  "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo " +
-                  "WHERE rv.fecha_reserva BETWEEN '" + fechaInicial + "' AND '" + fechaFinal + "' " +
-                  "GROUP BY v.origen " +
-                  "ORDER BY total DESC";
+        try {
+            Statement statement = cn.createStatement();
 
-          ResultSet resultSet = statement.executeQuery(query);
+            String query = "SELECT v.origen, COUNT(*) AS total "
+                    + "FROM reserva_vuelo rv "
+                    + "JOIN vuelo v ON rv.id_vuelo = v.id_vuelo "
+                    + "WHERE rv.fecha_reserva BETWEEN '" + fechaInicial + "' AND '" + fechaFinal + "' "
+                    + "GROUP BY v.origen "
+                    + "ORDER BY total DESC";
 
-          while (resultSet.next()) {
-              String origen = resultSet.getString("origen");
-              int total = resultSet.getInt("total");
-              dataset.setValue(total, "Vuelos más Vendidos", origen);
-          }
+            ResultSet resultSet = statement.executeQuery(query);
 
-          resultSet.close();
-          statement.close();
-          cn.close();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      return dataset;
-  }
-        
-        
+            while (resultSet.next()) {
+                String origen = resultSet.getString("origen");
+                int total = resultSet.getInt("total");
+                dataset.setValue(total, "Vuelos más Vendidos", origen);
+            }
+
+            resultSet.close();
+            statement.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataset;
+    }
+
     public void cambiarEstadoVuelo(String idVuelo, String estadoActual) {
         Connection cn = Conexion.getConexion();
 
@@ -513,25 +491,23 @@ public class VueloDAO {
             statement.executeUpdate();
 
             if ("CANCELADO".equals(nuevoEstado)) {
-                // Cancelar la reserva asociada al vuelo cancelado
                 String sqlCancelarReserva = "UPDATE reserva_vuelo SET estado_reserva = 'CANCELADO', fecha_cancelacion = " + fechaCancelacion + " WHERE id_vuelo = ?";
                 PreparedStatement statementCancelarReserva = cn.prepareStatement(sqlCancelarReserva);
                 System.out.println("HOLA NO FUNCION:");
                 statementCancelarReserva.setString(1, idVuelo);
                 statementCancelarReserva.executeUpdate();
-            } 
-            
+            }
+
             if ("ACTIVO".equals(nuevoEstado)) {
-                // Descancelar la reserva asociada al vuelo descancelado
                 System.out.println("HOLA FUNCIONO?");
                 String sqlDescancelarReserva = "UPDATE reserva_vuelo SET estado_reserva = 'ACTIVO', fecha_cancelacion = NULL WHERE id_vuelo = ?";
                 PreparedStatement statementDescancelarReserva = cn.prepareStatement(sqlDescancelarReserva);
 
                 statementDescancelarReserva.setString(1, idVuelo);
                 statementDescancelarReserva.executeUpdate();
-            
+
             }
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
@@ -542,80 +518,68 @@ public class VueloDAO {
             }
         }
     }
-    
-    
+
     public static DefaultPieDataset obtenerDatosVuelosCanceladosActivos() {
-    DefaultPieDataset dataset = new DefaultPieDataset();
-    Connection cn = Conexion.getConexion();
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        Connection cn = Conexion.getConexion();
 
-    try {
-        // Crear una declaración SQL
-        Statement statement = cn.createStatement();
+        try {
+            Statement statement = cn.createStatement();
 
-        // Consulta SQL para obtener la cantidad de vuelos cancelados y activos
-        String query = "SELECT estado_vuelo, COUNT(*) AS total " +
-                       "FROM vuelo " +
-                       "GROUP BY estado_vuelo";
+            String query = "SELECT estado_vuelo, COUNT(*) AS total "
+                    + "FROM vuelo "
+                    + "GROUP BY estado_vuelo";
 
-        // Ejecutar la consulta SQL
-        ResultSet resultSet = statement.executeQuery(query);
+            ResultSet resultSet = statement.executeQuery(query);
 
-        // Calcular el total de vuelos para obtener el porcentaje
-        int totalVuelos = 0;
-        while (resultSet.next()) {
-            int total = resultSet.getInt("total");
-            totalVuelos += total;
+            int totalVuelos = 0;
+            while (resultSet.next()) {
+                int total = resultSet.getInt("total");
+                totalVuelos += total;
+            }
+
+            resultSet.beforeFirst();
+            while (resultSet.next()) {
+                String estadoVuelo = resultSet.getString("estado_vuelo");
+                int total = resultSet.getInt("total");
+                double porcentaje = (double) total / totalVuelos * 100;
+                dataset.setValue(estadoVuelo + " (" + total + ", " + String.format("%.2f", porcentaje) + "%)", total);
+            }
+
+            resultSet.close();
+            statement.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        // Volver a ejecutar la consulta para obtener los datos reales
-        resultSet.beforeFirst();
-        while (resultSet.next()) {
-            String estadoVuelo = resultSet.getString("estado_vuelo");
-            int total = resultSet.getInt("total");
-            double porcentaje = (double) total / totalVuelos * 100;
-            dataset.setValue(estadoVuelo + " (" + total + ", " + String.format("%.2f", porcentaje) + "%)", total);
-        }
-
-        // Cerrar la conexión y liberar recursos
-        resultSet.close();
-        statement.close();
-        cn.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+        return dataset;
     }
-    return dataset;
-}
-    
-    
+
     public void actualizarEstadosVuelosRealizados() {
-    Connection cn = Conexion.getConexion();
-    LocalDate fechaActual = LocalDate.now();
+        Connection cn = Conexion.getConexion();
+        LocalDate fechaActual = LocalDate.now();
 
-    try {
-        // Obtener los vuelos con fecha de salida menor o igual a la fecha actual
-        String query = "SELECT id_vuelo FROM vuelo WHERE fecha_salida <= ?";
-        PreparedStatement statement = cn.prepareStatement(query);
-        statement.setDate(1, java.sql.Date.valueOf(fechaActual));
-        ResultSet resultSet = statement.executeQuery();
+        try {
+            String query = "SELECT id_vuelo FROM vuelo WHERE fecha_salida <= ?";
+            PreparedStatement statement = cn.prepareStatement(query);
+            statement.setDate(1, java.sql.Date.valueOf(fechaActual));
+            ResultSet resultSet = statement.executeQuery();
 
-        // Actualizar el estado de los vuelos a "REALIZADO"
-        while (resultSet.next()) {
-            String idVuelo = resultSet.getString("id_vuelo");
+            while (resultSet.next()) {
+                String idVuelo = resultSet.getString("id_vuelo");
 
-            String queryActualizar = "UPDATE vuelo SET estado_vuelo = 'REALIZADO' WHERE id_vuelo = ?";
-            PreparedStatement statementActualizar = cn.prepareStatement(queryActualizar);
-            statementActualizar.setString(1, idVuelo);
-            statementActualizar.executeUpdate();
+                String queryActualizar = "UPDATE vuelo SET estado_vuelo = 'REALIZADO' WHERE id_vuelo = ?";
+                PreparedStatement statementActualizar = cn.prepareStatement(queryActualizar);
+                statementActualizar.setString(1, idVuelo);
+                statementActualizar.executeUpdate();
+            }
+
+            resultSet.close();
+            statement.close();
+            cn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-
-        // Cerrar la conexión y liberar recursos
-        resultSet.close();
-        statement.close();
-        cn.close();
-    } catch (SQLException ex) {
-        ex.printStackTrace();
     }
-}
-
 
 }

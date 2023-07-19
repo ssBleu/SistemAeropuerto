@@ -1,8 +1,6 @@
 
 package Controlador;
 
-import Modelo.DAO.TrabajadorDAO;
-import Modelo.Trabajador;
 import Vista.frmBusCli;
 import Vista.frmLogin;
 import java.awt.event.ActionEvent;
@@ -33,8 +31,6 @@ public class ControladorLogin implements ActionListener, MouseListener {
         if (e.getSource() == loginForm.btnIngresar) {
             validarUsuario();
         }
-        // Agregar más condiciones para otros eventos de acción si es necesario
-
     }
     
     @Override
@@ -75,7 +71,7 @@ public class ControladorLogin implements ActionListener, MouseListener {
     }
 
     
-        //metodos
+    //metodos
     
     public void validarUsuario() {
         String usuario = loginForm.txtUsuario.getText();

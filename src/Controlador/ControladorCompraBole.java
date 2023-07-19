@@ -32,7 +32,6 @@ import javax.swing.table.DefaultTableModel;
 public class ControladorCompraBole implements ActionListener, MouseListener, ChangeListener {
 
     private frmCompraBole compraBoleForm;
-    
 
     private byte[] imagenUsuarioSes;
 
@@ -46,8 +45,7 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
         //ActionListeners
         compraBoleForm.btnBuscar.addActionListener(this);
         compraBoleForm.btnReservar.addActionListener(this);
-        
-       
+
         //MouseListeners
         compraBoleForm.btnCerrar.addMouseListener(this);
         compraBoleForm.btnMinimizar.addMouseListener(this);
@@ -89,7 +87,7 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
 
                 Vuelo vueloSeleccionado = objVD.buscarVuelo(idVuelo);
                 frmReserva frmReser = new frmReserva();
-                 // Crear una instancia de ControladorReserva
+                // Crear una instancia de ControladorReserva
                 ControladorReserva controladorReserva = new ControladorReserva(frmReser);
 
                 controladorReserva.cargarPasajeros(vueloSeleccionado);
@@ -193,7 +191,6 @@ public class ControladorCompraBole implements ActionListener, MouseListener, Cha
                             compraBoleForm.panelDetras.setVisible(false);
                         }
 
-                        // activa el botoncito
                         compraBoleForm.SliderDelMenu.setEnabled(true);
                     }
                 }

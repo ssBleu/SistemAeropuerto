@@ -1,9 +1,7 @@
 package Controlador;
 
 import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Pasajero;
 import Modelo.Trabajador;
-import static Vista.Controladores.objPS;
 import static Vista.Controladores.objTR;
 import Vista.frmBusCli;
 import Vista.frmEstadis;

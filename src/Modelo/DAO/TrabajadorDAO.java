@@ -1,4 +1,3 @@
-
 package Modelo.DAO;
 
 import Modelo.Conexion.Conexion;
@@ -27,8 +26,8 @@ public class TrabajadorDAO {
             statement.executeUpdate();
         }
     }
-    
-     public void eliminarTrabajdor(int id) throws SQLException {
+
+    public void eliminarTrabajdor(int id) throws SQLException {
         Connection cn = Conexion.getConexion();
         try {
             String sql = "delete from trabajador "
@@ -40,68 +39,70 @@ public class TrabajadorDAO {
             ex.printStackTrace();
         }
     }
-    
-public void modificarTrabajador(Trabajador trabajador) throws SQLException {
-    Connection cn = Conexion.getConexion();
-    String sql = "UPDATE trabajador SET nombre = ?, apellido = ?, fecha_nacimiento = ?, usuario = ?, contrasena = ?, foto = ?, salario = ?, fecha_contratacion = ? WHERE id_trabajador = ?";
 
-    try (PreparedStatement statement = cn.prepareStatement(sql)) {
-        statement.setString(1, trabajador.getNombre());
-        statement.setString(2, trabajador.getApellido());
-        statement.setDate(3, new java.sql.Date(trabajador.getFechaNacimiento().getTime()));
-        statement.setString(4, trabajador.getUsuario());
-        statement.setString(5, trabajador.getContrasena());
-        statement.setBytes(6, trabajador.getFoto());
-        statement.setDouble(7, trabajador.getSalario());
-        statement.setDate(8, new java.sql.Date(trabajador.getFechaContratacion().getTime()));
-        statement.setInt(9, trabajador.getCodigoTra());
+    public void modificarTrabajador(Trabajador trabajador) throws SQLException {
+        Connection cn = Conexion.getConexion();
+        String sql = "UPDATE trabajador SET nombre = ?, apellido = ?, fecha_nacimiento = ?, usuario = ?, contrasena = ?, foto = ?, salario = ?, fecha_contratacion = ? WHERE id_trabajador = ?";
 
-        statement.executeUpdate();
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    } finally {
-        try {
-            cn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setString(1, trabajador.getNombre());
+            statement.setString(2, trabajador.getApellido());
+            statement.setDate(3, new java.sql.Date(trabajador.getFechaNacimiento().getTime()));
+            statement.setString(4, trabajador.getUsuario());
+            statement.setString(5, trabajador.getContrasena());
+            statement.setBytes(6, trabajador.getFoto());
+            statement.setDouble(7, trabajador.getSalario());
+            statement.setDate(8, new java.sql.Date(trabajador.getFechaContratacion().getTime()));
+            statement.setInt(9, trabajador.getCodigoTra());
+
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-}
-    
-        public List<Trabajador> Listado() {
-            List<Trabajador> lis = new ArrayList();
-            Connection cn = Conexion.getConexion();
 
-            try {
-                String sql = "SELECT id_trabajador, nombre, apellido, fecha_nacimiento, usuario, contrasena, foto, salario, fecha_contratacion FROM trabajador";
-                PreparedStatement st = cn.prepareStatement(sql);
-                ResultSet rs = st.executeQuery();
+    public List<Trabajador> Listado() {
+        List<Trabajador> lis = new ArrayList();
+        Connection cn = Conexion.getConexion();
 
-                while (rs.next()) {
-                    int codigoTra = rs.getInt(1);
-                    String nombre = rs.getString(2);
-                    String apellido = rs.getString(3);
-                    Date fechaNacimiento = rs.getDate(4);
-                    String usuario = rs.getString(5);
-                    String contrasena = rs.getString(6);
-                    byte[] fotoBytes = rs.getBytes(7);
-                    double salario = rs.getDouble(8);
-                    Date fechaContratacion = rs.getDate(9);
+        try {
+            String sql = "SELECT id_trabajador, nombre, apellido, fecha_nacimiento, usuario, contrasena, foto, salario, fecha_contratacion FROM trabajador";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
 
-                    Trabajador trabajador = new Trabajador(codigoTra, nombre, apellido, fechaNacimiento, usuario, contrasena, fotoBytes, salario, fechaContratacion);
+            while (rs.next()) {
+                int codigoTra = rs.getInt(1);
+                String nombre = rs.getString(2);
+                String apellido = rs.getString(3);
+                Date fechaNacimiento = rs.getDate(4);
+                String usuario = rs.getString(5);
+                String contrasena = rs.getString(6);
+                byte[] fotoBytes = rs.getBytes(7);
+                double salario = rs.getDouble(8);
+                Date fechaContratacion = rs.getDate(9);
 
-                    lis.add(trabajador);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                try { cn.close(); } catch (Exception e2) {}
+                Trabajador trabajador = new Trabajador(codigoTra, nombre, apellido, fechaNacimiento, usuario, contrasena, fotoBytes, salario, fechaContratacion);
+
+                lis.add(trabajador);
             }
-
-            return lis;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            }
         }
-    
-    
+
+        return lis;
+    }
+
     public Trabajador buscarTrabajador(int id) {
         Trabajador trabajador = null;
         Connection cn = Conexion.getConexion();
@@ -133,27 +134,26 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
         }
         return trabajador;
     }
-    
 
-         public boolean validarCredenciales(String usuario, String contrasena) throws SQLException {
-        Connection cn=Conexion.getConexion();
-    String sql = "SELECT COUNT(*) FROM trabajador WHERE usuario = ? AND contrasena = ?";
+    public boolean validarCredenciales(String usuario, String contrasena) throws SQLException {
+        Connection cn = Conexion.getConexion();
+        String sql = "SELECT COUNT(*) FROM trabajador WHERE usuario = ? AND contrasena = ?";
 
-    try (PreparedStatement statement = cn.prepareStatement(sql)) {
-        statement.setString(1, usuario);
-        statement.setString(2, contrasena);
+        try (PreparedStatement statement = cn.prepareStatement(sql)) {
+            statement.setString(1, usuario);
+            statement.setString(2, contrasena);
 
-        try (ResultSet resultSet = statement.executeQuery()) {
-            if (resultSet.next()) {
-                int count = resultSet.getInt(1);
-                return count > 0;
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
             }
         }
+
+        return false;
     }
 
-    return false;
-    }
-         
     public int obtenerIdTrabajador(String usuario, String contrasena) throws SQLException {
         Connection cn = Conexion.getConexion();
         String sql = "SELECT id_trabajador FROM trabajador WHERE usuario = ? AND contrasena = ?";
@@ -171,8 +171,5 @@ public void modificarTrabajador(Trabajador trabajador) throws SQLException {
 
         return -1;
     }
-         
-         
-         
 
 }

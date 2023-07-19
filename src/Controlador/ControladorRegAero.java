@@ -34,7 +34,7 @@ public class ControladorRegAero implements ActionListener, MouseListener {
 
     public ControladorRegAero(frmRegAero form) {
         regAeroForm = form;
-        
+
         listado();
         obtenerUsuarioSesionado();
         datitos();
@@ -113,8 +113,8 @@ public class ControladorRegAero implements ActionListener, MouseListener {
             regAeroForm.txtPagina.setText(x.getPaginaWeb());
             regAeroForm.DCDate.setDate(x.getFechaFundacion());
         }
-        
-               if (e.getSource() == regAeroForm.cerrarSesion) {
+
+        if (e.getSource() == regAeroForm.cerrarSesion) {
             cerrarSesion();
             frmLogin frmLogin = new frmLogin();
             frmLogin.setVisible(true);
@@ -244,7 +244,7 @@ public class ControladorRegAero implements ActionListener, MouseListener {
             cambiarColores(regAeroForm.btnBusCli, regAeroForm.panelBusCli);
         }
 
-        if (e.getSource() ==regAeroForm.btnReTra | e.getSource() ==regAeroForm.panelReTra) {
+        if (e.getSource() == regAeroForm.btnReTra | e.getSource() == regAeroForm.panelReTra) {
             maus = false;
             cambiarColores(regAeroForm.btnReTra, regAeroForm.panelReTra);
         }

@@ -1,82 +1,36 @@
-
 package Vista;
 
 import Controlador.ControladorRegCli;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Conexion.Conexion;
-import Modelo.Pasajero;
-import Modelo.Trabajador;
-import static Vista.Controladores.objPS;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import java.sql.*;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
 public class frmRegCli extends javax.swing.JFrame {
+
     private ControladorRegCli controladorRegCli;
     private byte[] imagenUsuarioSes;
-    
+
     public frmRegCli() {
         initComponents();
         controladorRegCli = new ControladorRegCli(this);
-        
+
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);
-        
+
         //tablita
         TablaDatos.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         TablaDatos.getTableHeader().setOpaque(false);
         TablaDatos.getTableHeader().setBackground(new Color(12, 64, 160));
-        TablaDatos.getTableHeader().setForeground(new Color(255,255,255));
+        TablaDatos.getTableHeader().setForeground(new Color(255, 255, 255));
         TablaDatos.setRowHeight(25);
-        
+
     }
-    
-    
-    public void obtenerUsuarioSesionado() {
-        Trabajador trabajadorSesionado = LoginControlador.getTrabajadorSesionado();
-        if (trabajadorSesionado != null) {
-
-            lblIDUsu.setText(""+trabajadorSesionado.getCodigoTra());
-            lblUsuarioSes.setText(trabajadorSesionado.getUsuario());
-            lblNombreSes.setText(trabajadorSesionado.getNombre());
-            lblApeUsu.setText(trabajadorSesionado.getApellido());
-            imagenUsuarioSes = trabajadorSesionado.getFoto();
-            ImageIcon IconoSelec = new ImageIcon(imagenUsuarioSes);
-            lblFotoSes.setIcon(IconoSelec);
-            lblFotoSes2.setIcon(IconoSelec);
-            lblUsuarioSes2.setText(trabajadorSesionado.getUsuario());
-
-            LocalTime horaActual = LocalTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String horaDeInicio = horaActual.format(formatter);
-            lblTiempSes.setText(""+horaDeInicio);
-        } else {
-            System.out.println("Se supone que esto no debe pasar XD");
-        }
-    }
-
-
-
 
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -180,28 +134,8 @@ public class frmRegCli extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Nacionalidad:");
 
-        txtNacionalidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNacionalidadActionPerformed(evt);
-            }
-        });
-
-        txtDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDniActionPerformed(evt);
-            }
-        });
-
         btnGuardar.setText("Guardar");
         btnGuardar.setToolTipText("");
-        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseExited(evt);
-            }
-        });
 
         btnActualizar.setText("Actualizar");
 
@@ -664,41 +598,6 @@ public class frmRegCli extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNacionalidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNacionalidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNacionalidadActionPerformed
-
-    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDniActionPerformed
-
-    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
-        btnGuardar.setBackground(new Color(63,226,184));
-    }//GEN-LAST:event_btnGuardarMouseEntered
-
-    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
-        btnGuardar.setBackground(new Color(255,255,255));
-    }//GEN-LAST:event_btnGuardarMouseExited
-
-        //colores panel/jlabel"botones" xd
-    private java.awt.Color ColorEnteredBoton = new java.awt.Color(55, 231, 173);
-    private java.awt.Color ColorOriginalPanel = new java.awt.Color(67,90,132);
-    private java.awt.Color ColorEnteredPanel = new java.awt.Color(110, 153, 139);
-    
-    
-    private boolean maus = false;
-    
-    private void cambiarColores(Component boton, Component panel) {
-    if (maus) {
-        boton.setForeground(ColorEnteredBoton);
-        panel.setBackground(ColorEnteredPanel);
-    } else {
-        boton.setForeground(Color.WHITE);
-        panel.setBackground(ColorOriginalPanel);
-    }
-}
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -734,8 +633,6 @@ public class frmRegCli extends javax.swing.JFrame {
         });
     }
 
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel SliderDelMenu;
     public javax.swing.JTable TablaDatos;
@@ -807,11 +704,11 @@ public class frmRegCli extends javax.swing.JFrame {
     public javax.swing.JTextField txtNacionalidad;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-private void labelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(53,162,107));
+private void labelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(53, 162, 107));
     }
-    
-    private void resetlabelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(54,70,78));
+
+    private void resetlabelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(54, 70, 78));
     }
 }

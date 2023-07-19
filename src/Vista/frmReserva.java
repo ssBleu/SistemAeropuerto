@@ -1,36 +1,19 @@
-
 package Vista;
 
 import Controlador.ControladorReserva;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
 import Modelo.Pasajero;
-import Modelo.Reserva;
-import Modelo.Trabajador;
-import Modelo.Vuelo;
 import static Vista.Controladores.objPS;
-import static Vista.Controladores.objRS;
-import static Vista.Controladores.objVD;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
 public class frmReserva extends javax.swing.JFrame {
+
     private ControladorReserva controladorReserva;
     private byte[] imagenUsuarioSes;
+
     public frmReserva() {
         initComponents();
         controladorReserva = new ControladorReserva(this);
@@ -40,20 +23,18 @@ public class frmReserva extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         List<Pasajero> dnisPasajeros = objPS.Listado();
-          for (Pasajero x : dnisPasajeros) {
+        for (Pasajero x : dnisPasajeros) {
             cboDNIs.addItem(String.valueOf(x.getDniPasajero()));
         }
-                
+
         //tablita
         tablaReservas.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaReservas.getTableHeader().setOpaque(false);
         tablaReservas.getTableHeader().setBackground(new Color(12, 64, 160));
-        tablaReservas.getTableHeader().setForeground(new Color(255,255,255));
+        tablaReservas.getTableHeader().setForeground(new Color(255, 255, 255));
         tablaReservas.setRowHeight(25);
-        
+
     }
-    
-    
 
     @SuppressWarnings("unchecked")
 
@@ -518,8 +499,6 @@ public class frmReserva extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
-
     /**
      * @param args the command line arguments
      */
@@ -625,11 +604,11 @@ public class frmReserva extends javax.swing.JFrame {
     private util.PanelRound panelRound4;
     public javax.swing.JTable tablaReservas;
     // End of variables declaration//GEN-END:variables
-private void labelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(53,162,107));
+private void labelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(53, 162, 107));
     }
-    
-    private void resetlabelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(54,70,78));
+
+    private void resetlabelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(54, 70, 78));
     }
 }

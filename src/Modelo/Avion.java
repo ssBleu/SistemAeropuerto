@@ -1,6 +1,7 @@
 package Modelo;
 
 public class Avion {
+
     private int idAvion;
     private String modelo;
     private int capacidadPasajeros;
@@ -45,11 +46,11 @@ public class Avion {
     public void setIdAerolinea(int idAerolinea) {
         this.idAerolinea = idAerolinea;
     }
-    
+
     public String getNombreAerolinea() {
         return nombreAerolinea;
     }
-    
+
     public void setNombreAerolinea(String nombreAerolinea) {
         this.nombreAerolinea = nombreAerolinea;
     }

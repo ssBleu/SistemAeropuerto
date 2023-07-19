@@ -3,7 +3,8 @@ package Modelo;
 import java.util.Date;
 
 public class Aerolinea {
-   private int idAerolinea;
+
+    private int idAerolinea;
     private String nombre;
     private String paisOrigen;
     private String telefono;
@@ -66,5 +67,5 @@ public class Aerolinea {
     public void setFechaFundacion(java.sql.Date fechaFundacion) {
         this.fechaFundacion = fechaFundacion;
     }
-    
+
 }

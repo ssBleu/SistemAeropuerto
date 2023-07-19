@@ -1,65 +1,38 @@
-
 package Vista;
 
 import Controlador.ControladorRegTra;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Trabajador;
-import static Vista.Controladores.objTR;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
-import util.ImageRenderer;
 
 public class frmRegTrab extends javax.swing.JFrame {
+
     private ControladorRegTra controladorRegTra;
+
     public frmRegTrab() {
         initComponents();
         controladorRegTra = new ControladorRegTra(this);
-        
+
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);
-        
+
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         //tablita
         TablaTra.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         TablaTra.getTableHeader().setOpaque(false);
         TablaTra.getTableHeader().setBackground(new Color(12, 64, 160));
-        TablaTra.getTableHeader().setForeground(new Color(255,255,255));
+        TablaTra.getTableHeader().setForeground(new Color(255, 255, 255));
         TablaTra.setRowHeight(25);
-        
+
         int rowHeight = 80;
         TablaTra.setRowHeight(rowHeight);
-        
+
         lblImagenSeleccionada.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
     }
-  
 
     @SuppressWarnings("unchecked")
     int x = 210;
@@ -491,8 +464,6 @@ public class frmRegTrab extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
- 
-    
     /**
      * @param args the command line arguments
      */
@@ -597,11 +568,11 @@ public class frmRegTrab extends javax.swing.JFrame {
     public javax.swing.JTextField txtSalario;
     public javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
-private void labelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(53,162,107));
+private void labelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(53, 162, 107));
     }
-    
-    private void resetlabelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(54,70,78));
+
+    private void resetlabelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(54, 70, 78));
     }
 }

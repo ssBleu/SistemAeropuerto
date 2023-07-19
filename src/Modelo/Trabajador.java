@@ -1,9 +1,9 @@
-
 package Modelo;
 
 import java.util.Date;
 
 public class Trabajador {
+
     private int codigoTra;
     private String nombre;
     private String apellido;
@@ -13,7 +13,6 @@ public class Trabajador {
     private byte[] foto;
     private double salario;
     private Date fechaContratacion;
-
 
     public Trabajador(int codigoTra, String nombre, String apellido, Date fechaNacimiento, String usuario, String contrasena, byte[] foto, double salario, Date fechaContratacion) {
         this.codigoTra = codigoTra;

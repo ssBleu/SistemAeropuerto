@@ -1,64 +1,43 @@
-
 package Vista;
 
 import Controlador.ControladorRegVue;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Trabajador;
-import Modelo.Vuelo;
 import static Vista.Controladores.objAvD;
-import static Vista.Controladores.objRS;
-import static Vista.Controladores.objVD;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
+
 public class frmRegVue extends javax.swing.JFrame {
+
     private ControladorRegVue controladorRegVue;
     private byte[] imagenUsuarioSes;
+
     public frmRegVue() {
         initComponents();
         controladorRegVue = new ControladorRegVue(this);
-        
+
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);
-        
+
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         List<String> avion = objAvD.obtenerAvion();
-          for (String nombreAvion : avion) {
+        for (String nombreAvion : avion) {
             cboAvion.addItem(nombreAvion);
         }
-          
+
         //tablita
         tablaVuelo.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaVuelo.getTableHeader().setOpaque(false);
         tablaVuelo.getTableHeader().setBackground(new Color(12, 64, 160));
-        tablaVuelo.getTableHeader().setForeground(new Color(255,255,255));
+        tablaVuelo.getTableHeader().setForeground(new Color(255, 255, 255));
         tablaVuelo.setRowHeight(25);
 
     }
-    
 
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -573,7 +552,6 @@ public class frmRegVue extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
     /**
      * @param args the command line arguments
      */
@@ -687,11 +665,11 @@ public class frmRegVue extends javax.swing.JFrame {
     public javax.swing.JTextField txtPrecio;
     public javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
-private void labelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(53,162,107));
+private void labelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(53, 162, 107));
     }
-    
-    private void resetlabelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(54,70,78));
+
+    private void resetlabelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(54, 70, 78));
     }
 }

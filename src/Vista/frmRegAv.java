@@ -1,69 +1,43 @@
-
 package Vista;
 
 import Controlador.ControladorRegAv;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Aerolinea;
-import Modelo.Avion;
-import Modelo.Trabajador;
 import static Vista.Controladores.objAD;
-import static Vista.Controladores.objAvD;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
 public class frmRegAv extends javax.swing.JFrame {
-        private ControladorRegAv controladorRegAv;
+
+    private ControladorRegAv controladorRegAv;
     private byte[] imagenUsuarioSes;
+
     public frmRegAv() {
         initComponents();
         controladorRegAv = new ControladorRegAv(this);
         JLayeredPane layeredPane = getLayeredPane();
         layeredPane.add(panelDetras, JLayeredPane.PALETTE_LAYER);
         panelDetras.setVisible(false);
-        
-        
+
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         List<String> nombresAerolineas = objAD.obtenerNombresAerolineas();
-          for (String nombreAerolinea : nombresAerolineas) {
+        for (String nombreAerolinea : nombresAerolineas) {
             cboAerol.addItem(nombreAerolinea);
         }
-          
-          
+
         //tablita
         tablaAvion.getTableHeader().setFont(new Font("Segou UI", Font.BOLD, 12));
         tablaAvion.getTableHeader().setOpaque(false);
         tablaAvion.getTableHeader().setBackground(new Color(12, 64, 160));
-        tablaAvion.getTableHeader().setForeground(new Color(255,255,255));
+        tablaAvion.getTableHeader().setForeground(new Color(255, 255, 255));
         tablaAvion.setRowHeight(25);
 
     }
-    
-
-    
-
-    
-
 
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -157,12 +131,6 @@ public class frmRegAv extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Capacidad de pasajeros:");
-
-        cboAerol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboAerolActionPerformed(evt);
-            }
-        });
 
         btnGuardar.setText("Guardar");
 
@@ -305,11 +273,6 @@ public class frmRegAv extends javax.swing.JFrame {
                 "ID Avion", "ID Aerolinea", "Aerolinea", "Modelo", "Capacidad"
             }
         ));
-        tablaAvion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaAvionMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablaAvion);
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
@@ -575,15 +538,6 @@ public class frmRegAv extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tablaAvionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAvionMouseClicked
-
-    }//GEN-LAST:event_tablaAvionMouseClicked
-
-    
-    private void cboAerolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAerolActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboAerolActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -687,11 +641,11 @@ public class frmRegAv extends javax.swing.JFrame {
     public javax.swing.JTextField txtIDAvion;
     public javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
-private void labelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(53,162,107));
+private void labelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(53, 162, 107));
     }
-    
-    private void resetlabelcolor(JLabel label){
-        label.setBackground(new java.awt.Color(54,70,78));
+
+    private void resetlabelcolor(JLabel label) {
+        label.setBackground(new java.awt.Color(54, 70, 78));
     }
 }

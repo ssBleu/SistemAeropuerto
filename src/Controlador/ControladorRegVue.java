@@ -81,15 +81,15 @@ public class ControladorRegVue implements ActionListener, MouseListener {
         if (e.getSource() == regVueForm.btnGuardar) {
             guardar();
         }
-        
+
         if (e.getSource() == regVueForm.btnActualizar) {
             actualizar();
         }
-        
+
         if (e.getSource() == regVueForm.btnEliminar) {
             eliminar();
         }
-        
+
         if (e.getSource() == regVueForm.btnCambiarEstado) {
             cambiarEstado();
         }
@@ -387,62 +387,62 @@ public class ControladorRegVue implements ActionListener, MouseListener {
             Logger.getLogger(frmRegAv.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   void actualizar(){
-                try {
+
+    void actualizar() {
+        try {
             String IDVuelo = regVueForm.txtIDVuelo.getText();
-            
+
             String origen = regVueForm.txtOrigen.getText();
             String destino = regVueForm.txtDestino.getText();
             String duracion = regVueForm.txtDurac.getText();
             String tipo = regVueForm.txtTipo.getText();
-            
+
             JDateChooser dateChooser = regVueForm.FSalida;
             Date Fsali = dateChooser.getDate();
             JDateChooser jdateChooser = regVueForm.FLlegada;
-            Date Flleg = dateChooser.getDate();
+            Date Flleg = jdateChooser.getDate();
             double precio = Double.parseDouble(regVueForm.txtPrecio.getText());
-            
+
             String modeloAvion = (String) regVueForm.cboAvion.getSelectedItem();
             String idAvion = String.valueOf(objAvD.obtenerIdAvionPorModelo(modeloAvion));
-           
-                if(origen.length()>0){
-                    if(precio>0){
-                        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
-                        if (confirm.equals("CONTINUAR")){
-                                Vuelo pr=new Vuelo(IDVuelo,origen,destino,Fsali,Flleg,duracion,idAvion,precio,tipo,null);
-                                objVD.modificarVuelo(pr);
-                                regVueForm.txtIDVuelo.setText("");
-                                regVueForm.txtOrigen.setText("");
-                                regVueForm.txtDestino.setText("");
-                                regVueForm.txtDurac.setText("");
-                                regVueForm.txtTipo.setText("");
-                                regVueForm.FSalida.setDate(null);
-                                regVueForm.FLlegada.setDate(null);
-                                regVueForm.txtPrecio.setText("");
-                                regVueForm.cboAvion.setSelectedItem("");
-                                JOptionPane.showMessageDialog(null,"Datos actualizados exitosamente");
-                                listado();
-                            }else {
-                            JOptionPane.showMessageDialog(null,"Proceso cancelado");}
+
+            if (origen.length() > 0) {
+                if (precio > 0) {
+                    String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+                    if (confirm.equals("CONTINUAR")) {
+                        Vuelo pr = new Vuelo(IDVuelo, origen, destino, Fsali, Flleg, duracion, idAvion, precio, tipo, null);
+                        objVD.modificarVuelo(pr);
+                        regVueForm.txtIDVuelo.setText("");
+                        regVueForm.txtOrigen.setText("");
+                        regVueForm.txtDestino.setText("");
+                        regVueForm.txtDurac.setText("");
+                        regVueForm.txtTipo.setText("");
+                        regVueForm.FSalida.setDate(null);
+                        regVueForm.FLlegada.setDate(null);
+                        regVueForm.txtPrecio.setText("");
+                        regVueForm.cboAvion.setSelectedItem("");
+                        JOptionPane.showMessageDialog(null, "Datos actualizados exitosamente");
+                        listado();
                     } else {
-                        JOptionPane.showMessageDialog(null,"El precio de vuelo debe ser mayor a 0");
+                        JOptionPane.showMessageDialog(null, "Proceso cancelado");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Ingrese un Origen de vuelo");
+                    JOptionPane.showMessageDialog(null, "El precio de vuelo debe ser mayor a 0");
                 }
-            
-            
-        } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Seleccione una Aerolinea");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingrese un Origen de vuelo");
             }
-   }
-   
-   void eliminar(){
-          String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Seleccione una Aerolinea");
+        }
+    }
+
+    void eliminar() {
+        String confirm = JOptionPane.showInputDialog("Escriba CONTINUAR  para completar el proceso");
         try {
-            if (confirm.equals("CONTINUAR")){
-                String codigo=regVueForm.txtIDVuelo.getText();
+            if (confirm.equals("CONTINUAR")) {
+                String codigo = regVueForm.txtIDVuelo.getText();
                 objVD.eliminarVuelo(codigo);
                 regVueForm.txtIDVuelo.setText("");
                 regVueForm.txtOrigen.setText("");
@@ -453,23 +453,23 @@ public class ControladorRegVue implements ActionListener, MouseListener {
                 regVueForm.FLlegada.setDate(null);
                 regVueForm.txtPrecio.setText("");
                 regVueForm.cboAvion.setSelectedItem("");
-                JOptionPane.showMessageDialog(null,"Eliminacion completada exitosamente");
+                JOptionPane.showMessageDialog(null, "Eliminacion completada exitosamente");
                 listado();
-        } else {
-            JOptionPane.showMessageDialog(null,"Proceso cancelado");
-        }
+            } else {
+                JOptionPane.showMessageDialog(null, "Proceso cancelado");
+            }
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Seleccionar un Vuelo");
-            }     
-   }
-   
-   void cambiarEstado(){
-               int filaSeleccionada = regVueForm.tablaVuelo.getSelectedRow();
+            JOptionPane.showMessageDialog(null, "Seleccionar un Vuelo");
+        }
+    }
+
+    void cambiarEstado() {
+        int filaSeleccionada = regVueForm.tablaVuelo.getSelectedRow();
 
         if (filaSeleccionada != -1) {
             String idVuelo = regVueForm.tablaVuelo.getValueAt(filaSeleccionada, 0).toString();
             String estadoVuelo = regVueForm.tablaVuelo.getValueAt(filaSeleccionada, 11).toString();
-            
+
             int confirmacion;
             String mensaje;
 
@@ -486,10 +486,10 @@ public class ControladorRegVue implements ActionListener, MouseListener {
                 JOptionPane.showMessageDialog(null, mensaje);
             }
             listado();
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Selecciona un vuelo de la tabla");
         }
-   }
+    }
 
 }

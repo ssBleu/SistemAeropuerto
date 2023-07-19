@@ -1,7 +1,7 @@
-
 package Modelo;
 
 public class Pasajero {
+
     private int dniPasajero;
     private String nombre;
     private String apellido;
@@ -65,7 +65,5 @@ public class Pasajero {
     public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
     }
-    
-    
-    
+
 }

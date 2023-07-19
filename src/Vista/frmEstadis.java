@@ -2,37 +2,10 @@
 package Vista;
 
 import Controlador.ControladorEstadis;
-import Controlador.LoginControlador;
-import static Controlador.LoginControlador.cerrarSesion;
-import Modelo.Graficos;
-import Modelo.Trabajador;
-import static Vista.Controladores.objAD;
-import static Vista.Controladores.objRS;
-import static Vista.Controladores.objVD;
-import com.toedter.calendar.JDateChooser;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-import org.jfree.chart.ChartPanel;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 public class frmEstadis extends javax.swing.JFrame {
     private ControladorEstadis controladorEstadis;
@@ -55,8 +28,6 @@ public class frmEstadis extends javax.swing.JFrame {
 
     
     @SuppressWarnings("unchecked")
-    int x = 210;
-    int a = 0;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -486,7 +457,6 @@ public class frmEstadis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    
     /**
      * @param args the command line arguments
      */

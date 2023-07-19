@@ -187,7 +187,6 @@ public class ControladorReserva implements ActionListener, MouseListener {
                             reservaForm.panelDetras.setVisible(false);
                         }
 
-                        // activa el botoncito
                         reservaForm.SliderDelMenu.setEnabled(true);
                     }
                 }
@@ -366,14 +365,11 @@ public class ControladorReserva implements ActionListener, MouseListener {
         try {
             int IdVuelo = Integer.parseInt(reservaForm.lblIdVuelo.getText());
             Vuelo vuelito = objVD.buscarVuelo(IdVuelo);
-            // Obtener la capacidad de asientos del vuelo
             int capacidadAsientos = objRS.obtenerCapacidadAsientos(IdVuelo);
             System.out.println("Asientos capaci" + capacidadAsientos);
-            // Obtener la cantidad actual de reservas para el vuelo
             int reservasActuales = objRS.obtenerCantidadReservas(IdVuelo);
             System.out.println("reservas actu" + reservasActuales);
 
-            // Verificar si el pasajero ya tiene una reserva en el mismo vuelo
             if (objRS.existeReserva(dniPasajero, IdVuelo)) {
                 JOptionPane.showMessageDialog(null, "El pasajero ya tiene una reserva en este vuelo.");
             } else {
@@ -393,20 +389,19 @@ public class ControladorReserva implements ActionListener, MouseListener {
             JOptionPane.showMessageDialog(null, "Ingrese los datos en las casillas correctamente");
         }
     }
-    
-    void actualizarTextRCBO(){
+
+    void actualizarTextRCBO() {
         String selectedItem = reservaForm.cboDNIs.getSelectedItem().toString();
 
-            List<Pasajero> dnisPasajeros = objPS.Listado();
+        List<Pasajero> dnisPasajeros = objPS.Listado();
 
-            for (Pasajero x : dnisPasajeros) {
-                // Actualizar los JLabels según el elemento seleccionado
-                if (selectedItem.equals(String.valueOf(x.getDniPasajero()))) {
-                    reservaForm.lblNombre.setText(x.getNombre());
-                    reservaForm.lblApellido.setText(x.getApellido());
-                    reservaForm.lblNacionalidad.setText(x.getNacionalidad());
+        for (Pasajero x : dnisPasajeros) {
+            if (selectedItem.equals(String.valueOf(x.getDniPasajero()))) {
+                reservaForm.lblNombre.setText(x.getNombre());
+                reservaForm.lblApellido.setText(x.getApellido());
+                reservaForm.lblNacionalidad.setText(x.getNacionalidad());
 
-                }
             }
+        }
     }
 }

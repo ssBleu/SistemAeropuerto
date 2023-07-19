@@ -9,7 +9,7 @@ import java.util.List;
 public class AvionDAO {
 
     public void crearAvion(Avion avion) throws SQLException {
-        Connection cn=Conexion.getConexion();
+        Connection cn = Conexion.getConexion();
         String sql = "INSERT INTO avion (id_avion, modelo, capacidad_pasajeros, id_aerolinea) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
@@ -23,7 +23,7 @@ public class AvionDAO {
     }
 
     public Avion obtenerAvionPorId(String idAvion) throws SQLException {
-        Connection cn=Conexion.getConexion();
+        Connection cn = Conexion.getConexion();
         String sql = "SELECT id_avion, modelo, capacidad_pasajeros, id_aerolinea FROM avion WHERE id_avion = ?";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
@@ -43,16 +43,16 @@ public class AvionDAO {
 
         return null;
     }
-    
-        public List<Avion> Listado() {
-        List<Avion> lis=new ArrayList();
-        Connection cn=Conexion.getConexion();
+
+    public List<Avion> Listado() {
+        List<Avion> lis = new ArrayList();
+        Connection cn = Conexion.getConexion();
         try {
-            String sql="select id_avion, modelo, capacidad_pasajeros, id_aerolinea from avion" ;
-            PreparedStatement st=cn.prepareStatement(sql);
-            ResultSet rs=st.executeQuery();
-            while(rs.next()){
-                Avion ep=new Avion(0,"",0,0);
+            String sql = "select id_avion, modelo, capacidad_pasajeros, id_aerolinea from avion";
+            PreparedStatement st = cn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Avion ep = new Avion(0, "", 0, 0);
                 ep.setIdAvion(rs.getInt(1));
                 ep.setModelo(rs.getString(2));
                 ep.setCapacidadPasajeros(rs.getInt(3));
@@ -62,19 +62,22 @@ public class AvionDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            try { cn.close();} catch(Exception e2) {};
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            };
         }
         return lis;
     }
-        
+
     public List<Avion> obtenerListaAviones() {
         List<Avion> listaAviones = new ArrayList<>();
         Connection cn = Conexion.getConexion();
 
         try {
-            String sql = "SELECT av.id_avion, av.modelo, av.capacidad_pasajeros, ae.id_aerolinea, ae.nombre " +
-                         "FROM avion av " +
-                         "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea";
+            String sql = "SELECT av.id_avion, av.modelo, av.capacidad_pasajeros, ae.id_aerolinea, ae.nombre "
+                    + "FROM avion av "
+                    + "JOIN aerolinea ae ON av.id_aerolinea = ae.id_aerolinea";
             PreparedStatement statement = cn.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
@@ -100,9 +103,8 @@ public class AvionDAO {
 
         return listaAviones;
     }
-        
-        
-      public void eliminarAvion(int id) throws SQLException {
+
+    public void eliminarAvion(int id) throws SQLException {
         Connection cn = Conexion.getConexion();
         try {
             String sql = "delete from avion where id_avion=?";
@@ -114,17 +116,17 @@ public class AvionDAO {
         }
     }
 
-        public Avion buscarAvion(int id) {
-        Avion ep=null;
-        Connection cn=Conexion.getConexion();
+    public Avion buscarAvion(int id) {
+        Avion ep = null;
+        Connection cn = Conexion.getConexion();
         try {
-            String sql="select id_avion, modelo, capacidad_pasajeros, id_aerolinea from avion where id_avion=?" ;
-            PreparedStatement st=cn.prepareStatement(sql);
+            String sql = "select id_avion, modelo, capacidad_pasajeros, id_aerolinea from avion where id_avion=?";
+            PreparedStatement st = cn.prepareStatement(sql);
             st.setInt(1, id);
-            ResultSet rs=st.executeQuery();
-            if(rs.next()){//Si lee significa que existe
-                ep=new Avion(0,"",0,0);
-                 ep.setIdAvion(rs.getInt(1));
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                ep = new Avion(0, "", 0, 0);
+                ep.setIdAvion(rs.getInt(1));
                 ep.setModelo(rs.getString(2));
                 ep.setCapacidadPasajeros(rs.getInt(3));
                 ep.setIdAerolinea(rs.getInt(4));
@@ -132,12 +134,14 @@ public class AvionDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            try { cn.close();} catch(Exception e2) {};
+            try {
+                cn.close();
+            } catch (Exception e2) {
+            };
         }
         return ep;
     }
-        
-        
+
     public List<String> obtenerAvion() {
         List<String> avion = new ArrayList<>();
         Connection cn = Conexion.getConexion();
@@ -158,8 +162,8 @@ public class AvionDAO {
         }
         return avion;
     }
-    
-        public int obtenerIdAvionPorModelo(String modeloAvion) throws SQLException {
+
+    public int obtenerIdAvionPorModelo(String modeloAvion) throws SQLException {
         Connection cn = Conexion.getConexion();
         String sql = "SELECT id_avion FROM avion WHERE modelo = ?";
 
@@ -175,10 +179,7 @@ public class AvionDAO {
 
         return -1;
     }
-    
-        // Falta eliminar y metodos extras
-        
-        
+
     public String obtenerAvionPreferido() {
         String avionPreferido = null;
         Connection cn = Conexion.getConexion();
@@ -203,7 +204,7 @@ public class AvionDAO {
 
         return avionPreferido;
     }
-    
+
     public int obtenerCapacidadPromedioAvion() {
         int capacidadPromedio = 0;
         Connection cn = Conexion.getConexion();
