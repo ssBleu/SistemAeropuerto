@@ -12,7 +12,7 @@ public class ReservaDAO {
 
     public void crearReserva(Reserva reserva) throws SQLException {
         Connection cn = Conexion.getConexion();
-        String sql = "INSERT INTO reserva_vuelo (dni_pasajero, id_vuelo, fecha_reserva) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO reserva_vuelo (dni_pasajero, id_vuelo, fecha_reserva, estado_reserva) VALUES (?, ?, ?, 'ACTIVO')";
 
         try (PreparedStatement statement = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, reserva.getDniPasajero());

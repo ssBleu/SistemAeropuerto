@@ -41,7 +41,7 @@ public class ControladorBusCli implements ActionListener, MouseListener {
         listado();
         datitos();
         obtenerUsuarioSesionado();
-        objRS.actualizarReservasEstadoRealizado();
+        //objRS.actualizarReservasEstadoRealizado();
         //ActionListeners
         busCliForm.btnLimpiar.addActionListener(this);
         busCliForm.btnBuscarCli.addActionListener(this);

@@ -50,7 +50,6 @@ public class frmReserva extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new util.PanelRound();
         btnComprar = new javax.swing.JButton();
-        btnImprimir = new javax.swing.JButton();
         panelRound2 = new util.PanelRound();
         jLabel4 = new javax.swing.JLabel();
         cboDNIs = new util.Cbox();
@@ -133,9 +132,6 @@ public class frmReserva extends javax.swing.JFrame {
 
         btnComprar.setText("Comprar");
         panelRound1.add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 80, -1));
-
-        btnImprimir.setText("Imprimir");
-        panelRound1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 80, -1));
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 210, 160));
 
@@ -547,7 +543,6 @@ public class frmReserva extends javax.swing.JFrame {
     public javax.swing.JLabel btnCerrar;
     public javax.swing.JButton btnComprar;
     public javax.swing.JLabel btnEstadisticas;
-    public javax.swing.JButton btnImprimir;
     public javax.swing.JLabel btnMinimizar;
     public javax.swing.JLabel btnReAero;
     public javax.swing.JLabel btnReTra;

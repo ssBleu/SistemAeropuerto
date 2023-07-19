@@ -46,7 +46,6 @@ public class ControladorReserva implements ActionListener, MouseListener {
         //Actions
         reservaForm.btnCambVuelo.addActionListener(this);
         reservaForm.btnComprar.addActionListener(this);
-        reservaForm.btnImprimir.addActionListener(this);
         reservaForm.cboDNIs.addActionListener(this);
 
         //MouseListeners
@@ -90,9 +89,6 @@ public class ControladorReserva implements ActionListener, MouseListener {
             comprar();
         }
 
-        if (e.getSource() == reservaForm.btnImprimir) {
-
-        }
 
         if (e.getSource() == reservaForm.cboDNIs) {
             actualizarTextRCBO();

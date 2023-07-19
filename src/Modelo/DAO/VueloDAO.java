@@ -13,7 +13,7 @@ public class VueloDAO {
 
     public void crearVuelo(Vuelo vuelo) throws SQLException {
         Connection cn = Conexion.getConexion();
-        String sql = "INSERT INTO vuelo (id_vuelo, origen, destino, fecha_salida, fecha_llegada, duracion, id_avion, precio, tipo_vuelo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vuelo (id_vuelo, origen, destino, fecha_salida, fecha_llegada, duracion, id_avion, precio, tipo_vuelo, estado_vuelo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVO' )";
 
         try (PreparedStatement statement = cn.prepareStatement(sql)) {
             statement.setString(1, vuelo.getIdVuelo());
